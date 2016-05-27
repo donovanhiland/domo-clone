@@ -6,6 +6,7 @@ import uglify from 'gulp-uglify';
 import watch from 'gulp-watch';
 import sass from 'gulp-sass';
 import path from 'path';
+import babel from 'gulp-babel'
 
 const paths = {
   jsSource: ['./public/app/**/*.js', '!/public/bundle.js'],
