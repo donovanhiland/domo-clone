@@ -1,4 +1,4 @@
-angular.module("domoApp").config(function($stateProvider, $urlRouterProvider) {
+angular.module("domoApp").config(($stateProvider, $urlRouterProvider) => {
   $stateProvider
     .state('', {
       url: '/',
