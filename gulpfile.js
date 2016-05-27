@@ -1,31 +1,38 @@
 var gulp = require('gulp');
-var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
-var ngmin = require('gulp-ngmin');
-var jshint = require('gulp-jshint');
+var annotate = require('gulp-ng-annotate');
+var plumber = require('gulp-plumber');
+var uglify = require('gulp-uglify');
+var watch = require('gulp-watch');
 var sass = require('gulp-sass');
+var path = require('path');
 
-var scssPath = 'public/assets/styles/scss/*.scss';
-var scssDest = 'public/assets/styles';
-var appJsPath =  'public/app/**/*.js';
-var appJsDest = 'public/assets/js';
+var paths = {
+    jsSource: ['./public/app/**/*.js', '!/public/bundle.js'],
+    sassSource: ['./public/styles/**/*.scss']
+};
+
+gulp.task('js', function() {
+    return gulp.src(paths.jsSource)
+        .pipe(plumber())
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(concat('bundle.js'))
+        .pipe(annotate())
+        .pipe(gulp.dest('./public'));
+});
 
 gulp.task('styles', function() {
-  return gulp.src(scssPath)
-  .pipe(sass().on('error', sass.logError))
-  .pipe(concat('styles.css'))
-  .pipe(gulp.dest(scssDest));
+    return gulp.src(paths.sassSource)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(concat('style.css'))
+        .pipe(gulp.dest('./public/styles'));
 });
 
-gulp.task('frontend-scripts', function() {
-  return gulp.src(appJsPath)
-  // .pipe(ngmin())
-  .pipe(concat('all.js'))
-  // .pipe(uglify())
-  .pipe(gulp.dest(appJsDest));
+gulp.task('watch', function() {
+    gulp.watch(paths.jsSource, ['js']);
+    gulp.watch(paths.sassSource, ['styles']);
 });
 
-gulp.task('default', function() {
-  gulp.watch(appJsPath, ['frontend-scripts']);
-  gulp.watch(scssPath, ['styles']);
-});
+gulp.task('default', ['watch', 'js', 'styles']);
