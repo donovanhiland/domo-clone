@@ -21,7 +21,7 @@
         font-size: 16px;
         color: #555;
         text-decoration: none; }
-      .nav-section .site-nav .nav-menu-item .watch-demo {
+      .nav-section .site-nav .nav-menu-item .domo-oj-btn {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -47,3 +47,36 @@
   width: auto;
   display: flex;
   justify-content: center; }
+  .landing-container .landing .landing-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    .landing-container .landing .landing-info-container .landing-title {
+      margin-top: -53vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 44px;
+      font-weight: 300;
+      letter-spacing: -1px;
+      text-align: center;
+      color: white; }
+    .landing-container .landing .landing-info-container .landing-info {
+      margin-top: 5vh;
+      width: 65vw;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: white; }
+    .landing-container .landing .landing-info-container .domo-oj-btn {
+      margin-top: 5vh;
+      height: 35px;
+      width: 130px;
+      background-color: #f92;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+      border: none; }

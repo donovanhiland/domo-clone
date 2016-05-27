@@ -39,7 +39,7 @@ $test-border: 1px red solid;
         color: $domo-text;
         text-decoration: none;
       }
-      .watch-demo {
+      .domo-oj-btn {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -81,6 +81,51 @@ $test-border: 1px red solid;
      width: auto;
      display: flex;
      justify-content: center;
-  }
 
+     .landing-info-container {
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+
+       .landing-title {
+         margin-top: -53vh;
+         font-family: $domo-font;
+         font-size: 44px;
+         font-weight: 300;
+         letter-spacing: -1px;
+         text-align: center;
+         color: white;
+       }
+
+       .landing-info {
+         margin-top: 5vh;
+         width: 65vw;
+         font-family: $domo-font;
+         font-size: 20px;
+         font-weight: 300;
+         letter-spacing: 1px;
+         text-align: center;
+         color: white;
+       }
+       .domo-oj-btn {
+         margin-top: 5vh;
+         height: 35px;
+         width: 130px;
+         background-color: $domo-oj;
+         font-family: $domo-font;
+         font-size: 12px;
+         font-weight: 700;
+         letter-spacing: 1px;
+         color: #fff;
+         border: none;
+       }
+     }
+  }
 }
+
+/////////////////////////////////
+
+////// HOME PAGE - LANDING CONTAINER
+
+////////////////////////////////
