@@ -1,9 +1,8 @@
-angular.module("domoApp").config(function($stateProvider, $urlRouterProvider) {
+angular.module("domoApp", ["ui.router"]).config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('', {
-      url: '/',
-      templateUrl: '',
-      controller: ''
+    .state('home', {
+      url: '/home',
+      templateUrl: './app/components/home/homeTmpl.html'
     });
 
     $urlRouterProvider.otherwise('/home');
