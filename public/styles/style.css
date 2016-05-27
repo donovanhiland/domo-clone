@@ -80,3 +80,15 @@
       letter-spacing: 1px;
       color: #fff;
       border: none; }
+
+.domo-promo-container {
+  display: flex;
+  flex-wrap: wrap; }
+  .domo-promo-container .domo-promo-card {
+    height: 25vh;
+    width: 20vw;
+    background-color: #333; }
+
+#appstore {
+  background-image: url("./images/appstore-promo-media.png");
+  background-size: cover; }
