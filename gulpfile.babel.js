@@ -10,7 +10,7 @@ import babel from 'gulp-babel'
 
 const paths = {
   jsSource: ['./public/app/**/*.js', '!/public/bundle.js'],
-  sassSource: ['./public/styles/**/*.scss']
+  sassSource: ['./public/assets/styles/**/*.scss']
 };
 
 gulp.task('js', () =>  {
@@ -37,7 +37,7 @@ gulp.task('styles', () => {
   return gulp.src(paths.sassSource)
   .pipe(sass().on('error', sass.logError))
   .pipe(concat('style.css'))
-  .pipe(gulp.dest('./public/styles'));
+  .pipe(gulp.dest('./public/assets/styles'));
 });
 
 gulp.task('watch', () =>  {

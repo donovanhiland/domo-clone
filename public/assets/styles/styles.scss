@@ -7,6 +7,7 @@ $domo-oj: #f92;
 $domo-font: 'Open Sans', Helvetica, Arial, sans-serif;
 $test-border: 1px red solid;
 
+
 /////////////////////////////////
 
 ////// NAVIGATION
@@ -16,6 +17,7 @@ $test-border: 1px red solid;
 .nav-section {
   height: 10vh;
   width: 100vw;
+  position: fixed;
   background-color: #fff;
   display: flex;
   flex-direction: row;
@@ -46,6 +48,7 @@ $test-border: 1px red solid;
         height: 35px;
         width: 130px;
         margin: auto;
+        margin-right: 3vw;
         background-color: $domo-oj;
         font-family: $domo-font;
         font-size: 12px;
@@ -53,6 +56,13 @@ $test-border: 1px red solid;
         letter-spacing: 1px;
         color: #fff;
         border: none;
+        text-decoration: none;
+      }
+
+      .domo-oj-btn:hover {
+        background-color: $domo-blue;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
       }
     }
   }
@@ -72,55 +82,66 @@ $test-border: 1px red solid;
 ////// HOME PAGE - LANDING CONTAINER
 
 ////////////////////////////////
+.landing-section {
+  padding-top: 10vh;
 
-.landing-container {
-  .landing {
-     background-image: url("../images/bc-hero.jpg");
-     background-size: cover;
-     height: 90vh;
-     width: auto;
-     display: flex;
-     justify-content: center;
+  .landing-container {
 
-     .landing-info-container {
+    .landing {
+       background-image: url("../images/bc-hero.jpg");
+       background-repeat: no-repeat;
+       background-size: cover;
+       background-position: center center;
+       height: 90vh;
+       width: auto;
        display: flex;
-       flex-direction: column;
        justify-content: center;
-       align-items: center;
 
-       .landing-title {
-         margin-top: -53vh;
-         font-family: $domo-font;
-         font-size: 44px;
-         font-weight: 300;
-         letter-spacing: -1px;
-         text-align: center;
-         color: white;
-       }
+       .landing-info-container {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
 
-       .landing-info {
-         margin-top: 5vh;
-         width: 65vw;
-         font-family: $domo-font;
-         font-size: 20px;
-         font-weight: 300;
-         letter-spacing: 1px;
-         text-align: center;
-         color: white;
+         .landing-title {
+           margin-top: -50vh;
+           font-family: $domo-font;
+           font-size: 44px;
+           font-weight: 300;
+           letter-spacing: -1px;
+           text-align: center;
+           color: white;
+         }
+
+         .landing-info {
+           margin-top: 5vh;
+           width: 65vw;
+           font-family: $domo-font;
+           font-size: 20px;
+           font-weight: 300;
+           letter-spacing: 1px;
+           text-align: center;
+           color: white;
+         }
+         .domo-oj-btn {
+           margin-top: 5vh;
+           height: 35px;
+           width: 130px;
+           background-color: $domo-oj;
+           font-family: $domo-font;
+           font-size: 12px;
+           font-weight: 700;
+           letter-spacing: 1px;
+           color: #fff;
+           border: none;
+         }
+
+         .domo-oj-btn:hover {
+           background-color: $domo-blue;
+           transition: all 0.3s ease-in-out;
+         }
        }
-       .domo-oj-btn {
-         margin-top: 5vh;
-         height: 35px;
-         width: 130px;
-         background-color: $domo-oj;
-         font-family: $domo-font;
-         font-size: 12px;
-         font-weight: 700;
-         letter-spacing: 1px;
-         color: #fff;
-         border: none;
-       }
-     }
+    }
   }
 }
 
@@ -130,21 +151,268 @@ $test-border: 1px red solid;
 
 ////////////////////////////////
 
-.domo-promo-container {
-  display: flex;
-  flex-wrap: wrap;
 
-  .domo-promo-card {
-    height: 25vh;
-    width: 20vw;
-    background-color: $domo-grey;
+.domo-promo-section {
+  padding: 0;
+
+  .domo-promo-container {
+    display: inline-flex;
+    width: 100%;
+
+    .domo-promo-card {
+      width: 33.33333333%;
+      box-sizing: border-box;
+      background-color: $domo-grey;
+    }
   }
 }
 
 #appstore {
-  background-image: url("../images/appstore-promo-media.png");
-  background-size: cover;
+  height: 32vh;
+  width: 33.333333%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  overflow: hidden;
+
+  .appstore-info {
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    h3 {
+      margin-bottom: 1vh;
+      justify-content: center;
+      font-family: $domo-font;
+      font-size: 20px;
+      font-weight: 400;
+      color: white;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 4vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .appstore-info-border {
+
+      a {
+        padding: 8px 14px;
+        font-family: $domo-font;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: white;
+        text-decoration: none;
+        border: 2px white solid;
+      }
+
+      a:hover {
+        border: 2px $domo-blue solid;
+        background-color: $domo-blue;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+  .appstore-img {
+    width: 0vh;
+    display: flex;
+    flex-wrap: wrap;
+
+    img{
+      height: 32vh;
+      margin-left: -2vw;
+    }
+  }
 }
+
+#mastercard {
+  height: 32vh;
+  width: 33.333333%;
+  background-image: url("../images/city-banner.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+
+  .tint {
+    z-index: 1;
+    height: 32vh;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.4);
+
+    .mastercard-img {
+      height: 10vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img{
+        height: 7vh;
+        margin-top: 3vh;
+      }
+    }
+  }
+  .mastercard-info {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 3;
+    margin-top: -20vh;
+
+    p {
+      margin-bottom: 4vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .mastercard-info-border {
+
+      a {
+        padding: 8px 14px;
+        font-family: $domo-font;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: white;
+        text-decoration: none;
+        border: 2px white solid;
+      }
+
+      a:hover {
+        border: 2px $domo-blue solid;
+        background-color: $domo-blue;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+}
+
+
+
+
+
+#mobile {
+  height: 32vh;
+  width: 33.333333%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  overflow: hidden;
+
+  .mobile-info {
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    h3 {
+      margin-bottom: 1vh;
+      justify-content: center;
+      font-family: $domo-font;
+      font-size: 20px;
+      font-weight: 400;
+      color: white;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 4vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .mobile-info-border {
+
+      a {
+        padding: 8px 14px;
+        font-family: $domo-font;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: white;
+        text-decoration: none;
+        border: 2px white solid;
+      }
+
+      a:hover {
+        border: 2px $domo-blue solid;
+        background-color: $domo-blue;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+  .mobile-img {
+    width: 0vh;
+    display: flex;
+    flex-wrap: wrap;
+
+    img{
+      height: 32vh;
+      margin-left: -2vw;
+      margin-top: 5vh;
+    }
+  }
+}
+
+
+
+//SLIDER
+// .carousel-container {
+//
+//   .carousel {
+//     display: flex;
+//     justify-content: center;
+//     height: auto;
+//     width: 75vw;
+//     max-width: 100%;
+//
+//     .carousel {
+//       height: 20vh;
+//       width: 100%;
+//
+//
+//     }
+//   }
+// }
+//
+// #appstore {
+//   height: 10vh;
+//   width: 10vw;
+//   background-image: url("../images/appstore-promo-media.png");
+//   background-size: cover;
+// }
+// #mastercard {
+//   height: 10vh;
+//   width: 10vw;
+//   background-image: url("../images/city-banner.jpg");
+//   background-size: cover;
+// }
+// #mobile {
+//   height: 10vh;
+//   width: 10vw;
+//   background-image: url("../images/access.png");
+//   background-size: cover;
+// }
 
 
 

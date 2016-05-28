@@ -2,6 +2,7 @@
 .nav-section {
   height: 10vh;
   width: 100vw;
+  position: fixed;
   background-color: #fff;
   display: flex;
   flex-direction: row;
@@ -28,6 +29,61 @@
         height: 35px;
         width: 130px;
         margin: auto;
+        margin-right: 3vw;
+        background-color: #f92;
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #fff;
+        border: none;
+        text-decoration: none; }
+      .nav-section .site-nav .nav-menu-item .domo-oj-btn:hover {
+        background-color: #9ce;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none; }
+
+#domo-logo {
+  height: 10vh;
+  float: left; }
+
+.landing-section {
+  padding-top: 10vh; }
+  .landing-section .landing-container .landing {
+    background-image: url("../images/bc-hero.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 90vh;
+    width: auto;
+    display: flex;
+    justify-content: center; }
+    .landing-section .landing-container .landing .landing-info-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
+      .landing-section .landing-container .landing .landing-info-container .landing-title {
+        margin-top: -50vh;
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        font-size: 44px;
+        font-weight: 300;
+        letter-spacing: -1px;
+        text-align: center;
+        color: white; }
+      .landing-section .landing-container .landing .landing-info-container .landing-info {
+        margin-top: 5vh;
+        width: 65vw;
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 300;
+        letter-spacing: 1px;
+        text-align: center;
+        color: white; }
+      .landing-section .landing-container .landing .landing-info-container .domo-oj-btn {
+        margin-top: 5vh;
+        height: 35px;
+        width: 130px;
         background-color: #f92;
         font-family: "Open Sans", Helvetica, Arial, sans-serif;
         font-size: 12px;
@@ -35,60 +91,168 @@
         letter-spacing: 1px;
         color: #fff;
         border: none; }
+      .landing-section .landing-container .landing .landing-info-container .domo-oj-btn:hover {
+        background-color: #9ce;
+        transition: all 0.3s ease-in-out; }
 
-#domo-logo {
-  height: 10vh;
-  float: left; }
-
-.landing-container .landing {
-  background-image: url("../images/bc-hero.jpg");
-  background-size: cover;
-  height: 90vh;
-  width: auto;
-  display: flex;
-  justify-content: center; }
-  .landing-container .landing .landing-info-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; }
-    .landing-container .landing .landing-info-container .landing-title {
-      margin-top: -53vh;
-      font-family: "Open Sans", Helvetica, Arial, sans-serif;
-      font-size: 44px;
-      font-weight: 300;
-      letter-spacing: -1px;
-      text-align: center;
-      color: white; }
-    .landing-container .landing .landing-info-container .landing-info {
-      margin-top: 5vh;
-      width: 65vw;
-      font-family: "Open Sans", Helvetica, Arial, sans-serif;
-      font-size: 20px;
-      font-weight: 300;
-      letter-spacing: 1px;
-      text-align: center;
-      color: white; }
-    .landing-container .landing .landing-info-container .domo-oj-btn {
-      margin-top: 5vh;
-      height: 35px;
-      width: 130px;
-      background-color: #f92;
-      font-family: "Open Sans", Helvetica, Arial, sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: #fff;
-      border: none; }
-
-.domo-promo-container {
-  display: flex;
-  flex-wrap: wrap; }
-  .domo-promo-container .domo-promo-card {
-    height: 25vh;
-    width: 20vw;
-    background-color: #333; }
+.domo-promo-section {
+  padding: 0; }
+  .domo-promo-section .domo-promo-container {
+    display: inline-flex;
+    width: 100%; }
+    .domo-promo-section .domo-promo-container .domo-promo-card {
+      width: 33.33333333%;
+      box-sizing: border-box;
+      background-color: #333; }
 
 #appstore {
-  background-image: url("../images/appstore-promo-media.png");
-  background-size: cover; }
+  height: 32vh;
+  width: 33.333333%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  overflow: hidden; }
+  #appstore .appstore-info {
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; }
+    #appstore .appstore-info h3 {
+      margin-bottom: 1vh;
+      justify-content: center;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: white;
+      text-align: center; }
+    #appstore .appstore-info p {
+      margin-bottom: 4vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 20px;
+      text-align: center;
+      color: white; }
+    #appstore .appstore-info .appstore-info-border a {
+      padding: 8px 14px;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: white;
+      text-decoration: none;
+      border: 2px white solid; }
+    #appstore .appstore-info .appstore-info-border a:hover {
+      border: 2px #9ce solid;
+      background-color: #9ce;
+      transition: all 0.3s ease-in-out; }
+  #appstore .appstore-img {
+    width: 0vh;
+    display: flex;
+    flex-wrap: wrap; }
+    #appstore .appstore-img img {
+      height: 32vh;
+      margin-left: -2vw; }
+
+#mastercard {
+  height: 32vh;
+  width: 33.333333%;
+  background-image: url("../images/city-banner.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center; }
+  #mastercard .tint {
+    z-index: 1;
+    height: 32vh;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.4); }
+    #mastercard .tint .mastercard-img {
+      height: 10vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      #mastercard .tint .mastercard-img img {
+        height: 7vh;
+        margin-top: 3vh; }
+  #mastercard .mastercard-info {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 3;
+    margin-top: -20vh; }
+    #mastercard .mastercard-info p {
+      margin-bottom: 4vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 20px;
+      text-align: center;
+      color: white; }
+    #mastercard .mastercard-info .mastercard-info-border a {
+      padding: 8px 14px;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: white;
+      text-decoration: none;
+      border: 2px white solid; }
+    #mastercard .mastercard-info .mastercard-info-border a:hover {
+      border: 2px #9ce solid;
+      background-color: #9ce;
+      transition: all 0.3s ease-in-out; }
+
+#mobile {
+  height: 32vh;
+  width: 33.333333%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  overflow: hidden; }
+  #mobile .mobile-info {
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; }
+    #mobile .mobile-info h3 {
+      margin-bottom: 1vh;
+      justify-content: center;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: white;
+      text-align: center; }
+    #mobile .mobile-info p {
+      margin-bottom: 4vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 20px;
+      text-align: center;
+      color: white; }
+    #mobile .mobile-info .mobile-info-border a {
+      padding: 8px 14px;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: white;
+      text-decoration: none;
+      border: 2px white solid; }
+    #mobile .mobile-info .mobile-info-border a:hover {
+      border: 2px #9ce solid;
+      background-color: #9ce;
+      transition: all 0.3s ease-in-out; }
+  #mobile .mobile-img {
+    width: 0vh;
+    display: flex;
+    flex-wrap: wrap; }
+    #mobile .mobile-img img {
+      height: 32vh;
+      margin-left: -2vw;
+      margin-top: 5vh; }
