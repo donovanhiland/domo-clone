@@ -557,8 +557,61 @@ $test-border: 1px red solid;
 }
 
 #card-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   border-right: 1px $domo-solutions-border solid;
   border-bottom: 1px $domo-solutions-border solid;
+  overflow: hidden;
+
+  .ceo-image-container {
+    margin-top: 35vh;
+
+    img {
+      margin-bottom: 3vh;
+    }
+
+    h3 {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+
+  .ceo-info-container {
+
+    h3 {
+      margin-top: 30vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+
+  }
+}
+
+#card-1:hover .ceo-info {
+  transition: all 0.3s ease-in-out;
+  background-color: $domo-text;
+  margin-bottom: 70vh;
+}
+
+// #card-1:hover .ceo {
+//   transition: all 0.3s ease-in-out;
+//   background-color: $domo-text;
+//   margin-top: 70vh;
+// }
+
+#card-1:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: $domo-text;
 }
 
 #card-2 {
@@ -588,5 +641,5 @@ $test-border: 1px red solid;
 }
 
 #card-8 {
-  
+
 }

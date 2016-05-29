@@ -346,8 +346,41 @@
     background-color: #333; }
 
 #card-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   border-right: 1px #7d7d7d solid;
-  border-bottom: 1px #7d7d7d solid; }
+  border-bottom: 1px #7d7d7d solid;
+  overflow: hidden; }
+  #card-1 .ceo-image-container {
+    margin-top: 35vh; }
+    #card-1 .ceo-image-container img {
+      margin-bottom: 3vh; }
+    #card-1 .ceo-image-container h3 {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+  #card-1 .ceo-info-container h3 {
+    margin-top: 30vh;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #fff; }
+
+#card-1:hover .ceo-info {
+  transition: all 0.3s ease-in-out;
+  background-color: #555;
+  margin-bottom: 70vh; }
+
+#card-1:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: #555; }
 
 #card-2 {
   border-right: 1px #7d7d7d solid;
