@@ -8,6 +8,9 @@ angular.module("domoApp", ["ui.router"]).config(["$stateProvider", "$urlRouterPr
   $stateProvider.state('home', {
     url: '/home',
     templateUrl: './app/components/home/homeTmpl.html'
+  }).state('dashboard', {
+    url: '/dashboard',
+    templateUrl: './app/components/dashboard/dashboardTmpl.html'
   });
 
   $urlRouterProvider.otherwise('/home');
@@ -21,6 +24,7 @@ angular.module('domoApp').directive('navDirective', function () {
     templateUrl: './app/shared/nav/navTmpl.html'
   };
 });
+"use strict";
 'use strict';
 
 angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
