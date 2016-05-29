@@ -82,6 +82,7 @@ $test-border: 1px red solid;
 ////// HOME PAGE - LANDING CONTAINER
 
 ////////////////////////////////
+
 .landing-section {
   padding-top: 10vh;
 
@@ -418,6 +419,91 @@ $test-border: 1px red solid;
 
 /////////////////////////////////
 
-////// HOME PAGE - LANDING CONTAINER
+////// HOME PAGE - DOMO-EXAMPLE
 
 ////////////////////////////////
+
+.domo-example-section {
+
+  .domo-example-container {
+    height: 130vh;
+    width: 100%;
+    overflow: hidden;
+
+    .domo-example-info {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+
+      h1 {
+        width: 55vw;
+        margin-top: 15vh;
+        margin-bottom: 4vh;
+        justify-content: center;
+        font-family: $domo-font;
+        font-size: 44px;
+        font-weight: 400;
+        line-height: 1.1;
+        color: $domo-text;
+        text-align: center;
+      }
+
+      p {
+        width: 55vw;
+        margin-bottom: 5vh;
+        font-family: $domo-font;
+        font-size: 20px;
+        font-weight: 100;
+        line-height: 1.1;
+        text-align: center;
+        color: $domo-text;
+      }
+
+      .mobile-info-border {
+
+        a {
+          padding: 8px 14px;
+          font-family: $domo-font;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          color: $domo-text;
+          text-decoration: none;
+          border: 2px $domo-text solid;
+        }
+
+        a:hover {
+          border: 2px $domo-blue solid;
+          background-color: $domo-blue;
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+
+    .domo-example-img {
+      display: flex;
+      justify-content: center;
+
+      img {
+
+      }
+    }
+  }
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-SOLUTION
+
+////////////////////////////////
+
+.domo-solution-section {
+
+  .domo-solution-container {
+    height: 130vh;
+    width: 100%;
+    background-color: $domo-grey;
+  }
+}
