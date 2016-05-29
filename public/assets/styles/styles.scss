@@ -2,6 +2,7 @@
 
 $domo-grey: #333;
 $domo-text: #555;
+$domo-solutions-border: rgb(125, 125, 125);
 $domo-blue: #9ce;
 $domo-oj: #f92;
 $domo-font: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -28,6 +29,7 @@ $test-border: 1px red solid;
     flex-direction: row;
     justify-content: flex-end;
     width: 100vw;
+    border-bottom: 1px #f0f0f0 solid;
 
     .nav-menu-item {
       display: flex;
@@ -506,5 +508,85 @@ $test-border: 1px red solid;
     height: 130vh;
     width: 100%;
     background-color: $domo-grey;
+
+    .domo-solution-info {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      h1 {
+        margin-top: 10vh;
+        font-family: $domo-font;
+        font-size: 44px;
+        font-weight: 300;
+        text-align: center;
+        color: #fff;
+      }
+
+      p {
+        width: 75%;
+        margin-top: 5vh;
+        font-family: $domo-font;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.5;
+        text-align: center;
+        align-self: center;
+        color: #fff;
+      }
+    }
   }
+  .solution-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 85%;
+    margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+
+
+
+    .solution-card {
+      height: 30vh;
+      width: 25%;
+      box-sizing: border-box;
+      background-color: $domo-grey;
+    }
+
+  }
+}
+
+#card-1 {
+  border-right: 1px $domo-solutions-border solid;
+  border-bottom: 1px $domo-solutions-border solid;
+}
+
+#card-2 {
+  border-right: 1px $domo-solutions-border solid;
+  border-bottom: 1px $domo-solutions-border solid;
+}
+
+#card-3 {
+  border-right: 1px $domo-solutions-border solid;
+  border-bottom: 1px $domo-solutions-border solid;
+}
+
+#card-4 {
+  border-bottom: 1px $domo-solutions-border solid;
+}
+
+#card-5 {
+  border-right: 1px $domo-solutions-border solid;
+}
+
+#card-6 {
+  border-right: 1px $domo-solutions-border solid;
+}
+
+#card-7 {
+  border-right: 1px $domo-solutions-border solid;
+}
+
+#card-8 {
+  
 }
