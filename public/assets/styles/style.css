@@ -299,7 +299,8 @@
     .domo-example-section .domo-example-container .domo-example-info .mobile-info-border a:hover {
       border: 2px #9ce solid;
       background-color: #9ce;
-      transition: all 0.3s ease-in-out; }
+      transition: all 0.3s ease-in-out;
+      color: #fff; }
   .domo-example-section .domo-example-container .domo-example-img {
     display: flex;
     justify-content: center; }
