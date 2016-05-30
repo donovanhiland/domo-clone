@@ -6,7 +6,8 @@
   background-color: #fff;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end; }
+  justify-content: flex-end;
+  z-index: 999; }
   .nav-section .site-nav {
     display: flex;
     flex-direction: row;
@@ -259,7 +260,7 @@
       margin-top: 5vh; }
 
 .domo-example-section .domo-example-container {
-  height: 130vh;
+  height: 120vh;
   width: 100%;
   overflow: hidden; }
   .domo-example-section .domo-example-container .domo-example-info {
@@ -336,7 +337,7 @@
   display: flex;
   flex-wrap: wrap;
   width: 85%;
-  margin-top: 5vh;
+  margin-top: 10vh;
   margin-left: auto;
   margin-right: auto; }
   .domo-solution-section .solution-card-container .solution-card {
@@ -870,3 +871,41 @@
     border: 2px #9ce solid;
     background-color: #9ce;
     transition: all 0.3s ease-in-out; }
+
+.domo-video-section .domo-video-container {
+  background-image: url("../images/general_banner_3.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+  width: auto;
+  display: flex;
+  justify-content: center; }
+  .domo-video-section .domo-video-container .tint {
+    z-index: 1;
+    height: 100vh;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.4); }
+    .domo-video-section .domo-video-container .tint .video-mastercard-container {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .domo-video-section .domo-video-container .tint .video-mastercard-container img {
+        height: 15vh;
+        margin-top: 15vh; }
+  .domo-video-section .domo-video-container .domo-video-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .domo-video-section .domo-video-container .domo-video-info-container h1 {
+      margin: 2% 5%;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 36px;
+      font-style: italic;
+      font-weight: 100;
+      letter-spacing: 1px;
+      line-height: 1.5;
+      text-align: center;
+      color: #fff; }

@@ -13,7 +13,7 @@ const app = express();
 // initilize dependencies
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + './../public'));
 
 
 // Endpoints
@@ -21,7 +21,7 @@ app.use(express.static(__dirname + '/public'));
 // app.post('/model', modelCtrl.create);
 // app.put('/model/:id', modelCtrl.update);
 // app.delete('/model/:id', modelCtrl.delete);
-TwitterCtrl.getDataByScreenName('devmtn');
+// TwitterCtrl.getDataByScreenName('devmtn');
 
 
 // MongoDB connection
