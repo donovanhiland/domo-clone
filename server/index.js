@@ -27,6 +27,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(__dirname + './../public'));
 
+
 // Endpoints
 // app.get('/model', modelCtrl.read);
 // app.post('/model', modelCtrl.create);
@@ -46,6 +47,7 @@ app.get('/logout', function(req, res, next) {
     req.logout();
     return res.status(200).send('logged out');
 });
+
 
 // MongoDB connection
 mongoose.set('debug', true);

@@ -24,6 +24,7 @@ $test-border: 1px red solid;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  z-index: 999;
 
   .site-nav {
     display: flex;
@@ -429,7 +430,7 @@ $test-border: 1px red solid;
 .domo-example-section {
 
   .domo-example-container {
-    height: 130vh;
+    height: 120vh;
     width: 100%;
     overflow: hidden;
 
@@ -541,7 +542,7 @@ $test-border: 1px red solid;
     display: flex;
     flex-wrap: wrap;
     width: 85%;
-    margin-top: 5vh;
+    margin-top: 10vh;
     margin-left: auto;
     margin-right: auto;
 
@@ -1332,5 +1333,96 @@ $test-border: 1px red solid;
     border: 2px $domo-blue solid;
     background-color: $domo-blue;
     transition: all 0.3s ease-in-out;
+    text-decoration: none;
   }
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-VIDEO
+
+////////////////////////////////
+
+.domo-video-section {
+
+  .domo-video-container {
+    background-image: url("../images/general_banner_3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+    width: auto;
+    display: flex;
+    justify-content: center;
+
+    .tint {
+      z-index: 1;
+      height: 100vh;
+      width: 100%;
+      top: 0px;
+      left: 0px;
+      background: rgba(0, 0, 0, 0.4);
+
+      .video-mastercard-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          height: 15vh;
+          margin-top: 15vh;
+        }
+      }
+    }
+    .domo-video-info-container {
+      margin-top: 5vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h1 {
+        margin: 2% 7%;
+        font-family: $domo-font;
+        font-size: 36px;
+        font-style: italic;
+        font-weight: 100;
+        letter-spacing: 1px;
+        line-height: 1.5;
+        text-align: center;
+        color: #fff;
+      }
+    }
+    .domo-video-button-container {
+      margin-top: 2vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .fa {
+        color: #fff;
+        opacity: 1;
+      }
+
+      .fa:hover {
+        transition: all 0.3s ease-in-out;
+        opacity: .5;
+        cursor: pointer;
+      }
+
+      .glyphicon {
+        color: $domo-grey;
+      }
+    }
+  }
+}
+
+.domo-video-modal {
+  margin-top: 15vh;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3vh;
 }
