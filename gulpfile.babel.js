@@ -10,7 +10,7 @@ import babel from 'gulp-babel'
 
 const paths = {
   jsSource: ['./public/app/**/*.js', '!/public/bundle.js'],
-  serverSource: ['./server/es6-index.js']
+  serverSource: ['./server/es6-index.js'],
   sassSource: ['./public/assets/styles/**/*.scss']
 
 };
