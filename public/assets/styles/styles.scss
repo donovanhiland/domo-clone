@@ -1333,6 +1333,7 @@ $test-border: 1px red solid;
     border: 2px $domo-blue solid;
     background-color: $domo-blue;
     transition: all 0.3s ease-in-out;
+    text-decoration: none;
   }
 }
 
@@ -1374,12 +1375,13 @@ $test-border: 1px red solid;
       }
     }
     .domo-video-info-container {
+      margin-top: 5vh;
       display: flex;
       justify-content: center;
       align-items: center;
 
       h1 {
-        margin: 2% 5%;
+        margin: 2% 7%;
         font-family: $domo-font;
         font-size: 36px;
         font-style: italic;
@@ -1389,7 +1391,38 @@ $test-border: 1px red solid;
         text-align: center;
         color: #fff;
       }
+    }
+    .domo-video-button-container {
+      margin-top: 2vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
+      .fa {
+        color: #fff;
+        opacity: 1;
+      }
+
+      .fa:hover {
+        transition: all 0.3s ease-in-out;
+        opacity: .5;
+        cursor: pointer;
+      }
+
+      .glyphicon {
+        color: $domo-grey;
+      }
     }
   }
+}
+
+.domo-video-modal {
+  margin-top: 15vh;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3vh;
 }

@@ -870,7 +870,8 @@
   .view-solutions-container a:hover {
     border: 2px #9ce solid;
     background-color: #9ce;
-    transition: all 0.3s ease-in-out; }
+    transition: all 0.3s ease-in-out;
+    text-decoration: none; }
 
 .domo-video-section .domo-video-container {
   background-image: url("../images/general_banner_3.jpg");
@@ -896,11 +897,12 @@
         height: 15vh;
         margin-top: 15vh; }
   .domo-video-section .domo-video-container .domo-video-info-container {
+    margin-top: 5vh;
     display: flex;
     justify-content: center;
     align-items: center; }
     .domo-video-section .domo-video-container .domo-video-info-container h1 {
-      margin: 2% 5%;
+      margin: 2% 7%;
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
       font-size: 36px;
       font-style: italic;
@@ -909,3 +911,26 @@
       line-height: 1.5;
       text-align: center;
       color: #fff; }
+  .domo-video-section .domo-video-container .domo-video-button-container {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .domo-video-section .domo-video-container .domo-video-button-container .fa {
+      color: #fff;
+      opacity: 1; }
+    .domo-video-section .domo-video-container .domo-video-button-container .fa:hover {
+      transition: all 0.3s ease-in-out;
+      opacity: .5;
+      cursor: pointer; }
+    .domo-video-section .domo-video-container .domo-video-button-container .glyphicon {
+      color: #333; }
+
+.domo-video-modal {
+  margin-top: 15vh; }
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3vh; }
