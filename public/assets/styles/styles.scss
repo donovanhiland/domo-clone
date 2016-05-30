@@ -4,6 +4,7 @@ $domo-grey: #333;
 $domo-text: #555;
 $domo-solutions-border: rgb(125, 125, 125);
 $domo-blue: #9ce;
+$domo-link: #8bd;
 $domo-oj: #f92;
 $domo-font: 'Open Sans', Helvetica, Arial, sans-serif;
 $test-border: 1px red solid;
@@ -556,6 +557,14 @@ $test-border: 1px red solid;
   }
 }
 
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-SOLUTION - CARD-1
+
+////////////////////////////////
+
+
 #card-1 {
   display: flex;
   justify-content: center;
@@ -566,13 +575,20 @@ $test-border: 1px red solid;
   overflow: hidden;
 
   .ceo-image-container {
-    margin-top: 35vh;
+    margin-top: -25vh;
+    margin-bottom: 20vh;
 
     img {
-      margin-bottom: 3vh;
+      margin-top: 30vh;
+      margin-bottom: 2vh;
     }
+  }
 
-    h3 {
+  .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh;
+
+    #ceo {
       font-family: $domo-font;
       font-size: 16px;
       font-weight: 300;
@@ -583,9 +599,10 @@ $test-border: 1px red solid;
   }
 
   .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh;
 
     h3 {
-      margin-top: 30vh;
       font-family: $domo-font;
       font-size: 16px;
       font-weight: 300;
@@ -594,46 +611,726 @@ $test-border: 1px red solid;
       color: #fff;
     }
 
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: $domo-link;
+    }
+
+    #ceo-link {
+      margin-top: 2vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 600;
+      color: $domo-blue;
+    }
+
+    #ceo-link:hover {
+      color: $domo-link;
+    }
   }
 }
 
-#card-1:hover .ceo-info {
+#card-1:hover .ceo-info-container {
   transition: all 0.3s ease-in-out;
-  background-color: $domo-text;
-  margin-bottom: 70vh;
+  margin-bottom: 75vh;
+}
+
+#card-1:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0;
 }
 
 #card-1:hover {
-  transition: all 0.3s ease-in-out;
   background-color: $domo-text;
 }
 
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-SOLUTION - CARD-2
+
+////////////////////////////////
+
 #card-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   border-right: 1px $domo-solutions-border solid;
   border-bottom: 1px $domo-solutions-border solid;
+  overflow: hidden;
+
+  .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh;
+
+    img {
+      margin-top: 30vh;
+      margin-bottom: 2vh;
+    }
+  }
+
+  .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh;
+
+    #ceo {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+
+  .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh;
+
+    h3 {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: $domo-link;
+    }
+
+    #ceo-link {
+      margin-top: 2vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 600;
+      color: $domo-blue;
+    }
+
+    #ceo-link:hover {
+      color: $domo-link;
+    }
+  }
 }
 
+#card-2:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh;
+}
+
+#card-2:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0;
+}
+
+#card-2:hover {
+  background-color: $domo-text;
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-SOLUTION - CARD-3
+
+////////////////////////////////
+
 #card-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   border-right: 1px $domo-solutions-border solid;
   border-bottom: 1px $domo-solutions-border solid;
+  overflow: hidden;
+
+  .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh;
+
+    img {
+      margin-top: 30vh;
+      margin-bottom: 2vh;
+    }
+  }
+
+  .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh;
+
+    #ceo {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+
+  .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh;
+
+    h3 {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: $domo-link;
+    }
+
+    #ceo-link {
+      margin-top: 2vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 600;
+      color: $domo-blue;
+    }
+
+    #ceo-link:hover {
+      color: $domo-link;
+    }
+  }
+}
+
+#card-3:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh;
+}
+
+#card-3:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0;
+}
+
+#card-3:hover {
+  background-color: $domo-text;
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-SOLUTION - CARD-4
+
+////////////////////////////////
+
+#card-4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1px $domo-solutions-border solid;
+  border-bottom: 1px $domo-solutions-border solid;
+  overflow: hidden;
+
+  .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh;
+
+    img {
+      margin-top: 30vh;
+      margin-bottom: 2vh;
+    }
+  }
+
+  .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh;
+
+    #ceo {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+
+  .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh;
+
+    h3 {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: $domo-link;
+    }
+
+    #ceo-link {
+      margin-top: 2vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 600;
+      color: $domo-blue;
+    }
+
+    #ceo-link:hover {
+      color: $domo-link;
+    }
+  }
+}
+
+#card-4:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh;
+}
+
+#card-4:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0;
+}
+
+#card-4:hover {
+  background-color: $domo-text;
 }
 
 #card-4 {
   border-bottom: 1px $domo-solutions-border solid;
+  border-right: none;
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-SOLUTION - CARD-5
+
+////////////////////////////////
+
+#card-5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1px $domo-solutions-border solid;
+  border-bottom: 1px $domo-solutions-border solid;
+  overflow: hidden;
+
+  .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh;
+
+    img {
+      margin-top: 30vh;
+      margin-bottom: 2vh;
+    }
+  }
+
+  .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh;
+
+    #ceo {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+
+  .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh;
+
+    h3 {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: $domo-link;
+    }
+
+    #ceo-link {
+      margin-top: 2vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 600;
+      color: $domo-blue;
+    }
+
+    #ceo-link:hover {
+      color: $domo-link;
+    }
+  }
+}
+
+#card-5:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh;
+}
+
+#card-5:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0;
+}
+
+#card-5:hover {
+  background-color: $domo-text;
 }
 
 #card-5 {
   border-right: 1px $domo-solutions-border solid;
+  border-bottom: none;
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-SOLUTION - CARD-6
+
+////////////////////////////////
+
+#card-6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1px $domo-solutions-border solid;
+  border-bottom: 1px $domo-solutions-border solid;
+  overflow: hidden;
+
+  .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh;
+
+    img {
+      margin-top: 30vh;
+      margin-bottom: 2vh;
+    }
+  }
+
+  .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh;
+
+    #ceo {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+
+  .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh;
+
+    h3 {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: $domo-link;
+    }
+
+    #ceo-link {
+      margin-top: 2vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 600;
+      color: $domo-blue;
+    }
+
+    #ceo-link:hover {
+      color: $domo-link;
+    }
+  }
+}
+
+#card-6:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh;
+}
+
+#card-6:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0;
+}
+
+#card-6:hover {
+  background-color: $domo-text;
 }
 
 #card-6 {
   border-right: 1px $domo-solutions-border solid;
+  border-bottom: none;
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-SOLUTION - CARD-7
+
+////////////////////////////////
+
+#card-7 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1px $domo-solutions-border solid;
+  border-bottom: 1px $domo-solutions-border solid;
+  overflow: hidden;
+
+  .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh;
+
+    img {
+      margin-top: 30vh;
+      margin-bottom: 2vh;
+    }
+  }
+
+  .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh;
+
+    #ceo {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+
+  .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh;
+
+    h3 {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: $domo-link;
+    }
+
+    #ceo-link {
+      margin-top: 2vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 600;
+      color: $domo-blue;
+    }
+
+    #ceo-link:hover {
+      color: $domo-link;
+    }
+  }
+}
+
+#card-7:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh;
+}
+
+#card-7:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0;
+}
+
+#card-7:hover {
+  background-color: $domo-text;
 }
 
 #card-7 {
   border-right: 1px $domo-solutions-border solid;
+  border-bottom: none;
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-SOLUTION - CARD-8
+
+////////////////////////////////
+
+#card-8 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1px $domo-solutions-border solid;
+  border-bottom: 1px $domo-solutions-border solid;
+  overflow: hidden;
+
+  .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh;
+
+    img {
+      margin-top: 30vh;
+      margin-bottom: 2vh;
+    }
+  }
+
+  .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh;
+
+    #ceo {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+
+  .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh;
+
+    h3 {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: $domo-link;
+    }
+
+    #ceo-link {
+      margin-top: 2vh;
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 600;
+      color: $domo-blue;
+    }
+
+    #ceo-link:hover {
+      color: $domo-link;
+    }
+  }
+}
+
+#card-8:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh;
+}
+
+#card-8:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0;
+}
+
+#card-8:hover {
+  background-color: $domo-text;
 }
 
 #card-8 {
+  border-right: none;
+  border-bottom: none;
+}
 
+.view-solutions-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 13vh;
+
+  a {
+    padding: 8px 14px;
+    font-family: $domo-font;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: white;
+    text-decoration: none;
+    border: 2px white solid;
+  }
+
+  a:hover {
+    border: 2px $domo-blue solid;
+    background-color: $domo-blue;
+    transition: all 0.3s ease-in-out;
+  }
 }
