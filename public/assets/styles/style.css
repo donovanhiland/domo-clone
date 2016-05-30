@@ -354,50 +354,519 @@
   border-bottom: 1px #7d7d7d solid;
   overflow: hidden; }
   #card-1 .ceo-image-container {
-    margin-top: 35vh; }
+    margin-top: -25vh;
+    margin-bottom: 20vh; }
     #card-1 .ceo-image-container img {
-      margin-bottom: 3vh; }
-    #card-1 .ceo-image-container h3 {
+      margin-top: 30vh;
+      margin-bottom: 2vh; }
+  #card-1 .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh; }
+    #card-1 .ceo-container #ceo {
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-weight: 300;
       letter-spacing: 1px;
       text-align: center;
       color: #fff; }
-  #card-1 .ceo-info-container h3 {
-    margin-top: 30vh;
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    text-align: center;
-    color: #fff; }
+  #card-1 .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh; }
+    #card-1 .ceo-info-container h3 {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+    #card-1 .ceo-info-container a {
+      text-decoration: none; }
+    #card-1 .ceo-info-container a:hover {
+      text-decoration: underline;
+      color: #8bd; }
+    #card-1 .ceo-info-container #ceo-link {
+      margin-top: 2vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #9ce; }
+    #card-1 .ceo-info-container #ceo-link:hover {
+      color: #8bd; }
 
-#card-1:hover .ceo-info {
+#card-1:hover .ceo-info-container {
   transition: all 0.3s ease-in-out;
-  background-color: #555;
-  margin-bottom: 70vh; }
+  margin-bottom: 75vh; }
+
+#card-1:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0; }
 
 #card-1:hover {
-  transition: all 0.3s ease-in-out;
   background-color: #555; }
 
 #card-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   border-right: 1px #7d7d7d solid;
-  border-bottom: 1px #7d7d7d solid; }
+  border-bottom: 1px #7d7d7d solid;
+  overflow: hidden; }
+  #card-2 .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh; }
+    #card-2 .ceo-image-container img {
+      margin-top: 30vh;
+      margin-bottom: 2vh; }
+  #card-2 .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh; }
+    #card-2 .ceo-container #ceo {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+  #card-2 .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh; }
+    #card-2 .ceo-info-container h3 {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+    #card-2 .ceo-info-container a {
+      text-decoration: none; }
+    #card-2 .ceo-info-container a:hover {
+      text-decoration: underline;
+      color: #8bd; }
+    #card-2 .ceo-info-container #ceo-link {
+      margin-top: 2vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #9ce; }
+    #card-2 .ceo-info-container #ceo-link:hover {
+      color: #8bd; }
+
+#card-2:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh; }
+
+#card-2:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0; }
+
+#card-2:hover {
+  background-color: #555; }
 
 #card-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   border-right: 1px #7d7d7d solid;
-  border-bottom: 1px #7d7d7d solid; }
+  border-bottom: 1px #7d7d7d solid;
+  overflow: hidden; }
+  #card-3 .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh; }
+    #card-3 .ceo-image-container img {
+      margin-top: 30vh;
+      margin-bottom: 2vh; }
+  #card-3 .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh; }
+    #card-3 .ceo-container #ceo {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+  #card-3 .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh; }
+    #card-3 .ceo-info-container h3 {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+    #card-3 .ceo-info-container a {
+      text-decoration: none; }
+    #card-3 .ceo-info-container a:hover {
+      text-decoration: underline;
+      color: #8bd; }
+    #card-3 .ceo-info-container #ceo-link {
+      margin-top: 2vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #9ce; }
+    #card-3 .ceo-info-container #ceo-link:hover {
+      color: #8bd; }
+
+#card-3:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh; }
+
+#card-3:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0; }
+
+#card-3:hover {
+  background-color: #555; }
 
 #card-4 {
-  border-bottom: 1px #7d7d7d solid; }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1px #7d7d7d solid;
+  border-bottom: 1px #7d7d7d solid;
+  overflow: hidden; }
+  #card-4 .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh; }
+    #card-4 .ceo-image-container img {
+      margin-top: 30vh;
+      margin-bottom: 2vh; }
+  #card-4 .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh; }
+    #card-4 .ceo-container #ceo {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+  #card-4 .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh; }
+    #card-4 .ceo-info-container h3 {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+    #card-4 .ceo-info-container a {
+      text-decoration: none; }
+    #card-4 .ceo-info-container a:hover {
+      text-decoration: underline;
+      color: #8bd; }
+    #card-4 .ceo-info-container #ceo-link {
+      margin-top: 2vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #9ce; }
+    #card-4 .ceo-info-container #ceo-link:hover {
+      color: #8bd; }
+
+#card-4:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh; }
+
+#card-4:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0; }
+
+#card-4:hover {
+  background-color: #555; }
+
+#card-4 {
+  border-bottom: 1px #7d7d7d solid;
+  border-right: none; }
 
 #card-5 {
-  border-right: 1px #7d7d7d solid; }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1px #7d7d7d solid;
+  border-bottom: 1px #7d7d7d solid;
+  overflow: hidden; }
+  #card-5 .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh; }
+    #card-5 .ceo-image-container img {
+      margin-top: 30vh;
+      margin-bottom: 2vh; }
+  #card-5 .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh; }
+    #card-5 .ceo-container #ceo {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+  #card-5 .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh; }
+    #card-5 .ceo-info-container h3 {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+    #card-5 .ceo-info-container a {
+      text-decoration: none; }
+    #card-5 .ceo-info-container a:hover {
+      text-decoration: underline;
+      color: #8bd; }
+    #card-5 .ceo-info-container #ceo-link {
+      margin-top: 2vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #9ce; }
+    #card-5 .ceo-info-container #ceo-link:hover {
+      color: #8bd; }
+
+#card-5:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh; }
+
+#card-5:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0; }
+
+#card-5:hover {
+  background-color: #555; }
+
+#card-5 {
+  border-right: 1px #7d7d7d solid;
+  border-bottom: none; }
 
 #card-6 {
-  border-right: 1px #7d7d7d solid; }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1px #7d7d7d solid;
+  border-bottom: 1px #7d7d7d solid;
+  overflow: hidden; }
+  #card-6 .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh; }
+    #card-6 .ceo-image-container img {
+      margin-top: 30vh;
+      margin-bottom: 2vh; }
+  #card-6 .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh; }
+    #card-6 .ceo-container #ceo {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+  #card-6 .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh; }
+    #card-6 .ceo-info-container h3 {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+    #card-6 .ceo-info-container a {
+      text-decoration: none; }
+    #card-6 .ceo-info-container a:hover {
+      text-decoration: underline;
+      color: #8bd; }
+    #card-6 .ceo-info-container #ceo-link {
+      margin-top: 2vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #9ce; }
+    #card-6 .ceo-info-container #ceo-link:hover {
+      color: #8bd; }
+
+#card-6:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh; }
+
+#card-6:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0; }
+
+#card-6:hover {
+  background-color: #555; }
+
+#card-6 {
+  border-right: 1px #7d7d7d solid;
+  border-bottom: none; }
 
 #card-7 {
-  border-right: 1px #7d7d7d solid; }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1px #7d7d7d solid;
+  border-bottom: 1px #7d7d7d solid;
+  overflow: hidden; }
+  #card-7 .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh; }
+    #card-7 .ceo-image-container img {
+      margin-top: 30vh;
+      margin-bottom: 2vh; }
+  #card-7 .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh; }
+    #card-7 .ceo-container #ceo {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+  #card-7 .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh; }
+    #card-7 .ceo-info-container h3 {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+    #card-7 .ceo-info-container a {
+      text-decoration: none; }
+    #card-7 .ceo-info-container a:hover {
+      text-decoration: underline;
+      color: #8bd; }
+    #card-7 .ceo-info-container #ceo-link {
+      margin-top: 2vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #9ce; }
+    #card-7 .ceo-info-container #ceo-link:hover {
+      color: #8bd; }
+
+#card-7:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh; }
+
+#card-7:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0; }
+
+#card-7:hover {
+  background-color: #555; }
+
+#card-7 {
+  border-right: 1px #7d7d7d solid;
+  border-bottom: none; }
+
+#card-8 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1px #7d7d7d solid;
+  border-bottom: 1px #7d7d7d solid;
+  overflow: hidden; }
+  #card-8 .ceo-image-container {
+    margin-top: -25vh;
+    margin-bottom: 20vh; }
+    #card-8 .ceo-image-container img {
+      margin-top: 30vh;
+      margin-bottom: 2vh; }
+  #card-8 .ceo-container {
+    margin-bottom: 30vh;
+    margin-top: -20vh; }
+    #card-8 .ceo-container #ceo {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+  #card-8 .ceo-info-container {
+    margin-top: 0;
+    margin-bottom: -30vh; }
+    #card-8 .ceo-info-container h3 {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff; }
+    #card-8 .ceo-info-container a {
+      text-decoration: none; }
+    #card-8 .ceo-info-container a:hover {
+      text-decoration: underline;
+      color: #8bd; }
+    #card-8 .ceo-info-container #ceo-link {
+      margin-top: 2vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #9ce; }
+    #card-8 .ceo-info-container #ceo-link:hover {
+      color: #8bd; }
+
+#card-8:hover .ceo-info-container {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 75vh; }
+
+#card-8:hover .ceo-container {
+  transition: all 0.3s ease-in-out;
+  margin-top: 40vh;
+  margin-bottom: 5vh;
+  padding: 0; }
+
+#card-8:hover {
+  background-color: #555; }
+
+#card-8 {
+  border-right: none;
+  border-bottom: none; }
+
+.view-solutions-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 13vh; }
+  .view-solutions-container a {
+    padding: 8px 14px;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: white;
+    text-decoration: none;
+    border: 2px white solid; }
+  .view-solutions-container a:hover {
+    border: 2px #9ce solid;
+    background-color: #9ce;
+    transition: all 0.3s ease-in-out; }
