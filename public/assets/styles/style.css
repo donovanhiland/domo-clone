@@ -870,6 +870,7 @@
   .view-solutions-container a:hover {
     border: 2px #9ce solid;
     background-color: #9ce;
+<<<<<<< HEAD
     transition: all 0.3s ease-in-out;
     text-decoration: none; }
 
@@ -934,3 +935,101 @@
   justify-content: center;
   align-items: center;
   margin: 3vh; }
+=======
+    transition: all 0.3s ease-in-out; }
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
+.nav-section {
+  height: 10vh;
+  width: 100vw;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end; }
+  .nav-section .site-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100vw; }
+    .nav-section .site-nav .nav-menu-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px; }
+      .nav-section .site-nav .nav-menu-item .nav-link {
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        color: #555;
+        text-decoration: none; }
+      .nav-section .site-nav .nav-menu-item .domo-oj-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 35px;
+        width: 130px;
+        margin: auto;
+        background-color: #f92;
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #fff;
+        border: none; }
+
+#domo-logo {
+  height: 10vh;
+  float: left; }
+
+.landing-container .landing {
+  background-image: url("../images/bc-hero.jpg");
+  background-size: cover;
+  height: 90vh;
+  width: auto;
+  display: flex;
+  justify-content: center; }
+  .landing-container .landing .landing-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    .landing-container .landing .landing-info-container .landing-title {
+      margin-top: -53vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 44px;
+      font-weight: 300;
+      letter-spacing: -1px;
+      text-align: center;
+      color: white; }
+    .landing-container .landing .landing-info-container .landing-info {
+      margin-top: 5vh;
+      width: 65vw;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      color: white; }
+    .landing-container .landing .landing-info-container .domo-oj-btn {
+      margin-top: 5vh;
+      height: 35px;
+      width: 130px;
+      background-color: #f92;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+      border: none; }
+
+.domo-promo-container {
+  display: flex;
+  flex-wrap: wrap; }
+  .domo-promo-container .domo-promo-card {
+    height: 25vh;
+    width: 20vw;
+    background-color: #333; }
+
+#appstore {
+  background-image: url("../images/appstore-promo-media.png");
+  background-size: cover; }
+>>>>>>> master
