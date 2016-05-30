@@ -1,9 +1,9 @@
 "use strict";
 
 angular.module("domoApp", ["ui.router"]);
-'use strict';
+"use strict";
 
-angular.module("domoApp").config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
+angular.module("domoApp", ["ui.router"]).config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state('home', {
     url: '/home',
@@ -21,7 +21,7 @@ angular.module('domoApp').directive('navDirective', function () {
 
   return {
     restrict: 'E',
-    templateUrl: './app/components/nav/navTmpl.html'
+    templateUrl: './app/shared/nav/navTmpl.html'
   };
 });
 "use strict";
