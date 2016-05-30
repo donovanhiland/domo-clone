@@ -1,0 +1,155 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
+
+$domo-grey: #333;
+$domo-text: #555;
+$domo-blue: #9ce;
+$domo-oj: #f92;
+$domo-font: 'Open Sans', Helvetica, Arial, sans-serif;
+$test-border: 1px red solid;
+
+/////////////////////////////////
+
+////// NAVIGATION
+
+////////////////////////////////
+
+.nav-section {
+  height: 10vh;
+  width: 100vw;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  .site-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100vw;
+
+    .nav-menu-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+
+      .nav-link {
+        font-family: $domo-font;
+        font-size: 16px;
+        color: $domo-text;
+        text-decoration: none;
+      }
+      .domo-oj-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 35px;
+        width: 130px;
+        margin: auto;
+        background-color: $domo-oj;
+        font-family: $domo-font;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #fff;
+        border: none;
+      }
+    }
+  }
+}
+
+#domo-logo {
+  height: 10vh;
+  float: left;
+}
+
+
+
+
+
+/////////////////////////////////
+
+////// HOME PAGE - LANDING CONTAINER
+
+////////////////////////////////
+
+.landing-container {
+  .landing {
+     background-image: url("../images/bc-hero.jpg");
+     background-size: cover;
+     height: 90vh;
+     width: auto;
+     display: flex;
+     justify-content: center;
+
+     .landing-info-container {
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+
+       .landing-title {
+         margin-top: -53vh;
+         font-family: $domo-font;
+         font-size: 44px;
+         font-weight: 300;
+         letter-spacing: -1px;
+         text-align: center;
+         color: white;
+       }
+
+       .landing-info {
+         margin-top: 5vh;
+         width: 65vw;
+         font-family: $domo-font;
+         font-size: 20px;
+         font-weight: 300;
+         letter-spacing: 1px;
+         text-align: center;
+         color: white;
+       }
+       .domo-oj-btn {
+         margin-top: 5vh;
+         height: 35px;
+         width: 130px;
+         background-color: $domo-oj;
+         font-family: $domo-font;
+         font-size: 12px;
+         font-weight: 700;
+         letter-spacing: 1px;
+         color: #fff;
+         border: none;
+       }
+     }
+  }
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-PROMO-CARD
+
+////////////////////////////////
+
+.domo-promo-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  .domo-promo-card {
+    height: 25vh;
+    width: 20vw;
+    background-color: $domo-grey;
+  }
+}
+
+#appstore {
+  background-image: url("../images/appstore-promo-media.png");
+  background-size: cover;
+}
+
+
+
+/////////////////////////////////
+
+////// HOME PAGE - LANDING CONTAINER
+
+////////////////////////////////
