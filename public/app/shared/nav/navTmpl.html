@@ -1,11 +1,30 @@
-
 <header class="nav-section">
-  <img id="domo-logo" src="https://d3kjp0zrek7zit.cloudfront.net/uploads/vendor/image/490/large_detail_1391173259.jpg
+    <img id="domo-logo" src="https://d3kjp0zrek7zit.cloudfront.net/uploads/vendor/image/490/large_detail_1391173259.jpg
     " alt="" />
-  <nav class="site-nav">
-    <div class="nav-menu-item"><a class="nav-link" id="home" ui-sref="home">Home</a></div>
-    <div class="nav-menu-item"><a class="nav-link" ui-sref="dashboard">Dashboard</a></div>
-    <div class="nav-menu-item"><a class="nav-link" ui-sref="signin">Sign In</a></div>
-    <div class="nav-menu-item"><a class="nav-link" href="https://www.domo.com/request-a-demo"><button class="domo-oj-btn" type="button" name="button">WATCH DEMO</button></a></div>
-  </nav>
+    <nav class="site-nav">
+        <div class="nav-menu-item"><a class="nav-link" id="home" ui-sref="home">Home</a></div>
+        <div class="nav-menu-item"><a class="nav-link" ui-sref="dashboard">Dashboard</a></div>
+        <div class="nav-menu-item"><a class="nav-link btn-lg" ui-sref="signin" data-toggle="modal" data-target="#myModal">Sign In</a></div>
+        <div class="nav-menu-item">
+            <a class="nav-link" href="https://www.domo.com/request-a-demo">
+                <button class="domo-oj-btn" type="button" name="button">WATCH DEMO</button>
+            </a>
+        </div>
+    </nav>
 </header>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-bg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>This is a small modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
