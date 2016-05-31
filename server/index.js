@@ -37,6 +37,7 @@ app.use(express.static(__dirname + './../public'));
 
 // UserEndpoint
 app.post('/api/users', UserCtrl.register);
+app.get('/logout', UserCtrl.logout);
 app.get('/api/users', UserCtrl.getUsers);
 app.get('/me', isAuthed, UserCtrl.me);
 app.put('/users/:_id', isAuthed, UserCtrl.update);

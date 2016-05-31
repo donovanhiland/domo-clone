@@ -24,7 +24,7 @@ angular.module('domoApp').directive('navDirective', function () {
     templateUrl: './app/shared/nav/navTmpl.html'
   };
 });
-"use strict";
 'use strict';
 
 angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
+"use strict";
