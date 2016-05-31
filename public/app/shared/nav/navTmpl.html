@@ -9,7 +9,7 @@
     <div class="nav-menu-item"><a class="nav-link" href="https://www.domo.com/request-a-demo"><button class="domo-oj-btn" type="button" name="button">WATCH DEMO</button></a></div>
   </nav>
 </header>
-<section>
+<section ng-controller="loginCtrl">
   <div class="modal fade" id="myModal" role="dialog">
      <div class="modal-dialog modal-bg">
        <div class="modal-content">
@@ -18,7 +18,35 @@
            <h4 class="modal-title">Modal Header</h4>
          </div>
          <div class="modal-body">
-           <p>This is a small modal.</p>
+           <form action="index.html" method="post">
+             <fieldset>
+               <legend>Register</legend>
+               <div class="domo-register-container">
+                 <input type="text" name="name" ng-model="newUser.firstname" placeholder="First Name">
+                 <input type="text" name="name" ng-model="newUser.lastname" placeholder="Last Name">
+                 <input type="text" name="name" ng-model="newUser.email" placeholder="Email Address">
+                 <input type="password" name="name" ng-model="newUser.password" placeholder="Password">
+                 <input type="text" name="name" ng-model="newUser.phoneNumber" placeholder="Phone Number">
+               </div>
+               <div class="domo-register-btn-container">
+                 <button type="button" name="button" ng-click="register()">Sign Up</button>
+               </div>
+             </fieldset>
+           </form>
+         </div>
+         <div class="modal-body">
+           <form class="" action="index.html" method="post">
+            <fieldset>
+              <legend>Login</legend>
+              <div class="domo-login-container">
+                <input type="text" ng-model="credentials.email" placeholder="Enter Email">
+                <input type="password" ng-model="credentials.password" placeholder="Enter Password">
+              </div>
+              <div class="domo-login-btn-container">
+                <button id="post-modal-btn" class="post-btn" type="button" ng-click="login()" data-toggle="modal" data-target="#modal-1">Login</button>
+              </div>
+            </fieldset>
+          </form>
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

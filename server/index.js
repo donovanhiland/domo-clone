@@ -4,6 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import config from './config.js';
+import session from 'express-session';
 
 
 // Controllers
@@ -25,6 +26,13 @@ const app = express();
 // initilize dependencies
 app.use(cors());
 app.use(bodyParser.json());
+app.use(session({
+  secret: config.SESSION_SECRET,
+  saveUninitialized: false,
+  resave: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(__dirname + './../public'));
 
 
@@ -36,9 +44,9 @@ app.use(express.static(__dirname + './../public'));
 // TwitterCtrl.getDataByScreenName('devmtn');
 
 // UserEndpoint
-app.post('/api/users', UserCtrl.register);
+app.post('/users', UserCtrl.register);
 app.get('/logout', UserCtrl.logout);
-app.get('/api/users', UserCtrl.getUsers);
+app.get('/users', UserCtrl.getUsers);
 app.get('/me', isAuthed, UserCtrl.me);
 app.put('/users/:_id', isAuthed, UserCtrl.update);
 app.post('/login', passport.authenticate('local', {

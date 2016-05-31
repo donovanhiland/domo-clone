@@ -5,8 +5,7 @@
       register: function(req, res, next) {
           // save user information on signup
           User.create(req.body, function(err, dbRes) {
-              if (err) {
-                  res.status(500).json(err);
+              if (err) {res.status(500).json(err);
               } else {
                   console.log('account creation successful');
                   res.json(dbRes);
