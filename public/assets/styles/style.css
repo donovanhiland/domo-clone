@@ -106,7 +106,7 @@
     .domo-promo-section .domo-promo-container .domo-promo-card {
       width: 33.33333333%;
       box-sizing: border-box;
-      background-color: #333; }
+      background-color: #222; }
 
 #appstore {
   height: 32vh;
@@ -311,7 +311,7 @@
 .domo-solution-section .domo-solution-container {
   height: 130vh;
   width: 100%;
-  background-color: #333; }
+  background-color: #222; }
   .domo-solution-section .domo-solution-container .domo-solution-info {
     display: flex;
     justify-content: center;
@@ -345,7 +345,7 @@
     height: 30vh;
     width: 25%;
     box-sizing: border-box;
-    background-color: #333; }
+    background-color: #222; }
 
 #card-1 {
   display: flex;
@@ -925,7 +925,7 @@
       opacity: .5;
       cursor: pointer; }
     .domo-video-section .domo-video-container .domo-video-button-container .glyphicon {
-      color: #333; }
+      color: #222; }
 
 .domo-video-modal {
   margin-top: 15vh; }
@@ -1021,23 +1021,79 @@
       border: 2px #9ce solid;
       background-color: #9ce;
       transition: all 0.3s ease-in-out;
-      text-decoration: none; }
+      text-decoration: none;
+      color: #fff; }
 
 .domo-input-section .domo-input-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 85vh;
   width: 100%;
   background-color: #9ce; }
-  .domo-input-section .domo-input-container h1 {
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
-    font-size: 36px;
-    font-weight: 100;
-    letter-spacing: -1px;
-    color: #fff; }
-  .domo-input-section .domo-input-container p {
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 100;
-    letter-spacing: -1px;
-    color: #fff; }
+  .domo-input-section .domo-input-container .domo-input-info-container {
+    width: 50vw; }
+    .domo-input-section .domo-input-container .domo-input-info-container h1 {
+      margin-left: 5vh;
+      margin-bottom: 4vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 36px;
+      font-weight: 100;
+      letter-spacing: -1px;
+      color: #fff; }
+    .domo-input-section .domo-input-container .domo-input-info-container p {
+      margin-left: 5vh;
+      margin-bottom: 5vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: #fff; }
+    .domo-input-section .domo-input-container .domo-input-info-container input {
+      width: 20vw;
+      margin-left: 5vh;
+      margin-bottom: 4vh; }
+    .domo-input-section .domo-input-container .domo-input-info-container a .domo-oj-btn {
+      margin-left: 5vh;
+      height: 35px;
+      width: 130px;
+      background-color: #f92;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+      border: none; }
+
+.domo-footer-section .domo-footer-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 50vh;
+  width: 100%;
+  background-color: #222; }
+  .domo-footer-section .domo-footer-container .dev-team-container {
+    height: 30vh;
+    width: 20vw; }
+    .domo-footer-section .domo-footer-container .dev-team-container .linkedin-header p {
+      margin-left: 5vw;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      text-decoration: none;
+      color: #888; }
+    .domo-footer-section .domo-footer-container .dev-team-container .linkedin-container {
+      display: flex;
+      justify-content: flex-start; }
+      .domo-footer-section .domo-footer-container .dev-team-container .linkedin-container p a {
+        margin-left: 5vw;
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        text-decoration: none;
+        color: #888; }
+      .domo-footer-section .domo-footer-container .dev-team-container .linkedin-container p a:hover {
+        color: #9ce; }
+  .domo-footer-section .domo-footer-container .domo-logo {
+    display: flex; }
+    .domo-footer-section .domo-footer-container .domo-logo img {
+      height: 10vh; }

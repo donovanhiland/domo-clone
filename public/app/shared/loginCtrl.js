@@ -10,6 +10,7 @@ angular.module("domoApp").controller("loginCtrl", function($scope, loginService,
     loginService.login($scope.credentials).then(function(response) {
       $state.go('dashboard');
       $scope.user = response.data._id;
+      $scope.credentials = null;
       alert("Welcome " + response.data.firstname + " " + response.data.lastname);
     })
   }
