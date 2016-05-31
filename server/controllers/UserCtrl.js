@@ -5,8 +5,8 @@
       register: function(req, res, next) {
           // save user information on signup
           User.create(req.body, function(err, dbRes) {
-              if (err) {
-                  res.status(500).json(err);
+            console.log('hit');
+              if (err) {res.status(500).json(err);
               } else {
                   console.log('account creation successful');
                   res.json(dbRes);
@@ -51,5 +51,13 @@
                   })
               }
           });
+      },
+
+      logout: function(req, res, next) {
+          // user logout
+          req.logout();
+          return res.status(200).json('logged out');
       }
+
+
   };
