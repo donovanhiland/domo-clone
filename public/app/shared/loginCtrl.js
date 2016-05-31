@@ -2,6 +2,7 @@ angular.module("domoApp").controller("loginCtrl", function($scope, loginService,
 
   $scope.register = function() {
     loginService.register($scope.newUser).then(function(response){
+      clear();
     });
   };
 
@@ -13,4 +14,9 @@ angular.module("domoApp").controller("loginCtrl", function($scope, loginService,
     })
   }
 
-})
+  var clear = function() {
+    $scope.newUser = null;
+    return alert("account creation successful");
+  }
+
+});
