@@ -1582,12 +1582,26 @@ $test-border: 1px red solid;
 .domo-input-section {
 
   .domo-input-container {
+    display: flex;
+    justify-content: center;
     height: 85vh;
     width: 100%;
     background-color: $domo-blue;
-  }
-}
 
-.test {
-  
+    h1 {
+      font-family: $domo-font;
+      font-size: 36px;
+      font-weight: 100;
+      letter-spacing: -1px;
+      color: #fff;
+    }
+
+    p {
+      font-family: $domo-font;
+      font-size: 16px;
+      font-weight: 100;
+      letter-spacing: -1px;
+      color: #fff;
+    }
+  }
 }

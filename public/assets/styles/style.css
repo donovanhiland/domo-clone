@@ -1024,6 +1024,20 @@
       text-decoration: none; }
 
 .domo-input-section .domo-input-container {
+  display: flex;
+  justify-content: center;
   height: 85vh;
   width: 100%;
   background-color: #9ce; }
+  .domo-input-section .domo-input-container h1 {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 100;
+    letter-spacing: -1px;
+    color: #fff; }
+  .domo-input-section .domo-input-container p {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+    letter-spacing: -1px;
+    color: #fff; }
