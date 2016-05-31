@@ -605,6 +605,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -696,6 +697,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -787,6 +789,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -878,6 +881,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -974,6 +978,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -1070,6 +1075,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -1166,6 +1172,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -1262,6 +1269,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -1662,7 +1670,7 @@ $test-border: 1px red solid;
 
     .dev-team-container {
       height: 30vh;
-      width: 20vw;
+      width: 40vw;
 
       .linkedin-header {
         p {
@@ -1695,12 +1703,21 @@ $test-border: 1px red solid;
           }
         }
       }
-    }
-    .domo-logo {
-      display: flex;
+      .domo-logo {
 
-      img {
-        height: 10vh;
+        img {
+          height: 10vh;
+          margin-left: 5vw;
+        }
+
+        p {
+          margin-left: 15vw;
+          margin-top: -6vh;
+          font-family: $domo-font;
+          font-size: 14px;
+          text-decoration: none;
+          color: $domo-footer;
+        }
       }
     }
   }

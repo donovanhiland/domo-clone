@@ -373,7 +373,8 @@
       color: #fff; }
   #card-1 .ceo-info-container {
     margin-top: 0;
-    margin-bottom: -30vh; }
+    margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out; }
     #card-1 .ceo-info-container h3 {
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
       font-size: 16px;
@@ -434,7 +435,8 @@
       color: #fff; }
   #card-2 .ceo-info-container {
     margin-top: 0;
-    margin-bottom: -30vh; }
+    margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out; }
     #card-2 .ceo-info-container h3 {
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
       font-size: 16px;
@@ -495,7 +497,8 @@
       color: #fff; }
   #card-3 .ceo-info-container {
     margin-top: 0;
-    margin-bottom: -30vh; }
+    margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out; }
     #card-3 .ceo-info-container h3 {
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
       font-size: 16px;
@@ -556,7 +559,8 @@
       color: #fff; }
   #card-4 .ceo-info-container {
     margin-top: 0;
-    margin-bottom: -30vh; }
+    margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out; }
     #card-4 .ceo-info-container h3 {
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
       font-size: 16px;
@@ -621,7 +625,8 @@
       color: #fff; }
   #card-5 .ceo-info-container {
     margin-top: 0;
-    margin-bottom: -30vh; }
+    margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out; }
     #card-5 .ceo-info-container h3 {
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
       font-size: 16px;
@@ -686,7 +691,8 @@
       color: #fff; }
   #card-6 .ceo-info-container {
     margin-top: 0;
-    margin-bottom: -30vh; }
+    margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out; }
     #card-6 .ceo-info-container h3 {
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
       font-size: 16px;
@@ -751,7 +757,8 @@
       color: #fff; }
   #card-7 .ceo-info-container {
     margin-top: 0;
-    margin-bottom: -30vh; }
+    margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out; }
     #card-7 .ceo-info-container h3 {
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
       font-size: 16px;
@@ -816,7 +823,8 @@
       color: #fff; }
   #card-8 .ceo-info-container {
     margin-top: 0;
-    margin-bottom: -30vh; }
+    margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out; }
     #card-8 .ceo-info-container h3 {
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
       font-size: 16px;
@@ -1074,7 +1082,7 @@
   background-color: #222; }
   .domo-footer-section .domo-footer-container .dev-team-container {
     height: 30vh;
-    width: 20vw; }
+    width: 40vw; }
     .domo-footer-section .domo-footer-container .dev-team-container .linkedin-header p {
       margin-left: 5vw;
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -1093,7 +1101,13 @@
         color: #888; }
       .domo-footer-section .domo-footer-container .dev-team-container .linkedin-container p a:hover {
         color: #9ce; }
-  .domo-footer-section .domo-footer-container .domo-logo {
-    display: flex; }
-    .domo-footer-section .domo-footer-container .domo-logo img {
-      height: 10vh; }
+    .domo-footer-section .domo-footer-container .dev-team-container .domo-logo img {
+      height: 10vh;
+      margin-left: 5vw; }
+    .domo-footer-section .domo-footer-container .dev-team-container .domo-logo p {
+      margin-left: 15vw;
+      margin-top: -6vh;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      text-decoration: none;
+      color: #888; }
