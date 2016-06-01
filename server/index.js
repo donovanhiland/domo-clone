@@ -21,7 +21,11 @@ app.use(express.static(__dirname + '/public'));
 // app.post('/model', modelCtrl.create);
 // app.put('/model/:id', modelCtrl.update);
 // app.delete('/model/:id', modelCtrl.delete);
-TwitterCtrl.getDataByScreenName('devmtn');
+
+
+//=======uncomment this for testing=======//
+
+// TwitterCtrl.getDataByScreenName('devmtn');
 
 
 // MongoDB connection
