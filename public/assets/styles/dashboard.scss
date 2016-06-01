@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
-
 $domo-grey: #333;
 $domo-text: #555;
 $domo-solutions-border: rgb(125, 125, 125);
@@ -7,96 +6,109 @@ $domo-blue: #9ce;
 $domo-link: #8bd;
 $domo-oj: #f92;
 $domo-font: 'Open Sans', Helvetica, Arial, sans-serif;
-$test-border: 1px red solid;
-
-
-/////////////////////////////////
-
+$test-border: 1px red solid; /////////////////////////////////
 ////// Dashboard Nav
-
 ////////////////////////////////
 .dash-nav-section {
-
-  .dash-nav-top {
-    height: 7vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    background-color: $domo-text;
-
-    .dash-nav-name {
-      margin-left: 40px;
-      padding-right: 10px;
-      padding-left: 10px;
-      white-space: nowrap;
-      background-color: #FA8D32;
-      color: #fff;
+    .dash-nav-top {
+        height: 7vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        background-color: $domo-text;
+        .dash-nav-name {
+            margin-left: 40px;
+            padding-right: 10px;
+            padding-left: 10px;
+            white-space: nowrap;
+            background-color: #FA8D32;
+            color: #fff;
+            h2 {
+                text-align: center;
+                margin: 10px;
+            }
+        }
+        .site-nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            width: 100vw;
+        }
     }
-
-    .site-nav {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      width: 100vw;
+    .dash-nav-bottom {
+        height: 5vh;
+        width: 100vw;
+        background-color: $domo-grey;
+        ul {
+            display: inline-block;
+            li {
+                float: left;
+                margin: 14px;
+                color: #fff;
+            }
+        }
+        ul li:hover {
+            padding: 6px;
+            margin: 8px;
+            background-color: $domo-text;
+        }
     }
-  }
-  .dash-nav-bottom {
-    height: 5vh;
-    width: 100vw;
-    background-color: $domo-grey;
-
-    ul {
-      display: inline-block;
-
-      li  {
-        float: left;
-        margin: 14px;
-        color: #fff;
-      }
-    }
-
-    ul li:hover {
-      padding: 6px;
-      margin: 8px;
-      background-color: $domo-text;
-    }
-  }
 }
-
 #domo-dash-logo {
-  height: 6.95vh;
-  float: left;
+    height: 6.95vh;
+    float: left;
 }
-
 /////////////////////////////////
-
 ////// Dashboard backdrop
-
 ////////////////////////////////
-
 .dashboard {
-  padding: 20px;
-  background-color: #F5F5F5;
-
-  .dash-top {
-    font-family: $domo-font;
-    h2 {
-      font-size: 26px;
-      float: left;
+    padding: 20px;
+    .dash-top {
+        font-family: $domo-font;
+        h2 {
+            font-size: 26px;
+            float: left;
+            margin-top: 5px;
+        }
+        .dash-menu {
+            float: right;
+            margin-right: 20px;
+            .btn-group {
+                margin-right: 20px;
+            }
+            .btn:hover {
+                background-color: #bfbfbf;
+            }
+        }
     }
-    .dash-menu {
-      float: right;
-      margin-right: 20px;
-
-      .btn-group {
-        margin-right: 20px
-      }
-
-      .btn:hover {
-        background-color: #bfbfbf;
-      }
-    }
-
-  }
 }
+/////////////////////////////////
+////// Cards
+////////////////////////////////
+.cards {
+  height: 50vh;
+  display: flex;
+  width: 95%;
+  justify-content: flex-start;
+    .lg-card-container {
+        .lg-card {
+            height: 50vh;
+            width: 25vw;
+            background-color: rgb(125, 125, 125);
+            margin: 0 2vh;
+        }
+    }
+    .sm-card-container {
+      display: flex;
+      border: 1px green solid;
+      flex-wrap: wrap;
+        .sm-card {
+            background-color: blue;
+            height: 20vh;
+            border: 1px red solid;
+            width: 10vw;
+            color: white;
+        }
+      }
+    }

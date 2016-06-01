@@ -10,6 +10,7 @@ import session from 'express-session';
 // Controllers
 import TwitterCtrl from './controllers/TwitterCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
+import cardCtrl from './controllers/cardCtrl.js';
 
 // POLICIES //
 const isAuthed = (req, res, next) => {
@@ -53,6 +54,8 @@ app.put('/users/:_id', isAuthed, UserCtrl.update);
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/me'
 }));
+app.post('/card', cardCtrl.createCard);
+app.get('/card', cardCtrl.readCard);
 app.get('/logout', function(req, res, next) {
     req.logout();
     return res.status(200).send('logged out');

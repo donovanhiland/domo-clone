@@ -1,56 +1,155 @@
 <header class="dash-nav-section">
-  <div class="dash-nav-top">
-    <a class="nav-link" id="home" ui-sref="home"><img id="domo-dash-logo" src="https://d3kjp0zrek7zit.cloudfront.net/uploads/vendor/image/490/large_detail_1391173259.jpg
+    <div class="dash-nav-top">
+        <a class="nav-link" id="home" ui-sref="home"><img id="domo-dash-logo" src="https://d3kjp0zrek7zit.cloudfront.net/uploads/vendor/image/490/large_detail_1391173259.jpg
     " alt="" /></a>
-    <div class="dash-nav-name">
-      <h2>User Name</h2>
+        <div class="dash-nav-name">
+            <h2>User Name</h2>
+        </div>
+
+        <nav class="site-nav">
+            <div class="nav-menu-item">
+
+            </div>
+            <div class="nav-menu-item">
+
+            </div>
+
+        </nav>
     </div>
-
-    <nav class="site-nav">
-      <div class="nav-menu-item">
-
-      </div>
-      <div class="nav-menu-item">
-
-      </div>
-
-    </nav>
-  </div>
-  <div class="dash-nav-bottom">
-    <ul>
-      <a href="#"><li>Overview</li></a>
-      <a href="#"><li>Favorites</li></a>
-      <a href="#"><li>Alerts</li></a>
-      <a href="#"><li>CEO</li></a>
-      <a href="#"><li>Finance</li></a>
-      <a href="#"><li>HR</li></a>
-      <a href="#"><li>Marketing</li></a>
-      <a href="#"><li>Operations</li></a>
-      <a href="#"><li>Sales</li></a>
-      <a href="#"><li>IT</li></a>
-    </ul>
-  </div>
+    <div class="dash-nav-bottom">
+        <ul>
+            <a href="#">
+                <li>Overview</li>
+            </a>
+            <a href="#">
+                <li>Favorites</li>
+            </a>
+            <a href="#">
+                <li>Alerts</li>
+            </a>
+            <a href="#">
+                <li>CEO</li>
+            </a>
+            <a href="#">
+                <li>Finance</li>
+            </a>
+            <a href="#">
+                <li>HR</li>
+            </a>
+            <a href="#">
+                <li>Marketing</li>
+            </a>
+            <a href="#">
+                <li>Operations</li>
+            </a>
+            <a href="#">
+                <li>Sales</li>
+            </a>
+            <a href="#">
+                <li>IT</li>
+            </a>
+            <a href="#">
+                <li>Settings</li>
+            </a>
+        </ul>
+    </div>
 </header>
 <section class="dashboard">
-  <div class="dash-top">
-    <h2>Overview</h2>
-    <div class="dash-menu">
+    <div class="dash-top">
+        <h2>Overview</h2>
+        <div class="dash-menu">
 
-      <div class="btn-group" uib-dropdown keyboard-nav>
-          <button id="simple-btn-keyboard-nav" type="button" class="btn" uib-dropdown-toggle>
-            Add Card
-              <span class="caret"></span>
-          </button>
-      </div>
+            <div class="btn-group">
+                <button type="button" data-toggle="modal" data-target="#myModal" class="love btn btn-primary">
+                    Add Card
+                </button>
+            </div>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
 
-        <!-- Single button with keyboard nav -->
-      <div class="btn-group" uib-dropdown keyboard-nav>
-          <button id="simple-btn-keyboard-nav" type="button" class="btn" uib-dropdown-toggle>
-            <i class="fa fa-wrench" aria-hidden="true"></i>
-              <span class="caret"></span>
-          </button>
-      </div>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Create Board</h4>
+                        </div>
+                        <div class="modal-body">
+                            <label id="label" for="inputdefault">Title:</label>
+                            <input id="text-box" class="form-control" id="inputdefault" type="text" ng-model="newTitle">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="love btn btn-primary" ng-click="createCard(newTitle)" data-dismiss="modal">Create</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single button with keyboard nav -->
+            <div class="btn-group" uib-dropdown keyboard-nav>
+                <button id="simple-btn-keyboard-nav" type="button" class="btn" uib-dropdown-toggle>
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                    <span class="caret"></span>
+                </button>
+            </div>
+        </div>
+
     </div>
 
-  </div>
+
+
+
+
+    <!-- <div class="container">
+         Trigger the modal with a button
+        <br>
+        <button id="button" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create new board...</button> -->
+
+    <!-- Modal -->
+    <!-- <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+    <!-- <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Create Board</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label id="label" for="inputdefault">Title:</label>
+                        <input id="text-box" class="form-control" id="inputdefault" type="text" ng-model="newTitle">
+                    </div> -->
+    <!-- <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="love btn btn-primary" ng-click="createBoard()">Create</button>
+                    </div> -->
+
+    <!-- </div>
+            </div>
+        </div> -->
+    <!-- <div id="div-outer" ng-repeat="card in cards"> -->
+    <div class="cards">
+      <div class="lg-card-container">
+        <div class="lg-card">
+
+        </div>
+
+
+      </div>
+      <div class="sm-card-container">
+        <div class="sm-card">
+
+        </div>
+        <div class="sm-card" ng-repeat="card in cards">
+            {{card.title}}
+        </div>
+
+        </div>
+
+
+      </div>
+        <!-- <a ui-sref="card({id:user._id})"> -->
+        <!-- <button id="button2" type="button" class="btn " data-target="#myModal">{{card.title}}</button> -->
+
+    </div>
+    <!-- </div> -->
 </section>

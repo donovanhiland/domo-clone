@@ -2,8 +2,10 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 require('mongoose-schematypes-extend')(mongoose);
 
+import {Schema} from 'mongoose';
 
-var User = new mongoose.Schema({
+
+var User = new Schema({
 
   firstname: {
     type: String,
@@ -35,7 +37,11 @@ var User = new mongoose.Schema({
 
   phoneNumber: {
     type: String
-  }
+  },
+
+  card: [
+    {type: Schema.Types.ObjectId, ref: 'Card'}
+  ]
 });
 
 User.pre('save', function(next) {
