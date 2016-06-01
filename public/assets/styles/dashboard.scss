@@ -106,7 +106,9 @@ $test-border: 1px red solid; /////////////////////////////////
         .sm-card {
             background-color: blue;
             height: 20vh;
+            border: 1px red solid;
             width: 10vw;
+            color: white;
         }
       }
     }

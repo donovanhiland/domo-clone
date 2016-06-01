@@ -3,19 +3,21 @@ import Card from '../models/cardmodel';
 module.exports = {
 
   createCard: function(req, res) {
-    var newCard = new Card(req.body);
-    newCard.save(function(err, result) {
-      if (err) {
-        return res.status(500).send(err);
-      } else {
-          Card.findByIdAndUpdate(req.user._id, {$addToSet:{cards:result._id}},function (err, user) {
-            if (err) {
-              return res.status(500).send(err);
-            } else {
-              res.status(200).send(result);
-            }
-          })
-      }
+    var card = new Card(req.body);
+    // card.user = req.user._id;
+    card.save(function(err, result) {
+      return err ? res.status(500).send(err) : res.send(result);
+    });
+  },
+  readCard: function (req, res) {
+    Card.find(req.query)
+    .populate({
+      path:'user',
+      select:"firstname lastname",
+    })
+    .exec(function (err, i) {
+      res.send(i);
     });
   }
-}
+
+};

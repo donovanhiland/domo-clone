@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
-require('mongoose-schematypes-extend')(mongoose);
 
-var cardSchema = new mongoose.Schema({
+var Schema = mongoose.Schema
+var cardSchema = new Schema({
 
-    title: String
-
+    title: String,
+    user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 module.exports = mongoose.model('Card', cardSchema);
