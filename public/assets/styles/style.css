@@ -1029,6 +1029,16 @@
   align-items: center;
   margin: 3vh; }
 
+@media screen and (max-width: 768px) {
+  .domo-video-section .domo-video-container {
+    height: 60vh; }
+    .domo-video-section .domo-video-container .tint {
+      height: 60vh; }
+      .domo-video-section .domo-video-container .tint .video-mastercard-container img {
+        display: none; }
+      .domo-video-section .domo-video-container .tint .domo-video-info-container h1 {
+        font-size: 20px; } }
+
 .domo-partners-section .domo-partners-container {
   height: 50vh;
   width: 100%;
@@ -1158,6 +1168,18 @@
       color: #fff;
       border: none; }
 
+@media screen and (max-width: 768px) {
+  .domo-input-section .domo-input-container {
+    height: 110vh; }
+    .domo-input-section .domo-input-container .domo-input-img-container img {
+      display: none; }
+    .domo-input-section .domo-input-container .domo-input-info-container {
+      width: 95vw; }
+      .domo-input-section .domo-input-container .domo-input-info-container h1 {
+        margin-top: 0vh; }
+      .domo-input-section .domo-input-container .domo-input-info-container input {
+        width: 80vw; } }
+
 .domo-footer-section .domo-footer-container {
   display: flex;
   justify-content: flex-start;
@@ -1196,3 +1218,11 @@
       font-size: 14px;
       text-decoration: none;
       color: #888; }
+
+@media screen and (max-width: 768px) {
+  .domo-footer-section .domo-footer-container {
+    height: 75vh; }
+    .domo-footer-section .domo-footer-container .dev-team-container {
+      width: 90vw; }
+  #domo-clone {
+    margin-left: 25vw; } }

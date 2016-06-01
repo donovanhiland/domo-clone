@@ -1661,7 +1661,26 @@ $test-border: 1px red solid;
 ////////////////////////////////
 
 @media screen and (max-width: 768px) {
+  .domo-video-section {
+    .domo-video-container {
+      height: 60vh;
 
+      .tint {
+        height: 60vh;
+
+        .video-mastercard-container {
+          img  {
+            display: none;
+          }
+        }
+        .domo-video-info-container {
+          h1 {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
 }
 
 /////////////////////////////////
@@ -1811,7 +1830,7 @@ $test-border: 1px red solid;
 
 /////////////////////////////////
 
-////// HOME PAGE - INPUT-PARTNERS
+////// HOME PAGE - INPUT
 
 ////////////////////////////////
 
@@ -1873,6 +1892,41 @@ $test-border: 1px red solid;
             letter-spacing: 1px;
             color: #fff;
             border: none;
+        }
+      }
+    }
+  }
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - INPUT - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .domo-input-section {
+    .domo-input-container {
+      height: 110vh;
+
+      .domo-input-img-container {
+        img {
+          display: none;
+        }
+      }
+      .domo-input-info-container {
+        width: 95vw;
+
+        h1 {
+          margin-top: 0vh;
+        }
+
+        p {
+
+        }
+
+        input {
+          width: 80vw;
         }
       }
     }
@@ -1947,5 +2001,28 @@ $test-border: 1px red solid;
         }
       }
     }
+  }
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-FOOTER - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .domo-footer-section {
+    .domo-footer-container {
+      height: 75vh;
+
+      .dev-team-container {
+        width: 90vw;
+
+      }
+    }
+  }
+
+  #domo-clone {
+    margin-left: 25vw;
   }
 }
