@@ -37,9 +37,8 @@
     <div class="dash-menu">
 
       <div class="btn-group" uib-dropdown keyboard-nav>
-          <button id="simple-btn-keyboard-nav" type="button" class="btn" uib-dropdown-toggle>
+        <button type="button" data-dismiss="modal" class="love btn btn-primary" ng-click="createCard()">
             Add Card
-              <span class="caret"></span>
           </button>
       </div>
 
@@ -53,4 +52,47 @@
     </div>
 
   </div>
+
+
+
+
+
+  <div class="container">
+    <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+    <h4 id="h3-title-home">My Boards</h4>
+    <!-- Trigger the modal with a button -->
+    <br>
+    <button id="button" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create new board...</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Board</h4>
+                </div>
+                <div class="modal-body">
+                    <label id="label" for="inputdefault">Title:</label>
+                    <input id="text-box" class="form-control" id="inputdefault" type="text" ng-model="newTitle">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="love btn btn-primary" ng-click="createBoard()">Create</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="div-outer"ng-repeat="board in boards" >
+      <div class="one board-title" ng-mouseover="hover = true" ng-mouseleave="hover=false">
+        <a ui-sref="card({id:board._id})">
+        <button id="button2" type="button" class="btn "  data-target="#myModal">{{board.title}}</button></a>
+        <div class="delete" ng-if="hover">
+          <i class="fa fa-times" aria-hidden="true"style="color:red" ng-click="remove(board)"></i>
+        </div>
+      </div>
+     </div>
+</div>
 </section>
