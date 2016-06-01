@@ -1,7 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
 
-$domo-grey: #333;
+$domo-grey: #222;
 $domo-text: #555;
+$domo-footer: #888;
 $domo-solutions-border: rgb(125, 125, 125);
 $domo-blue: #9ce;
 $domo-link: #8bd;
@@ -79,7 +80,39 @@ $test-border: 1px red solid;
   float: left;
 }
 
+/////////////////////////////////
 
+////// NAVIGATION - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .nav-section {
+    .site-nav {
+      .nav-menu-item {
+        .nav-link {
+          font-family: $domo-font;
+          font-size: 10px;
+          color: $domo-text;
+          text-decoration: none;
+          cursor: pointer;
+
+          .domo-oj-btn {
+            margin-right: 1vw;
+            font-size: 10px;
+            font-weight: 100;
+            letter-spacing: 0px;
+            width: 80px;
+          }
+        }
+      }
+    }
+  }
+
+  #domo-logo {
+
+  }
+}
 
 
 
@@ -154,6 +187,27 @@ $test-border: 1px red solid;
 
 /////////////////////////////////
 
+////// HOME PAGE - LANDING CONTAINER - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .landing-section {
+    .landing-container {
+      .landing {
+        .landing-info-container {
+          .landing-title {
+            padding-top: 25vh;
+            font-size: 36px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/////////////////////////////////
+
 ////// HOME PAGE - DOMO-PROMO-CARD
 
 ////////////////////////////////
@@ -215,7 +269,7 @@ $test-border: 1px red solid;
       a {
         padding: 8px 14px;
         font-family: $domo-font;
-        font-size: 12px;
+        font-size: 11px;
         letter-spacing: 1px;
         color: white;
         text-decoration: none;
@@ -382,45 +436,54 @@ $test-border: 1px red solid;
 }
 
 
+/////////////////////////////////
 
-//SLIDER
-// .carousel-container {
-//
-//   .carousel {
-//     display: flex;
-//     justify-content: center;
-//     height: auto;
-//     width: 75vw;
-//     max-width: 100%;
-//
-//     .carousel {
-//       height: 20vh;
-//       width: 100%;
-//
-//
-//     }
-//   }
-// }
-//
-// #appstore {
-//   height: 10vh;
-//   width: 10vw;
-//   background-image: url("../images/appstore-promo-media.png");
-//   background-size: cover;
-// }
-// #mastercard {
-//   height: 10vh;
-//   width: 10vw;
-//   background-image: url("../images/city-banner.jpg");
-//   background-size: cover;
-// }
-// #mobile {
-//   height: 10vh;
-//   width: 10vw;
-//   background-image: url("../images/access.png");
-//   background-size: cover;
-// }
+////// HOME PAGE - MEDIA QUERY
 
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .domo-promo-section {
+    display: none;
+    .domo-promo-container {
+      display: flex;
+      justify-content: center;
+      #appstore {
+        display: flex;
+        justify-content: flex-start;
+        height: 32vh;
+        width: 100%;
+        .appstore-info {
+          width: 40%;
+          margin-left: 20vw;
+
+          h3 {
+
+          }
+          p {
+            font-size: 12px;
+          }
+          .appstore-info-border {
+            a {
+              font-size: 8px;
+            }
+          }
+        }
+        .appstore-img {
+          img {
+            margin-left: 0vh;
+          }
+        }
+      }
+      #mastercard {
+        display: none;
+      }
+      #mobile {
+        display: none;
+      }
+    }
+  }
+}
 
 
 /////////////////////////////////
@@ -492,9 +555,42 @@ $test-border: 1px red solid;
     .domo-example-img {
       display: flex;
       justify-content: center;
+      padding-left: 15px;
+      padding-right: 15px;
 
       img {
+        height: auto;
+        max-width: 100%;
+      }
+    }
+  }
+}
 
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-EXAMPLE - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .domo-example-section {
+    .domo-example-container {
+      .domo-example-info {
+        h1 {
+          width: 95%;
+          font-size: 36px;
+        }
+
+        p{
+          width: 95%;
+          font-size: 20px;
+        }
+      }
+      .domo-example-img {
+
+        img {
+
+        }
       }
     }
   }
@@ -560,7 +656,6 @@ $test-border: 1px red solid;
   }
 }
 
-
 /////////////////////////////////
 
 ////// HOME PAGE - DOMO-SOLUTION - CARD-1
@@ -604,6 +699,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -695,6 +791,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -786,6 +883,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -877,6 +975,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -973,6 +1072,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -1069,6 +1169,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -1165,6 +1266,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -1261,6 +1363,7 @@ $test-border: 1px red solid;
   .ceo-info-container {
     margin-top: 0;
     margin-bottom: -30vh;
+    -webkit-transition: .3s ease-in-out;
 
     h3 {
       font-family: $domo-font;
@@ -1336,6 +1439,127 @@ $test-border: 1px red solid;
     background-color: $domo-blue;
     transition: all 0.3s ease-in-out;
     text-decoration: none;
+  }
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-SOLUTION - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .domo-solution-section {
+    .domo-solution-container {
+      height: 215vh;
+
+      .domo-solution-info {
+        h1 {
+          font-size: 36px;
+        }
+
+        p {
+
+        }
+      }
+      .solution-card-container {
+        .card-query {
+
+          .ceo-image-container {
+            display: flex;
+            justify-content: center;
+
+            img {
+
+            }
+
+            img:hover {
+              margin-top: -20vh;
+            }
+          }
+          .ceo-container {
+            margin-bottom: 30vh;
+            margin-top: -32vh;
+
+            #ceo {
+              font-size: 10px;
+            }
+          }
+          .ceo-info-container {
+
+            h3 {
+              font-size: 12px;
+            }
+          }
+        }
+        .card-query:hover {
+          margin-top: -20px;
+        }
+      }
+    }
+  }
+
+
+  #card-1 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-1:hover .ceo-info-container {
+    transition: all 0.3s ease-in-out;
+    margin-top: 0vh;
+  }
+
+  #card-1:hover .ceo-container {
+    transition: all 0.3s ease-in-out;
+    margin-top: -15vh;
+    margin-bottom: 0vh;
+    padding: 0;
+  }
+
+  #card-1:hover .ceo-image-container img {
+    margin-top: 15vh;
+    margin-bottom: 0;
+  }
+
+  #card-1:hover {
+    background-color: $domo-text;
+  }
+
+  #card-2 {
+    width: 50%;
+    display: block;
+    border-right: none;
+  }
+
+  #card-3 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-4 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-5 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-6 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-7 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-8 {
+    width: 50%;
+    display: block;
   }
 }
 
@@ -1427,6 +1651,35 @@ $test-border: 1px red solid;
   justify-content: center;
   align-items: center;
   margin: 3vh;
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-VIDEO - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .domo-video-section {
+    .domo-video-container {
+      height: 60vh;
+
+      .tint {
+        height: 60vh;
+
+        .video-mastercard-container {
+          img  {
+            display: none;
+          }
+        }
+        .domo-video-info-container {
+          h1 {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
 }
 
 /////////////////////////////////
@@ -1568,6 +1821,7 @@ $test-border: 1px red solid;
         background-color: $domo-blue;
         transition: all 0.3s ease-in-out;
         text-decoration: none;
+        color: #fff;
       }
     }
   }
@@ -1575,33 +1829,431 @@ $test-border: 1px red solid;
 
 /////////////////////////////////
 
-////// HOME PAGE - INPUT-PARTNERS
+////// HOME PAGE - INPUT
 
 ////////////////////////////////
 
 .domo-input-section {
 
-  .domo-input-container {
-    display: flex;
-    justify-content: center;
-    height: 85vh;
-    width: 100%;
-    background-color: $domo-blue;
+    .domo-input-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 85vh;
+      width: 100%;
+      background-color: $domo-blue;
 
-    h1 {
-      font-family: $domo-font;
-      font-size: 36px;
-      font-weight: 100;
-      letter-spacing: -1px;
-      color: #fff;
+      .domo-input-img-container {
+
+        img {
+
+        }
+      }
+      .domo-input-info-container {
+        width: 50vw;
+
+        h1 {
+          margin-left: 5vh;
+          margin-bottom: 4vh;
+          font-family: $domo-font;
+          font-size: 36px;
+          font-weight: 100;
+          letter-spacing: -1px;
+          color: #fff;
+        }
+
+        p {
+          margin-left: 5vh;
+          margin-bottom: 5vh;
+          font-family: $domo-font;
+          font-size: 16px;
+          font-weight: 700;
+          letter-spacing: -1px;
+          color: #fff;
+        }
+
+        input {
+          width: 20vw;
+          margin-left: 5vh;
+          margin-bottom: 4vh;
+        }
+
+        a {
+
+          .domo-oj-btn {
+            margin-left: 5vh;
+            height: 35px;
+            width: 130px;
+            background-color: $domo-oj;
+            font-family: $domo-font;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            border: none;
+        }
+      }
     }
+  }
+}
 
-    p {
-      font-family: $domo-font;
-      font-size: 16px;
-      font-weight: 100;
-      letter-spacing: -1px;
-      color: #fff;
+/////////////////////////////////
+
+////// HOME PAGE - INPUT - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .domo-input-section {
+    .domo-input-container {
+      height: 110vh;
+
+      .domo-input-img-container {
+        img {
+          display: none;
+        }
+      }
+      .domo-input-info-container {
+        width: 95vw;
+
+        h1 {
+          margin-top: 0vh;
+        }
+
+        p {
+
+        }
+
+        input {
+          width: 80vw;
+        }
+      }
+    }
+  }
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-FOOTER
+
+////////////////////////////////
+
+.domo-footer-section {
+
+  .domo-footer-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50vh;
+    width: 100%;
+    background-color: $domo-grey;
+
+    .dev-team-container {
+      height: 30vh;
+      width: 40vw;
+
+      .linkedin-header {
+        p {
+          // margin-top: 5vh;
+          // margin-bottom: 2vh;
+          margin-left: 5vw;
+          font-family: $domo-font;
+          font-size: 20px;
+          font-weight: 600;
+          text-decoration: none;
+          color: $domo-footer;
+        }
+      }
+      .linkedin-container {
+        display: flex;
+        justify-content: flex-start;;
+
+        p {
+
+          a {
+            margin-left: 5vw;
+            font-family: $domo-font;
+            font-size: 14px;
+            text-decoration: none;
+            color: $domo-footer;
+          }
+
+          a:hover {
+            color: $domo-blue;
+          }
+        }
+      }
+      .domo-logo {
+
+        img {
+          height: 10vh;
+          margin-left: 5vw;
+        }
+
+        p {
+          margin-left: 15vw;
+          margin-top: -6vh;
+          font-family: $domo-font;
+          font-size: 14px;
+          text-decoration: none;
+          color: $domo-footer;
+        }
+      }
+    }
+  }
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-FOOTER - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .domo-footer-section {
+    .domo-footer-container {
+      height: 75vh;
+
+      .dev-team-container {
+        width: 90vw;
+
+      }
+    }
+  }
+
+  #domo-clone {
+    margin-left: 25vw;
+  }
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-PROMO-SECTION - MEDIA QUERY
+
+///// DISPLAY NONE WHEN SCREEN IS BIGGER THAN 768PX
+///// DISPLAY VISIBLE WHEN SCREEN IS SMALLER THAN 768PX
+
+////////////////////////////////
+
+@media screen and (min-width: 768px) {
+  .carousel-container {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .carousel-container {
+    height: 32vh;
+
+    .carousel {
+      #appstore {
+        height: 32vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        overflow: hidden;
+        background-color: $domo-grey;
+
+        .appstore-info {
+          width: 40%;
+          margin-left: 20vw;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+
+          h3 {
+            margin-bottom: 1vh;
+            justify-content: center;
+            font-family: $domo-font;
+            font-size: 20px;
+            font-weight: 400;
+            color: white;
+            text-align: center;
+          }
+
+          p {
+            margin-bottom: 4vh;
+            font-family: $domo-font;
+            font-size: 12px;
+            font-weight: 300;
+            line-height: 20px;
+            text-align: center;
+            color: white;
+          }
+
+          .appstore-info-border {
+
+            a {
+              padding: 8px 14px;
+              font-family: $domo-font;
+              font-size: 8px;
+              letter-spacing: 1px;
+              color: white;
+              text-decoration: none;
+              border: 2px white solid;
+            }
+
+            a:hover {
+              border: 2px $domo-blue solid;
+              background-color: $domo-blue;
+              transition: all 0.3s ease-in-out;
+            }
+          }
+        }
+        .appstore-img {
+          width: 0vh;
+          display: flex;
+          flex-wrap: wrap;
+
+          img{
+            height: 32vh;
+            margin-left: 0vw;
+          }
+        }
+      }
+    }
+    #mastercard {
+      height: 32vh;
+      width: 100%;
+      background-image: url("../images/city-banner.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      background-color: $domo-grey;
+
+      .tint {
+        z-index: 1;
+        height: 32vh;
+        top: 0px;
+        left: 0px;
+        background: rgba(0, 0, 0, 0.4);
+
+        .mastercard-img {
+          height: 10vh;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img{
+            height: 7vh;
+            margin-top: 3vh;
+          }
+        }
+      }
+      .mastercard-info {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        z-index: 3;
+        margin-top: -20vh;
+
+        p {
+          margin-bottom: 4vh;
+          font-family: $domo-font;
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 20px;
+          text-align: center;
+          color: white;
+        }
+
+        .mastercard-info-border {
+
+          a {
+            padding: 8px 14px;
+            margin: 10vh;
+            font-family: $domo-font;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: white;
+            text-decoration: none;
+            border: 2px white solid;
+          }
+
+          a:hover {
+            border: 2px $domo-blue solid;
+            background-color: $domo-blue;
+            transition: all 0.3s ease-in-out;
+          }
+        }
+      }
+    }
+    #mobile {
+      height: 32vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      overflow: hidden;
+      background-color: $domo-grey;
+
+      .mobile-info {
+        width: 40vw;
+        margin-left: 4vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        h3 {
+          margin-bottom: 1vh;
+          font-family: $domo-font;
+          font-size: 16px;
+          font-weight: 400;
+          color: white;
+          text-align: center;
+        }
+
+        p {
+          margin-bottom: 4vh;
+          font-family: $domo-font;
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 20px;
+          text-align: center;
+          color: white;
+        }
+
+        .mobile-info-border {
+
+          a {
+            padding: 8px 14px;
+            font-family: $domo-font;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: white;
+            text-decoration: none;
+            border: 2px white solid;
+          }
+
+          a:hover {
+            border: 2px $domo-blue solid;
+            background-color: $domo-blue;
+            transition: all 0.3s ease-in-out;
+          }
+        }
+      }
+      .mobile-img {
+        width: 0vh;
+        display: flex;
+        flex-wrap: wrap;
+
+        img{
+          margin-right: 0vh;
+          height: 32vh;
+          margin-left: 6vw;
+          margin-top: 5vh;
+
+        }
+      }
     }
   }
 }
