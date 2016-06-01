@@ -944,12 +944,40 @@
     height: 215vh; }
     .domo-solution-section .domo-solution-container .domo-solution-info h1 {
       font-size: 36px; }
+    .domo-solution-section .domo-solution-container .solution-card-container .card-query .ceo-image-container {
+      display: flex;
+      justify-content: center; }
+      .domo-solution-section .domo-solution-container .solution-card-container .card-query .ceo-image-container img:hover {
+        margin-top: -20vh; }
+    .domo-solution-section .domo-solution-container .solution-card-container .card-query .ceo-container {
+      margin-bottom: 30vh;
+      margin-top: -32vh; }
+      .domo-solution-section .domo-solution-container .solution-card-container .card-query .ceo-container #ceo {
+        font-size: 10px; }
+    .domo-solution-section .domo-solution-container .solution-card-container .card-query .ceo-info-container h3 {
+      font-size: 12px; }
+    .domo-solution-section .domo-solution-container .solution-card-container .card-query:hover {
+      margin-top: -20px; }
   #card-1 {
     width: 50%;
     display: block; }
+  #card-1:hover .ceo-info-container {
+    transition: all 0.3s ease-in-out;
+    margin-top: 0vh; }
+  #card-1:hover .ceo-container {
+    transition: all 0.3s ease-in-out;
+    margin-top: -15vh;
+    margin-bottom: 0vh;
+    padding: 0; }
+  #card-1:hover .ceo-image-container img {
+    margin-top: 15vh;
+    margin-bottom: 0; }
+  #card-1:hover {
+    background-color: #555; }
   #card-2 {
     width: 50%;
-    display: block; }
+    display: block;
+    border-right: none; }
   #card-3 {
     width: 50%;
     display: block; }
@@ -1349,14 +1377,14 @@
       overflow: hidden;
       background-color: #222; }
       .carousel-container #mobile .mobile-info {
-        width: 55vw;
+        width: 40vw;
+        margin-left: 4vh;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap; }
         .carousel-container #mobile .mobile-info h3 {
           margin-bottom: 1vh;
-          justify-content: center;
           font-family: "Open Sans", Helvetica, Arial, sans-serif;
           font-size: 16px;
           font-weight: 400;
@@ -1387,6 +1415,7 @@
         display: flex;
         flex-wrap: wrap; }
         .carousel-container #mobile .mobile-img img {
+          margin-right: 0vh;
           height: 32vh;
-          margin-left: -6vw;
+          margin-left: 6vw;
           margin-top: 5vh; } }

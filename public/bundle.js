@@ -20,15 +20,23 @@ angular.module("domoApp", ["ui.router"]).config(["$stateProvider", "$urlRouterPr
 angular.module("domoApp").controller("loginCtrl", ["$scope", "loginService", "$state", function ($scope, loginService, $state) {
 
   $scope.register = function () {
-    loginService.register($scope.newUser).then(function (response) {});
+    loginService.register($scope.newUser).then(function (response) {
+      clear();
+    });
   };
 
   $scope.login = function () {
     loginService.login($scope.credentials).then(function (response) {
       $state.go('dashboard');
       $scope.user = response.data._id;
+      $scope.credentials = null;
       alert("Welcome " + response.data.firstname + " " + response.data.lastname);
     });
+  };
+
+  var clear = function clear() {
+    $scope.newUser = null;
+    return alert("account creation successful");
   };
 }]);
 "use strict";
