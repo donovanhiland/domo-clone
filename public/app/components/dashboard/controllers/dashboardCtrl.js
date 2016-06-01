@@ -1,4 +1,6 @@
-angular.module('domoApp').controller('dashboardCtrl', function($scope, $log, mainService, $state) {
+angular.module('domoApp')
+.controller('dashboardCtrl', function($scope, $log, checkAuth, dashboardService, $state){
+
 
     //drop down
     // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
@@ -6,7 +8,6 @@ angular.module('domoApp').controller('dashboardCtrl', function($scope, $log, mai
     $scope.createCard = function(newTitle) {
         console.log("working");
         mainService.createCard(newTitle).then(function(response) {
-
             console.log("createCard", response);
             // $state.go("card",{id:response._id})
         });
