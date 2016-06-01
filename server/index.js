@@ -24,7 +24,6 @@ app.use(express.static(__dirname + '/public'));
 
 
 //=======uncomment this for testing=======//
-
 // TwitterCtrl.getDataByScreenName('devmtn');
 
 
