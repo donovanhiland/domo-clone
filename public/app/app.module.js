@@ -1,1 +1,1 @@
-angular.module("domoApp", ["ui.router"]);
+angular.module("domoApp", ["ui.router", 'ui.bootstrap']);
