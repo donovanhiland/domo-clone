@@ -10,7 +10,8 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap']).config(["$stateProvider
     templateUrl: './app/components/home/homeTmpl.html'
   }).state('dashboard', {
     url: '/dashboard',
-    templateUrl: './app/components/dashboard/dashboardTmpl.html'
+    templateUrl: './app/components/dashboard/dashboardTmpl.html',
+    controller: 'dashboardCtrl'
   });
 
   $urlRouterProvider.otherwise('/home');
@@ -83,11 +84,65 @@ angular.module('domoApp').directive('navDirective', function () {
 });
 'use strict';
 
-angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
+angular.module('domoApp').service('mainService', ["$http", function ($http) {
+
+    this.createCard = function (newTitle) {
+        return $http({
+            method: "POST",
+            url: "/card",
+            data: {
+                title: newTitle
+            }
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.readCard = function () {
+        return $http({
+            method: "GET",
+            url: "/card"
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.getCardByUser = function (id) {
+        return $http.get('/card?user=' + id).then(function (response) {
+            return response.data;
+        });
+    };
+}]);
 'use strict';
 
-angular.module('domoApp').controller('dashboardCtrl', ["$scope", "$log", function ($scope, $log) {
+angular.module('domoApp').controller('dashboardCtrl', ["$scope", "$log", "mainService", "$state", function ($scope, $log, mainService, $state) {
 
   //drop down
-  $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+  // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+  //create card
+  $scope.createCard = function (newTitle) {
+    console.log("working");
+    mainService.createCard(newTitle).then(function (response) {
+
+      console.log("createCard", response);
+      // $state.go("card",{id:response._id})
+    });
+  };
+  $scope.readCard = function () {
+    console.log("working2");
+    mainService.readCard().then(function (response) {
+      $scope.cards = response;
+    });
+  };
+  $scope.readCard();
+  // $scope.user = user;
+
+  $scope.getCardByUser = function () {
+    mainService.getCardByUser(). /*$scope.user._id*/then(function (results) {
+      console.log(results);
+      $scope.userCards = results;
+    });
+  };
+  $scope.getCardByUser();
 }]);
+'use strict';
+
+angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
