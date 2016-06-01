@@ -5,7 +5,6 @@
       register: function(req, res, next) {
           // save user information on signup
           User.create(req.body, function(err, dbRes) {
-            console.log('hit');
               if (err) {res.status(500).json(err);
               } else {
                   console.log('account creation successful');
@@ -16,7 +15,7 @@
 
       checkAuth: function(req, res, next) {
           if (req.user) {
-              res.status(200).json(req.user.type);
+              res.status(200).json(req.user);
           }
           if (!req.user) {
               res.status(200).json('unauthorized');

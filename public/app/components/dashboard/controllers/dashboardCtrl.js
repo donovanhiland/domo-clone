@@ -1,6 +1,9 @@
 angular.module('domoApp')
-.controller('dashboardCtrl', function($scope, $log){
+.controller('dashboardCtrl', function($scope, $log, checkAuth, dashboardService, $state){
 
+
+$scope.checkAuth = checkAuth;
+console.log($scope.checkAuth);
 
 
 

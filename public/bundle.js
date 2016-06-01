@@ -7,10 +7,23 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap']).config(["$stateProvider
 
   $stateProvider.state('home', {
     url: '/home',
-    templateUrl: './app/components/home/homeTmpl.html'
+    templateUrl: './app/components/home/homeTmpl.html',
+    controller: 'loginCtrl'
   }).state('dashboard', {
     url: '/dashboard',
-    templateUrl: './app/components/dashboard/dashboardTmpl.html'
+    templateUrl: './app/components/dashboard/dashboardTmpl.html',
+    controller: 'dashboardCtrl',
+    resolve: {
+      checkAuth: ["$state", "dashboardService", function checkAuth($state, dashboardService) {
+        dashboardService.checkAuth().then(function (response) {
+          console.log(response);
+          if (response === 'unauthorized') {
+            $state.go('home');
+          }
+          return response.data;
+        });
+      }]
+    }
   });
 
   $urlRouterProvider.otherwise('/home');
@@ -83,10 +96,27 @@ angular.module('domoApp').directive('navDirective', function () {
 });
 'use strict';
 
-angular.module('domoApp').controller('dashboardCtrl', ["$scope", "$log", function ($scope, $log) {
+angular.module('domoApp').controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "dashboardService", "$state", function ($scope, $log, checkAuth, dashboardService, $state) {
+
+  $scope.checkAuth = checkAuth;
+  console.log($scope.checkAuth);
 
   //drop down
   $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+}]);
+'use strict';
+
+angular.module('domoApp').service('dashboardService', ["$http", function ($http) {
+
+  this.checkAuth = function () {
+    console.log('service');
+    return $http({
+      method: 'GET',
+      url: '/checkAuth'
+    }).then(function (response) {
+      return response.data;
+    });
+  };
 }]);
 'use strict';
 

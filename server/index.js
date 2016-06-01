@@ -44,6 +44,7 @@ app.use(express.static(__dirname + './../public'));
 // TwitterCtrl.getDataByScreenName('devmtn');
 
 // UserEndpoint
+app.get('/checkAuth', UserCtrl.checkAuth);
 app.post('/users', UserCtrl.register);
 app.get('/logout', UserCtrl.logout);
 app.get('/users', UserCtrl.getUsers);
