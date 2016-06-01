@@ -80,7 +80,39 @@ $test-border: 1px red solid;
   float: left;
 }
 
+/////////////////////////////////
 
+////// NAVIGATION - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .nav-section {
+    .site-nav {
+      .nav-menu-item {
+        .nav-link {
+          font-family: $domo-font;
+          font-size: 10px;
+          color: $domo-text;
+          text-decoration: none;
+          cursor: pointer;
+
+          .domo-oj-btn {
+            margin-right: 1vw;
+            font-size: 10px;
+            font-weight: 100;
+            letter-spacing: 0px;
+            width: 80px;
+          }
+        }
+      }
+    }
+  }
+
+  #domo-logo {
+
+  }
+}
 
 
 
@@ -155,6 +187,27 @@ $test-border: 1px red solid;
 
 /////////////////////////////////
 
+////// HOME PAGE - LANDING CONTAINER - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .landing-section {
+    .landing-container {
+      .landing {
+        .landing-info-container {
+          .landing-title {
+            padding-top: 25vh;
+            font-size: 36px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/////////////////////////////////
+
 ////// HOME PAGE - DOMO-PROMO-CARD
 
 ////////////////////////////////
@@ -216,7 +269,7 @@ $test-border: 1px red solid;
       a {
         padding: 8px 14px;
         font-family: $domo-font;
-        font-size: 12px;
+        font-size: 11px;
         letter-spacing: 1px;
         color: white;
         text-decoration: none;
@@ -386,6 +439,7 @@ $test-border: 1px red solid;
 
 //SLIDER
 // .carousel-container {
+//   height: 50vh;
 //
 //   .carousel {
 //     display: flex;
@@ -404,24 +458,87 @@ $test-border: 1px red solid;
 // }
 //
 // #appstore {
-//   height: 10vh;
-//   width: 10vw;
+//   height: 50vh;
 //   background-image: url("../images/appstore-promo-media.png");
 //   background-size: cover;
 // }
 // #mastercard {
-//   height: 10vh;
-//   width: 10vw;
+//   height: 50vh;
 //   background-image: url("../images/city-banner.jpg");
 //   background-size: cover;
 // }
 // #mobile {
-//   height: 10vh;
-//   width: 10vw;
+//   height: 50vh;
 //   background-image: url("../images/access.png");
 //   background-size: cover;
 // }
 
+// @media screen and (min-width: 768px) {
+//   .carousel-container {
+//     display: none;
+//     .carousel {
+//       display: flex;
+//       justify-content: center;
+//       height: auto;
+//       width: 75vw;
+//       max-width: 100%;
+//
+//       .carousel {
+//         height: 20vh;
+//         width: 100%;
+//       }
+//     }
+//   }
+// }
+
+
+/////////////////////////////////
+
+////// HOME PAGE - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .domo-promo-section {
+    .domo-promo-container {
+      display: flex;
+      justify-content: center;
+      #appstore {
+        display: flex;
+        justify-content: flex-start;
+        height: 32vh;
+        width: 100%;
+        .appstore-info {
+          width: 40%;
+          margin-left: 20vw;
+
+          h3 {
+
+          }
+          p {
+            font-size: 12px;
+          }
+          .appstore-info-border {
+            a {
+              font-size: 8px;
+            }
+          }
+        }
+        .appstore-img {
+          img {
+            margin-left: 0vh;
+          }
+        }
+      }
+      #mastercard {
+        display: none;
+      }
+      #mobile {
+        display: none;
+      }
+    }
+  }
+}
 
 
 /////////////////////////////////
@@ -493,9 +610,42 @@ $test-border: 1px red solid;
     .domo-example-img {
       display: flex;
       justify-content: center;
+      padding-left: 15px;
+      padding-right: 15px;
 
       img {
+        height: auto;
+        max-width: 100%;
+      }
+    }
+  }
+}
 
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-EXAMPLE - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .domo-example-section {
+    .domo-example-container {
+      .domo-example-info {
+        h1 {
+          width: 95%;
+          font-size: 36px;
+        }
+
+        p{
+          width: 95%;
+          font-size: 20px;
+        }
+      }
+      .domo-example-img {
+
+        img {
+
+        }
       }
     }
   }
@@ -560,7 +710,6 @@ $test-border: 1px red solid;
 
   }
 }
-
 
 /////////////////////////////////
 
@@ -1350,6 +1499,73 @@ $test-border: 1px red solid;
 
 /////////////////////////////////
 
+////// HOME PAGE - DOMO-SOLUTION - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+  .domo-solution-section {
+    .domo-solution-container {
+      height: 215vh;
+
+      .domo-solution-info {
+        h1 {
+          font-size: 36px;
+        }
+
+        p {
+
+        }
+      }
+      .solution-card-container {
+
+      }
+    }
+  }
+
+  #card-1 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-2 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-3 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-4 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-5 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-6 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-7 {
+    width: 50%;
+    display: block;
+  }
+
+  #card-8 {
+    width: 50%;
+    display: block;
+  }
+}
+
+/////////////////////////////////
+
 ////// HOME PAGE - DOMO-VIDEO
 
 ////////////////////////////////
@@ -1436,6 +1652,16 @@ $test-border: 1px red solid;
   justify-content: center;
   align-items: center;
   margin: 3vh;
+}
+
+/////////////////////////////////
+
+////// HOME PAGE - DOMO-VIDEO - MEDIA QUERY
+
+////////////////////////////////
+
+@media screen and (max-width: 768px) {
+
 }
 
 /////////////////////////////////
@@ -1635,6 +1861,7 @@ $test-border: 1px red solid;
         }
 
         a {
+
           .domo-oj-btn {
             margin-left: 5vh;
             height: 35px;
