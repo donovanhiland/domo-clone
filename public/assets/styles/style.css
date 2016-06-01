@@ -280,27 +280,29 @@
       margin-top: 5vh; }
 
 @media screen and (max-width: 768px) {
-  .domo-promo-section .domo-promo-container {
-    display: flex;
-    justify-content: center; }
-    .domo-promo-section .domo-promo-container #appstore {
+  .domo-promo-section {
+    display: none; }
+    .domo-promo-section .domo-promo-container {
       display: flex;
-      justify-content: flex-start;
-      height: 32vh;
-      width: 100%; }
-      .domo-promo-section .domo-promo-container #appstore .appstore-info {
-        width: 40%;
-        margin-left: 20vw; }
-        .domo-promo-section .domo-promo-container #appstore .appstore-info p {
-          font-size: 12px; }
-        .domo-promo-section .domo-promo-container #appstore .appstore-info .appstore-info-border a {
-          font-size: 8px; }
-      .domo-promo-section .domo-promo-container #appstore .appstore-img img {
-        margin-left: 0vh; }
-    .domo-promo-section .domo-promo-container #mastercard {
-      display: none; }
-    .domo-promo-section .domo-promo-container #mobile {
-      display: none; } }
+      justify-content: center; }
+      .domo-promo-section .domo-promo-container #appstore {
+        display: flex;
+        justify-content: flex-start;
+        height: 32vh;
+        width: 100%; }
+        .domo-promo-section .domo-promo-container #appstore .appstore-info {
+          width: 40%;
+          margin-left: 20vw; }
+          .domo-promo-section .domo-promo-container #appstore .appstore-info p {
+            font-size: 12px; }
+          .domo-promo-section .domo-promo-container #appstore .appstore-info .appstore-info-border a {
+            font-size: 8px; }
+        .domo-promo-section .domo-promo-container #appstore .appstore-img img {
+          margin-left: 0vh; }
+      .domo-promo-section .domo-promo-container #mastercard {
+        display: none; }
+      .domo-promo-section .domo-promo-container #mobile {
+        display: none; } }
 
 .domo-example-section .domo-example-container {
   height: 120vh;
@@ -1226,3 +1228,165 @@
       width: 90vw; }
   #domo-clone {
     margin-left: 25vw; } }
+
+@media screen and (min-width: 768px) {
+  .carousel-container {
+    display: none; } }
+
+@media screen and (max-width: 768px) {
+  .carousel-container {
+    height: 32vh; }
+    .carousel-container .carousel #appstore {
+      height: 32vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      overflow: hidden;
+      background-color: #222; }
+      .carousel-container .carousel #appstore .appstore-info {
+        width: 40%;
+        margin-left: 20vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap; }
+        .carousel-container .carousel #appstore .appstore-info h3 {
+          margin-bottom: 1vh;
+          justify-content: center;
+          font-family: "Open Sans", Helvetica, Arial, sans-serif;
+          font-size: 20px;
+          font-weight: 400;
+          color: white;
+          text-align: center; }
+        .carousel-container .carousel #appstore .appstore-info p {
+          margin-bottom: 4vh;
+          font-family: "Open Sans", Helvetica, Arial, sans-serif;
+          font-size: 12px;
+          font-weight: 300;
+          line-height: 20px;
+          text-align: center;
+          color: white; }
+        .carousel-container .carousel #appstore .appstore-info .appstore-info-border a {
+          padding: 8px 14px;
+          font-family: "Open Sans", Helvetica, Arial, sans-serif;
+          font-size: 8px;
+          letter-spacing: 1px;
+          color: white;
+          text-decoration: none;
+          border: 2px white solid; }
+        .carousel-container .carousel #appstore .appstore-info .appstore-info-border a:hover {
+          border: 2px #9ce solid;
+          background-color: #9ce;
+          transition: all 0.3s ease-in-out; }
+      .carousel-container .carousel #appstore .appstore-img {
+        width: 0vh;
+        display: flex;
+        flex-wrap: wrap; }
+        .carousel-container .carousel #appstore .appstore-img img {
+          height: 32vh;
+          margin-left: 0vw; }
+    .carousel-container #mastercard {
+      height: 32vh;
+      width: 100%;
+      background-image: url("../images/city-banner.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      background-color: #222; }
+      .carousel-container #mastercard .tint {
+        z-index: 1;
+        height: 32vh;
+        top: 0px;
+        left: 0px;
+        background: rgba(0, 0, 0, 0.4); }
+        .carousel-container #mastercard .tint .mastercard-img {
+          height: 10vh;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center; }
+          .carousel-container #mastercard .tint .mastercard-img img {
+            height: 7vh;
+            margin-top: 3vh; }
+      .carousel-container #mastercard .mastercard-info {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        z-index: 3;
+        margin-top: -20vh; }
+        .carousel-container #mastercard .mastercard-info p {
+          margin-bottom: 4vh;
+          font-family: "Open Sans", Helvetica, Arial, sans-serif;
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 20px;
+          text-align: center;
+          color: white; }
+        .carousel-container #mastercard .mastercard-info .mastercard-info-border a {
+          padding: 8px 14px;
+          margin: 10vh;
+          font-family: "Open Sans", Helvetica, Arial, sans-serif;
+          font-size: 12px;
+          letter-spacing: 1px;
+          color: white;
+          text-decoration: none;
+          border: 2px white solid; }
+        .carousel-container #mastercard .mastercard-info .mastercard-info-border a:hover {
+          border: 2px #9ce solid;
+          background-color: #9ce;
+          transition: all 0.3s ease-in-out; }
+    .carousel-container #mobile {
+      height: 32vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      overflow: hidden;
+      background-color: #222; }
+      .carousel-container #mobile .mobile-info {
+        width: 55vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap; }
+        .carousel-container #mobile .mobile-info h3 {
+          margin-bottom: 1vh;
+          justify-content: center;
+          font-family: "Open Sans", Helvetica, Arial, sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+          color: white;
+          text-align: center; }
+        .carousel-container #mobile .mobile-info p {
+          margin-bottom: 4vh;
+          font-family: "Open Sans", Helvetica, Arial, sans-serif;
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 20px;
+          text-align: center;
+          color: white; }
+        .carousel-container #mobile .mobile-info .mobile-info-border a {
+          padding: 8px 14px;
+          font-family: "Open Sans", Helvetica, Arial, sans-serif;
+          font-size: 12px;
+          letter-spacing: 1px;
+          color: white;
+          text-decoration: none;
+          border: 2px white solid; }
+        .carousel-container #mobile .mobile-info .mobile-info-border a:hover {
+          border: 2px #9ce solid;
+          background-color: #9ce;
+          transition: all 0.3s ease-in-out; }
+      .carousel-container #mobile .mobile-img {
+        width: 0vh;
+        display: flex;
+        flex-wrap: wrap; }
+        .carousel-container #mobile .mobile-img img {
+          height: 32vh;
+          margin-left: -6vw;
+          margin-top: 5vh; } }
