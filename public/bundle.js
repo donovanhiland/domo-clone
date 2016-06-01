@@ -7,11 +7,23 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap']).config(["$stateProvider
 
   $stateProvider.state('home', {
     url: '/home',
-    templateUrl: './app/components/home/homeTmpl.html'
+    templateUrl: './app/components/home/homeTmpl.html',
+    controller: 'loginCtrl'
   }).state('dashboard', {
     url: '/dashboard',
     templateUrl: './app/components/dashboard/dashboardTmpl.html',
-    controller: 'dashboardCtrl'
+    controller: 'dashboardCtrl',
+    resolve: {
+      checkAuth: ["$state", "dashboardService", function checkAuth($state, dashboardService) {
+        dashboardService.checkAuth().then(function (response) {
+          console.log(response);
+          if (response === 'unauthorized') {
+            $state.go('home');
+          }
+          return response.data;
+        });
+      }]
+    }
   });
 
   $urlRouterProvider.otherwise('/home');
@@ -84,6 +96,51 @@ angular.module('domoApp').directive('navDirective', function () {
 });
 'use strict';
 
+angular.module('domoApp').controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "dashboardService", "$state", function ($scope, $log, checkAuth, dashboardService, $state) {
+
+  //drop down
+  // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+  //create card
+  $scope.createCard = function (newTitle) {
+    console.log("working");
+    mainService.createCard(newTitle).then(function (response) {
+      console.log("createCard", response);
+      // $state.go("card",{id:response._id})
+    });
+  };
+  $scope.readCard = function () {
+    console.log("working2");
+    mainService.readCard().then(function (response) {
+      $scope.cards = response;
+    });
+  };
+  $scope.readCard();
+  // $scope.user = user;
+
+  $scope.getCardByUser = function () {
+    mainService.getCardByUser(). /*$scope.user._id*/then(function (results) {
+      console.log(results);
+      $scope.userCards = results;
+    });
+  };
+  $scope.getCardByUser();
+}]);
+'use strict';
+
+angular.module('domoApp').service('dashboardService', ["$http", function ($http) {
+
+  this.checkAuth = function () {
+    console.log('service');
+    return $http({
+      method: 'GET',
+      url: '/checkAuth'
+    }).then(function (response) {
+      return response.data;
+    });
+  };
+}]);
+'use strict';
+
 angular.module('domoApp').service('mainService', ["$http", function ($http) {
 
     this.createCard = function (newTitle) {
@@ -110,38 +167,6 @@ angular.module('domoApp').service('mainService', ["$http", function ($http) {
             return response.data;
         });
     };
-}]);
-'use strict';
-
-angular.module('domoApp').controller('dashboardCtrl', ["$scope", "$log", "mainService", "$state", function ($scope, $log, mainService, $state) {
-
-  //drop down
-  // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
-  //create card
-  $scope.createCard = function (newTitle) {
-    console.log("working");
-    mainService.createCard(newTitle).then(function (response) {
-
-      console.log("createCard", response);
-      // $state.go("card",{id:response._id})
-    });
-  };
-  $scope.readCard = function () {
-    console.log("working2");
-    mainService.readCard().then(function (response) {
-      $scope.cards = response;
-    });
-  };
-  $scope.readCard();
-  // $scope.user = user;
-
-  $scope.getCardByUser = function () {
-    mainService.getCardByUser(). /*$scope.user._id*/then(function (results) {
-      console.log(results);
-      $scope.userCards = results;
-    });
-  };
-  $scope.getCardByUser();
 }]);
 'use strict';
 
