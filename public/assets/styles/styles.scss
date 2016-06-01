@@ -1529,6 +1529,7 @@ $test-border: 1px red solid;
   a:hover {
     border: 2px $domo-blue solid;
     background-color: $domo-blue;
+    color: #fff;
     transition: all 0.3s ease-in-out;
     text-decoration: none;
   }
