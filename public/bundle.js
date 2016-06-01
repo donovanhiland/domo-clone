@@ -83,11 +83,11 @@ angular.module('domoApp').directive('navDirective', function () {
 });
 'use strict';
 
-angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
-'use strict';
-
 angular.module('domoApp').controller('dashboardCtrl', ["$scope", "$log", function ($scope, $log) {
 
   //drop down
   $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 }]);
+'use strict';
+
+angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);

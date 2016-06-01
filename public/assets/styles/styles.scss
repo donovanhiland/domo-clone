@@ -80,6 +80,98 @@ $test-border: 1px red solid;
   float: left;
 }
 
+.modal-header {
+  button {
+    h4 {
+
+    }
+  }
+}
+
+.modal-body {
+  form {
+    fieldset {
+      legend {
+        font-family: $domo-font;
+      }
+      .domo-register-container {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
+        input {
+          margin: 2vh;
+          border: 1px $domo-grey solid;
+        }
+      }
+    }
+  }
+}
+
+.domo-register-btn-container {
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 130px;
+    margin: auto;
+    background-color: $domo-oj;
+    font-family: $domo-font;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+  }
+
+  button:hover {
+    background-color: $domo-blue;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+  }
+}
+
+.modal-body {
+  form {
+    fieldset {
+      .domo-login-container {
+        input {
+          margin: 2vh;
+          border: 1px $domo-grey solid;
+        }
+      }
+      .domo-login-btn-container {
+
+        button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 35px;
+          width: 130px;
+          margin: auto;
+          background-color: $domo-oj;
+          font-family: $domo-font;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          color: #fff;
+          border: none;
+          text-decoration: none;
+        }
+
+        button:hover {
+          background-color: $domo-blue;
+          transition: all 0.3s ease-in-out;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
 /////////////////////////////////
 
 ////// NAVIGATION - MEDIA QUERY
