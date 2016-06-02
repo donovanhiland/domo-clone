@@ -48,6 +48,10 @@ $test-border: 1px red solid;
         cursor: pointer;
       }
 
+      .nav-link:hover {
+        color: $domo-blue;
+      }
+
       .domo-oj-btn {
         display: flex;
         justify-content: center;
@@ -536,7 +540,7 @@ $test-border: 1px red solid;
 
 @media screen and (max-width: 768px) {
   .domo-promo-section {
-    display: none;
+
     .domo-promo-container {
       display: flex;
       justify-content: center;

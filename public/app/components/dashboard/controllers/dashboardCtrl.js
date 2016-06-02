@@ -1,5 +1,5 @@
 angular.module('domoApp')
-.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $state){
+.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $state, $timeout){
 
 
     //drop down
@@ -24,6 +24,5 @@ angular.module('domoApp')
       $scope.userCards = results;
     });
   };
-  $scope.getCardByUser();
 
 });

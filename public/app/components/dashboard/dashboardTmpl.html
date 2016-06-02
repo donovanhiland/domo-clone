@@ -150,13 +150,13 @@
 
 <section class="dashboard-card-section">
   <div class="dashboard-card-container">
-    <div class="card" ng-repeat="card in cards">
+    <div class="card" ng-repeat="card in cards" card-directive>
       <h1>{{card.title}}</h1>
-      <button class="grow" type="button" name="button">Grow</button>
-      <button class="sm" type="button" name="button"></button>
+      <button type="button" class="card-btn" ng-click="cardAnimation($index)"></button>
     </div>
   </div>
 </section>
+
 
 
         <!-- <a ui-sref="card({id:user._id})"> -->

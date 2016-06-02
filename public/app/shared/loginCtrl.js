@@ -20,4 +20,6 @@ angular.module("domoApp").controller("loginCtrl", function($scope, loginService,
     return alert("account creation successful");
   }
 
+
+
 });

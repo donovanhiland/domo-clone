@@ -17,6 +17,7 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap']).config(($stateProvider,
               console.log(response);
               if (response === 'unauthorized') {
                 $state.go('home');
+                alert('Sign in to view dashboard');
               }
               return response.data;
             })
