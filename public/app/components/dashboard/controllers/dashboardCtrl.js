@@ -1,5 +1,5 @@
 angular.module('domoApp')
-.controller('dashboardCtrl', function($scope, $log, checkAuth, dashboardService, $state){
+.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $state){
 
 
     //drop down
@@ -9,7 +9,6 @@ angular.module('domoApp')
         console.log("working");
         mainService.createCard(newTitle).then(function(response) {
             console.log("createCard", response);
-            // $state.go("card",{id:response._id})
         });
     };
     $scope.readCard = function() {
