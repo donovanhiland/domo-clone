@@ -2,7 +2,14 @@ import Twitter from 'twitter';
 import config from '../config.js';
 import _ from 'lodash';
 
-
+// Geocoder
+let geocoderProvider = 'google';
+let httpAdapter = 'https';
+let extra = {
+    apiKey: config.google.GOOGLE_API_KEY, // for Mapquest, OpenCage, Google Premier
+    formatter: null         // 'gpx', 'string', ...
+};
+let geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
 const twitter = new Twitter({
     consumer_key: config.twitter.TWITTER_CONSUMER_KEY,
@@ -17,7 +24,8 @@ module.exports = {
     // Unfortunately twitter api put all kinds of limiters on calling for information.
     // I can get 75,000 follower ids every 15 minutes, but only 18,000 user objects with information every 15 minutes.
     // This mismatch of numbers makes it hard to do the calls without storing the follower ids somewhere
-    // To make matters worse, the location on the user object is entered in by the user and not formatted at all. It's not always even there. When it is there it's very often formatted different which makes it hard to keep track and tally
+    // To make matters worse, the location on the user object is entered in by the user and not formatted at all. It's not always even there.
+    // When it is there it's very often formatted different which makes it hard to keep track and tally
     // I looked into google's geocoder api to solve this problem. You can query their database with the locations (formatted or not) and it will spit back a formatted address that can be used to tally location for data analysis.
     // Unfortunately their api only allows 2500 hits per day. When working with twitter accounts with millions of followers this just doesn't work.
     // For now we're going to have to just limit the data selection to 2500 to make things work. Will look into other solutions in the future.
@@ -84,28 +92,48 @@ module.exports = {
         // });
 
         let idsList;
+        //call for followers ids
         twitter.get('followers/ids', {
             screen_name: screenName,
             count: 300
         }, (error, ids, response) => {
             if (error) console.log(error);
-            idsList = ids.ids.join(',');
+            //ids.ids is the array of ids
+            idsList = ids.ids;
 
-            let start = 0;
-            let end = 100;
+            let index = 0;
             let locationList = [];
             const getUsersById = (idsList) => {
-              let idsListTrimmed = idsList.slice(start, end);
-              console.log('idslisttrimmed      ', idsListTrimmed);
-              twitter.get('users/lookup', {
-                user_id: idsListTrimmed
-              }, (error, users, response) => {
-                console.log(users.location);
-              });
+                // users/lookup only takes 100 ids at a time as a string of ids separated by commas
+                let idsListJoined = idsList.slice(index, index + 100).join(',');
+                // if the loop gets to the end of the ids list then idsListJoined will be an empty string "" - falsey.
+                if (idsListJoined) {
+                    // calls for user objects based on a batch of user ids
+                    twitter.get('users/lookup', {
+                        user_id: idsListJoined
+                    }, (error, users, response) => {
+                        _.forEach(users, (user) => {
+                            if (user.location) {
+                              // push the location on the user object to locationList
+                                locationList.push(user.location);
+                            }
+                        });
+                        index += 100;
+                        getUsersById(idsList);
+                    });
+                } else {
+                    return;
+                }
             };
             getUsersById(idsList);
-        });
 
+            function getLocationByQuery(locationList) {
+              geocoder.geocode('29 champs elysée paris', function(err, res) {
+                if(err) console.log(err);
+                console.log(res);
+              });
+            }
+        });
 
 
 
