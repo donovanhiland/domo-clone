@@ -8,11 +8,10 @@ angular.module('domoApp')
     $scope.createCard = function(newTitle) {
         console.log("working");
         mainService.createCard(newTitle).then(function(response) {
-            console.log("createCard", response);
+            $scope.readCard();
         });
     };
     $scope.readCard = function() {
-      console.log("working2");
         mainService.readCard().then(function(response) {
           $scope.cards = response;
         });
@@ -22,9 +21,9 @@ angular.module('domoApp')
 
   $scope.getCardByUser = function () {
     mainService.getCardByUser(/*$scope.user._id*/).then(function (results) {
-    console.log(results);
       $scope.userCards = results;
     });
   };
   $scope.getCardByUser();
+
 });
