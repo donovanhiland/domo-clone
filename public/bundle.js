@@ -96,7 +96,7 @@ angular.module('domoApp').directive('navDirective', function () {
 });
 'use strict';
 
-angular.module('domoApp').controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "dashboardService", "$state", function ($scope, $log, checkAuth, dashboardService, $state) {
+angular.module('domoApp').controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "mainService", "$state", function ($scope, $log, checkAuth, mainService, $state) {
 
   //drop down
   // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));

@@ -1,5 +1,5 @@
 angular.module('domoApp')
-.controller('dashboardCtrl', function($scope, $log, checkAuth, dashboardService, $state){
+.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $state){
 
 
     //drop down
