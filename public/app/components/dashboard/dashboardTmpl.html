@@ -127,7 +127,7 @@
             </div>
         </div> -->
     <!-- <div id="div-outer" ng-repeat="card in cards"> -->
-    <div class="cards">
+    <!-- <div class="cards">
       <div class="lg-card-container">
         <div class="lg-card">
 
@@ -146,7 +146,19 @@
         </div>
 
 
-      </div>
+      </div> -->
+
+<section class="dashboard-card-section">
+  <div class="dashboard-card-container">
+    <div class="card" ng-repeat="card in cards">
+      <h1>{{card.title}}</h1>
+      <button class="grow" type="button" name="button">Grow</button>
+      <button class="sm" type="button" name="button"></button>
+    </div>
+  </div>
+</section>
+
+
         <!-- <a ui-sref="card({id:user._id})"> -->
         <!-- <button id="button2" type="button" class="btn " data-target="#myModal">{{card.title}}</button> -->
 

@@ -86,29 +86,32 @@ $test-border: 1px red solid; /////////////////////////////////
 /////////////////////////////////
 ////// Cards
 ////////////////////////////////
-.cards {
-  height: 50vh;
+
+.dashboard-card-section {
+  border: 1px pink solid;
   display: flex;
-  width: 95%;
-  justify-content: flex-start;
-    .lg-card-container {
-        .lg-card {
-            height: 50vh;
-            width: 25vw;
-            background-color: rgb(125, 125, 125);
-            margin: 0 2vh;
-        }
-    }
-    .sm-card-container {
-      display: flex;
-      border: 1px green solid;
-      flex-wrap: wrap;
-        .sm-card {
-            background-color: blue;
-            height: 20vh;
-            border: 1px red solid;
-            width: 10vw;
-            color: white;
-        }
+  justify-content: space-between;
+  width: 100%;
+
+  .dashboard-card-container {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    border: 1px green solid;
+
+    .card {
+      height: 40vh;
+      width: 20vw;
+      margin: 2vh;
+      box-sizing: border-box;
+      background-color: $domo-grey;
+      border: 1px red solid;
+
+      h1 {
+        color: pink;
       }
+
     }
+  }
+}
