@@ -122,6 +122,13 @@ app.controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "mainService", "
         });
     };
     $scope.getCardByUser();
+
+    $scope.deleteCard = function (id) {
+        mainService.deleteCard(id).then(function (results) {
+            $scope.readCard();
+        });
+    };
+    $scope.deleteCard();
 }]);
 
 app.factory("excelReader", ['$q', '$rootScope', function ($q, $rootScope) {
@@ -162,37 +169,9 @@ app.controller('excelController', ["$scope", "excelReader", function ($scope, ex
 angular.module('domoApp').directive('barChart', function () {
   return {
     restrict: "E",
-    templateUrl: './app/components/dashboard/graphs/graph.html',
     controller: 'excelController',
     link: function link(scope, element) {
       scope.$watch('excelData', function () {
-
-        //Makes Graph responsive
-        d3.select(window).on('resize', function () {
-          // update width
-          w = parseInt(d3.select('#graph').style('width'), 10);
-          w = w - margin.left - margin.right;
-          // reset x range
-          xScale.range([0, w]);
-
-          d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
-
-          svg.selectAll('rect.background').attr('width', w);
-
-          svg.selectAll('rect.percent').attr('width', function (d) {
-            return xScale(d.formatAs);
-          });
-
-          // update median ticks
-          var median = d3.median(svg.selectAll('.bar').data(), function (d) {
-            return d.formatAs;
-          });
-
-          svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
-          // update axes
-          svg.select('.x.axis.top').call(xAxis.orient('top'));
-          svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
-        });
 
         var dataset = scope.excelData[0];
         // var dataset = [5,10,15,13,25,34,19,14,23,15, 12, 16, 19, 12, 8, 20];
@@ -275,19 +254,42 @@ angular.module('domoApp').directive('barChart', function () {
 
         //Create Y axis
         svg.append("g").attr("class", "y axis").attr("transform", "translate(" + 5 + ",0)").call(yAxis);
+
+        //Makes Graph responsive
+        d3.select(window).on('resize', function () {
+          // update width
+          w = parseInt(d3.select('#graph').style('width'), 10);
+          w = w - margin.left - margin.right;
+          // reset x range
+          xScale.range([0, w]);
+
+          d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
+
+          svg.selectAll('rect.background').attr('width', w);
+
+          svg.selectAll('rect.percent').attr('width', function (d) {
+            return xScale(d.formatAs);
+          });
+
+          // update median ticks
+          var median = d3.median(svg.selectAll('.bar').data(), function (d) {
+            return d.formatAs;
+          });
+
+          svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
+          // update axes
+          svg.select('.x.axis.top').call(xAxis.orient('top'));
+          svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
+        });
       }); //scope.watch
     } //link
   }; //return
 }); //directive
 'use strict';
 
-angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
-'use strict';
-
 angular.module('domoApp').service('dashboardService', ["$http", function ($http) {
 
   this.checkAuth = function () {
-    console.log('service');
     return $http({
       method: 'GET',
       url: '/checkAuth'
@@ -324,7 +326,18 @@ angular.module('domoApp').service('mainService', ["$http", function ($http) {
             return response.data;
         });
     };
+    this.deleteCard = function (id) {
+        return $http({
+            method: "DELETE",
+            url: "/card/" + id
+        }).then(function (response) {
+            return response.data;
+        });
+    };
 }]);
+'use strict';
+
+angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
 'use strict';
 
 //this will parse data from JSON into usable data for D3.
@@ -364,6 +377,15 @@ function mapEntries(json, realrowlength, skip) {
   dataframe.push(row);
   return dataframe;
 }
+'use strict';
+
+angular.module('domoApp').directive('excelForm', function () {
+  return {
+    restrict: "E",
+    controller: 'excelController',
+    templateUrl: './app/components/dashboard/excel/excelForm.html'
+  }; //return
+}); //directive
 "use strict";
 
 /**

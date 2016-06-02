@@ -1,4 +1,4 @@
-var app = angular.module("domoApp");
+const app = angular.module("domoApp");
 app.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $state){
 
 
@@ -25,6 +25,14 @@ app.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $
     });
   };
   $scope.getCardByUser();
+
+  $scope.deleteCard = (id) => {
+    mainService.deleteCard(id).then(function (results) {
+      $scope.readCard();
+    })
+  }
+$scope.deleteCard();
+
 
 });
 
