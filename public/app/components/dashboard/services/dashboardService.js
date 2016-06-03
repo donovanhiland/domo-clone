@@ -1,7 +1,6 @@
 angular.module('domoApp').service('dashboardService', function($http){
 
   this.checkAuth = function() {
-    console.log('service');
     return $http({
       method: 'GET',
       url: '/checkAuth'
