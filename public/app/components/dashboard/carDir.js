@@ -6,7 +6,7 @@ angular.module('domoApp').directive('cardDirective', function(){
 
         $('.card-lg').on('click', function(){
           $(this).parent().parent().css('height', '100%');
-          $(this).parent().parent().css('width', '50%');
+          $(this).parent().parent().css('width', '40%');
           // $(this).parent().css('transition', 'all 0.9s ease-in-out');
         });
 
