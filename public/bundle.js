@@ -97,7 +97,7 @@ angular.module('domoApp').directive('cardDirective', function () {
       $('.card-lg').on('click', function () {
         $(this).parent().parent().css('height', '100%');
         $(this).parent().parent().css('width', '40%');
-        // $(this).parent().css('transition', 'all 0.9s ease-in-out');
+        // $(this).parent().parent().css('transition', 'all 0.9s ease-in-out');
       });
 
       $('.card-sm').on('click', function () {
@@ -183,6 +183,56 @@ app.controller('excelController', ["$scope", "excelReader", function ($scope, ex
     $scope.updateJSONString = function () {
         $scope.excelData = $scope.sheets[$scope.selectedSheetName];
         $scope.excelData = $scope.excelData.data;
+    };
+}]);
+'use strict';
+
+angular.module('domoApp').service('dashboardService', ["$http", function ($http) {
+
+  this.checkAuth = function () {
+    return $http({
+      method: 'GET',
+      url: '/checkAuth'
+    }).then(function (response) {
+      return response.data;
+    });
+  };
+}]);
+'use strict';
+
+angular.module('domoApp').service('mainService', ["$http", function ($http) {
+
+    this.createCard = function (newTitle) {
+        return $http({
+            method: "POST",
+            url: "/card",
+            data: {
+                title: newTitle
+            }
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.readCard = function () {
+        return $http({
+            method: "GET",
+            url: "/card"
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.getCardByUser = function (id) {
+        return $http.get('/card?user=' + id).then(function (response) {
+            return response.data;
+        });
+    };
+    this.deleteCard = function (id) {
+        return $http({
+            method: "DELETE",
+            url: "/card/" + id
+        }).then(function (response) {
+            return response.data;
+        });
     };
 }]);
 'use strict';
@@ -306,56 +356,6 @@ angular.module('domoApp').directive('barChart', function () {
     } //link
   }; //return
 }); //directive
-'use strict';
-
-angular.module('domoApp').service('dashboardService', ["$http", function ($http) {
-
-  this.checkAuth = function () {
-    return $http({
-      method: 'GET',
-      url: '/checkAuth'
-    }).then(function (response) {
-      return response.data;
-    });
-  };
-}]);
-'use strict';
-
-angular.module('domoApp').service('mainService', ["$http", function ($http) {
-
-    this.createCard = function (newTitle) {
-        return $http({
-            method: "POST",
-            url: "/card",
-            data: {
-                title: newTitle
-            }
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.readCard = function () {
-        return $http({
-            method: "GET",
-            url: "/card"
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.getCardByUser = function (id) {
-        return $http.get('/card?user=' + id).then(function (response) {
-            return response.data;
-        });
-    };
-    this.deleteCard = function (id) {
-        return $http({
-            method: "DELETE",
-            url: "/card/" + id
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-}]);
 'use strict';
 
 angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);

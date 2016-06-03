@@ -7,6 +7,7 @@ import config from './config.js';
 import session from 'express-session';
 
 
+
 // Controllers
 import TwitterCtrl from './controllers/TwitterCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
@@ -62,6 +63,7 @@ app.get('/logout', function(req, res, next) {
     req.logout();
     return res.status(200).send('logged out');
 });
+
 
 
 // MongoDB connection

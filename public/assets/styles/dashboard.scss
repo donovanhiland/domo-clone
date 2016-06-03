@@ -117,7 +117,7 @@ $test-border: 1px red solid; /////////////////////////////////
 .dash-card-section {
 
   .dash-card-container {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
