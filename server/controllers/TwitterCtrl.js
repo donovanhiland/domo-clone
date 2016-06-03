@@ -7,7 +7,7 @@ let geocoderProvider = 'google';
 let httpAdapter = 'https';
 let extra = {
     apiKey: config.google.GOOGLE_API_KEY, // for Mapquest, OpenCage, Google Premier
-    formatter: null         // 'gpx', 'string', ...
+    formatter: null // 'gpx', 'string', ...
 };
 let geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
@@ -18,22 +18,22 @@ const twitter = new Twitter({
     access_token_secret: config.twitter.TWITTER_ACCESS_TOKEN_SECRET,
 });
 
+
+// The ideas was to use the twitter api to get location of a user's followers.
+// Unfortunately twitter api put all kinds of limiters on calling for information.
+// I can get 75,000 follower ids every 15 minutes, but only 18,000 user objects with information every 15 minutes.
+// This mismatch of numbers makes it hard to do the calls without storing the follower ids somewhere
+// To make matters worse, the location on the user object is entered in by the user and not formatted at all. It's not always even there.
+// When it is there it's very often formatted different which makes it hard to keep track and tally
+// I looked into google's geocoder api to solve this problem. You can query their database with the locations (formatted or not) and it will spit back a formatted address that can be used to tally location for data analysis.
+// Unfortunately their api only allows 2500 hits per day. When working with twitter accounts with millions of followers this just doesn't work.
+// For now we're going to have to just limit the data selection to 2500 to make things work. Will look into other solutions in the future.
+
+// The below function is set up to cooperate with the api limits of twitter
+// 15 calls every 15 minutes. The max count is 5000, but it can be set to however many ids you want
+// It will check to see if there are any more ids left to get and if not will break out, if there are ids left to get and the max calls are reached will wait 15 minutes to start again
+// the pagination is tracked by a cursor returned from the api call, which is tracked by the function and stored in cursotTracker
 module.exports = {
-
-    // The ideas was to use the twitter api to get location of a user's followers.
-    // Unfortunately twitter api put all kinds of limiters on calling for information.
-    // I can get 75,000 follower ids every 15 minutes, but only 18,000 user objects with information every 15 minutes.
-    // This mismatch of numbers makes it hard to do the calls without storing the follower ids somewhere
-    // To make matters worse, the location on the user object is entered in by the user and not formatted at all. It's not always even there.
-    // When it is there it's very often formatted different which makes it hard to keep track and tally
-    // I looked into google's geocoder api to solve this problem. You can query their database with the locations (formatted or not) and it will spit back a formatted address that can be used to tally location for data analysis.
-    // Unfortunately their api only allows 2500 hits per day. When working with twitter accounts with millions of followers this just doesn't work.
-    // For now we're going to have to just limit the data selection to 2500 to make things work. Will look into other solutions in the future.
-
-    // The below function is set up to cooperate with the api limits of twitter
-    // 15 calls every 15 minutes. The max count is 5000, but it can be set to however many ids you want
-    // It will check to see if there are any more ids left to get and if not will break out, if there are ids left to get and the max calls are reached will wait 15 minutes to start again
-    // the pagination is tracked by a cursor returned from the api call, which is tracked by the function and stored in cursotTracker
     getDataByScreenName: (screenName) => {
         //     //=== gets followers ids from screen name ===//
         //     let cursorTracker = -1;
@@ -92,10 +92,11 @@ module.exports = {
         // });
 
         let idsList;
+        let locationData = {};
         //call for followers ids
         twitter.get('followers/ids', {
             screen_name: screenName,
-            count: 300
+            count: 500
         }, (error, ids, response) => {
             if (error) console.log(error);
             //ids.ids is the array of ids
@@ -113,30 +114,96 @@ module.exports = {
                         user_id: idsListJoined
                     }, (error, users, response) => {
                         _.forEach(users, (user) => {
-                            if (user.location) {
-                              // push the location on the user object to locationList
-                                locationList.push(user.location);
-                            }
+                            // push the location on the user object to locationList
+                            if (user.location) locationList.push(user.location);
                         });
                         index += 100;
                         getUsersById(idsList);
                     });
                 } else {
-                    return;
+                    index = 0;
+                    let locationName;
+                    let latitude;
+                    let longitude;
+                    const getLocationByQuery = (locationList) => {
+                        if (locationList[index]) {
+                            geocoder.geocode(locationList[index], function(error, res) {
+                                // res is a list of location objects returned based on the queries location
+                                if (error) console.log(error);
+                                // if response is empty, do nothing. if there is a response, get the level1/2/3long or country property and set locationName equal to that value
+                                if (!res[0]) {
+                                    index++;
+                                    getLocationByQuery(locationList);
+                                }
+                                if (res[0]) {
+                                    // if there's a response, but there's no level1long property
+                                    if (res[0].administrativeLevels.level1long) {
+                                      locationName = res[0].administrativeLevels.level1long;
+                                    }
+                                    if (!res[0].administrativeLevels.level1long) {
+                                        if (res[0].administrativeLevels.level2long) {
+                                            locationName = res[0].administrativeLevels.level2long;
+                                        }
+                                        if (!res[0].administrativeLevels.level2long) {
+                                            if (res[0].administrativeLevels.level3long) {
+                                                locationName = res[0].administrativeLevels.level3long;
+                                            }
+                                            if (!res[0].administrativeLevels.level3long) {
+                                                locationName = res[0].country;
+                                            }
+                                        }
+                                    }
+                                    latitude = res[0].latitude;
+                                    longitude = res[0].longitude;
+                                }
+
+                                // if locationData has a property of locationName (which is the state returned from the search), add 1 to the tally
+                                if (locationData.hasOwnProperty(locationName)) locationData[locationName].tally += 1;
+                                // if locationData doesn't have property represented by locationName, create it and start the tally
+                                if (!locationData.hasOwnProperty(locationName)) {
+                                    locationData[locationName] = {
+                                        tally: 1,
+                                        location: {
+                                            latitude: latitude,
+                                            longitude: longitude
+                                        }
+                                    };
+                                }
+                                index++;
+                                getLocationByQuery(locationList);
+                            });
+                        }
+                        if (!locationList[index]) {
+                            console.log(locationData);
+                            return;
+                        }
+                    };
+                    getLocationByQuery(locationList);
                 }
             };
             getUsersById(idsList);
-
-            function getLocationByQuery(locationList) {
-              geocoder.geocode('29 champs elysée paris', function(err, res) {
-                if(err) console.log(err);
-                console.log(res);
-              });
-            }
         });
-
-
-
-
     }
+    // need a promise to add this data to database after it's all composed and filled out
 };
+
+// {
+//     formattedAddress: 'Berlin, Germany',
+//     latitude: 52.52000659999999,
+//     longitude: 13.404954,
+//     extra: {
+//         googlePlaceId: 'ChIJAVkDPzdOqEcRcDteW0YgIQQ',
+//         confidence: 0.5,
+//         premise: null,
+//         subpremise: null,
+//         neighborhood: null,
+//         establishment: null
+//     },
+//     administrativeLevels: {
+//         level1long: 'Berlin',
+//         level1short: 'Berlin'
+//     },
+//     city: 'Berlin',
+//     country: 'Germany',
+//     countryCode: 'DE'
+// }
