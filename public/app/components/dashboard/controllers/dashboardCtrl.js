@@ -6,7 +6,6 @@ app.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $
     // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
     //create card
     $scope.createCard = (newTitle) => {
-        console.log("working");
         mainService.createCard(newTitle).then(function(response) {
             $scope.readCard();
         });

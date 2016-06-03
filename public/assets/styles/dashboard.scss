@@ -6,7 +6,8 @@ $domo-blue: #9ce;
 $domo-link: #8bd;
 $domo-oj: #f92;
 $domo-font: 'Open Sans', Helvetica, Arial, sans-serif;
-$test-border: 1px red solid; /////////////////////////////////
+$test-border: 1px red solid;
+/////////////////////////////////
 ////// Dashboard Nav
 ////////////////////////////////
 .dash-nav-section {
@@ -136,4 +137,7 @@ $test-border: 1px red solid; /////////////////////////////////
 .axis text {
 	font-family: sans-serif;
 	font-size: 11px;
+}
+.containsGraph {
+  
 }

@@ -63,7 +63,16 @@
                 <button type="button" data-toggle="modal" data-target="#myModal" class="love btn btn-primary">
                     Add Card
                 </button>
+                <!-- Single button with keyboard nav -->
+                <div class="btn-group" uib-dropdown keyboard-nav>
+                    <button id="simple-btn-keyboard-nav" type="button" class="btn" uib-dropdown-toggle>
+                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                        <span class="caret"></span>
+                    </button>
+                </div>
+
             </div>
+
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
 
@@ -76,7 +85,7 @@
                         <div class="modal-body">
                             <label id="label" for="inputdefault">Title:</label>
                             <input id="text-box" class="form-control" id="inputdefault" type="text" ng-model="newTitle">
-                            <!-- <excel-form></excel-form> -->
+                            <excel-form></excel-form>
                         <div class="modal-footer">
                             <button type="button" class="love btn btn-primary" ng-click="createCard(newTitle)" data-dismiss="modal">Create</button>
                         </div>
@@ -84,15 +93,8 @@
                     </div>
                 </div>
             </div>
+</div>
 
-            <!-- Single button with keyboard nav -->
-            <div class="btn-group" uib-dropdown keyboard-nav>
-                <button id="simple-btn-keyboard-nav" type="button" class="btn" uib-dropdown-toggle>
-                    <i class="fa fa-wrench" aria-hidden="true"></i>
-                    <span class="caret"></span>
-                </button>
-            </div>
-        </div>
 
     </div>
 
@@ -153,9 +155,12 @@
     <div class="card" ng-repeat="card in cards">
       <div class="deleteCard" ng-click="deleteCard(card._id)">X</div>
       <h1>{{card.title}}</h1>
-      <div id="graph">
-        <!-- <bar-chart></bar-chart> -->
+      <div class="containsGraph">
+        <div id="graph">
+          <bar-chart ></bar-chart>
+        </div>
       </div>
+
       <button class="grow" type="button" name="button">Grow</button>
       <button class="sm" type="button" name="button"></button>
     </div>
