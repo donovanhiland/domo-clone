@@ -108,6 +108,8 @@ $test-border: 1px red solid;
       box-sizing: border-box;
       background-color: $domo-grey;
       border: 1px red solid;
+      // resize: both;
+      // overflow: auto;
 
       .deleteCard {
         float: right;
@@ -119,7 +121,6 @@ $test-border: 1px red solid;
       h1 {
         color: pink;
       }
-
     }
   }
 }

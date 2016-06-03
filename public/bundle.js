@@ -19,6 +19,7 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap']).config(["$stateProvider
           console.log(response);
           if (response === 'unauthorized') {
             $state.go('home');
+            alert('Sign in to view dashboard');
           }
           return response.data;
         });
@@ -87,6 +88,27 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
 }]);
 'use strict';
 
+angular.module('domoApp').directive('cardDirective', function () {
+
+  return {
+    restrict: 'A',
+    link: function link(scope, element, attrs) {
+
+      $('.card-lg').on('click', function () {
+        $(this).parent().css('height', '80vh');
+        $(this).parent().css('width', '80vw');
+        // $(this).parent().css('transition', 'all 0.9s ease-in-out');
+      });
+
+      $('.card-sm').on('click', function () {
+        $(this).parent().css('height', '40vh');
+        $(this).parent().css('width', '20vw');
+      });
+    }
+  };
+});
+'use strict';
+
 angular.module('domoApp').directive('navDirective', function () {
 
   return {
@@ -120,7 +142,6 @@ app.controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "mainService", "
             $scope.userCards = results;
         });
     };
-    $scope.getCardByUser();
 
     $scope.deleteCard = function (id) {
         mainService.deleteCard(id).then(function (results) {
