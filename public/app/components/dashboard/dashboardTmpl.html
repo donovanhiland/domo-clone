@@ -31,6 +31,7 @@
 <section class="dashboard">
     <div class="dash-top">
         <h2>Overview</h2>
+        {{user}}
         <div class="dash-menu">
             <div class="btn-group">
                 <button type="button" data-toggle="modal" data-target="#myModal" id="add-card-btn">
@@ -78,9 +79,10 @@
           </header>
           <div class="graph-container" >
             <div id="graph">
-              <bar-chart ng-if="card.graph == 'bar'"></bar-chart>
+              <!-- add ng-if="card.graph == 'bar'" on each graph -->
+              <bar-chart ></bar-chart>
               <section>
-                <img ng-click cad.type = "bar">
+                <img ng-click=card.grap = "bar">
               </section>
             </div>
           </div>

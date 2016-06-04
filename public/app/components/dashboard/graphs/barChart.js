@@ -12,10 +12,11 @@ angular.module('domoApp')
         var dataset = [5,10,15,13,25,34,19,14,23,15, 12, 16, 19, 12, 8, 20];
 
         //Width and height
-        var margin = {top: 30, right: 10, bottom: 30, left: 10};
-        var w = parseInt(d3.select(element[0]).style('width'), 10)
+        var margin = {top: 65, right: 10, bottom: 10, left: 40};
+        var w = parseInt(d3.select(element[0]).style('width'), 11)
         w = w - margin.left - margin.right;
-        var h = 500 - margin.top - margin.bottom;
+        var h = parseInt(d3.select(element[0]).style('height'), 11)
+        h = h - margin.top - margin.bottom;
         var formatAs = d3.format(".1"); //when data is messy
 
         var sortOrder = false;
