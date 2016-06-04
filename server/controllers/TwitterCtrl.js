@@ -79,7 +79,7 @@ module.exports = {
         let latitude;
         let longitude;
         //call for followers ids
-        let getFollowersIdsAsync = (screenName) => {
+        const getFollowersIdsAsync = (screenName) => {
             return new Promise((resolve, reject) => {
                 twitter.get('followers/ids', {
                     screen_name: screenName,
@@ -93,7 +93,7 @@ module.exports = {
             });
         };
 
-        let getUsersAsync = (idsList) => {
+        const getUsersAsync = (idsList) => {
             return new Promise((resolve, reject) => {
                 const getUsersById = (idsList) => {
                     // users/lookup only takes 100 ids at a time as a string of ids separated by commas
@@ -119,7 +119,7 @@ module.exports = {
             });
         };
 
-        let getLocationByQueryAsync = (locationList) => {
+        const getLocationByQueryAsync = (locationList) => {
             return new Promise((resolve, reject) => {
                 index = 0;
                 const getLocationByQuery = (locationList) => {
@@ -175,6 +175,10 @@ module.exports = {
                 };
                 getLocationByQuery(locationList);
             });
+        };
+
+        const handleErr = (error) => {
+          console.log('there was an error', error);
         };
 
         getFollowersIdsAsync(screenName)
