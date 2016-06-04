@@ -1,7 +1,5 @@
-const app = angular.module("domoApp");
-app.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $state){
-
-
+angular.module("domoApp")
+.controller('dashboardCtrl', function($scope, $log, mainService, $state){
 
     //drop down
     // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
@@ -9,6 +7,7 @@ app.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $
     $scope.createCard = (newTitle) => {
         mainService.createCard(newTitle).then(function(response) {
             $scope.readCard();
+            $scope.newTitle = "";
         });
     };
     $scope.readCard = () => {
@@ -31,44 +30,21 @@ app.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $
     })
   }
 $scope.deleteCard();
+$scope.readCard();
 
 
-});
-
-
-
-
-
-app.factory("excelReader", ['$q', '$rootScope',
-    function($q, $rootScope) {
-        var service = (data) => {
-            angular.extend(this, data);
-        };
-        service.readFile = (file, showPreview) => {
-            var deferred = $q.defer();
-            XLSXReader(file, showPreview, function(data) {
-                $rootScope.$apply(function() {
-                    deferred.resolve(data);
-                });
-            });
-            return deferred.promise;
-        };
-        return service;
-    }
- ]);
-app.controller('excelController', function($scope, excelReader) {
-  $scope.json_string = "";
-    $scope.fileChanged = (files) => {
-        $scope.isProcessing = true;
-        $scope.sheets = [];
-        $scope.excelFile = files[0];
-        excelReader.readFile($scope.excelFile, true).then(function(xlsxData) {
-            $scope.sheets = xlsxData.sheets;
-            $scope.isProcessing = false;
-        });
-    };
-  $scope.updateJSONString = () => {
-    $scope.excelData = $scope.sheets[$scope.selectedSheetName];
-      $scope.excelData = $scope.excelData.data
-  }
+// $scope.json_string = "";
+//   $scope.fileChanged = (files) => {
+//       $scope.isProcessing = true;
+//       $scope.sheets = [];
+//       $scope.excelFile = files[0];
+//       excelReader.readFile($scope.excelFile, true).then(function(xlsxData) {
+//           $scope.sheets = xlsxData.sheets;
+//           $scope.isProcessing = false;
+//       });
+//   };
+// $scope.updateJSONString = () => {
+//   $scope.excelData = $scope.sheets[$scope.selectedSheetName];
+//     $scope.excelData = $scope.excelData.data
+// }
 });

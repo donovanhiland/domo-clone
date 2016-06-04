@@ -1,17 +1,19 @@
 angular.module('domoApp')
   .directive('barChart', function () {
     return {
-      restrict: "E",
-      controller: 'excelController',
+      restrict: "AE",
+      // controller: 'dashboardCtrl',
       link: function (scope, element) {
-        scope.$watch('excelData', function () {
+        console.log(d3.select(element[0]));
+        //d3.select(element[0]).append("div").attr("style","background-color:black;height:50px;width:50px");
+        // scope.$watch('excelData', function () {
 
-        var dataset = scope.excelData[0];
-        // var dataset = [5,10,15,13,25,34,19,14,23,15, 12, 16, 19, 12, 8, 20];
+        // var dataset = scope.excelData[0];
+        var dataset = [5,10,15,13,25,34,19,14,23,15, 12, 16, 19, 12, 8, 20];
 
         //Width and height
         var margin = {top: 30, right: 10, bottom: 30, left: 10};
-        var w = parseInt(d3.select('#graph').style('width'), 10)
+        var w = parseInt(d3.select(element[0]).style('width'), 10)
         w = w - margin.left - margin.right;
         var h = 500 - margin.top - margin.bottom;
         var formatAs = d3.format(".1"); //when data is messy
@@ -59,8 +61,8 @@ angular.module('domoApp')
                           .ticks(5)
                           .tickFormat(formatAs);
 
-        //Create SVG element
-        var svg = d3.select("#graph")
+        //Create SVG element[0]
+        var svg = d3.select(element[0])
                     .append("svg")
                     .attr("width", w + margin.left + margin.right)
                     .attr("height", h + margin.top + margin.bottom);
@@ -124,7 +126,7 @@ angular.module('domoApp')
         //Makes Graph responsive
         d3.select(window).on('resize', function () {
             // update width
-            w = parseInt(d3.select('#graph').style('width'), 10);
+            w = parseInt(d3.select(element[0]).style('width'), 10);
             w = w - margin.left - margin.right;
             // reset x range
             xScale.range([0, w]);
@@ -150,7 +152,7 @@ angular.module('domoApp')
             svg.select('.x.axis.top').call(xAxis.orient('top'));
             svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
         });
-      }); //scope.watch
+      // }); //scope.watch
     } //link
   } //return
 }) //directive
