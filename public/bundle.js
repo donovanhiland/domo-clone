@@ -120,6 +120,10 @@ angular.module('domoApp').directive('navDirective', function () {
 
 angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "mainService", "$state", function ($scope, $log, mainService, $state) {
 
+  $scope.setChartType = function (chartType) {
+    $scope.chartType = chartType;
+  };
+
   //drop down
   // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
   //create card
@@ -173,7 +177,7 @@ angular.module('domoApp').directive('barChart', function () {
     restrict: "AE",
     // controller: 'dashboardCtrl',
     link: function link(scope, element) {
-      console.log(d3.select(element[0]));
+
       //d3.select(element[0]).append("div").attr("style","background-color:black;height:50px;width:50px");
       // scope.$watch('excelData', function () {
 
@@ -292,54 +296,112 @@ angular.module('domoApp').directive('barChart', function () {
 }); //directive
 'use strict';
 
+angular.module('domoApp').directive('lineChart', function () {
+  return {
+    restrict: "AE",
+    // controller: 'dashboardCtrl',
+    link: function link(scope, element) {
+      // scope.$watch('excelData', function () {
+      console.log(element);
+      var margin = { top: 20, right: 20, bottom: 30, left: 50 },
+          width = 960 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+
+      var formatDate = d3.time.format("%d-%b-%y");
+
+      var x = d3.time.scale().range([0, width]);
+
+      var y = d3.scale.linear().range([height, 0]);
+
+      var xAxis = d3.svg.axis().scale(x).orient("bottom");
+
+      var yAxis = d3.svg.axis().scale(y).orient("left");
+
+      var line = d3.svg.line().x(function (d) {
+        return x(d.date);
+      }).y(function (d) {
+        return y(d.close);
+      });
+
+      var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      d3.tsv("data.tsv", type, function (error, data) {
+        if (error) throw error;
+
+        x.domain(d3.extent(data, function (d) {
+          return d.date;
+        }));
+        y.domain(d3.extent(data, function (d) {
+          return d.close;
+        }));
+
+        svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+        svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("Price ($)");
+
+        svg.append("path").datum(data).attr("class", "line").attr("d", line);
+      });
+
+      function type(d) {
+        d.date = formatDate.parse(d.date);
+        d.close = +d.close;
+        return d;
+      }
+
+      // }); //scope.watch
+    } //link
+  };
+});
+'use strict';
+
 angular.module('domoApp').directive('pieChart', function () {
-    return {
-        restrict: "AE",
-        // controller: 'dashboardCtrl',
-        link: function link(scope, element) {
-            // scope.$watch('excelData', function () {
+  return {
+    restrict: "AE",
+    // controller: 'dashboardCtrl',
+    link: function link(scope, element) {
+      // scope.$watch('excelData', function () {
 
-            // var dataset = scope.excelData[0];
-            var dataset = [5, 10, 20, 45, 6, 25];
+      // var dataset = scope.excelData[0];
+      var dataset = [5, 10, 20, 45, 6, 25];
 
-            var pie = d3.layout.pie();
-            var w = 230;
-            var h = 250;
-            var color = d3.scale.category10(); //generates categorical colors
-            var outerRadius = w / 2;
-            var innerRadius = w / 4; //change this for the
-            //arcs require inner and outer radii
-            var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+      var pie = d3.layout.pie();
+      var w = 230;
+      var h = 250;
+      var color = d3.scale.ordinal().range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
+      function randomColor() {
+        return color([Math.floor(Math.random() * 5)]);
+      }
+      var outerRadius = w / 2;
+      var innerRadius = w / 4; //change this for the
+      //arcs require inner and outer radii
+      var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
 
-            //Create SVG element
-            var svg = d3.select(element[0]).append("svg").attr("width", w).attr("height", h);
+      //Create SVG element
+      var svg = d3.select(element[0]).append("svg").attr("width", w).attr("height", h);
 
-            //Set up groups
-            var arcs = svg.selectAll("g.arc").data(pie(dataset)).enter().append("g").attr("class", "arc").attr("transform", "translate( " + outerRadius + ", " + outerRadius + " )");
+      //Set up groups
+      var arcs = svg.selectAll("g.arc").data(pie(dataset)).enter().append("g").attr("class", "arc").attr("transform", "translate( " + outerRadius + ", " + outerRadius + " )");
 
-            //paths - SVG’s answer to drawing irregular forms
-            //Draw arc paths
-            arcs.append("path") //within each new g, we append a path. A paths path description is defined in the d attribute.
-            .attr("fill", function (d, i) {
-                return color(i);
-            }).attr("d", arc).on("mouseover", function (d) {
-                d3.select(this).attr("fill", "#f92");
-            }).on("mouseout", function (d) {
-                d3.select(this).transition().duration(250).attr("fill", function (d, i) {
-                    return color(i);
-                });
-            });
+      //paths - SVG’s answer to drawing irregular forms
+      //Draw arc paths
+      arcs.append("path") //within each new g, we append a path. A paths path description is defined in the d attribute.
+      .attr("fill", function (d, i) {
+        return color(i);
+      }).attr("d", arc).on("mouseover", function (d) {
+        d3.select(this).attr("fill", "#f92");
+      }).on("mouseout", function (d) {
+        d3.select(this).transition().duration(250).attr("fill", randomColor());
+      });
+      //labels
+      arcs.append("text").attr("transform", function (d) {
+        return "translate(" + arc.centroid(d) + ")"; //A centroid is the calculated center point of any shape
+      }).attr("text-anchor", "middle").attr("fill", "white").text(function (d) {
+        return d.value; //pie-ified data has to return d.value
+      });
 
-            //labels
-            arcs.append("text").attr("transform", function (d) {
-                return "translate(" + arc.centroid(d) + ")"; //A centroid is the calculated center point of any shape
-            }).attr("text-anchor", "middle").attr("fill", "white").text(function (d) {
-                return d.value; //pie-ified data has to return d.value
-            });
-
-            // }); //scope.watch
-        } //link
-    };
+      // }); //scope.watch
+    } //link
+  };
 });
 'use strict';
 
@@ -397,10 +459,10 @@ angular.module('domoApp').directive('scatterPlot', function () {
         return d[0] + "," + d[1];
       }).attr({
         x: function x(d) {
-          return xScale(d[0]);
+          return xScale(d[0]) + 4;
         },
         y: function y(d) {
-          return yScale(d[1]);
+          return yScale(d[1]) + 2;
         },
         "font-family": "sans-serif",
         "font-sizee": "11px",

@@ -1,6 +1,10 @@
 angular.module("domoApp")
 .controller('dashboardCtrl', function($scope, $log, mainService, $state){
 
+    $scope.setChartType = function(chartType) {
+      $scope.chartType = chartType;
+    }
+
     //drop down
     // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
     //create card

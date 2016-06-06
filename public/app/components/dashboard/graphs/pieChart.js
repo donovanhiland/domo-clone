@@ -5,11 +5,12 @@ angular.module('domoApp')
       // controller: 'dashboardCtrl',
       link: function (scope, element) {
         // scope.$watch('excelData', function () {
+        
 
         // var dataset = scope.excelData[0];
         var dataset = [ 5, 10, 20, 45, 6, 25 ];
 
-        var pie = d3.layout.pie();
+        var pie = d3.layout.pie()
         var w = 230;
         var h = 250;
         var color = d3.scale.ordinal()
@@ -56,7 +57,6 @@ angular.module('domoApp')
                     .duration(250)
                     .attr("fill", randomColor())
           })
-
             //labels
             arcs.append("text")
                 .attr("transform", function(d) {

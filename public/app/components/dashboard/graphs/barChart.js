@@ -4,7 +4,7 @@ angular.module('domoApp')
       restrict: "AE",
       // controller: 'dashboardCtrl',
       link: function (scope, element) {
-        console.log(d3.select(element[0]));
+
         //d3.select(element[0]).append("div").attr("style","background-color:black;height:50px;width:50px");
         // scope.$watch('excelData', function () {
 
