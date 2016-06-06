@@ -88,6 +88,32 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
 }]);
 'use strict';
 
+angular.module('domoApp').directive('alertDir', function () {
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/alertTmpl.html'
+  };
+});
+'use strict';
+
+angular.module('domoApp').directive('dashDir', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/dashTmpl.html'
+  };
+});
+'use strict';
+
+angular.module('domoApp').directive('navDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/navTmpl.html'
+  };
+});
+'use strict';
+
 angular.module('domoApp').directive('cardDirective', function () {
 
   return {
@@ -107,15 +133,6 @@ angular.module('domoApp').directive('cardDirective', function () {
     }
   };
 });
-'use strict';
-
-angular.module('domoApp').directive('navDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './app/shared/nav/navTmpl.html'
-  };
-});
 "use strict";
 
 var app = angular.module("domoApp");
@@ -130,6 +147,22 @@ app.controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "mainService", "
             $scope.readCard();
         });
     };
+    $scope.sendEmail = function (email) {
+        mainService.sendEmail({
+            toField: $scope.email.toField,
+            subjectField: $scope.email.subjectField,
+            textField: $scope.email.textField
+        }).then(function (response) {
+            clear();
+            console.log("sendEmail", response);
+        });
+    };
+
+    var clear = function clear() {
+        $scope.email = null;
+        return alert("email received!");
+    };
+
     $scope.readCard = function () {
         mainService.readCard().then(function (response) {
             $scope.cards = response;
@@ -351,6 +384,16 @@ angular.module('domoApp').service('mainService', ["$http", function ($http) {
         return $http({
             method: "DELETE",
             url: "/card/" + id
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.sendEmail = function (email) {
+        console.log(email);
+        return $http({
+            method: "POST",
+            url: "/email",
+            data: email
         }).then(function (response) {
             return response.data;
         });

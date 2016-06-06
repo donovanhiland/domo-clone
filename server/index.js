@@ -5,6 +5,8 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import config from './config.js';
 import session from 'express-session';
+import nodemailer from 'nodemailer';
+
 
 
 
@@ -12,6 +14,7 @@ import session from 'express-session';
 import TwitterCtrl from './controllers/TwitterCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
 import cardCtrl from './controllers/cardCtrl.js';
+import formCtrl from './controllers/formCtrl.js';
 
 // POLICIES //
 const isAuthed = (req, res, next) => {
@@ -37,14 +40,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + './../public'));
 
-
-// Endpoints
-// app.get('/model', modelCtrl.read);
-// app.post('/model', modelCtrl.create);
-// app.put('/model/:id', modelCtrl.update);
-// app.delete('/model/:id', modelCtrl.delete);
-// TwitterCtrl.getDataByScreenName('devmtn');
-
 // UserEndpoint
 app.get('/checkAuth', UserCtrl.checkAuth);
 app.post('/users', UserCtrl.register);
@@ -63,6 +58,11 @@ app.get('/logout', function(req, res, next) {
     req.logout();
     return res.status(200).send('logged out');
 });
+//email
+app.post('/email', formCtrl.sendEmail);
+
+//=======uncomment this for testing=======//
+// TwitterCtrl.getDataByScreenName('devmtn');
 
 
 
