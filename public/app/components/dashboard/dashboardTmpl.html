@@ -91,10 +91,10 @@
           <div class="graph-container" >
             <div id="graph">
               <!-- add ng-if="card.graph == 'bar'" on each graph -->
-              <bar-chart ng-hide="true"></bar-chart>
-              <scatter-plot ng-hide="true"></scatter-plot>
-              <pie-chart ng-hide="false"></pie-chart>
-              <!-- <line-chart></line-chart>  needs data first-->
+              <bar-chart ng-hide="true" ng-model="barChart"></bar-chart>
+              <scatter-plot ng-hide="true" ng-model="scatterPlot"></scatter-plot>
+              <pie-chart ng-hide="false" ng-model="pieChart"></pie-chart>
+              <!-- <line-graph></line-graph ng-model="lineGraph">  needs data first-->
             </div>
           </div>
           <div class="dash-footer-icons">
