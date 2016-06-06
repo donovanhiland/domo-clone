@@ -12,9 +12,10 @@ angular.module('domoApp')
         var pie = d3.layout.pie();
         var w = 230;
         var h = 250;
-        var color = d3.scale.category10(); //generates categorical colors
+        var color = d3.scale.ordinal()
+	.range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
         function randomColor() {
-          return '#'+Math.floor(Math.random()*16777215).toString(16);
+          return color([Math.floor(Math.random()*5)])
         }
         var outerRadius = w / 2;
         var innerRadius = w / 4; //change this for the
