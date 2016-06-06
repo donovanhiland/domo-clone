@@ -88,27 +88,6 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
 }]);
 'use strict';
 
-angular.module('domoApp').directive('cardDirective', function () {
-
-  return {
-    restrict: 'A',
-    link: function link(scope, element, attrs) {
-
-      $('.card-lg').on('click', function () {
-        $(this).parent().parent().css('height', '100%');
-        $(this).parent().parent().css('width', '40%');
-        // $(this).parent().css('transition', 'all 0.9s ease-in-out');
-      });
-
-      $('.card-sm').on('click', function () {
-        $(this).parent().parent().css('height', '100%');
-        $(this).parent().parent().css('width', '20vw');
-      });
-    }
-  };
-});
-'use strict';
-
 angular.module('domoApp').directive('alertDir', function () {
   return {
     restrict: 'E',
@@ -133,6 +112,27 @@ angular.module('domoApp').directive('navDirective', function () {
     templateUrl: './app/shared/nav/navTmpl.html'
   };
 });
+'use strict';
+
+angular.module('domoApp').directive('cardDirective', function () {
+
+  return {
+    restrict: 'A',
+    link: function link(scope, element, attrs) {
+
+      $('.card-lg').on('click', function () {
+        $(this).parent().parent().css('height', '100%');
+        $(this).parent().parent().css('width', '40%');
+        // $(this).parent().css('transition', 'all 0.9s ease-in-out');
+      });
+
+      $('.card-sm').on('click', function () {
+        $(this).parent().parent().css('height', '100%');
+        $(this).parent().parent().css('width', '20vw');
+      });
+    }
+  };
+});
 "use strict";
 
 var app = angular.module("domoApp");
@@ -153,10 +153,16 @@ app.controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "mainService", "
             subjectField: $scope.email.subjectField,
             textField: $scope.email.textField
         }).then(function (response) {
-
+            clear();
             console.log("sendEmail", response);
         });
     };
+
+    var clear = function clear() {
+        $scope.email = null;
+        return alert("email received!");
+    };
+
     $scope.readCard = function () {
         mainService.readCard().then(function (response) {
             $scope.cards = response;
@@ -210,66 +216,6 @@ app.controller('excelController', ["$scope", "excelReader", function ($scope, ex
     $scope.updateJSONString = function () {
         $scope.excelData = $scope.sheets[$scope.selectedSheetName];
         $scope.excelData = $scope.excelData.data;
-    };
-}]);
-'use strict';
-
-angular.module('domoApp').service('dashboardService', ["$http", function ($http) {
-
-  this.checkAuth = function () {
-    return $http({
-      method: 'GET',
-      url: '/checkAuth'
-    }).then(function (response) {
-      return response.data;
-    });
-  };
-}]);
-'use strict';
-
-angular.module('domoApp').service('mainService', ["$http", function ($http) {
-
-    this.createCard = function (newTitle) {
-        return $http({
-            method: "POST",
-            url: "/card",
-            data: {
-                title: newTitle
-            }
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.readCard = function () {
-        return $http({
-            method: "GET",
-            url: "/card"
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.getCardByUser = function (id) {
-        return $http.get('/card?user=' + id).then(function (response) {
-            return response.data;
-        });
-    };
-    this.deleteCard = function (id) {
-        return $http({
-            method: "DELETE",
-            url: "/card/" + id
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.sendEmail = function (email) {
-        console.log(email);
-        return $http({
-            method: "POST",
-            url: "/email",
-            data: email
-        }).then(function (response) {
-            return response.data;
-        });
     };
 }]);
 'use strict';
@@ -393,6 +339,66 @@ angular.module('domoApp').directive('barChart', function () {
     } //link
   }; //return
 }); //directive
+'use strict';
+
+angular.module('domoApp').service('dashboardService', ["$http", function ($http) {
+
+  this.checkAuth = function () {
+    return $http({
+      method: 'GET',
+      url: '/checkAuth'
+    }).then(function (response) {
+      return response.data;
+    });
+  };
+}]);
+'use strict';
+
+angular.module('domoApp').service('mainService', ["$http", function ($http) {
+
+    this.createCard = function (newTitle) {
+        return $http({
+            method: "POST",
+            url: "/card",
+            data: {
+                title: newTitle
+            }
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.readCard = function () {
+        return $http({
+            method: "GET",
+            url: "/card"
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.getCardByUser = function (id) {
+        return $http.get('/card?user=' + id).then(function (response) {
+            return response.data;
+        });
+    };
+    this.deleteCard = function (id) {
+        return $http({
+            method: "DELETE",
+            url: "/card/" + id
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.sendEmail = function (email) {
+        console.log(email);
+        return $http({
+            method: "POST",
+            url: "/email",
+            data: email
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+}]);
 'use strict';
 
 angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);

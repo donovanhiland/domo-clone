@@ -1,9 +1,10 @@
 import nodemailer from 'nodemailer';
+import config from '../config.js'
 
 
-var EMAIL_ACCOUNT_USER = 'hijazikaram@gmail.com';
-var EMAIL_ACCOUNT_PASSWORD = 'abumonzer';
-var YOUR_NAME = 'Karam Hijazi';
+var EMAIL_ACCOUNT_USER = config.emailAccountUser;
+var EMAIL_ACCOUNT_PASSWORD = config.emailPassword;
+var YOUR_NAME = config.emailName;
 
 
 var smtpTransport = nodemailer.createTransport("SMTP",{
@@ -17,7 +18,7 @@ module.exports = {
 
     sendEmail: function(req, res, next) {
       smtpTransport.sendMail({  //email options
-        from: "Karam <hijazikaram@gmail.com>", // sender address.  Must be the same as authenticated user if using GMail.
+        from: "Domo Clone <domoclone@gmail.com>", // sender address.  Must be the same as authenticated user if using GMail.
         to: req.body.toField, // receiver
         subject: req.body.subjectField, // subject
         text: req.body.textField // body

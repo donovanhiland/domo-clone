@@ -12,5 +12,8 @@ module.exports = {
   google: {
     //google api works for geocode and things like youtube if needed
     GOOGLE_API_KEY: "AIzaSyCE9GCedm-QT0dYwCl-6mwoCgeM8Hbfm8E"
-  }
+  },
+  emailAccountUser: 'domoclone@gmail.com',
+  emailPassword: 'H@ramkaram',
+  emailName: 'Domo Clone'
 };
