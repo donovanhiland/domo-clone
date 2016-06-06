@@ -98,6 +98,7 @@ angular.module('domoApp')
                     .attr("font-size", "12px")
                     .attr("font-weight", "bold")
                     .attr("fill", "black")
+                    .attr("cursor", "context-menu")
                     .text(d);
                 })
             .on("mouseout", function(d) {
@@ -139,7 +140,7 @@ angular.module('domoApp')
             svg.selectAll('rect.background')
                 .attr('width', w);
 
-            svg.selectAll('rect.percent')
+            svg.selectAll('rect.formatAs')
                 .attr('width', function(d) { return xScale(d.formatAs); });
 
             // update median ticks
