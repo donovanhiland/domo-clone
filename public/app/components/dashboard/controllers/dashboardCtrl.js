@@ -1,18 +1,28 @@
-angular.module('domoApp').controller('dashboardCtrl', function($scope, $log, mainService, $state) {
+const app = angular.module("domoApp");
+app.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $state){
+
+
 
     //drop down
     // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
     //create card
-    $scope.createCard = function(newTitle) {
+    $scope.createCard = (newTitle) => {
         console.log("working");
         mainService.createCard(newTitle).then(function(response) {
-
-            console.log("createCard", response);
-            // $state.go("card",{id:response._id})
+            $scope.readCard();
         });
     };
-    $scope.readCard = function() {
-      console.log("working2");
+    $scope.sendEmail = (email) => {
+          mainService.sendEmail({
+            toField: $scope.email.toField,
+            subjectField: $scope.email.subjectField,
+            textField: $scope.email.textField
+          }).then(function(response) {
+
+              console.log("sendEmail", response);
+          });
+      };
+    $scope.readCard = () => {
         mainService.readCard().then(function(response) {
           $scope.cards = response;
         });
@@ -20,11 +30,56 @@ angular.module('domoApp').controller('dashboardCtrl', function($scope, $log, mai
     $scope.readCard();
     // $scope.user = user;
 
-  $scope.getCardByUser = function () {
+  $scope.getCardByUser = () => {
     mainService.getCardByUser(/*$scope.user._id*/).then(function (results) {
-    console.log(results);
       $scope.userCards = results;
     });
   };
-  $scope.getCardByUser();
+
+  $scope.deleteCard = (id) => {
+    mainService.deleteCard(id).then(function (results) {
+      $scope.readCard();
+    });
+  };
+$scope.deleteCard();
+
+
+});
+
+
+
+
+
+app.factory("excelReader", ['$q', '$rootScope',
+    function($q, $rootScope) {
+        var service = (data) => {
+            angular.extend(this, data);
+        };
+        service.readFile = (file, showPreview) => {
+            var deferred = $q.defer();
+            XLSXReader(file, showPreview, function(data) {
+                $rootScope.$apply(function() {
+                    deferred.resolve(data);
+                });
+            });
+            return deferred.promise;
+        };
+        return service;
+    }
+ ]);
+app.controller('excelController', function($scope, excelReader) {
+  $scope.json_string = "";
+    $scope.fileChanged = (files) => {
+        $scope.isProcessing = true;
+        $scope.sheets = [];
+        $scope.excelFile = files[0];
+        excelReader.readFile($scope.excelFile, true).then(function(xlsxData) {
+            $scope.sheets = xlsxData.sheets;
+            $scope.isProcessing = false;
+        });
+    };
+  $scope.updateJSONString = () => {
+    $scope.excelData = $scope.sheets[$scope.selectedSheetName];
+      $scope.excelData = $scope.excelData.data;
+  };
 });

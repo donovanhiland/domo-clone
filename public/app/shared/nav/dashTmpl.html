@@ -1,56 +1,18 @@
-<header class="dash-nav-section">
-    <div class="dash-nav-top">
-        <a class="nav-link" id="home" ui-sref="home"><img id="domo-dash-logo" src="https://d3kjp0zrek7zit.cloudfront.net/uploads/vendor/image/490/large_detail_1391173259.jpg
-    " alt="" /></a>
-        <div class="dash-nav-name">
-            <h2>User Name</h2>
+<form role="form">
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" ng-model="email.toField" id="email">
         </div>
+        <div class="form-group">
+            <label for="pwd">Subject:</label>
+            <input type="text" class="form-control" id="pwd" ng-model="email.subjectField">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Message:</label>
+            <input type="text" class="form-control" id="pwd" ng-model="email.textField">
+        </div>
+        <div class="checkbox">
 
-        <nav class="site-nav">
-            <div class="nav-menu-item">
-
-            </div>
-            <div class="nav-menu-item">
-
-            </div>
-
-        </nav>
-    </div>
-    <div class="dash-nav-bottom">
-        <ul>
-            <a href="#">
-                <li>Overview</li>
-            </a>
-            <a href="#">
-                <li>Favorites</li>
-            </a>
-            <a href="#">
-                <li>Alerts</li>
-            </a>
-            <a href="#">
-                <li>CEO</li>
-            </a>
-            <a href="#">
-                <li>Finance</li>
-            </a>
-            <a href="#">
-                <li>HR</li>
-            </a>
-            <a href="#">
-                <li>Marketing</li>
-            </a>
-            <a href="#">
-                <li>Operations</li>
-            </a>
-            <a href="#">
-                <li>Sales</li>
-            </a>
-            <a ui-sref="alert">
-                <li>Alert</li>
-            </a>
-            <a href="#">
-                <li>Settings</li>
-            </a>
-        </ul>
-    </div>
-</header>
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="sendEmail(email)">Submit</button>
+    </form>

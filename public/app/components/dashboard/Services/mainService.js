@@ -1,6 +1,6 @@
 angular.module('domoApp').service('mainService', function($http) {
 
-    this.createCard = function(newTitle) {
+    this.createCard = (newTitle) => {
         return $http({
             method: "POST",
             url: "/card",
@@ -11,7 +11,7 @@ angular.module('domoApp').service('mainService', function($http) {
             return response.data;
         });
     };
-    this.readCard = function() {
+    this.readCard = () => {
         return $http({
             method: "GET",
             url: "/card"
@@ -19,10 +19,27 @@ angular.module('domoApp').service('mainService', function($http) {
             return response.data;
         });
     };
-    this.getCardByUser = function(id) {
+    this.getCardByUser = (id) => {
         return $http.get('/card?user=' + id).then(function(response) {
             return response.data;
         });
     };
-
+    this.deleteCard = (id) => {
+      return $http({
+        method: "DELETE",
+        url: "/card/" + id
+      }).then(function (response) {
+        return response.data;
+      });
+    };
+    this.sendEmail = (email) => {
+        console.log(email);
+          return $http({
+              method: "POST",
+              url: "/email",
+              data: email
+          }).then(function(response) {
+              return response.data;
+          });
+      };
 });

@@ -5,33 +5,15 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import config from './config.js';
 import session from 'express-session';
+import nodemailer from 'nodemailer';
 
-import nodemailer from'nodemailer';
 
-// create reusable transporter object using the default SMTP transport
-var transporter = nodemailer.createTransport('smtps://user%40gmail.com:pass@smtp.gmail.com');
-
-// setup e-mail data with unicode symbols
-var mailOptions = {
-    from: '"Fred Foo 👥" <foo@blurdybloop.com>', // sender address
-    to: 'bar@blurdybloop.com, baz@blurdybloop.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world 🐴', // plaintext body
-    html: '<b>Hello world 🐴</b>' // html body
-};
-
-// send mail with defined transport object
-transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        return console.log(error);
-    }
-    console.log('Message sent: ' + info.response);
-});
 
 // Controllers
 import TwitterCtrl from './controllers/TwitterCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
 import cardCtrl from './controllers/cardCtrl.js';
+import formCtrl from './controllers/formCtrl.js';
 
 // POLICIES //
 const isAuthed = (req, res, next) => {
@@ -57,15 +39,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + './../public'));
 
-
-// Endpoints
-// app.get('/model', modelCtrl.read);
-// app.post('/model', modelCtrl.create);
-// app.put('/model/:id', modelCtrl.update);
-// app.delete('/model/:id', modelCtrl.delete);
-// TwitterCtrl.getDataByScreenName('devmtn');
-
 // UserEndpoint
+app.get('/checkAuth', UserCtrl.checkAuth);
 app.post('/users', UserCtrl.register);
 app.get('/logout', UserCtrl.logout);
 app.get('/users', UserCtrl.getUsers);
@@ -74,12 +49,19 @@ app.put('/users/:_id', isAuthed, UserCtrl.update);
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/me'
 }));
+//card
 app.post('/card', cardCtrl.createCard);
 app.get('/card', cardCtrl.readCard);
+app.delete('/card/:id', cardCtrl.deleteCard);
 app.get('/logout', function(req, res, next) {
     req.logout();
     return res.status(200).send('logged out');
 });
+//email
+app.post('/email', formCtrl.sendEmail);
+
+//=======uncomment this for testing=======//
+// TwitterCtrl.getDataByScreenName('devmtn');
 
 
 // MongoDB connection
