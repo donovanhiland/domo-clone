@@ -12,6 +12,7 @@ import nodemailer from 'nodemailer';
 
 // Controllers
 import TwitterCtrl from './controllers/TwitterCtrl';
+import twitterTweetsCtrl from './controllers/twitterTweetsCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
 import cardCtrl from './controllers/cardCtrl.js';
 import formCtrl from './controllers/formCtrl.js';
@@ -63,6 +64,7 @@ app.post('/email', formCtrl.sendEmail);
 
 //=======uncomment this for testing=======//
 // TwitterCtrl.getDataByScreenName('devmtn');
+twitterTweetsCtrl.tweetData('devmtn');
 
 
 
