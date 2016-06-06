@@ -88,6 +88,27 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
 }]);
 'use strict';
 
+angular.module('domoApp').directive('cardDirective', function () {
+
+  return {
+    restrict: 'A',
+    link: function link(scope, element, attrs) {
+
+      $('.card-lg').on('click', function () {
+        $(this).parent().parent().css('height', '100%');
+        $(this).parent().parent().css('width', '40%');
+        // $(this).parent().parent().css('transition', 'all 0.9s ease-in-out');
+      });
+
+      $('.card-sm').on('click', function () {
+        $(this).parent().parent().css('height', '100%');
+        $(this).parent().parent().css('width', '20vw');
+      });
+    }
+  };
+});
+'use strict';
+
 angular.module('domoApp').directive('alertDir', function () {
   return {
     restrict: 'E',
@@ -110,27 +131,6 @@ angular.module('domoApp').directive('navDirective', function () {
   return {
     restrict: 'E',
     templateUrl: './app/shared/nav/navTmpl.html'
-  };
-});
-'use strict';
-
-angular.module('domoApp').directive('cardDirective', function () {
-
-  return {
-    restrict: 'A',
-    link: function link(scope, element, attrs) {
-
-      $('.card-lg').on('click', function () {
-        $(this).parent().parent().css('height', '100%');
-        $(this).parent().parent().css('width', '40%');
-        // $(this).parent().parent().css('transition', 'all 0.9s ease-in-out');
-      });
-
-      $('.card-sm').on('click', function () {
-        $(this).parent().parent().css('height', '100%');
-        $(this).parent().parent().css('width', '20vw');
-      });
-    }
   };
 });
 "use strict";
