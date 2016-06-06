@@ -36,14 +36,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + './../public'));
 
-
-// Endpoints
-// app.get('/model', modelCtrl.read);
-// app.post('/model', modelCtrl.create);
-// app.put('/model/:id', modelCtrl.update);
-// app.delete('/model/:id', modelCtrl.delete);
-// TwitterCtrl.getDataByScreenName('devmtn');
-
 // UserEndpoint
 app.get('/checkAuth', UserCtrl.checkAuth);
 app.post('/users', UserCtrl.register);
@@ -62,6 +54,10 @@ app.get('/logout', function(req, res, next) {
     req.logout();
     return res.status(200).send('logged out');
 });
+
+
+//=======uncomment this for testing=======//
+// TwitterCtrl.getDataByScreenName('devmtn');
 
 
 // MongoDB connection
