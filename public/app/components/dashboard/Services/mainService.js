@@ -8,20 +8,20 @@ angular.module('domoApp').service('mainService', function($http) {
                 title: newTitle
             }
         }).then(function(response) {
-            return response.data
-        })
+            return response.data;
+        });
     };
     this.readCard = () => {
         return $http({
             method: "GET",
             url: "/card"
         }).then(function(response) {
-            return response.data
-        })
+            return response.data;
+        });
     };
     this.getCardByUser = (id) => {
         return $http.get('/card?user=' + id).then(function(response) {
-            return response.data
+            return response.data;
         });
     };
     this.deleteCard = (id) => {
@@ -32,5 +32,14 @@ angular.module('domoApp').service('mainService', function($http) {
         return response.data;
       });
     };
-
+    this.sendEmail = (email) => {
+        console.log(email);
+          return $http({
+              method: "POST",
+              url: "/email",
+              data: email
+          }).then(function(response) {
+              return response.data;
+          });
+      };
 });

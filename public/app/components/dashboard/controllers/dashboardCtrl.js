@@ -12,6 +12,16 @@ app.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $
             $scope.readCard();
         });
     };
+    $scope.sendEmail = (email) => {
+          mainService.sendEmail({
+            toField: $scope.email.toField,
+            subjectField: $scope.email.subjectField,
+            textField: $scope.email.textField
+          }).then(function(response) {
+
+              console.log("sendEmail", response);
+          });
+      };
     $scope.readCard = () => {
         mainService.readCard().then(function(response) {
           $scope.cards = response;
@@ -29,8 +39,8 @@ app.controller('dashboardCtrl', function($scope, $log, checkAuth, mainService, $
   $scope.deleteCard = (id) => {
     mainService.deleteCard(id).then(function (results) {
       $scope.readCard();
-    })
-  }
+    });
+  };
 $scope.deleteCard();
 
 
@@ -70,6 +80,6 @@ app.controller('excelController', function($scope, excelReader) {
     };
   $scope.updateJSONString = () => {
     $scope.excelData = $scope.sheets[$scope.selectedSheetName];
-      $scope.excelData = $scope.excelData.data
-  }
+      $scope.excelData = $scope.excelData.data;
+  };
 });
