@@ -240,7 +240,7 @@ angular.module('domoApp').directive('barChart', function () {
         //Get this bar's x/y values, then augment for the tooltip
         var xPosition = parseFloat(d3.select(this).attr("x")) + xScale.rangeBand() / 2;
         var yPosition = parseFloat(d3.select(this).attr("y")) + 20;
-        d3.select(this).attr("fill", "orange");
+        d3.select(this).attr("fill", "#f92");
 
         //Create the tooltip label
         svg.append("text").attr("id", "tooltip").attr("x", xPosition).attr("y", yPosition).attr("text-anchor", "middle").attr("font-family", "sans-serif").attr("font-size", "12px").attr("font-weight", "bold").attr("fill", "black").attr("cursor", "context-menu").text(d);
@@ -292,21 +292,68 @@ angular.module('domoApp').directive('barChart', function () {
 }); //directive
 'use strict';
 
+angular.module('domoApp').directive('pieChart', function () {
+    return {
+        restrict: "AE",
+        // controller: 'dashboardCtrl',
+        link: function link(scope, element) {
+            // scope.$watch('excelData', function () {
+
+            // var dataset = scope.excelData[0];
+            var dataset = [5, 10, 20, 45, 6, 25];
+
+            var pie = d3.layout.pie();
+            var w = 230;
+            var h = 250;
+            var color = d3.scale.category10(); //generates categorical colors
+            var outerRadius = w / 2;
+            var innerRadius = w / 4; //change this for the
+            //arcs require inner and outer radii
+            var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+
+            //Create SVG element
+            var svg = d3.select(element[0]).append("svg").attr("width", w).attr("height", h);
+
+            //Set up groups
+            var arcs = svg.selectAll("g.arc").data(pie(dataset)).enter().append("g").attr("class", "arc").attr("transform", "translate( " + outerRadius + ", " + outerRadius + " )");
+
+            //paths - SVG’s answer to drawing irregular forms
+            //Draw arc paths
+            arcs.append("path") //within each new g, we append a path. A paths path description is defined in the d attribute.
+            .attr("fill", function (d, i) {
+                return color(i);
+            }).attr("d", arc).on("mouseover", function (d) {
+                d3.select(this).attr("fill", "#f92");
+            }).on("mouseout", function (d) {
+                d3.select(this).transition().duration(250).attr("fill", function (d, i) {
+                    return color(i);
+                });
+            });
+
+            //labels
+            arcs.append("text").attr("transform", function (d) {
+                return "translate(" + arc.centroid(d) + ")"; //A centroid is the calculated center point of any shape
+            }).attr("text-anchor", "middle").attr("fill", "white").text(function (d) {
+                return d.value; //pie-ified data has to return d.value
+            });
+
+            // }); //scope.watch
+        } //link
+    };
+});
+'use strict';
+
 angular.module('domoApp').directive('scatterPlot', function () {
   return {
     restrict: "AE",
     // controller: 'dashboardCtrl',
     link: function link(scope, element) {
-      console.log(d3.select(element[0]));
       // scope.$watch('excelData', function () {
       // var dataset = scope.excelData[0];
       var dataset = [[5, 20], [480, 90], [250, 50], [100, 33], [330, 95], [410, 12], [475, 44], [25, 67], [85, 21], [220, 88], [600, 150]];
-      var margin = { top: 65, right: 10, bottom: 10, left: 40 };
-      var w = parseInt(d3.select(element[0]).style('width'), 11);
-      w = w - margin.left - margin.right;
-      var h = parseInt(d3.select(element[0]).style('height'), 11);
-      h = h - margin.top - margin.bottom;
-      var padding = 50;
+      var w = 210;
+      var h = 200;
+      var padding = 0;
       var formatAs = d3.format(".1"); //when data is messy
 
       var xScale = d3.scale.linear().domain([0, d3.max(dataset, function (d) {
@@ -428,7 +475,7 @@ angular.module('domoApp').directive('scatterPlot', function () {
 
         svg.selectAll('circle.background').attr('width', w);
 
-        svg.selectAll('circle.percent').attr('width', function (d) {
+        svg.selectAll('circle.formatAs').attr('width', function (d) {
           return xScale(d.formatAs);
         });
 

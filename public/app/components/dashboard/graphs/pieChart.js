@@ -13,8 +13,11 @@ angular.module('domoApp')
         var w = 230;
         var h = 250;
         var color = d3.scale.category10(); //generates categorical colors
+        function randomColor() {
+          return '#'+Math.floor(Math.random()*16777215).toString(16);
+        }
         var outerRadius = w / 2;
-        var innerRadius = w / 3.5; //change this for the
+        var innerRadius = w / 4; //change this for the
         //arcs require inner and outer radii
         var arc = d3.svg.arc()
                         .innerRadius(innerRadius)
@@ -32,7 +35,8 @@ angular.module('domoApp')
                 .enter()
                 .append("g")
                 .attr("class", "arc")
-                .attr("transform", "translate( " + outerRadius + ", " + outerRadius + " )");
+                .attr("transform", "translate( " + outerRadius + ", " + outerRadius + " )")
+
 
         //paths - SVG’s answer to drawing irregular forms
         //Draw arc paths
@@ -40,7 +44,17 @@ angular.module('domoApp')
             .attr("fill", function(d, i) {
                 return color(i);
             })
-            .attr("d", arc);
+            .attr("d", arc)
+            .on("mouseover", function(d) {
+              d3.select(this)
+                .attr("fill", "#f92");
+            })
+            .on("mouseout", function(d) {
+                  d3.select(this)
+                    .transition()
+                    .duration(250)
+                    .attr("fill", randomColor())
+          })
 
             //labels
             arcs.append("text")
@@ -51,7 +65,7 @@ angular.module('domoApp')
                 .attr("fill", "white")
                 .text(function(d) {
                     return d.value; //pie-ified data has to return d.value
-                });
+                })
 
 
         // }); //scope.watch

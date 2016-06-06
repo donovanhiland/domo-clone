@@ -86,7 +86,7 @@ angular.module('domoApp')
              var xPosition = parseFloat(d3.select(this).attr("x")) + xScale.rangeBand() / 2;
              var yPosition = parseFloat(d3.select(this).attr("y")) + 20;
                 d3.select(this)
-                  .attr("fill", "orange");
+                  .attr("fill", "#f92");
 
                   //Create the tooltip label
                   svg.append("text")
