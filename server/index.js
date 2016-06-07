@@ -5,12 +5,15 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import config from './config.js';
 import session from 'express-session';
+import nodemailer from 'nodemailer';
+
 
 
 // Controllers
 import TwitterCtrl from './controllers/TwitterCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
 import cardCtrl from './controllers/cardCtrl.js';
+import formCtrl from './controllers/formCtrl.js';
 
 // POLICIES //
 const isAuthed = (req, res, next) => {
@@ -54,7 +57,8 @@ app.get('/logout', function(req, res, next) {
     req.logout();
     return res.status(200).send('logged out');
 });
-
+//email
+app.post('/email', formCtrl.sendEmail);
 
 //=======uncomment this for testing=======//
 // TwitterCtrl.getDataByScreenName('devmtn');

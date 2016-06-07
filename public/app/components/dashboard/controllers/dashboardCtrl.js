@@ -14,6 +14,23 @@ angular.module("domoApp")
             $scope.newTitle = "";
         });
     };
+    $scope.sendEmail = (email) => {
+          mainService.sendEmail({
+            toField: $scope.email.toField,
+            subjectField: $scope.email.subjectField,
+            textField: $scope.email.textField
+          }).then(function(response) {
+              clear();
+              console.log("sendEmail", response);
+          });
+      };
+
+      const clear = function() {
+        $scope.email = null;
+        return alert("email received!");
+      }
+
+
     $scope.readCard = () => {
         mainService.readCard().then(function(response) {
           $scope.cards = response;
@@ -31,8 +48,8 @@ angular.module("domoApp")
   $scope.deleteCard = (id) => {
     mainService.deleteCard(id).then(function (results) {
       $scope.readCard();
-    })
-  }
+    });
+  };
 $scope.deleteCard();
 $scope.readCard();
 
@@ -51,4 +68,39 @@ $scope.readCard();
 //   $scope.excelData = $scope.sheets[$scope.selectedSheetName];
 //     $scope.excelData = $scope.excelData.data
 // }
+});
+
+
+app.factory("excelReader", ['$q', '$rootScope',
+    function($q, $rootScope) {
+        var service = (data) => {
+            angular.extend(this, data);
+        };
+        service.readFile = (file, showPreview) => {
+            var deferred = $q.defer();
+            XLSXReader(file, showPreview, function(data) {
+                $rootScope.$apply(function() {
+                    deferred.resolve(data);
+                });
+            });
+            return deferred.promise;
+        };
+        return service;
+    }
+ ]);
+app.controller('excelController', function($scope, excelReader) {
+  $scope.json_string = "";
+    $scope.fileChanged = (files) => {
+        $scope.isProcessing = true;
+        $scope.sheets = [];
+        $scope.excelFile = files[0];
+        excelReader.readFile($scope.excelFile, true).then(function(xlsxData) {
+            $scope.sheets = xlsxData.sheets;
+            $scope.isProcessing = false;
+        });
+    };
+  $scope.updateJSONString = () => {
+    $scope.excelData = $scope.sheets[$scope.selectedSheetName];
+      $scope.excelData = $scope.excelData.data;
+  };
 });

@@ -21,7 +21,7 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
                 alert('Sign in to view dashboard');
               }
               return response.data;
-            })
+            });
         }
       }
     });

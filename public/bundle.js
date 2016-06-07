@@ -88,6 +88,32 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
 }]);
 'use strict';
 
+angular.module('domoApp').directive('alertDir', function () {
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/alertTmpl.html'
+  };
+});
+'use strict';
+
+angular.module('domoApp').directive('dashDir', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/dashTmpl.html'
+  };
+});
+'use strict';
+
+angular.module('domoApp').directive('navDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/navTmpl.html'
+  };
+});
+'use strict';
+
 angular.module('domoApp').directive('cardDirective', function () {
 
   return {
@@ -107,18 +133,47 @@ angular.module('domoApp').directive('cardDirective', function () {
     }
   };
 });
-'use strict';
-
-angular.module('domoApp').directive('navDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './app/shared/nav/navTmpl.html'
-  };
-});
 "use strict";
 
+<<<<<<< HEAD
 angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "mainService", "$state", function ($scope, $log, mainService, $state) {
+=======
+var app = angular.module("domoApp");
+app.controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "mainService", "$state", function ($scope, $log, checkAuth, mainService, $state) {
+
+    //drop down
+    // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+    //create card
+    $scope.createCard = function (newTitle) {
+        console.log("working");
+        mainService.createCard(newTitle).then(function (response) {
+            $scope.readCard();
+        });
+    };
+    $scope.sendEmail = function (email) {
+        mainService.sendEmail({
+            toField: $scope.email.toField,
+            subjectField: $scope.email.subjectField,
+            textField: $scope.email.textField
+        }).then(function (response) {
+            clear();
+            console.log("sendEmail", response);
+        });
+    };
+
+    var clear = function clear() {
+        $scope.email = null;
+        return alert("email received!");
+    };
+
+    $scope.readCard = function () {
+        mainService.readCard().then(function (response) {
+            $scope.cards = response;
+        });
+    };
+    $scope.readCard();
+    // $scope.user = user;
+>>>>>>> master
 
   $scope.setChartType = function (chartType) {
     $scope.chartType = chartType;
@@ -601,6 +656,16 @@ app.service('mainService', ["$http", function ($http) {
         return $http({
             method: "DELETE",
             url: "/card/" + id
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.sendEmail = function (email) {
+        console.log(email);
+        return $http({
+            method: "POST",
+            url: "/email",
+            data: email
         }).then(function (response) {
             return response.data;
         });
