@@ -9,7 +9,7 @@ const twitter = new Twitter({
     consumer_secret: config.twitter.TWITTER_CONSUMER_SECRET,
     access_token_key: config.twitter.TWITTER_ACCESS_TOKEN_KEY,
     access_token_secret: config.twitter.TWITTER_ACCESS_TOKEN_SECRET,
-})
+});
 
 module.exports = {
 
@@ -22,10 +22,9 @@ module.exports = {
                 console.log(tweets[i].id, tweets[i].retweet_count, tweets[i].favorite_count);
             }
             console.log(tweets);
-        })
+        });
     }
-
-}
+};
 
 // const instagram = new Instagram({
 //   ig_client_secret: config.instagram.CLIENT_SECRET,
