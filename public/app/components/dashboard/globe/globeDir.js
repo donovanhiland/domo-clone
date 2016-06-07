@@ -18,10 +18,10 @@ angular.module('domoApp').directive('globeDir', () => {
               }
             });
 
-            return $http ({
-              method: 'POST',
-
-            })
+            // return $http ({
+            //   method: 'POST',
+            //
+            // });
             var xhr = new XMLHttpRequest();
             xhr.open('GET', './twittertest.json', true);
             xhr.onreadystatechange = function(e) {

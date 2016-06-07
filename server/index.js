@@ -5,12 +5,17 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import config from './config.js';
 import session from 'express-session';
+import nodemailer from 'nodemailer';
+
+
 
 
 // Controllers
 import TwitterLocationCtrl from './controllers/TwitterLocationCtrl';
+import TwitterTweetsCtrl from './controllers/TwitterTweetsCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
-import cardCtrl from './controllers/cardCtrl.js';
+import CardCtrl from './controllers/CardCtrl.js';
+import FormCtrl from './controllers/FormCtrl.js';
 
 // POLICIES //
 const isAuthed = (req, res, next) => {
@@ -54,7 +59,8 @@ app.post('/login', passport.authenticate('local', {
 app.post('/card', cardCtrl.createCard);
 app.get('/card', cardCtrl.readCard);
 app.delete('/card/:id', cardCtrl.deleteCard);
-
+//email
+app.post('/email', formCtrl.sendEmail);
 
 //=======uncomment this for testing=======//
 // app.post('/followers', TwitterLocationCtrl.getDataByScreenName);
