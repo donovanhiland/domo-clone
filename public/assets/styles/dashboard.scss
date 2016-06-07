@@ -38,21 +38,26 @@ $test-border: 1px red solid;
         }
     }
     .dash-nav-bottom {
-        height: 5vh;
-        width: 100vw;
-        background-color: $domo-grey;
+      display: flex;
+      align-items: center;
+      padding-top: 7px;
+      height: 5vh;
+      width: 100vw;
+      background-color: #333;
         ul {
             display: inline-block;
             li {
                 float: left;
                 margin: 14px;
+                font-family: $domo-font;
+                font-size: 16px;
                 color: #fff;
             }
         }
         ul li:hover {
             padding: 6px;
             margin: 8px;
-            background-color: $domo-text;
+            color: $domo-blue;
         }
     }
 }
@@ -60,6 +65,20 @@ $test-border: 1px red solid;
     height: 6.95vh;
     float: left;
 }
+
+@media screen and (max-width: 768px) {
+  .dash-nav-bottom {
+    display: flex;
+    justify-content: center;
+    ul {
+      li {
+        font-size: 12px !important;
+        margin: 5px !important;
+      }
+    }
+  }
+}
+
 /////////////////////////////////
 ////// Dashboard backdrop
 ////////////////////////////////
@@ -117,14 +136,14 @@ $test-border: 1px red solid;
 .dash-card-section {
 
   .dash-card-container {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
 
     .dash-card {
       height: 100%;
-      width: 20vw;
+      width: 200px;
       margin: 2vh;
       background-color: #fff;
       border: 1px #EEEEEE solid;

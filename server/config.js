@@ -13,6 +13,10 @@ module.exports = {
     //google api works for geocode and things like youtube if needed
     GOOGLE_API_KEY: "AIzaSyCE9GCedm-QT0dYwCl-6mwoCgeM8Hbfm8E"
   },
+  instagram: {
+    CLIENT_ID: "bd735df659c84fe6884ea0d99c5ac59a",
+    CLIENT_SECRET: "545dd72e98204a82ace48059b8b93759"
+  },
   emailAccountUser: 'domoclone@gmail.com',
   emailPassword: 'H@ramkaram',
   emailName: 'Domo Clone'
