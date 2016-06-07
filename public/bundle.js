@@ -97,31 +97,14 @@ angular.module('domoApp').directive('cardDirective', function () {
       $('.card-lg').on('click', function () {
         $(this).parent().parent().css('height', '100%');
         $(this).parent().parent().css('width', '40%');
-        // $(this).parent().parent().css('transition', 'all 0.9s ease-in-out');
+        $(this).parent().parent().css('transition', 'all 0.5s ease-in-out');
       });
 
       $('.card-sm').on('click', function () {
         $(this).parent().parent().css('height', '100%');
-        $(this).parent().parent().css('width', '20vw');
+        $(this).parent().parent().css('width', '200px');
       });
     }
-  };
-});
-'use strict';
-
-angular.module('domoApp').directive('alertDir', function () {
-  return {
-    restrict: 'E',
-    templateUrl: './app/shared/nav/alertTmpl.html'
-  };
-});
-'use strict';
-
-angular.module('domoApp').directive('dashDir', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './app/shared/nav/dashTmpl.html'
   };
 });
 'use strict';
@@ -131,6 +114,14 @@ angular.module('domoApp').directive('navDirective', function () {
   return {
     restrict: 'E',
     templateUrl: './app/shared/nav/navTmpl.html'
+  };
+});
+'use strict';
+
+angular.module('domoApp').directive('alertDir', function () {
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/alertTmpl.html'
   };
 });
 "use strict";

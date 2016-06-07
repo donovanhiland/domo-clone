@@ -27,7 +27,12 @@ module.exports = {
 
 }
 
-const instagram = new Instagram({
-  ig_access_token_secret: config.instagram.CLIENT_SECRET,
-  ig_access_client_id: config.instagram.CLIENT_ID
-})
+// const instagram = new Instagram({
+//   ig_client_secret: config.instagram.CLIENT_SECRET,
+//   ig_client_id: config.instagram.CLIENT_ID
+// });
+//
+//
+// module.exports = {
+//
+// }

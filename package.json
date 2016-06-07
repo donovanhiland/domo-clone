@@ -41,6 +41,7 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "express-sessions": "^1.0.5",
+    "instagram-node": "^0.5.8",
     "lodash": "^4.13.1",
     "mongoose": "^4.4.19",
     "mongoose-schematypes-extend": "^0.3.2",

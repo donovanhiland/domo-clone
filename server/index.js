@@ -65,6 +65,7 @@ app.post('/email', formCtrl.sendEmail);
 //=======uncomment this for testing=======//
 // TwitterCtrl.getDataByScreenName('devmtn');
 twitterTweetsCtrl.tweetData('devmtn');
+// twitterTweetsCtrl.instaData('devmtn');
 
 
 
