@@ -135,6 +135,9 @@ angular.module('domoApp').directive('cardDirective', function () {
 });
 "use strict";
 
+<<<<<<< HEAD
+angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "mainService", "$state", function ($scope, $log, mainService, $state) {
+=======
 var app = angular.module("domoApp");
 app.controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "mainService", "$state", function ($scope, $log, checkAuth, mainService, $state) {
 
@@ -170,175 +173,443 @@ app.controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "mainService", "
     };
     $scope.readCard();
     // $scope.user = user;
+>>>>>>> master
 
-    $scope.getCardByUser = function () {
-        mainService.getCardByUser(). /*$scope.user._id*/then(function (results) {
-            $scope.userCards = results;
-        });
-    };
+  $scope.setChartType = function (chartType) {
+    $scope.chartType = chartType;
+  };
 
-    $scope.deleteCard = function (id) {
-        mainService.deleteCard(id).then(function (results) {
-            $scope.readCard();
-        });
-    };
-    $scope.deleteCard();
-}]);
+  //drop down
+  // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+  //create card
+  $scope.createCard = function (newTitle) {
+    mainService.createCard(newTitle).then(function (response) {
+      $scope.readCard();
+      $scope.newTitle = "";
+    });
+  };
+  $scope.readCard = function () {
+    mainService.readCard().then(function (response) {
+      $scope.cards = response;
+    });
+  };
+  $scope.readCard();
+  // $scope.user = user;
 
-app.factory("excelReader", ['$q', '$rootScope', function ($q, $rootScope) {
-    var _this = this;
+  $scope.getCardByUser = function () {
+    mainService.getCardByUser(). /*$scope.user._id*/then(function (results) {
+      $scope.userCards = results;
+    });
+  };
 
-    var service = function service(data) {
-        angular.extend(_this, data);
-    };
-    service.readFile = function (file, showPreview) {
-        var deferred = $q.defer();
-        XLSXReader(file, showPreview, function (data) {
-            $rootScope.$apply(function () {
-                deferred.resolve(data);
-            });
-        });
-        return deferred.promise;
-    };
-    return service;
-}]);
-app.controller('excelController', ["$scope", "excelReader", function ($scope, excelReader) {
-    $scope.json_string = "";
-    $scope.fileChanged = function (files) {
-        $scope.isProcessing = true;
-        $scope.sheets = [];
-        $scope.excelFile = files[0];
-        excelReader.readFile($scope.excelFile, true).then(function (xlsxData) {
-            $scope.sheets = xlsxData.sheets;
-            $scope.isProcessing = false;
-        });
-    };
-    $scope.updateJSONString = function () {
-        $scope.excelData = $scope.sheets[$scope.selectedSheetName];
-        $scope.excelData = $scope.excelData.data;
-    };
+  $scope.deleteCard = function (id) {
+    mainService.deleteCard(id).then(function (results) {
+      $scope.readCard();
+    });
+  };
+  $scope.deleteCard();
+  $scope.readCard();
+
+  // $scope.json_string = "";
+  //   $scope.fileChanged = (files) => {
+  //       $scope.isProcessing = true;
+  //       $scope.sheets = [];
+  //       $scope.excelFile = files[0];
+  //       excelReader.readFile($scope.excelFile, true).then(function(xlsxData) {
+  //           $scope.sheets = xlsxData.sheets;
+  //           $scope.isProcessing = false;
+  //       });
+  //   };
+  // $scope.updateJSONString = () => {
+  //   $scope.excelData = $scope.sheets[$scope.selectedSheetName];
+  //     $scope.excelData = $scope.excelData.data
+  // }
 }]);
 'use strict';
 
 angular.module('domoApp').directive('barChart', function () {
   return {
-    restrict: "E",
-    controller: 'excelController',
+    restrict: "AE",
+    // controller: 'dashboardCtrl',
     link: function link(scope, element) {
-      scope.$watch('excelData', function () {
 
-        var dataset = scope.excelData[0];
-        // var dataset = [5,10,15,13,25,34,19,14,23,15, 12, 16, 19, 12, 8, 20];
+      //d3.select(element[0]).append("div").attr("style","background-color:black;height:50px;width:50px");
+      // scope.$watch('excelData', function () {
 
-        //Width and height
-        var margin = { top: 30, right: 10, bottom: 30, left: 10 };
-        var w = parseInt(d3.select('#graph').style('width'), 10);
-        w = w - margin.left - margin.right;
-        var h = 500 - margin.top - margin.bottom;
-        var formatAs = d3.format(".1"); //when data is messy
+      // var dataset = scope.excelData[0];
+      var dataset = [5, 10, 15, 13, 25, 34, 19, 14, 23, 15, 12, 16, 19, 12, 8, 20];
 
-        var sortOrder = false;
-        var sortBars = function sortBars() {
-          sortOrder = !sortOrder;
-          svg.selectAll("rect").sort(function (a, b) {
-            //sorts the bars in asc/desc order
-            if (sortOrder) {
-              return d3.ascending(a, b);
-            } else {
-              return d3.descending(a, b);
-            }
-          }).transition().delay(function (d, i) {
-            return i * 50;
-          }).duration(1000).attr("x", function (d, i) {
-            return xScale(i);
-          });
-        };
+      //Width and height
+      var margin = { top: 65, right: 10, bottom: 10, left: 40 };
+      var w = parseInt(d3.select(element[0]).style('width'), 11);
+      w = w - margin.left - margin.right;
+      var h = parseInt(d3.select(element[0]).style('height'), 11);
+      h = h - margin.top - margin.bottom;
+      var formatAs = d3.format(".1"); //when data is messy
 
-        var xScale = d3.scale.ordinal() //an ordinal scale instead of linear
-        .domain(d3.range(dataset.length + 2)).rangeRoundBands([0, w], 0.05); //discreet outputs are rounded to the nearest integer
-
-        var yScale = d3.scale.linear().domain([0, d3.max(dataset)]).range([0, h]);
-
-        //Define x-axis
-        var xAxis = d3.svg.axis().scale(xScale) //which scale to operate
-        .orient('bottom') //where
-        .ticks(5) //how many little lines(ticks) on the axis
-        .tickFormat(formatAs);
-
-        //Define Y axis
-        var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5).tickFormat(formatAs);
-
-        //Create SVG element
-        var svg = d3.select("#graph").append("svg").attr("width", w + margin.left + margin.right).attr("height", h + margin.top + margin.bottom);
-
-        svg.selectAll("rect").data(dataset).enter().append("rect").attr({
-          x: function x(d, i) {
-            return xScale(i);
-          }, //bar width
-          y: function y(d) {
-            return h - yScale(d);
-          }, //sets height and flips it
-          width: xScale.rangeBand(), //width in between bars
-          height: function height(d) {
-            return yScale(d);
-          },
-          fill: function fill(d) {
-            return "rgb(0, 0, " + d * 10 + ")";
+      var sortOrder = false;
+      var sortBars = function sortBars() {
+        sortOrder = !sortOrder;
+        svg.selectAll("rect").sort(function (a, b) {
+          //sorts the bars in asc/desc order
+          if (sortOrder) {
+            return d3.ascending(a, b);
+          } else {
+            return d3.descending(a, b);
           }
-        }).on("mouseover", function (d) {
-          //Get this bar's x/y values, then augment for the tooltip
-          var xPosition = parseFloat(d3.select(this).attr("x")) + xScale.rangeBand() / 2;
-          var yPosition = parseFloat(d3.select(this).attr("y")) + 20;
-          d3.select(this).attr("fill", "orange");
+        }).transition().delay(function (d, i) {
+          return i * 50;
+        }).duration(1000).attr("x", function (d, i) {
+          return xScale(i);
+        });
+      };
 
-          //Create the tooltip label
-          svg.append("text").attr("id", "tooltip").attr("x", xPosition).attr("y", yPosition).attr("text-anchor", "middle").attr("font-family", "sans-serif").attr("font-size", "12px").attr("font-weight", "bold").attr("fill", "black").text(d);
-        }).on("mouseout", function (d) {
-          d3.select(this).transition().duration(250).attr("fill", "rgb(0, 0, " + d * 10 + ")");
-          //Remove the tooltip
-          d3.select("#tooltip").remove();
-        }).on("click", function () {
-          sortBars();
+      var xScale = d3.scale.ordinal() //an ordinal scale instead of linear
+      .domain(d3.range(dataset.length + 2)).rangeRoundBands([0, w], 0.05); //discreet outputs are rounded to the nearest integer
+
+      var yScale = d3.scale.linear().domain([0, d3.max(dataset)]).range([0, h]);
+
+      //Define x-axis
+      var xAxis = d3.svg.axis().scale(xScale) //which scale to operate
+      .orient('bottom') //where
+      .ticks(5) //how many little lines(ticks) on the axis
+      .tickFormat(formatAs);
+
+      //Define Y axis
+      var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5).tickFormat(formatAs);
+
+      //Create SVG element[0]
+      var svg = d3.select(element[0]).append("svg").attr("width", w + margin.left + margin.right).attr("height", h + margin.top + margin.bottom);
+
+      svg.selectAll("rect").data(dataset).enter().append("rect").attr({
+        x: function x(d, i) {
+          return xScale(i);
+        }, //bar width
+        y: function y(d) {
+          return h - yScale(d);
+        }, //sets height and flips it
+        width: xScale.rangeBand(), //width in between bars
+        height: function height(d) {
+          return yScale(d);
+        },
+        fill: function fill(d) {
+          return "rgb(0, 0, " + d * 10 + ")";
+        }
+      }).on("mouseover", function (d) {
+        //Get this bar's x/y values, then augment for the tooltip
+        var xPosition = parseFloat(d3.select(this).attr("x")) + xScale.rangeBand() / 2;
+        var yPosition = parseFloat(d3.select(this).attr("y")) + 20;
+        d3.select(this).attr("fill", "#f92");
+
+        //Create the tooltip label
+        svg.append("text").attr("id", "tooltip").attr("x", xPosition).attr("y", yPosition).attr("text-anchor", "middle").attr("font-family", "sans-serif").attr("font-size", "12px").attr("font-weight", "bold").attr("fill", "black").attr("cursor", "context-menu").text(d);
+      }).on("mouseout", function (d) {
+        d3.select(this).transition().duration(250).attr("fill", "rgb(0, 0, " + d * 10 + ")");
+        //Remove the tooltip
+        d3.select("#tooltip").remove();
+      }).on("click", function () {
+        sortBars();
+      });
+
+      // create x-axis
+      svg.append('g').attr('class', 'x axis') //assigns 'x' and 'axis' class
+      .attr("transform", "translate(0," + h + ")") //pushes line to bottom
+      .call(xAxis); //takes the incoming selection and hands it off to any function
+
+      //Create Y axis
+      svg.append("g").attr("class", "y axis").attr("transform", "translate(" + 5 + ",0)").call(yAxis);
+
+      //Makes Graph responsive
+      d3.select(window).on('resize', function () {
+        // update width
+        w = parseInt(d3.select(element[0]).style('width'), 10);
+        w = w - margin.left - margin.right;
+        // reset x range
+        xScale.range([0, w]);
+
+        d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
+
+        svg.selectAll('rect.background').attr('width', w);
+
+        svg.selectAll('rect.formatAs').attr('width', function (d) {
+          return xScale(d.formatAs);
         });
 
-        // create x-axis
-        svg.append('g').attr('class', 'x axis') //assigns 'x' and 'axis' class
-        .attr("transform", "translate(0," + h + ")") //pushes line to bottom
-        .call(xAxis); //takes the incoming selection and hands it off to any function
-
-        //Create Y axis
-        svg.append("g").attr("class", "y axis").attr("transform", "translate(" + 5 + ",0)").call(yAxis);
-
-        //Makes Graph responsive
-        d3.select(window).on('resize', function () {
-          // update width
-          w = parseInt(d3.select('#graph').style('width'), 10);
-          w = w - margin.left - margin.right;
-          // reset x range
-          xScale.range([0, w]);
-
-          d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
-
-          svg.selectAll('rect.background').attr('width', w);
-
-          svg.selectAll('rect.percent').attr('width', function (d) {
-            return xScale(d.formatAs);
-          });
-
-          // update median ticks
-          var median = d3.median(svg.selectAll('.bar').data(), function (d) {
-            return d.formatAs;
-          });
-
-          svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
-          // update axes
-          svg.select('.x.axis.top').call(xAxis.orient('top'));
-          svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
+        // update median ticks
+        var median = d3.median(svg.selectAll('.bar').data(), function (d) {
+          return d.formatAs;
         });
-      }); //scope.watch
+
+        svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
+        // update axes
+        svg.select('.x.axis.top').call(xAxis.orient('top'));
+        svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
+      });
+      // }); //scope.watch
     } //link
   }; //return
 }); //directive
+'use strict';
+
+angular.module('domoApp').directive('lineChart', function () {
+  return {
+    restrict: "AE",
+    // controller: 'dashboardCtrl',
+    link: function link(scope, element) {
+      // scope.$watch('excelData', function () {
+      console.log(element);
+      var margin = { top: 20, right: 20, bottom: 30, left: 50 },
+          width = 960 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+
+      var formatDate = d3.time.format("%d-%b-%y");
+
+      var x = d3.time.scale().range([0, width]);
+
+      var y = d3.scale.linear().range([height, 0]);
+
+      var xAxis = d3.svg.axis().scale(x).orient("bottom");
+
+      var yAxis = d3.svg.axis().scale(y).orient("left");
+
+      var line = d3.svg.line().x(function (d) {
+        return x(d.date);
+      }).y(function (d) {
+        return y(d.close);
+      });
+
+      var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      d3.tsv("data.tsv", type, function (error, data) {
+        if (error) throw error;
+
+        x.domain(d3.extent(data, function (d) {
+          return d.date;
+        }));
+        y.domain(d3.extent(data, function (d) {
+          return d.close;
+        }));
+
+        svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+        svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("Price ($)");
+
+        svg.append("path").datum(data).attr("class", "line").attr("d", line);
+      });
+
+      function type(d) {
+        d.date = formatDate.parse(d.date);
+        d.close = +d.close;
+        return d;
+      }
+
+      // }); //scope.watch
+    } //link
+  };
+});
+'use strict';
+
+angular.module('domoApp').directive('pieChart', function () {
+  return {
+    restrict: "AE",
+    // controller: 'dashboardCtrl',
+    link: function link(scope, element) {
+      // scope.$watch('excelData', function () {
+
+      // var dataset = scope.excelData[0];
+      var dataset = [5, 10, 20, 45, 6, 25];
+
+      var pie = d3.layout.pie();
+      var w = 230;
+      var h = 250;
+      var color = d3.scale.ordinal().range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
+      function randomColor() {
+        return color([Math.floor(Math.random() * 5)]);
+      }
+      var outerRadius = w / 2;
+      var innerRadius = w / 4; //change this for the
+      //arcs require inner and outer radii
+      var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+
+      //Create SVG element
+      var svg = d3.select(element[0]).append("svg").attr("width", w).attr("height", h);
+
+      //Set up groups
+      var arcs = svg.selectAll("g.arc").data(pie(dataset)).enter().append("g").attr("class", "arc").attr("transform", "translate( " + outerRadius + ", " + outerRadius + " )");
+
+      //paths - SVG’s answer to drawing irregular forms
+      //Draw arc paths
+      arcs.append("path") //within each new g, we append a path. A paths path description is defined in the d attribute.
+      .attr("fill", function (d, i) {
+        return color(i);
+      }).attr("d", arc).on("mouseover", function (d) {
+        d3.select(this).attr("fill", "#f92");
+      }).on("mouseout", function (d) {
+        d3.select(this).transition().duration(250).attr("fill", randomColor());
+      });
+      //labels
+      arcs.append("text").attr("transform", function (d) {
+        return "translate(" + arc.centroid(d) + ")"; //A centroid is the calculated center point of any shape
+      }).attr("text-anchor", "middle").attr("fill", "white").text(function (d) {
+        return d.value; //pie-ified data has to return d.value
+      });
+
+      // }); //scope.watch
+    } //link
+  };
+});
+'use strict';
+
+angular.module('domoApp').directive('scatterPlot', function () {
+  return {
+    restrict: "AE",
+    // controller: 'dashboardCtrl',
+    link: function link(scope, element) {
+      // scope.$watch('excelData', function () {
+      // var dataset = scope.excelData[0];
+      var dataset = [[5, 20], [480, 90], [250, 50], [100, 33], [330, 95], [410, 12], [475, 44], [25, 67], [85, 21], [220, 88], [600, 150]];
+      var w = 210;
+      var h = 200;
+      var padding = 0;
+      var formatAs = d3.format(".1"); //when data is messy
+
+      var xScale = d3.scale.linear().domain([0, d3.max(dataset, function (d) {
+        return d[0];
+      })]).range([padding, w - padding * 2]);
+
+      var yScale = d3.scale.linear().domain([0, d3.max(dataset, function (d) {
+        return d[1];
+      })]).range([h - padding, padding]);
+
+      var rScale = d3.scale.linear().domain([0, d3.max(dataset, function (d) {
+        return d[1];
+      })]).range([2, 5]);
+      //define x-axis
+      var xAxis = d3.svg.axis().scale(xScale) //which scale to operate
+      .orient('bottom') //where
+      .ticks(5) //how many little lines(ticks) on the axis
+      .tickFormat(formatAs);
+
+      //Define Y axis
+      var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5).tickFormat(formatAs);
+
+      //create svg
+      var svg = d3.select(element[0]).append('svg').attr('width', w).attr('height', h);
+
+      //create circles
+      svg.selectAll('circle').data(dataset).enter().append('circle').attr({
+        cx: function cx(d) {
+          return xScale(d[0]);
+        },
+        cy: function cy(d) {
+          return yScale(d[1]);
+        },
+        r: function r(d) {
+          return rScale(d[1]);
+        }
+      });
+
+      //labels
+      svg.selectAll("text").data(dataset).enter().append("text").text(function (d) {
+        return d[0] + "," + d[1];
+      }).attr({
+        x: function x(d) {
+          return xScale(d[0]) + 4;
+        },
+        y: function y(d) {
+          return yScale(d[1]) + 2;
+        },
+        "font-family": "sans-serif",
+        "font-sizee": "11px",
+        "fill": "red"
+      });
+
+      // create x-axis
+      svg.append('g').attr('class', 'x axis') //assigns 'x' and 'axis' class
+      .attr("transform", "translate(0," + (h - padding) + ")") //pushes line to bottom
+      .call(xAxis); //takes the incoming selection and hands it off to any function
+
+      //Create Y axis
+      svg.append("g").attr("class", "y axis").attr("transform", "translate(" + padding + ",0)").call(yAxis);
+
+      //random button
+      d3.select(element[0]).on('click', function () {
+
+        //Update scale domains
+        xScale.domain([0, d3.max(dataset, function (d) {
+          return d[0];
+        })]);
+        yScale.domain([0, d3.max(dataset, function (d) {
+          return d[1];
+        })]);
+
+        svg.selectAll('circle').data(dataset).transition().duration(1000).each("start", function () {
+          // <-- Executes at start of transition
+          d3.select(this) //selects the current element
+          .attr("fill", "magenta").attr("r", 7);
+        }).attr({
+          cx: function cx(d) {
+            return xScale(d[0]);
+          },
+          cy: function cy(d) {
+            return yScale(d[1]);
+          },
+          r: function r(d) {
+            return rScale(d[1]);
+          }
+        }).transition() // <-- 2nd transition
+        .duration(500).attr("fill", "black").attr("r", 2);
+
+        svg.selectAll("text").data(dataset).transition().duration(1000).text(function (d) {
+          return d[0] + "," + d[1];
+        }).attr({
+          x: function x(d) {
+            return xScale(d[0]);
+          },
+          y: function y(d) {
+            return yScale(d[1]);
+          },
+          "font-family": "sans-serif",
+          "font-sizee": "11px",
+          "fill": "red"
+        });
+        //update x-axis
+        svg.select(".x.axis").transition().duration(1000).call(xAxis);
+
+        //update y axis
+        svg.select(".y.axis").transition().duration(1000).call(yAxis);
+      }); //on click
+
+      //Makes Graph responsive
+      d3.select(window).on('resize', function () {
+        // update width
+        w = parseInt(d3.select(element[0]).style('width'), 10);
+        w = w - margin.left - margin.right;
+        // reset x range
+        xScale.range([0, w]);
+
+        d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
+
+        svg.selectAll('circle.background').attr('width', w);
+
+        svg.selectAll('circle.formatAs').attr('width', function (d) {
+          return xScale(d.formatAs);
+        });
+
+        // update median ticks
+        var median = d3.median(svg.selectAll('.bar').data(), function (d) {
+          return d.formatAs;
+        });
+
+        svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
+        // update axes
+        svg.select('.x.axis.top').call(xAxis.orient('top'));
+        svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
+      });
+      // }); //scope.watch
+    } //link
+  };
+});
 'use strict';
 
 angular.module('domoApp').service('dashboardService', ["$http", function ($http) {
@@ -354,7 +625,8 @@ angular.module('domoApp').service('dashboardService', ["$http", function ($http)
 }]);
 'use strict';
 
-angular.module('domoApp').service('mainService', ["$http", function ($http) {
+var app = angular.module('domoApp');
+app.service('mainService', ["$http", function ($http) {
 
     this.createCard = function (newTitle) {
         return $http({
@@ -398,6 +670,23 @@ angular.module('domoApp').service('mainService', ["$http", function ($http) {
             return response.data;
         });
     };
+}]);
+app.factory("excelReader", ['$q', '$rootScope', function ($q, $rootScope) {
+    var _this = this;
+
+    var service = function service(data) {
+        angular.extend(_this, data);
+    };
+    service.readFile = function (file, showPreview) {
+        var deferred = $q.defer();
+        XLSXReader(file, showPreview, function (data) {
+            $rootScope.$apply(function () {
+                deferred.resolve(data);
+            });
+        });
+        return deferred.promise;
+    };
+    return service;
 }]);
 'use strict';
 
@@ -446,7 +735,7 @@ function mapEntries(json, realrowlength, skip) {
 angular.module('domoApp').directive('excelForm', function () {
   return {
     restrict: "E",
-    controller: 'excelController',
+    controller: 'dashboardCtrl',
     templateUrl: './app/components/dashboard/excel/excelForm.html'
   }; //return
 }); //directive
