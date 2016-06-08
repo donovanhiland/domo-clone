@@ -1,4 +1,3 @@
-
 <header class="dash-nav-section">
     <div class="dash-nav-top">
         <a class="nav-link" id="home" ui-sref="home"><img id="domo-dash-logo" src="https://d3kjp0zrek7zit.cloudfront.net/uploads/vendor/image/490/large_detail_1391173259.jpg
@@ -15,115 +14,29 @@
     </div>
     <div class="dash-nav-bottom">
         <ul>
-            <a href="#"><li>Overview</li></a>
-            <a href="#"><li>Favorites</li></a>
-            <a href="#"><li>Alerts</li></a>
-            <a href="#"><li>CEO</li></a>
-            <a href="#"><li>Finance</li></a>
-            <a href="#"><li>HR</li></a>
-            <a href="#"><li>Marketing</li></a>
-            <a href="#"><li>Operations</li></a>
-            <a href="#"><li>Sales</li></a>
-            <a href="#"><li>IT</li></a>
-            <a href="#"><li>Settings</li></a>
+            <a ui-sref="dashboard.overview">
+                <li>Overview</li>
+            </a>
+            <a ui-sref="dashboard.twitter">
+                <li>Twitter</li>
+            </a>
+            <a ui-sref="dashboard.twitter-globe">
+                <li>Twitter Globe</li>
+            </a>
+            <a ui-sref="dashboard.instagram">
+                <li>Instagram</li>
+            </a>
+            <a ui-sref="dashboard.info">
+                <li>Info</li>
+            </a>
+            <a ui-sref="dashboard.alerts">
+                <li>Alerts</li>
+            </a>
+            <a ui-sref="dashboard.settings">
+                <li>Settings</li>
+            </a>
         </ul>
     </div>
 </header>
-<section class="dashboard">
-    <div class="dash-top">
-        <h2>Overview</h2>
-        {{user}}
-        <div class="dash-menu">
-            <div class="btn-group">
-                <button type="button" data-toggle="modal" data-target="#myModal" id="add-card-btn">
-                    Add Chart
-                </button>
-                <!-- Single button with keyboard nav -->
-                <div class="btn-group" uib-dropdown keyboard-nav>
-                    <button id="simple-btn-keyboard-nav" type="button" class="btn" uib-dropdown-toggle>
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
-                        <span class="caret"></span>
-                    </button>
-                </div>
-            </div>
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Create Board</h4>
-                        </div>
-                        <div class="modal-body">
-                            <label id="label" for="inputdefault">Title:</label>
-                            <input id="text-box" class="form-control" id="inputdefault" type="text" ng-model="newTitle">
-                            <!-- <excel-form></excel-form> -->
 
-
-                        <div class="modal-footer">
-                            <button type="button" class="love btn btn-primary" ng-click="createCard(newTitle)" data-dismiss="modal">Create</button>
-                        </div>
-                    </div>
-                    <!-- add ng-if="card.graph == 'bar'" on each graph -->
-                    <section class="modal-images">
-                      <h3 class="pick-graph">Pick a graph to display your data:</h3>
-                      <!-- <img ng-click=card.grap = "bar"> -->
-                      <img src="../../../assets/images/bar-chart.png" alt="Bar Chart" ng-click="setChartType('barChart')" />
-                      <img src="../../../assets/images/scatterplot.png" alt="Scatter Plot" ng-click="setChartType('scatterPlot')"/>
-                      <img src="../../../assets/images/pie-chart.png" alt="Pie Chart" ng-click="setChartType('pieChart')"/>
-                      <img src="../../../assets/images/line-graph.png" alt="Line Graph" ng-click="setChartType('lineGraph')"/>
-                    </section>
-                </div>
-            </div>
-          </div>
-        </div>
-    </div>
-    <section class="dash-card-section">
-      <div class="dash-card-container">
-        <div class="dash-card" ng-repeat="card in cards" card-directive>
-          <header>
-            <div class="card-title-container">
-              <h1>{{card.title}}</h1>
-            </div>
-            <div class="deleteCard" ng-click="deleteCard(card._id)">
-              <i class="fa fa-times lg" aria-hidden="true"></i>
-            </div>
-          </header>
-          <div class="graph-container" >
-            <div id="graph">
-              <!-- <graphs graphData="" graphType=""></graphs> -->
-              <grouped-bar></grouped-bar>
-            </div>
-          </div>
-          <div class="dash-footer-icons">
-            <i class="fa fa-expand fa-lg card-lg" aria-hidden="true"></i>
-            <i class="fa fa-compress fa-lg card-sm" aria-hidden="true"></i>
-          </div>
-        </div>
-      </div>
-    </section>
-
-        <!-- <a ui-sref="card({id:user._id})"> -->
-        <!-- <button id="button2" type="button" class="btn " data-target="#myModal">{{card.title}}</button> -->
-</section>
-<section>
-    <dash-dir></dash-dir>
-</section>
-    <!-- <form role="form">
-            <div class="form-group">
-                <label for="email">Email address:</label>
-                <input type="email" class="form-control" ng-model="email.toField" id="email">
-            </div>
-            <div class="form-group">
-                <label for="pwd">Subject:</label>
-                <input type="text" class="form-control" id="pwd" ng-model="email.subjectField">
-            </div>
-            <div class="form-group">
-                <label for="pwd">Message:</label>
-                <input type="text" class="form-control" id="pwd" ng-model="email.textField">
-            </div>
-            <div class="checkbox">
-
-            </div>
-            <button type="submit" class="btn btn-default" ng-click="sendEmail(email)">Submit</button>
-        </form> -->
+<ui-view></ui-view>

@@ -15,16 +15,6 @@ angular.module("domoApp")
             $scope.newTitle = "";
         });
     };
-    $scope.sendEmail = (email) => {
-          mainService.sendEmail({
-            toField: $scope.email.toField,
-            subjectField: $scope.email.subjectField,
-            textField: $scope.email.textField
-          }).then(function(response) {
-              clear();
-              console.log("sendEmail", response);
-          });
-      };
 
       const clear = function() {
         $scope.email = null;

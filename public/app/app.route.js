@@ -26,12 +26,22 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
         }
       }
     })
+    .state('dashboard.overview', {
+      url: '/dashboard',
+      templateUrl: './app/components/dashboard/overview/dashboard.overview.html',
+      controller: 'dashboardCtrl'
+    })
+    .state('dashboard.alerts', {
+      url: '/dashboard',
+      templateUrl: './app/components/dashboard/alerts/alertTmpl.html',
+      controller:'alertsCtrl'
+    })
     .state('dashboard.info', {
       url: '/dashboard',
       // templateUrl: make new template of picture
       controller: 'dashboardCtrl',
-      
     })
+
 
     $urlRouterProvider.otherwise('/home');
 });
