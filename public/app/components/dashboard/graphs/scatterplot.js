@@ -2,11 +2,13 @@ angular.module('domoApp')
   .directive('scatterPlot', function () {
     return {
       restrict: "AE",
-      // controller: 'dashboardCtrl',
+      scope: {
+        graphData: '='
+      },
       link: function (scope, element) {
-        // scope.$watch('excelData', function () {
 
-        // var dataset = scope.excelData[0];
+
+        // var dataset = scope.graphData;
         var dataset = [
                   [ 5,     20 ],
                   [ 480,   90 ],
@@ -118,7 +120,7 @@ angular.module('domoApp')
               .duration(1000)
               .each("start", function() {      // <-- Executes at start of transition
                d3.select(this) //selects the current element
-                 .attr("fill", "magenta")
+                 .attr("fill", "#f92")
                  .attr("r", 7);
                })
               .attr({
@@ -142,8 +144,8 @@ angular.module('domoApp')
                  x: function(d){return xScale(d[0])},
                  y: function(d){return yScale(d[1])},
                  "font-family": "sans-serif",
-                 "font-sizee": "11px",
-                 "fill": "red"
+                 "font-size": "11px",
+                 "fill": "#5DAEF8"
                })
             //update x-axis
             svg.select(".x.axis")
@@ -188,7 +190,6 @@ angular.module('domoApp')
               svg.select('.x.axis.top').call(xAxis.orient('top'));
               svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
           });
-      // }); //scope.watch
     } //link
   }
 })

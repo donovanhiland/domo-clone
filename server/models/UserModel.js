@@ -41,7 +41,9 @@ var User = new Schema({
 
   card: [
     {type: Schema.Types.ObjectId, ref: 'Card'}
-  ]
+  ],
+
+  dataFiles: [String]
 });
 
 User.pre('save', function(next) {
