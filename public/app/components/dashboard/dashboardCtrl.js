@@ -1,5 +1,5 @@
 angular.module("domoApp")
-.controller('dashboardCtrl', function($scope, $log, mainService, $state, checkAuth){
+.controller('dashboardCtrl', function($scope, $log, dashboardService, $state, checkAuth){
 
     $scope.user = checkAuth;
     console.log(checkAuth);
@@ -16,7 +16,7 @@ angular.module("domoApp")
         $scope.card.title = newTitle;
         // $scope.card.user = $scope.user._id;
         //$scope.card.dataElement = excel crap
-        mainService.createCard($scope.card).then(function(response) {
+        dashboardService.createCard($scope.card).then(function(response) {
             $scope.readCard();
             $scope.newTitle = "";
         });
