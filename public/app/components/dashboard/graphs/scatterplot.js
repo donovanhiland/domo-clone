@@ -5,6 +5,7 @@ angular.module('domoApp')
       // controller: 'dashboardCtrl',
       link: function (scope, element) {
         // scope.$watch('excelData', function () {
+
         // var dataset = scope.excelData[0];
         var dataset = [
                   [ 5,     20 ],
@@ -19,6 +20,7 @@ angular.module('domoApp')
                   [ 220,   88 ],
                   [ 600,   150]
               ];
+        var margin = {top: 20, right: 20, bottom: 30, left: 40};
         var w = 210;
         var h = 200;
         var padding = 0;
@@ -87,7 +89,7 @@ angular.module('domoApp')
              "font-family": "sans-serif",
              "font-sizee": "11px",
              "fill": "red"
-           })
+           });
 
         // create x-axis
         svg.append('g')

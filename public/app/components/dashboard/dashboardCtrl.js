@@ -1,5 +1,5 @@
 angular.module("domoApp")
-.controller('dashboardCtrl', function($scope, $log, mainService, $state){
+.controller('dashboardCtrl', function($scope, $log, dashboardService, $state){
 
     $scope.setChartType = function(chartType) {
       $scope.chartType = chartType;
@@ -9,11 +9,31 @@ angular.module("domoApp")
     // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
     //create card
     $scope.createCard = (newTitle) => {
-        mainService.createCard(newTitle).then(function(response) {
+        dashboardService.createCard(newTitle).then(function(response) {
             $scope.readCard();
             $scope.newTitle = "";
         });
     };
+    $scope.sendText = (message) =>{
+      var newMessage = {
+        to: ["+12406780268"],
+        from: "+18013969302",
+        message: message
+      };
+      dashboardService.sendText(newMessage).then(function(response){
+        $scope.message = response;
+      });
+    };
+    $scope.sendEmail = (email) => {
+          dashboardService.sendEmail({
+            toField: $scope.email.toField,
+            subjectField: $scope.email.subjectField,
+            textField: $scope.email.textField
+          }).then(function(response) {
+              clear();
+              console.log("sendEmail", response);
+          });
+      };
 
       const clear = function() {
         $scope.email = null;
@@ -22,7 +42,7 @@ angular.module("domoApp")
 
 
     $scope.readCard = () => {
-        mainService.readCard().then(function(response) {
+        dashboardService.readCard().then(function(response) {
           $scope.cards = response;
         });
     };
@@ -30,13 +50,13 @@ angular.module("domoApp")
     // $scope.user = user;
 
   $scope.getCardByUser = () => {
-    mainService.getCardByUser(/*$scope.user._id*/).then(function (results) {
+    dashboardService.getCardByUser(/*$scope.user._id*/).then(function (results) {
       $scope.userCards = results;
     });
   };
 
   $scope.deleteCard = (id) => {
-    mainService.deleteCard(id).then(function (results) {
+    dashboardService.deleteCard(id).then(function (results) {
       $scope.readCard();
     });
   };
