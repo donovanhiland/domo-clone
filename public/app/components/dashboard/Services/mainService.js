@@ -1,5 +1,5 @@
-const app = angular.module('domoApp');
-app.service('mainService', function($http) {
+angular.module("domoApp")
+.service('mainService', function($http) {
 
     this.createCard = (newTitle) => {
         return $http({
@@ -44,20 +44,3 @@ app.service('mainService', function($http) {
           });
       };
 });
-app.factory("excelReader", ['$q', '$rootScope',
-    function($q, $rootScope) {
-        var service = (data) => {
-            angular.extend(this, data);
-        };
-        service.readFile = (file, showPreview) => {
-            var deferred = $q.defer();
-            XLSXReader(file, showPreview, function(data) {
-                $rootScope.$apply(function() {
-                    deferred.resolve(data);
-                });
-            });
-            return deferred.promise;
-        };
-        return service;
-    }
- ]);

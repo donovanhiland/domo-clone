@@ -7,6 +7,7 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       templateUrl: './app/components/home/homeTmpl.html',
       controller: 'loginCtrl'
     })
+
     .state('dashboard', {
       url: '/dashboard',
       templateUrl: './app/components/dashboard/dashboardTmpl.html',
@@ -24,7 +25,13 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
             });
         }
       }
-    });
+    })
+    .state('dashboard.info', {
+      url: '/dashboard',
+      // templateUrl: make new template of picture
+      controller: 'dashboardCtrl',
+      
+    })
 
     $urlRouterProvider.otherwise('/home');
 });

@@ -68,10 +68,10 @@
                     <section class="modal-images">
                       <h3 class="pick-graph">Pick a graph to display your data:</h3>
                       <!-- <img ng-click=card.grap = "bar"> -->
-                      <img src="../../../assets/images/bar-chart.png" alt="Bar Chart" ng-click="setChartType(barChart)" />
-                      <img src="../../../assets/images/scatterplot.png" alt="Scatter Plot" ng-click="setChartType(scatterPlot)"/>
-                      <img src="../../../assets/images/pie-chart.png" alt="Pie Chart" ng-click="setChartType(pieChart)"/>
-                      <img src="../../../assets/images/line-graph.png" alt="Line Graph" ng-click="setChartType(lineGraph)"/>
+                      <img src="../../../assets/images/bar-chart.png" alt="Bar Chart" ng-click="setChartType('barChart')" />
+                      <img src="../../../assets/images/scatterplot.png" alt="Scatter Plot" ng-click="setChartType('scatterPlot')"/>
+                      <img src="../../../assets/images/pie-chart.png" alt="Pie Chart" ng-click="setChartType('pieChart')"/>
+                      <img src="../../../assets/images/line-graph.png" alt="Line Graph" ng-click="setChartType('lineGraph')"/>
                     </section>
                 </div>
             </div>
@@ -91,11 +91,8 @@
           </header>
           <div class="graph-container" >
             <div id="graph">
-              <!-- add ng-if="card.graph == 'bar'" on each graph -->
-              <bar-chart ng-hide="true" ng-model="barChart"></bar-chart>
-              <scatter-plot ng-hide="true" ng-model="scatterPlot"></scatter-plot>
-              <pie-chart ng-hide="false" ng-model="pieChart"></pie-chart>
-              <!-- <line-graph></line-graph ng-model="lineGraph">  needs data first-->
+              <!-- <graphs graphData="" graphType=""></graphs> -->
+              <grouped-bar></grouped-bar>
             </div>
           </div>
           <div class="dash-footer-icons">
