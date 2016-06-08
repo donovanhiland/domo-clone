@@ -38,6 +38,11 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       templateUrl: './app/components/dashboard/globe/dashboard.twitter-globe.html',
       controller: 'globeCtrl'
     })
+    .state('dashboard.info', {
+      url: '/dashboard',
+      templateUrl: './app/components/dashboard/info/dashboard.info.html',
+      controller:'infoCtrl'
+    })
     .state('dashboard.alerts', {
       url: '/dashboard',
       templateUrl: './app/components/dashboard/alerts/alertTmpl.html',
