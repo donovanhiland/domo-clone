@@ -55,8 +55,6 @@ $test-border: 1px red solid;
             }
         }
         ul li:hover {
-            padding: 6px;
-            margin: 8px;
             color: $domo-blue;
         }
     }
@@ -72,8 +70,8 @@ $test-border: 1px red solid;
     justify-content: center;
     ul {
       li {
-        font-size: 12px !important;
-        margin: 5px !important;
+        font-size: 10px !important;
+        margin: 2px !important;
       }
     }
   }
