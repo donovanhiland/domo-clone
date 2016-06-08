@@ -14,8 +14,8 @@ import nodemailer from 'nodemailer';
 import TwitterLocationCtrl from './controllers/TwitterLocationCtrl';
 import TwitterTweetsCtrl from './controllers/TwitterTweetsCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
-import CardCtrl from './controllers/CardCtrl.js';
-import FormCtrl from './controllers/FormCtrl.js';
+import cardCtrl from './controllers/cardCtrl.js';
+import formCtrl from './controllers/formCtrl.js';
 
 // POLICIES //
 const isAuthed = (req, res, next) => {
