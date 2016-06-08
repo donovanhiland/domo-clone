@@ -8,6 +8,7 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       controller: 'loginCtrl'
     })
 
+
     // dashboard views/subviews
     .state('dashboard', {
       url: '/dashboard',

@@ -14,6 +14,7 @@ import nodemailer from 'nodemailer';
 import TwitterLocationCtrl from './controllers/TwitterLocationCtrl';
 import TwitterTweetsCtrl from './controllers/TwitterTweetsCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
+import TextCtrl from './controllers/TextCtrl.js';
 import CardCtrl from './controllers/CardCtrl.js';
 import FormCtrl from './controllers/FormCtrl.js';
 
@@ -61,6 +62,10 @@ app.get('/card', CardCtrl.readCard);
 app.delete('/card/:id', CardCtrl.deleteCard);
 //email
 app.post('/email', FormCtrl.sendEmail);
+
+//text message
+app.post('/text', TextCtrl.sendText);
+
 
 //=======uncomment this for testing=======//
 app.post('/followers', TwitterLocationCtrl.getDataByScreenName);
