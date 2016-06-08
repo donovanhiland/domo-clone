@@ -44,21 +44,6 @@ angular.module("domoApp")
 $scope.deleteCard();
 $scope.readCard();
 
-
-// $scope.json_string = "";
-//   $scope.fileChanged = (files) => {
-//       $scope.isProcessing = true;
-//       $scope.sheets = [];
-//       $scope.excelFile = files[0];
-//       excelReader.readFile($scope.excelFile, true).then(function(xlsxData) {
-//           $scope.sheets = xlsxData.sheets;
-//           $scope.isProcessing = false;
-//       });
-//   };
-// $scope.updateJSONString = () => {
-//   $scope.excelData = $scope.sheets[$scope.selectedSheetName];
-//     $scope.excelData = $scope.excelData.data
-// }
 })
 
 

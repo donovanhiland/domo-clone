@@ -241,6 +241,7 @@ bar-chart, graphs, scatter-plot, pie-chart, line-chart{
   display:block;
   width:100%;
   height:100%;
+  text-align: center;
 }
 
 path.line {
@@ -263,10 +264,6 @@ path.area {
 
 .x.axis .minor {
   stroke-opacity: .5;
-}
-
-.x.axis path {
-  display: none;
 }
 
 .y.axis line, .y.axis path {
