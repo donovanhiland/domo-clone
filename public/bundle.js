@@ -88,6 +88,27 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
 }]);
 'use strict';
 
+angular.module('domoApp').directive('cardDirective', function () {
+
+  return {
+    restrict: 'A',
+    link: function link(scope, element, attrs) {
+
+      $('.card-lg').on('click', function () {
+        $(this).parent().parent().css('height', '100%');
+        $(this).parent().parent().css('width', '40%');
+        // $(this).parent().css('transition', 'all 0.9s ease-in-out');
+      });
+
+      $('.card-sm').on('click', function () {
+        $(this).parent().parent().css('height', '100%');
+        $(this).parent().parent().css('width', '20vw');
+      });
+    }
+  };
+});
+'use strict';
+
 angular.module('domoApp').directive('alertDir', function () {
   return {
     restrict: 'E',
@@ -114,66 +135,95 @@ angular.module('domoApp').directive('navDirective', function () {
 });
 'use strict';
 
-angular.module('domoApp').directive('cardDirective', function () {
+angular.module('domoApp').service('dashboardService', ["$http", function ($http) {
 
-  return {
-    restrict: 'A',
-    link: function link(scope, element, attrs) {
-
-      $('.card-lg').on('click', function () {
-        $(this).parent().parent().css('height', '100%');
-        $(this).parent().parent().css('width', '40%');
-        // $(this).parent().css('transition', 'all 0.9s ease-in-out');
-      });
-
-      $('.card-sm').on('click', function () {
-        $(this).parent().parent().css('height', '100%');
-        $(this).parent().parent().css('width', '20vw');
-      });
-    }
+  this.checkAuth = function () {
+    return $http({
+      method: 'GET',
+      url: '/checkAuth'
+    }).then(function (response) {
+      return response.data;
+    });
   };
-});
+}]);
+'use strict';
+
+var app = angular.module('domoApp');
+app.service('mainService', ["$http", function ($http) {
+
+    this.createCard = function (newTitle) {
+        return $http({
+            method: "POST",
+            url: "/card",
+            data: {
+                title: newTitle
+            }
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.readCard = function () {
+        return $http({
+            method: "GET",
+            url: "/card"
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.getCardByUser = function (id) {
+        return $http.get('/card?user=' + id).then(function (response) {
+            return response.data;
+        });
+    };
+    this.deleteCard = function (id) {
+        return $http({
+            method: "DELETE",
+            url: "/card/" + id
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.sendText = function (message) {
+        return $http({
+            method: "POST",
+            url: "/text",
+            data: message
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    //Comment C
+    this.sendEmail = function (email) {
+        console.log(email);
+        return $http({
+            method: "POST",
+            url: "/email",
+            data: email
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+}]);
+app.factory("excelReader", ['$q', '$rootScope', function ($q, $rootScope) {
+    var _this = this;
+
+    var service = function service(data) {
+        angular.extend(_this, data);
+    };
+    service.readFile = function (file, showPreview) {
+        var deferred = $q.defer();
+        XLSXReader(file, showPreview, function (data) {
+            $rootScope.$apply(function () {
+                deferred.resolve(data);
+            });
+        });
+        return deferred.promise;
+    };
+    return service;
+}]);
 "use strict";
 
-<<<<<<< HEAD
 angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "mainService", "$state", function ($scope, $log, mainService, $state) {
-=======
-var app = angular.module("domoApp");
-app.controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "mainService", "$state", function ($scope, $log, checkAuth, mainService, $state) {
-
-    //drop down
-    // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
-    //create card
-    $scope.createCard = function (newTitle) {
-        console.log("working");
-        mainService.createCard(newTitle).then(function (response) {
-            $scope.readCard();
-        });
-    };
-    $scope.sendEmail = function (email) {
-        mainService.sendEmail({
-            toField: $scope.email.toField,
-            subjectField: $scope.email.subjectField,
-            textField: $scope.email.textField
-        }).then(function (response) {
-            clear();
-            console.log("sendEmail", response);
-        });
-    };
-
-    var clear = function clear() {
-        $scope.email = null;
-        return alert("email received!");
-    };
-
-    $scope.readCard = function () {
-        mainService.readCard().then(function (response) {
-            $scope.cards = response;
-        });
-    };
-    $scope.readCard();
-    // $scope.user = user;
->>>>>>> master
 
   $scope.setChartType = function (chartType) {
     $scope.chartType = chartType;
@@ -188,6 +238,32 @@ app.controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "mainService", "
       $scope.newTitle = "";
     });
   };
+  $scope.sendText = function (message) {
+    var newMessage = {
+      to: ["+12406780268"],
+      from: "+18013969302",
+      message: message
+    };
+    mainService.sendText(newMessage).then(function (response) {
+      $scope.message = response;
+    });
+  };
+  $scope.sendEmail = function (email) {
+    mainService.sendEmail({
+      toField: $scope.email.toField,
+      subjectField: $scope.email.subjectField,
+      textField: $scope.email.textField
+    }).then(function (response) {
+      clear();
+      console.log("sendEmail", response);
+    });
+  };
+
+  var clear = function clear() {
+    $scope.email = null;
+    return alert("email received!");
+  };
+
   $scope.readCard = function () {
     mainService.readCard().then(function (response) {
       $scope.cards = response;
@@ -224,6 +300,37 @@ app.controller('dashboardCtrl', ["$scope", "$log", "checkAuth", "mainService", "
   //   $scope.excelData = $scope.sheets[$scope.selectedSheetName];
   //     $scope.excelData = $scope.excelData.data
   // }
+}]).factory("excelReader", ['$q', '$rootScope', function ($q, $rootScope) {
+  var _this = this;
+
+  var service = function service(data) {
+    angular.extend(_this, data);
+  };
+  service.readFile = function (file, showPreview) {
+    var deferred = $q.defer();
+    XLSXReader(file, showPreview, function (data) {
+      $rootScope.$apply(function () {
+        deferred.resolve(data);
+      });
+    });
+    return deferred.promise;
+  };
+  return service;
+}]).controller('excelController', ["$scope", "excelReader", function ($scope, excelReader) {
+  $scope.json_string = "";
+  $scope.fileChanged = function (files) {
+    $scope.isProcessing = true;
+    $scope.sheets = [];
+    $scope.excelFile = files[0];
+    excelReader.readFile($scope.excelFile, true).then(function (xlsxData) {
+      $scope.sheets = xlsxData.sheets;
+      $scope.isProcessing = false;
+    });
+  };
+  $scope.updateJSONString = function () {
+    $scope.excelData = $scope.sheets[$scope.selectedSheetName];
+    $scope.excelData = $scope.excelData.data;
+  };
 }]);
 'use strict';
 
@@ -352,60 +459,60 @@ angular.module('domoApp').directive('barChart', function () {
 'use strict';
 
 angular.module('domoApp').directive('lineChart', function () {
-  return {
-    restrict: "AE",
-    // controller: 'dashboardCtrl',
-    link: function link(scope, element) {
-      // scope.$watch('excelData', function () {
-      console.log(element);
-      var margin = { top: 20, right: 20, bottom: 30, left: 50 },
-          width = 960 - margin.left - margin.right,
-          height = 500 - margin.top - margin.bottom;
+    return {
+        restrict: "AE",
+        // controller: 'dashboardCtrl',
+        link: function link(scope, element) {
+            // scope.$watch('excelData', function () {
+            console.log(element);
+            var margin = { top: 20, right: 20, bottom: 30, left: 50 },
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
 
-      var formatDate = d3.time.format("%d-%b-%y");
+            var formatDate = d3.time.format("%d-%b-%y");
 
-      var x = d3.time.scale().range([0, width]);
+            var x = d3.time.scale().range([0, width]);
 
-      var y = d3.scale.linear().range([height, 0]);
+            var y = d3.scale.linear().range([height, 0]);
 
-      var xAxis = d3.svg.axis().scale(x).orient("bottom");
+            var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
-      var yAxis = d3.svg.axis().scale(y).orient("left");
+            var yAxis = d3.svg.axis().scale(y).orient("left");
 
-      var line = d3.svg.line().x(function (d) {
-        return x(d.date);
-      }).y(function (d) {
-        return y(d.close);
-      });
+            var line = d3.svg.line().x(function (d) {
+                return x(d.date);
+            }).y(function (d) {
+                return y(d.close);
+            });
 
-      var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      d3.tsv("data.tsv", type, function (error, data) {
-        if (error) throw error;
+            d3.tsv("data.tsv", type, function (error, data) {
+                if (error) throw error;
 
-        x.domain(d3.extent(data, function (d) {
-          return d.date;
-        }));
-        y.domain(d3.extent(data, function (d) {
-          return d.close;
-        }));
+                x.domain(d3.extent(data, function (d) {
+                    return d.date;
+                }));
+                y.domain(d3.extent(data, function (d) {
+                    return d.close;
+                }));
 
-        svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+                svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
 
-        svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("Price ($)");
+                svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("Price ($)");
 
-        svg.append("path").datum(data).attr("class", "line").attr("d", line);
-      });
+                svg.append("path").datum(data).attr("class", "line").attr("d", line);
+            });
 
-      function type(d) {
-        d.date = formatDate.parse(d.date);
-        d.close = +d.close;
-        return d;
-      }
+            function type(d) {
+                d.date = formatDate.parse(d.date);
+                d.close = +d.close;
+                return d;
+            }
 
-      // }); //scope.watch
-    } //link
-  };
+            // }); //scope.watch
+        } //link
+    };
 });
 'use strict';
 
@@ -466,8 +573,10 @@ angular.module('domoApp').directive('scatterPlot', function () {
     // controller: 'dashboardCtrl',
     link: function link(scope, element) {
       // scope.$watch('excelData', function () {
+
       // var dataset = scope.excelData[0];
       var dataset = [[5, 20], [480, 90], [250, 50], [100, 33], [330, 95], [410, 12], [475, 44], [25, 67], [85, 21], [220, 88], [600, 150]];
+      var margin = { top: 20, right: 20, bottom: 30, left: 40 };
       var w = 210;
       var h = 200;
       var padding = 0;
@@ -610,84 +719,6 @@ angular.module('domoApp').directive('scatterPlot', function () {
     } //link
   };
 });
-'use strict';
-
-angular.module('domoApp').service('dashboardService', ["$http", function ($http) {
-
-  this.checkAuth = function () {
-    return $http({
-      method: 'GET',
-      url: '/checkAuth'
-    }).then(function (response) {
-      return response.data;
-    });
-  };
-}]);
-'use strict';
-
-var app = angular.module('domoApp');
-app.service('mainService', ["$http", function ($http) {
-
-    this.createCard = function (newTitle) {
-        return $http({
-            method: "POST",
-            url: "/card",
-            data: {
-                title: newTitle
-            }
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.readCard = function () {
-        return $http({
-            method: "GET",
-            url: "/card"
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.getCardByUser = function (id) {
-        return $http.get('/card?user=' + id).then(function (response) {
-            return response.data;
-        });
-    };
-    this.deleteCard = function (id) {
-        return $http({
-            method: "DELETE",
-            url: "/card/" + id
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.sendEmail = function (email) {
-        console.log(email);
-        return $http({
-            method: "POST",
-            url: "/email",
-            data: email
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-}]);
-app.factory("excelReader", ['$q', '$rootScope', function ($q, $rootScope) {
-    var _this = this;
-
-    var service = function service(data) {
-        angular.extend(_this, data);
-    };
-    service.readFile = function (file, showPreview) {
-        var deferred = $q.defer();
-        XLSXReader(file, showPreview, function (data) {
-            $rootScope.$apply(function () {
-                deferred.resolve(data);
-            });
-        });
-        return deferred.promise;
-    };
-    return service;
-}]);
 'use strict';
 
 angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);

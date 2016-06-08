@@ -33,6 +33,16 @@ app.service('mainService', function($http) {
         return response.data;
       });
     };
+    this.sendText = (message) =>{
+      return $http({
+        method: "POST",
+        url: "/text",
+        data: message
+      }).then(function(response){
+        return response.data;
+      });
+    };
+ //Comment C
     this.sendEmail = (email) => {
         console.log(email);
           return $http({

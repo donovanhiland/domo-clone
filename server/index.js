@@ -14,6 +14,7 @@ import TwitterCtrl from './controllers/TwitterCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
 import cardCtrl from './controllers/cardCtrl.js';
 import formCtrl from './controllers/formCtrl.js';
+import textCtrl from './controllers/textCtrl.js';
 
 // POLICIES //
 const isAuthed = (req, res, next) => {
@@ -57,8 +58,12 @@ app.get('/logout', function(req, res, next) {
     req.logout();
     return res.status(200).send('logged out');
 });
+
 //email
 app.post('/email', formCtrl.sendEmail);
+
+//text message
+app.post('/text', textCtrl.sendText);
 
 //=======uncomment this for testing=======//
 // TwitterCtrl.getDataByScreenName('devmtn');
