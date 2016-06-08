@@ -1,4 +1,4 @@
-import Card from '../models/cardmodel';
+import Card from '../models/CardModel';
 
 module.exports = {
 

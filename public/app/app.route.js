@@ -7,6 +7,8 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       templateUrl: './app/components/home/homeTmpl.html',
       controller: 'loginCtrl'
     })
+
+    
     .state('dashboard', {
       url: '/dashboard',
       templateUrl: './app/components/dashboard/dashboardTmpl.html',

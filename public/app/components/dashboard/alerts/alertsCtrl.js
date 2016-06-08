@@ -1,7 +1,7 @@
-angular.module('domoApp').controller('alertsCtrl', function($scope, mainService){
+angular.module('domoApp').controller('alertsCtrl', function($scope, dashboardService){
 
   $scope.sendEmail = (email) => {
-        mainService.sendEmail({
+        dashboardService.sendEmail({
           toField: $scope.email.toField,
           subjectField: $scope.email.subjectField,
           textField: $scope.email.textField

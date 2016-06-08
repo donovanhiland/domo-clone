@@ -13,7 +13,7 @@ angular.module('domoApp').directive('cardDirective', function(){
         $('.card-sm').on('click', function(){
           $(this).parent().parent().css('height', '100%');
           $(this).parent().parent().css('width', '200px');
-        })
+        });
 
       }
     };

@@ -57,14 +57,14 @@ app.post('/login', passport.authenticate('local', {
     successRedirect: '/me'
 }));
 //card
-app.post('/card', cardCtrl.createCard);
-app.get('/card', cardCtrl.readCard);
-app.delete('/card/:id', cardCtrl.deleteCard);
+app.post('/card', CardCtrl.createCard);
+app.get('/card', CardCtrl.readCard);
+app.delete('/card/:id', CardCtrl.deleteCard);
 //email
-app.post('/email', formCtrl.sendEmail);
+app.post('/email', FormCtrl.sendEmail);
 
 //text message
-app.post('/text', textCtrl.sendText);
+app.post('/text', TextCtrl.sendText);
 
 //=======uncomment this for testing=======//
 // app.post('/followers', TwitterLocationCtrl.getDataByScreenName);
