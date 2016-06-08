@@ -270,12 +270,13 @@ path.area {
   fill: none;
   stroke: #000;
 }
+//info page
 #img-info{
   display: flex;
   background-color: $domo-grey;
   justify-content: center;
-  .img-container{
-
+  #img-container{
+    // margin-top: 30px;
 
   }
 }

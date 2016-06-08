@@ -34,25 +34,30 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       controller: 'dashboardCtrl'
     })
     .state('dashboard.twitter-globe', {
-      url: '/dashboard',
+      url: '/globe',
       templateUrl: './app/components/dashboard/globe/dashboard.twitter-globe.html',
       controller: 'globeCtrl'
     })
     .state('dashboard.info', {
-      url: '/dashboard',
+      url: '/info',
       templateUrl: './app/components/dashboard/info/dashboard.info.html',
       controller:'infoCtrl'
     })
+    .state('dashboard.settings', {
+      url: '/settings',
+      templateUrl: './app/components/dashboard/settings/dashboard.settings.html',
+      controller:'settingsCtrl'
+    })
     .state('dashboard.alerts', {
-      url: '/dashboard',
+      url: '/alert',
       templateUrl: './app/components/dashboard/alerts/alertTmpl.html',
       controller:'alertsCtrl'
-    })
-    .state('dashboard.info', {
-      url: '/dashboard',
-      // templateUrl: make new template of picture
-      controller: 'dashboardCtrl',
-    })
+    });
+    // .state('dashboard.info', {
+    //   url: '/dashboard',
+    //   // templateUrl: make new template of picture
+    //   controller: 'dashboardCtrl',
+    // })
 
 
     $urlRouterProvider.otherwise('/home');
