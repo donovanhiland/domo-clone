@@ -9,13 +9,12 @@ angular.module('domoApp').service('dashboardService', function($http) {
         });
     };
 
-    this.createCard = (newTitle) => {
+    this.createCard = (card) => {
         return $http({
             method: "POST",
             url: "/card",
-            data: {
-                title: newTitle
-            }
+            data: card
+
         }).then(function(response) {
             return response.data;
         });
@@ -53,7 +52,6 @@ angular.module('domoApp').service('dashboardService', function($http) {
         });
     };
     this.sendEmail = (email) => {
-        console.log(email);
         return $http({
             method: "POST",
             url: "/email",
@@ -63,22 +61,3 @@ angular.module('domoApp').service('dashboardService', function($http) {
         });
     };
 })
-
-
-.factory("excelReader", ['$q', '$rootScope',
-    function($q, $rootScope) {
-        var service = (data) => {
-            angular.extend(this, data);
-        };
-        service.readFile = (file, showPreview) => {
-            var deferred = $q.defer();
-            XLSXReader(file, showPreview, function(data) {
-                $rootScope.$apply(function() {
-                    deferred.resolve(data);
-                });
-            });
-            return deferred.promise;
-        };
-        return service;
-    }
-]);
