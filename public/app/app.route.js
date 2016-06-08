@@ -22,7 +22,7 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
                 $state.go('home');
                 alert('Sign in to view dashboard');
               }
-              return response.data;
+              return response;
             });
         }
       }

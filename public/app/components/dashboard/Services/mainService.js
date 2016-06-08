@@ -1,13 +1,12 @@
 angular.module("domoApp")
 .service('mainService', function($http) {
 
-    this.createCard = (newTitle) => {
+    this.createCard = (card) => {
         return $http({
             method: "POST",
             url: "/card",
-            data: {
-                title: newTitle
-            }
+            data: card
+
         }).then(function(response) {
             return response.data;
         });

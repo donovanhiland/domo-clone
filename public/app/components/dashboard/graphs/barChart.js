@@ -9,10 +9,10 @@ angular.module('domoApp')
 
         //d3.select(element[0]).append("div").attr("style","background-color:black;height:50px;width:50px");
         // scope.$watch('excelData', function () {
-        console.log(scope.graphData);
-        var dataset = scope.graphData;
+        // console.log(scope.graphData);
+        // var dataset = scope.graphData;
 
-        // var dataset = [5,10,15,13,25,34,19,14,23,15, 12, 16, 19, 12, 8, 20];
+        var dataset = [5,10,15,13,25,34,19,14,23,15, 12, 16, 19, 12, 8, 20];
 
         //Width and height
         var margin = {top: 65, right: 10, bottom: 10, left: 40};

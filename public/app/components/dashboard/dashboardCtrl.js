@@ -1,16 +1,22 @@
 angular.module("domoApp")
-.controller('dashboardCtrl', function($scope, $log, mainService, $state){
+.controller('dashboardCtrl', function($scope, $log, mainService, $state, checkAuth){
 
-    $scope.setChartType = function(chartType) {
-      $scope.chartType = chartType;
+    $scope.user = checkAuth;
+    console.log(checkAuth);
+    $scope.card = {};
+
+    $scope.setGraphType = function(graphType) {
+      $scope.card.graphType = graphType;
     };
-
 
     //drop down
     // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
     //create card
     $scope.createCard = (newTitle) => {
-        mainService.createCard(newTitle).then(function(response) {
+        $scope.card.title = newTitle;
+        // $scope.card.user = $scope.user._id;
+        //$scope.card.dataElement = excel crap
+        mainService.createCard($scope.card).then(function(response) {
             $scope.readCard();
             $scope.newTitle = "";
         });
