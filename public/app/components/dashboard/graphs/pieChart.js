@@ -1,11 +1,24 @@
+//make a parent directive
+//plug in the children directives into the parent
+// make scope on parent
+// scope: {
+//   chartType: '=',
+//   chartData: '='
+// }
+// add <chart chart-type="myChartType" chart-data="myData"> into the html
+//use ng-if to toggle between graphs
+//make an api call on the ctrl to get the data and pass the data through the HTML
+
+
 angular.module('domoApp')
   .directive('pieChart', function () {
     return {
       restrict: "AE",
+
       // controller: 'dashboardCtrl',
       link: function (scope, element) {
         // scope.$watch('excelData', function () {
-        
+
 
         // var dataset = scope.excelData[0];
         var dataset = [ 5, 10, 20, 45, 6, 25 ];

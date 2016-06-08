@@ -23,7 +23,7 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
                 $state.go('home');
                 alert('Sign in to view dashboard');
               }
-              return response.data;
+              return response;
             });
         }
       }
@@ -47,7 +47,13 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       url: '/dashboard',
       templateUrl: './app/components/dashboard/alerts/alertTmpl.html',
       controller:'alertsCtrl'
-    });
+    })
+    .state('dashboard.info', {
+      url: '/dashboard',
+      // templateUrl: make new template of picture
+      controller: 'dashboardCtrl',
+    })
+
 
     $urlRouterProvider.otherwise('/home');
 });
