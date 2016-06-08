@@ -1,0 +1,21 @@
+globe-dir {
+  margin: 0;
+  padding: 0;
+  background: #000000 url(/globe/loading.gif) center center no-repeat;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  height: 100%;
+}
+
+#title {
+  position: absolute;
+  top: 20px;
+  width: 270px;
+  left: 20px;
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 3px;
+  font: 20px Georgia;
+  padding: 10px;
+}

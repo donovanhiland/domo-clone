@@ -1,0 +1,19 @@
+["Longitude", "Latitude", "Magnitude", "Color", "Longitude", "Latitude", "Magnitude", "Color"]
+"max magnitude is 8, but max usable is 4 otherwise you can't see it"
+"color is 1-15"
+"White
+Purple
+Cyan
+Blue
+Dark Blue
+Pink
+Bright Red
+Red
+Dark Red
+Yellow
+Orange
+Light Green
+Dark Green
+Puce Black (21)"
+
+[4.810,-75.700,0.020,11,5.070,-75.520,0.010,11]

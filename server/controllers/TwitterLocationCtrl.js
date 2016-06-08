@@ -69,21 +69,18 @@ const twitter = new Twitter({
 // };
 
 module.exports = {
-    getDataByScreenName: (screenName) => {
+    getDataByScreenName: (req, res, next) => {
 
-        let idsList;
+        let idsList, locationName, latitude, longitude;
         let locationData = {};
         let index = 0;
         let locationList = [];
-        let locationName;
-        let latitude;
-        let longitude;
         //call for followers ids
         const getFollowersIdsAsync = (screenName) => {
             return new Promise((resolve, reject) => {
                 twitter.get('followers/ids', {
                     screen_name: screenName,
-                    count: 20
+                    count: 300
                 }, (error, ids, response) => {
                     if (error) console.log(error);
                     //ids.ids is the array of follower ids
@@ -150,8 +147,8 @@ module.exports = {
                                         }
                                     }
                                 }
-                                latitude = res[0].latitude;
                                 longitude = res[0].longitude;
+                                latitude = res[0].latitude;
                             }
                             // if locationData has a property of locationName (which is the state returned from the search), add 1 to the tally
                             if (locationData.hasOwnProperty(locationName)) locationData[locationName].count += 1;
@@ -159,10 +156,8 @@ module.exports = {
                             if (!locationData.hasOwnProperty(locationName)) {
                                 locationData[locationName] = {
                                     count: 1,
-                                    location: {
-                                        latitude: latitude,
-                                        longitude: longitude
-                                    }
+                                    latitude: latitude,
+                                    longitude: longitude
                                 };
                             }
                             index++;
@@ -177,14 +172,133 @@ module.exports = {
             });
         };
 
-        const handleErr = (error) => {
-          console.log('there was an error', error);
+        const formatLocationDataAsync = (locationData) => {
+            return new Promise((resolve, reject) => {
+                let latitude,
+                    longitude,
+                    magnitude,
+                    color,
+                    max,
+                    colorRange = (1 / 11),
+                    locationJSON = [];
+                // webGL globe takes a max magnitude of 8, but to be visible a max magnitude of 4.
+                // I need to scale the tally field of followers to between 0 and 4
+                // Divide 4 by the max tally to get the magic number I need to scale everything down.
+                for (let location in locationData) {
+                    // find the highest tally so I can use it to scale the others based off of it
+                    if (max === undefined || max < locationData[location].count) max = locationData[location].count;
+                }
+                let scaler = (1 / max);
+                for (let location in locationData) {
+                    // accepted format = [long, lat, mag, color(0 through list of colors defined)]
+                    longitude = Number(locationData[location].longitude.toFixed(3));
+                    latitude = Number(locationData[location].latitude.toFixed(3));
+                    magnitude = Number((locationData[location].count * scaler).toFixed(3));
+                    if (magnitude >= colorRange * 0 && magnitude <= colorRange * 1) color = 0;
+                    if (magnitude >= colorRange * 1 && magnitude <= colorRange * 2) color = 1;
+                    if (magnitude >= colorRange * 2 && magnitude <= colorRange * 3) color = 2;
+                    if (magnitude >= colorRange * 3 && magnitude <= colorRange * 4) color = 3;
+                    if (magnitude >= colorRange * 4 && magnitude <= colorRange * 5) color = 4;
+                    if (magnitude >= colorRange * 5 && magnitude <= colorRange * 6) color = 5;
+                    if (magnitude >= colorRange * 6 && magnitude <= colorRange * 7) color = 6;
+                    if (magnitude >= colorRange * 7 && magnitude <= colorRange * 8) color = 7;
+                    if (magnitude >= colorRange * 8 && magnitude <= colorRange * 9) color = 8;
+                    if (magnitude >= colorRange * 9 && magnitude <= colorRange * 10) color = 9;
+                    if (magnitude >= colorRange * 10 && magnitude <= colorRange * 11) color = 10;
+                    locationJSON.push(latitude, longitude, magnitude, color);
+                }
+                resolve(locationJSON);
+            });
         };
 
-        getFollowersIdsAsync(screenName)
+        const handleErr = (error) => {
+            console.log('there was an error', error);
+        };
+
+        getFollowersIdsAsync(req.body.screenName)
             .then(getUsersAsync, handleErr)
             .then(getLocationByQueryAsync, handleErr)
-            .then(console.log, handleErr);
+            .then(formatLocationDataAsync, handleErr)
+            .then((response) => {
+              res.status(200).json(response);
+            });
 
     }
 };
+
+
+// {
+//     Missouri: {
+//         count: 1,
+//         latitude: 38.6270025,
+//         longitude: -90.19940419999999
+//     },
+//     'West Bengal': {
+//         count: 1,
+//         latitude: 22.572646,
+//         longitude: 88.36389500000001
+//     },
+//     Telangana: {
+//         count: 1,
+//         location: {
+//             latitude: 17.328003,
+//             longitude: 78.554615
+//         }
+//     },
+//     California: {
+//         count: 1,
+//         location: {
+//             latitude: 34.2506356,
+//             longitude: -118.61481
+//         }
+//     },
+//     England: {
+//         count: 1,
+//         location: {
+//             latitude: 53.8007554,
+//             longitude: -1.5490774
+//         }
+//     },
+//     Utah: {
+//         count: 3,
+//         location: {
+//             latitude: 39.3209801,
+//             longitude: -111.0937311
+//         }
+//     },
+//     Indiana: {
+//         count: 1,
+//         location: {
+//             latitude: 40.2671941,
+//             longitude: -86.1349019
+//         }
+//     },
+//     Pakistan: {
+//         count: 1,
+//         location: {
+//             latitude: 30.375321,
+//             longitude: 69.34511599999999
+//         }
+//     },
+//     Washington: {
+//         count: 1,
+//         location: {
+//             latitude: 45.6387281,
+//             longitude: -122.6614861
+//         }
+//     },
+//     'New York': {
+//         count: 1,
+//         location: {
+//             latitude: 40.7127837,
+//             longitude: -74.0059413
+//         }
+//     },
+//     'New Jersey': {
+//         count: 1,
+//         location: {
+//             latitude: 40.2973319,
+//             longitude: -74.3582041
+//         }
+//     }
+// }

@@ -9,12 +9,14 @@ import nodemailer from 'nodemailer';
 
 
 
+
 // Controllers
-import TwitterCtrl from './controllers/TwitterCtrl';
+import TwitterLocationCtrl from './controllers/TwitterLocationCtrl';
+import TwitterTweetsCtrl from './controllers/TwitterTweetsCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
-import cardCtrl from './controllers/cardCtrl.js';
-import formCtrl from './controllers/formCtrl.js';
-import textCtrl from './controllers/textCtrl.js';
+import TextCtrl from './controllers/TextCtrl.js';
+import CardCtrl from './controllers/CardCtrl.js';
+import FormCtrl from './controllers/FormCtrl.js';
 
 // POLICIES //
 const isAuthed = (req, res, next) => {
@@ -28,8 +30,12 @@ import passport from './services/passport.js';
 // initilize app
 const app = express();
 
+const corsOptions = {
+  origin: '*'
+};
+
 // initilize dependencies
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(session({
   secret: config.SESSION_SECRET,
@@ -54,11 +60,6 @@ app.post('/login', passport.authenticate('local', {
 app.post('/card', cardCtrl.createCard);
 app.get('/card', cardCtrl.readCard);
 app.delete('/card/:id', cardCtrl.deleteCard);
-app.get('/logout', function(req, res, next) {
-    req.logout();
-    return res.status(200).send('logged out');
-});
-
 //email
 app.post('/email', formCtrl.sendEmail);
 
@@ -66,7 +67,7 @@ app.post('/email', formCtrl.sendEmail);
 app.post('/text', textCtrl.sendText);
 
 //=======uncomment this for testing=======//
-// TwitterCtrl.getDataByScreenName('devmtn');
+// app.post('/followers', TwitterLocationCtrl.getDataByScreenName);
 
 
 // MongoDB connection
