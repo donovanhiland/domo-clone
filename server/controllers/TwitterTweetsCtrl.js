@@ -3,6 +3,7 @@ const ig = require('instagram-node').instagram();
 import config from '../config.js';
 import _ from 'lodash';
 import Promise from 'bluebird';
+import moment from 'moment';
 
 const twitter = new Twitter({
     consumer_key: config.twitter.TWITTER_CONSUMER_KEY,
@@ -13,15 +14,15 @@ const twitter = new Twitter({
 
 module.exports = {
 
-    tweetData: (screenName) => {
+    tweetData: (req, res, next) => {
         twitter.get('statuses/user_timeline', {
-            screen_name: screenName,
-            count: 1
+            screen_name: req.body.screenName,
+            count: 5
         }, (error, tweets, response) => {
             for (let i = 0; i < tweets.length; i++) {
-                console.log(tweets[i].id, tweets[i].retweet_count, tweets[i].favorite_count);
+              console.log(tweets[i].created_at, moment(tweets[i].created_at).format('lll'), tweets[i].retweet_count, tweets[i].favorite_count);
+              // console.log(moment(tweets[i].created_at).format('lll'));
             }
-            console.log(tweets);
         });
     }
 };

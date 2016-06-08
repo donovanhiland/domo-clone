@@ -41,7 +41,6 @@ angular.module("domoApp")
       };
 
 
-
     $scope.readCard = () => {
         dashboardService.readCard().then(function(response) {
           $scope.cards = response;
@@ -81,7 +80,6 @@ $scope.readCard();
 // }
 })
 
-
 .factory("excelReader", ['$q', '$rootScope',
     function($q, $rootScope) {
         var service = (data) => {
@@ -99,7 +97,8 @@ $scope.readCard();
         return service;
     }
  ])
- .controller('excelController', function($scope, excelReader) {
+
+.controller('excelController', function($scope, excelReader) {
   $scope.json_string = "";
     $scope.fileChanged = (files) => {
         $scope.isProcessing = true;

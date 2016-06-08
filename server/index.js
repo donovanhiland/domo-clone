@@ -66,9 +66,10 @@ app.post('/email', FormCtrl.sendEmail);
 //text message
 app.post('/text', TextCtrl.sendText);
 
-//=======uncomment this for testing=======//
-// app.post('/followers', TwitterLocationCtrl.getDataByScreenName);
 
+//=======uncomment this for testing=======//
+app.post('/followers', TwitterLocationCtrl.getDataByScreenName);
+app.post('/tweetData', TwitterTweetsCtrl.tweetData);
 
 // MongoDB connection
 mongoose.set('debug', true);
