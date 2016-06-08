@@ -8,6 +8,7 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       controller: 'loginCtrl'
     })
 
+    // dashboard views/subviews
     .state('dashboard', {
       url: '/dashboard',
       templateUrl: './app/components/dashboard/dashboardTmpl.html',
@@ -30,6 +31,11 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       url: '/dashboard',
       templateUrl: './app/components/dashboard/overview/dashboard.overview.html',
       controller: 'dashboardCtrl'
+    })
+    .state('dashboard.twitter-globe', {
+      url: '/dashboard',
+      templateUrl: './app/components/dashboard/globe/dashboard.twitter-globe.html',
+      controller: 'globeCtrl'
     })
     .state('dashboard.alerts', {
       url: '/dashboard',

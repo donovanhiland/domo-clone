@@ -3,8 +3,8 @@ angular.module("domoApp")
 
     $scope.setChartType = function(chartType) {
       $scope.chartType = chartType;
+    };
 
-    }
 
     //drop down
     // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
@@ -19,7 +19,7 @@ angular.module("domoApp")
       const clear = function() {
         $scope.email = null;
         return alert("email received!");
-      }
+      };
 
 
     $scope.readCard = () => {
@@ -44,8 +44,8 @@ angular.module("domoApp")
 $scope.deleteCard();
 $scope.readCard();
 
-})
 
+})
 
 .factory("excelReader", ['$q', '$rootScope',
     function($q, $rootScope) {
@@ -64,7 +64,8 @@ $scope.readCard();
         return service;
     }
  ])
- .controller('excelController', function($scope, excelReader) {
+.controller('excelController', function($scope, excelReader) {
+
   $scope.json_string = "";
     $scope.fileChanged = (files) => {
         $scope.isProcessing = true;
