@@ -64,18 +64,85 @@ $test-border: 1px red solid;
     float: left;
 }
 
-@media screen and (max-width: 768px) {
-  .dash-nav-bottom {
-    display: flex;
-    justify-content: center;
-    ul {
+.dash-nav-mobile {
+  display: flex;
+  align-items: center;
+  padding-top: 7px;
+  height: 5vh;
+  width: 100vw;
+  background-color: #333;
+  .hamburger-container {
+    .hamburger {
+      margin-bottom: 5px;
+      background: none;
+      border: none;
+      color: #fff;
+    }
+  }
+}
+
+.dash-nav-mobile-menu {
+  background-color: $domo-grey;
+  ul {
+    a {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+
       li {
-        font-size: 12px !important;
-        margin: 5px !important;
+        height: 50px;
+        padding-top: 8px;
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        border-bottom: 1px #555 solid;
+      }
+
+      li:hover {
+        text-decoration: none;
+        background-color: $domo-text;
       }
     }
   }
 }
+
+
+
+// < 769 px, nav changes to drop down menu
+
+@media screen and (max-width: 768px) {
+  .dash-nav-bottom {
+    display: none !important;
+    ul {
+
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  menu-directive {
+    display: none;
+  }
+}
+
+
+
+// @media screen and (min-width: 768px) {
+//   .dash-nav-mobile {
+//     display: none;
+//     .hamburger-container {
+//       .hamburger {
+//         margin-bottom: 5px;
+//         background: none;
+//         border: none;
+//         color: #fff;
+//       }
+//     }
+//   }
+// }
 
 /////////////////////////////////
 ////// Dashboard backdrop
