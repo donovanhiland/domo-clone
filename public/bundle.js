@@ -19,7 +19,6 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap']).config(["$stateProvider
     resolve: {
       checkAuth: ["$state", "dashboardService", function checkAuth($state, dashboardService) {
         dashboardService.checkAuth().then(function (response) {
-          console.log(response);
           if (response === 'unauthorized') {
             $state.go('home');
             alert('Sign in to view dashboard');
@@ -305,6 +304,7 @@ angular.module('domoApp').directive('menuDirective', function () {
       $('.hamburger').click(function () {
         console.log('click');
         $('.dash-nav-mobile-menu').find('ul').slideToggle();
+        //test
       });
     }
   };
@@ -414,7 +414,7 @@ DAT.Globe = function (container, opts) {
     shader = Shaders['earth'];
     uniforms = THREE.UniformsUtils.clone(shader.uniforms);
 
-    uniforms['texture'].value = THREE.ImageUtils.loadTexture(imgDir + 'world.jpg');
+    uniforms['texture'].value = THREE.TextureLoader(imgDir + 'world.jpg');
 
     material = new THREE.ShaderMaterial({
 
@@ -766,15 +766,14 @@ angular.module('domoApp').directive('barChart', function () {
       // console.log(scope.graphData);
 
       // var dataset = scope.graphData;
-      console.log(element[0]);
-      console.log(parseInt(d3.select(element[0])));
       var dataset = [5, 10, 15, 13, 25, 34, 19, 14, 23, 15, 12, 16, 19, 12, 8, 20];
       //Width and height
-      var margin = { top: 20, right: 10, bottom: 10, left: 10 };
-      // var w = parseInt(d3.select(element[0]).style('width'), 11)
-      var w = 450;
+      var margin = { top: 20, right: 20, bottom: 30, left: 40 };
+      var w = parseInt(d3.select(element[0]).style('width'), 11);
+      // var w = 450;
       w = w - margin.left - margin.right;
-      var h = 300 - margin.top - margin.bottom;
+      // var h = parseInt(d3.select(element[0]).style('width'), 11);
+      var h = 250 - margin.top - margin.bottom;
       var formatAs = d3.format(".1"); //when data is messy
 
       var sortOrder = false;
@@ -884,88 +883,18 @@ angular.module('domoApp').directive('barChart', function () {
 angular.module("domoApp").controller("graphCtrl", ["$scope", function ($scope) {}]);
 'use strict';
 
-angular.module('domoApp').directive('groupedBar', function () {
-      return {
-            restrict: "AE",
-            // controller: 'excelController',
-            link: function link(scope, element) {
-                  // scope.$watch('excelData', function () {
-                  var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-                      width = 960 - margin.left - margin.right,
-                      height = 500 - margin.top - margin.bottom;
+angular.module('domoApp').service('graphService', ["$http", function ($http) {
 
-                  var x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1);
-
-                  var x1 = d3.scale.ordinal();
-
-                  var y = d3.scale.linear().range([height, 0]);
-
-                  var color = d3.scale.ordinal().range(["#98abc5", "#f92"]);
-
-                  var xAxis = d3.svg.axis().scale(x0).orient("bottom");
-
-                  var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.format(".2s"));
-
-                  var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-                  d3.csv("data.csv", function (error, data) {
-                        if (error) throw error;
-
-                        var ageNames = d3.keys(data[0]).filter(function (key) {
-                              return key !== "State";
-                        });
-
-                        data.forEach(function (d) {
-                              d.ages = ageNames.map(function (name) {
-                                    return { name: name, value: +d[name] };
-                              });
-                        });
-
-                        x0.domain(data.map(function (d) {
-                              return d.State;
-                        }));
-                        x1.domain(ageNames).rangeRoundBands([0, x0.rangeBand()]);
-                        y.domain([0, d3.max(data, function (d) {
-                              return d3.max(d.ages, function (d) {
-                                    return d.value;
-                              });
-                        })]);
-
-                        svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
-
-                        svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 2).attr("dy", ".30em").style("text-anchor", "end").text("Population");
-
-                        var state = svg.selectAll(".state").data(data).enter().append("g").attr("class", "state").attr("transform", function (d) {
-                              return "translate(" + x0(d.State) + ",0)";
-                        });
-
-                        state.selectAll("rect").data(function (d) {
-                              return d.ages;
-                        }).enter().append("rect").attr("width", x1.rangeBand()).attr("x", function (d) {
-                              return x1(d.name);
-                        }).attr("y", function (d) {
-                              return y(d.value);
-                        }).attr("height", function (d) {
-                              return height - y(d.value);
-                        }).style("fill", function (d) {
-                              return color(d.name);
-                        });
-
-                        var legend = svg.selectAll(".legend").data(ageNames.slice().reverse()).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
-                              return "translate(0," + i * 20 + ")";
-                        });
-
-                        legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", color);
-
-                        legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
-                              return d;
-                        });
-                  });
-
-                  // }); //scope.watch
-            } //link
-      }; //return
-}); //directive
+    this.getData = function () {
+        return $http({
+            method: "POST",
+            url: "/tweets/engagement",
+            data: { "screenName": "devmtn" }
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+}]);
 'use strict';
 
 angular.module('domoApp').directive('lineChart', function () {
@@ -1175,13 +1104,13 @@ angular.module('domoApp').directive('scatterPlot', function () {
         return d[0] + "," + d[1];
       }).attr({
         x: function x(d) {
-          return xScale(d[0]) + 4;
+          return xScale(d[0]) + 5;
         },
         y: function y(d) {
-          return yScale(d[1]) + 2;
+          return yScale(d[1]) + 3;
         },
         "font-family": "sans-serif",
-        "font-sizee": "11px",
+        "font-size": "11px",
         "fill": "#5DAEF8"
       });
 
@@ -1225,10 +1154,10 @@ angular.module('domoApp').directive('scatterPlot', function () {
           return d[0] + "," + d[1];
         }).attr({
           x: function x(d) {
-            return xScale(d[0]);
+            return xScale(d[0]) + 5;
           },
           y: function y(d) {
-            return yScale(d[1]);
+            return yScale(d[1]) + 3;
           },
           "font-family": "sans-serif",
           "font-size": "11px",
