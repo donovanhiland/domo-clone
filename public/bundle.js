@@ -300,9 +300,6 @@ angular.module('domoApp').directive('navDirective', function () {
 });
 'use strict';
 
-angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
-'use strict';
-
 angular.module('domoApp').controller('alertsCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
 
     $scope.sendEmail = function (email) {
@@ -1237,6 +1234,9 @@ angular.module('domoApp').directive('scatterPlot', function () {
     } //link
   };
 });
+'use strict';
+
+angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
 'use strict';
 
 //this will parse data from JSON into usable data for D3.
