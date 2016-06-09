@@ -125,7 +125,7 @@ angular.module('domoApp')
           //Create Y axis
           svg.append("g")
               .attr("class", "y axis")
-              .attr("transform", "translate(" + 5 + ",0)")
+              .attr("transform", "translate(" + w + ",0)")
               .call(yAxis);
 
         //Makes Graph responsive

@@ -833,7 +833,7 @@ angular.module('domoApp').directive('barChart', function () {
       .call(xAxis); //takes the incoming selection and hands it off to any function
 
       //Create Y axis
-      svg.append("g").attr("class", "y axis").attr("transform", "translate(" + 5 + ",0)").call(yAxis);
+      svg.append("g").attr("class", "y axis").attr("transform", "translate(" + w + ",0)").call(yAxis);
 
       //Makes Graph responsive
       d3.select(window).on('resize', function () {
@@ -1087,10 +1087,10 @@ angular.module('domoApp').directive('scatterPlot', function () {
     link: function link(scope, element) {
 
       // var dataset = scope.graphData;
-      var dataset = [[5, 20], [480, 90], [250, 50], [100, 33], [330, 95], [410, 12], [475, 44], [25, 67], [85, 21], [220, 88], [600, 150]];
+      var dataset = [[5, 20], [480, 90], [250, 50], [100, 33], [330, 95], [410, 12], [475, 44], [25, 67], [85, 21], [220, 88], [300, 150]];
       var margin = { top: 20, right: 20, bottom: 30, left: 40 };
-      var w = 210;
-      var h = 200;
+      var w = 960 - margin.left - margin.right;
+      var h = 500 - margin.top - margin.bottom;
       var padding = 0;
       var formatAs = d3.format(".1"); //when data is messy
 
@@ -1142,7 +1142,7 @@ angular.module('domoApp').directive('scatterPlot', function () {
         },
         "font-family": "sans-serif",
         "font-sizee": "11px",
-        "fill": "red"
+        "fill": "#5DAEF8"
       });
 
       // create x-axis
@@ -1152,6 +1152,13 @@ angular.module('domoApp').directive('scatterPlot', function () {
 
       //Create Y axis
       svg.append("g").attr("class", "y axis").attr("transform", "translate(" + padding + ",0)").call(yAxis);
+
+      d3.select(element[0]).append("div").classed("svg-container", true) //container class to make it responsive
+      .append("svg")
+      //responsive SVG needs these 2 attributes and no width and height attr
+      .attr("preserveAspectRatio", "xMinYMin meet").attr("viewBox", "0 0 600 400")
+      //class to make it responsive
+      .classed("svg-content-responsive", true);
 
       //random button
       d3.select(element[0]).on('click', function () {
@@ -1191,7 +1198,7 @@ angular.module('domoApp').directive('scatterPlot', function () {
             return yScale(d[1]);
           },
           "font-family": "sans-serif",
-          "font-sizee": "11px",
+          "font-size": "11px",
           "fill": "#5DAEF8"
         });
         //update x-axis

@@ -20,11 +20,11 @@ angular.module('domoApp')
                   [ 25,    67 ],
                   [ 85,    21 ],
                   [ 220,   88 ],
-                  [ 600,   150]
+                  [ 300,   150]
               ];
         var margin = {top: 20, right: 20, bottom: 30, left: 40};
-        var w = 210;
-        var h = 200;
+        var w = 960 - margin.left - margin.right;
+        var h = 500 - margin.top - margin.bottom;
         var padding = 0;
         var formatAs = d3.format(".1"); //when data is messy
 
@@ -90,7 +90,7 @@ angular.module('domoApp')
              y: function(d){return yScale(d[1]) + 2},
              "font-family": "sans-serif",
              "font-sizee": "11px",
-             "fill": "red"
+             "fill": "#5DAEF8"
            });
 
         // create x-axis
@@ -105,6 +105,15 @@ angular.module('domoApp')
             .attr("transform", "translate(" + padding + ",0)")
             .call(yAxis);
 
+        d3.select(element[0])
+         .append("div")
+         .classed("svg-container", true) //container class to make it responsive
+         .append("svg")
+         //responsive SVG needs these 2 attributes and no width and height attr
+         .attr("preserveAspectRatio", "xMinYMin meet")
+         .attr("viewBox", "0 0 600 400")
+         //class to make it responsive
+         .classed("svg-content-responsive", true);
 
           //random button
         d3.select(element[0])
