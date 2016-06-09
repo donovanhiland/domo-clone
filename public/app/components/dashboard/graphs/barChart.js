@@ -6,10 +6,10 @@ angular.module('domoApp')
         graphData: '=',
       },
       link: function (scope, element) {
-
-        //d3.select(element[0]).append("div").attr("style","background-color:black;height:50px;width:50px");
         // scope.$watch('excelData', function () {
+
         // console.log(scope.graphData);
+
         // var dataset = scope.graphData;
 
         var dataset = [5,10,15,13,25,34,19,14,23,15, 12, 16, 19, 12, 8, 20];
@@ -125,7 +125,7 @@ angular.module('domoApp')
           //Create Y axis
           svg.append("g")
               .attr("class", "y axis")
-              .attr("transform", "translate(" + 5 + ",0)")
+              .attr("transform", "translate(" + w + ",0)")
               .call(yAxis);
 
         //Makes Graph responsive

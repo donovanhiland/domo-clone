@@ -7,6 +7,27 @@ angular.module("domoApp")
 
     $scope.setGraphType = function(graphType) {
       $scope.card.graphType = graphType;
+      if (graphType === 'barChart') {
+        $scope.imageOpacity1 = {opacity: 1};
+        $scope.imageOpacity2 = {opacity: .1};
+        $scope.imageOpacity3 = {opacity: .1};
+        $scope.imageOpacity4 = {opacity: .1};
+      } else if (graphType === 'scatterPlot') {
+        $scope.imageOpacity1 = {opacity: .1};
+        $scope.imageOpacity2 = {opacity: 1};
+        $scope.imageOpacity3 = {opacity: .1};
+        $scope.imageOpacity4 = {opacity: .1};
+      } else if (graphType === 'pieChart') {
+        $scope.imageOpacity1 = {opacity: .1};
+        $scope.imageOpacity2 = {opacity: .1};
+        $scope.imageOpacity3 = {opacity: 1};
+        $scope.imageOpacity4 = {opacity: .1};
+      } else if (graphType === 'lineGraph') {
+        $scope.imageOpacity1 = {opacity: .1};
+        $scope.imageOpacity2 = {opacity: .1};
+        $scope.imageOpacity3 = {opacity: .1};
+        $scope.imageOpacity4 = {opacity: 1};
+      }
     };
 
     //drop down
@@ -69,7 +90,6 @@ angular.module("domoApp")
   };
 $scope.deleteCard();
 $scope.readCard();
-
 
 })
 

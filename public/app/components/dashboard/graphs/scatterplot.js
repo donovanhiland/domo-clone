@@ -2,11 +2,13 @@ angular.module('domoApp')
   .directive('scatterPlot', function () {
     return {
       restrict: "AE",
-      // controller: 'dashboardCtrl',
+      scope: {
+        graphData: '='
+      },
       link: function (scope, element) {
-        // scope.$watch('excelData', function () {
 
-        // var dataset = scope.excelData[0];
+
+        // var dataset = scope.graphData;
         var dataset = [
                   [ 5,     20 ],
                   [ 480,   90 ],
@@ -18,11 +20,11 @@ angular.module('domoApp')
                   [ 25,    67 ],
                   [ 85,    21 ],
                   [ 220,   88 ],
-                  [ 600,   150]
+                  [ 300,   150]
               ];
         var margin = {top: 20, right: 20, bottom: 30, left: 40};
-        var w = 210;
-        var h = 200;
+        var w = 960 - margin.left - margin.right;
+        var h = 500 - margin.top - margin.bottom;
         var padding = 0;
         var formatAs = d3.format(".1"); //when data is messy
 
@@ -88,7 +90,7 @@ angular.module('domoApp')
              y: function(d){return yScale(d[1]) + 2},
              "font-family": "sans-serif",
              "font-sizee": "11px",
-             "fill": "red"
+             "fill": "#5DAEF8"
            });
 
         // create x-axis
@@ -103,6 +105,15 @@ angular.module('domoApp')
             .attr("transform", "translate(" + padding + ",0)")
             .call(yAxis);
 
+        d3.select(element[0])
+         .append("div")
+         .classed("svg-container", true) //container class to make it responsive
+         .append("svg")
+         //responsive SVG needs these 2 attributes and no width and height attr
+         .attr("preserveAspectRatio", "xMinYMin meet")
+         .attr("viewBox", "0 0 600 400")
+         //class to make it responsive
+         .classed("svg-content-responsive", true);
 
           //random button
         d3.select(element[0])
@@ -118,7 +129,7 @@ angular.module('domoApp')
               .duration(1000)
               .each("start", function() {      // <-- Executes at start of transition
                d3.select(this) //selects the current element
-                 .attr("fill", "magenta")
+                 .attr("fill", "#f92")
                  .attr("r", 7);
                })
               .attr({
@@ -142,8 +153,8 @@ angular.module('domoApp')
                  x: function(d){return xScale(d[0])},
                  y: function(d){return yScale(d[1])},
                  "font-family": "sans-serif",
-                 "font-sizee": "11px",
-                 "fill": "red"
+                 "font-size": "11px",
+                 "fill": "#5DAEF8"
                })
             //update x-axis
             svg.select(".x.axis")
@@ -188,7 +199,6 @@ angular.module('domoApp')
               svg.select('.x.axis.top').call(xAxis.orient('top'));
               svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
           });
-      // }); //scope.watch
     } //link
   }
 })
