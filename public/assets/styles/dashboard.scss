@@ -63,7 +63,6 @@ $test-border: 1px red solid;
     height: 6.95vh;
     float: left;
 }
-
 .dash-nav-mobile {
   display: flex;
   align-items: center;
@@ -81,13 +80,11 @@ $test-border: 1px red solid;
     .hamburger:hover {
       color: $domo-blue;
     }
-
     .hamburger:focus {
       outline: 0;
     }
   }
 }
-
 .dash-nav-mobile-menu {
   background-color: $domo-grey;
   ul {
@@ -95,7 +92,6 @@ $test-border: 1px red solid;
       display: flex;
       flex-direction: column;
       text-decoration: none;
-
       li {
         height: 50px;
         padding-top: 8px;
@@ -107,7 +103,6 @@ $test-border: 1px red solid;
         cursor: pointer;
         border-bottom: 1px #555 solid;
       }
-
       li:hover {
         text-decoration: none;
         background-color: $domo-text;
@@ -116,26 +111,19 @@ $test-border: 1px red solid;
     }
   }
 }
-
-
-
 // < 769 px, nav changes to drop down menu
-
 @media screen and (max-width: 768px) {
   .dash-nav-bottom {
     display: none !important;
     ul {
-
     }
   }
 }
-
 @media screen and (min-width: 768px) {
   menu-directive {
     display: none;
   }
 }
-
 /////////////////////////////////
 ////// Dashboard backdrop
 ////////////////////////////////
@@ -197,31 +185,26 @@ $test-border: 1px red solid;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-
     .dash-card {
       height: 100%;
       width: 31%;
       margin: 2vh;
       background-color: #fff;
       border: 1px #EEEEEE solid;
-
       header {
         display: flex;
         justify-content: space-between;
         border: 1px #eee solid;
-
         .deleteCard {
           i {
             cursor: pointer;
             margin: 5px;
           }
-
           i:hover {
             color: red;
           }
         }
         .card-title-container {
-
           h1 {
             font-family: $domo-font;
             font-size: 16px;
@@ -233,7 +216,10 @@ $test-border: 1px red solid;
       .graph-container {
         display: flex;
         justify-content: center;
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
         #graph {
           margin-top: 5vh;
           height: auto;
@@ -246,11 +232,13 @@ $test-border: 1px red solid;
     }
   }
 }
-
 /////////////////////////////////
 ////// Graphs
 ////////////////////////////////
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
 .modal-images {
   width: 100%;
   .image-modal {
@@ -306,6 +294,23 @@ path.area {
 
 .x.axis .minor {
   stroke-opacity: .5;
+<<<<<<< HEAD
+}
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: #000;
+}
+
+///////////info page//////////
+#img-info {
+    display: flex;
+    background-color: $domo-grey;
+    justify-content: center;
+    #img-container {
+        // margin-top: 30px;
+    }
+=======
+>>>>>>> master
 }
 
 .y.axis line, .y.axis path {
