@@ -6,7 +6,8 @@ $domo-blue: #9ce;
 $domo-link: #8bd;
 $domo-oj: #f92;
 $domo-font: 'Open Sans', Helvetica, Arial, sans-serif;
-$test-border: 1px red solid; /////////////////////////////////
+$test-border: 1px red solid;
+/////////////////////////////////
 ////// Dashboard Nav
 ////////////////////////////////
 .dash-nav-section {
@@ -37,12 +38,12 @@ $test-border: 1px red solid; /////////////////////////////////
         }
     }
     .dash-nav-bottom {
-        display: flex;
-        align-items: center;
-        padding-top: 7px;
-        height: 5vh;
-        width: 100vw;
-        background-color: #333;
+      display: flex;
+      align-items: center;
+      padding-top: 7px;
+      height: 5vh;
+      width: 100vw;
+      background-color: #333;
         ul {
             display: inline-block;
             li {
@@ -62,18 +63,6 @@ $test-border: 1px red solid; /////////////////////////////////
     height: 6.95vh;
     float: left;
 }
-
-@media screen and (max-width: 768px) {
-    .dash-nav-bottom {
-        display: flex;
-        justify-content: center;
-        ul {
-            li {
-                font-size: 12px !important;
-                margin: 5px !important;
-            }
-        }
-
 .dash-nav-mobile {
   display: flex;
   align-items: center;
@@ -91,13 +80,11 @@ $test-border: 1px red solid; /////////////////////////////////
     .hamburger:hover {
       color: $domo-blue;
     }
-
     .hamburger:focus {
       outline: 0;
     }
   }
 }
-
 .dash-nav-mobile-menu {
   background-color: $domo-grey;
   ul {
@@ -105,7 +92,6 @@ $test-border: 1px red solid; /////////////////////////////////
       display: flex;
       flex-direction: column;
       text-decoration: none;
-
       li {
         height: 50px;
         padding-top: 8px;
@@ -117,7 +103,6 @@ $test-border: 1px red solid; /////////////////////////////////
         cursor: pointer;
         border-bottom: 1px #555 solid;
       }
-
       li:hover {
         text-decoration: none;
         background-color: $domo-text;
@@ -126,25 +111,19 @@ $test-border: 1px red solid; /////////////////////////////////
     }
   }
 }
-
-
-
 // < 769 px, nav changes to drop down menu
-
 @media screen and (max-width: 768px) {
   .dash-nav-bottom {
     display: none !important;
     ul {
-
     }
+  }
 }
-
 @media screen and (min-width: 768px) {
   menu-directive {
     display: none;
   }
 }
-
 /////////////////////////////////
 ////// Dashboard backdrop
 ////////////////////////////////
@@ -171,25 +150,26 @@ $test-border: 1px red solid; /////////////////////////////////
     }
 }
 #add-card-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 35px;
-    width: 130px;
-    margin: auto 3vw auto auto;
-    background-color: $domo-oj;
-    font-family: $domo-font;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: #fff;
-    border: none;
-    text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 130px;
+  margin: auto;
+  margin-right: 3vw;
+  background-color: $domo-oj;
+  font-family: $domo-font;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  border: none;
+  text-decoration: none;
 }
 #add-card-btn:hover {
-    background-color: $domo-blue;
-    transition: all 0.3s ease-in-out;
-    text-decoration: none;
+  background-color: $domo-blue;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
 }
 /////////////////////////////////
 ////// Cards
@@ -200,31 +180,26 @@ $test-border: 1px red solid; /////////////////////////////////
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-
     .dash-card {
       height: 100%;
       width: 31%;
       margin: 2vh;
       background-color: #fff;
       border: 1px #EEEEEE solid;
-
       header {
         display: flex;
         justify-content: space-between;
         border: 1px #eee solid;
-
         .deleteCard {
           i {
             cursor: pointer;
             margin: 5px;
           }
-
           i:hover {
             color: red;
           }
         }
         .card-title-container {
-
           h1 {
             font-family: $domo-font;
             font-size: 16px;
@@ -235,63 +210,7 @@ $test-border: 1px red solid; /////////////////////////////////
       }
       .graph-container {
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
-        width: 100%;
-        .dash-card {
-            height: 100%;
-            width: 300px;
-            margin: 2vh;
-            background-color: #fff;
-            border: 1px #EEEEEE solid;
-            header {
-                display: flex;
-                justify-content: space-between;
-                border: 1px #eee solid;
-                .deleteCard {
-                    i {
-                        cursor: pointer;
-                        margin: 5px;
-                    }
-                    i:hover {
-                        color: red;
-                    }
-                }
-                .card-title-container {
-                    h1 {
-                        font-family: $domo-font;
-                        font-size: 16px;
-                        font-weight: 400;
-                        margin: 5px;
-                    }
-                }
-            }
-            .graph-container {
-                display: flex;
-                justify-content: center;
-                #graph {
-                    width: 100%;
-                    height: 35vh;
-                    overflow: hidden;
-                    display: flex;
-                    justify-content: center;
-                    border-right: 1px #eee solid;
-                    border-left: 1px #eee solid;
-                }
-            }
-            .dash-footer-icons {
-                display: flex;
-                justify-content: flex-end;
-                border: 1px #eee solid;
-                i {
-                    margin: 5px;
-                    align-self: baseline;
-                    cursor: pointer;
-                }
-                i:hover {
-                    opacity: 0.7;
-                }
-            }
         #graph {
           margin-top: 5vh;
           height: auto;
@@ -299,14 +218,14 @@ $test-border: 1px red solid; /////////////////////////////////
           display: flex;
           justify-content: center;
         }
+      }
     }
+  }
 }
-
 /////////////////////////////////
 ////// Graphs
 ////////////////////////////////
 .modal-images {
-
   width: 100%;
   .image-modal {
     display: inline;
@@ -321,10 +240,10 @@ $test-border: 1px red solid; /////////////////////////////////
   }
 }
 .pick-graph {
-    text-align: center;
+  text-align: center;
 }
-.axis line,
-.axis path {
+.axis path,
+.axis line {
     fill: none;
     stroke: black;
     shape-rendering: crispEdges;
@@ -333,38 +252,34 @@ $test-border: 1px red solid; /////////////////////////////////
     font-family: sans-serif;
     font-size: 11px;
 }
-bar-chart,
-graphs,
-line-chart,
-pie-chart,
-scatter-plot {
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+bar-chart, graphs, scatter-plot, pie-chart, line-chart{
+  display:block;
+  width:100%;
+  height:100%;
+  text-align: center;
 }
 path.line {
-    fill: none;
-    stroke: #666;
-    stroke-width: 1.5px;
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
 }
 path.area {
-    fill: #e7e7e7;
+  fill: #e7e7e7;
 }
 .axis {
-    shape-rendering: crispEdges;
+  shape-rendering: crispEdges;
 }
 .x.axis line {
-    stroke: #fff;
+  stroke: #fff;
 }
 .x.axis .minor {
-    stroke-opacity: 0.5;
+  stroke-opacity: .5;
 }
-.y.axis line,
-.y.axis path {
-    fill: none;
-    stroke: #000;
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: #000;
 }
+
 ///////////info page//////////
 #img-info {
     display: flex;
