@@ -104,6 +104,7 @@ $test-border: 1px red solid;
       li:hover {
         text-decoration: none;
         background-color: $domo-text;
+        color: $domo-blue;
       }
     }
   }
@@ -128,28 +129,12 @@ $test-border: 1px red solid;
   }
 }
 
-
-
-// @media screen and (min-width: 768px) {
-//   .dash-nav-mobile {
-//     display: none;
-//     .hamburger-container {
-//       .hamburger {
-//         margin-bottom: 5px;
-//         background: none;
-//         border: none;
-//         color: #fff;
-//       }
-//     }
-//   }
-// }
-
 /////////////////////////////////
 ////// Dashboard backdrop
 ////////////////////////////////
 .dashboard {
+    height: 100%;
     padding: 20px;
-    background-color: #F5F5F5;
     .dash-top {
         font-family: $domo-font;
         h2 {
@@ -207,8 +192,8 @@ $test-border: 1px red solid;
     width: 100%;
 
     .dash-card {
-      height: 100%;
-      width: 300px;
+      height: 100vh;
+      width: 85vw;
       margin: 2vh;
       background-color: #fff;
       border: 1px #EEEEEE solid;
@@ -243,35 +228,23 @@ $test-border: 1px red solid;
         justify-content: center;
 
         #graph {
-          width: 100%;
-          height: 35vh;
+          margin-top: 10vh;
+          width: 65vh;
+          height: auto;
           overflow: hidden;
           display: flex;
           justify-content: center;
-          border-right: 1px #eee solid;
-          border-left: 1px #eee solid;
-        }
-      }
-      .dash-footer-icons {
-        display: flex;
-        justify-content: flex-end;
-        border: 1px #eee solid;
 
-        i {
-          margin-left: 5px;
-          margin: 5px;
-          align-self: baseline;
-          cursor: pointer;
-        }
-
-        i:hover {
-          opacity: .7;
         }
       }
     }
   }
 }
 
+svg {
+  height: 100vh;
+  width: 100vw;
+}
 
 /////////////////////////////////
 ////// Graphs

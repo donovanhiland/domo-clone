@@ -105,19 +105,14 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
     });
   };
 }]);
-"use strict";
+'use strict';
 
-// $(document).ready(function(){
-//   console.log('jquery');
-//     $('.hamburger').click(function(e){
-//         e.preventDefault();
-//         console.log("this is the click");
-//     });
-// });
+angular.module('domoApp').directive('navDirective', function () {
 
-$(document).on("click", ".hamburger", function () {
-  console.log("click");
-  $(".menu").slideToggle("slow", function () {});
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/navTmpl.html'
+  };
 });
 "use strict";
 
@@ -300,15 +295,6 @@ angular.module('domoApp').directive('menuDirective', function () {
         $('.dash-nav-mobile-menu').find('ul').slideToggle();
       });
     }
-  };
-});
-'use strict';
-
-angular.module('domoApp').directive('navDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './app/shared/nav/navTmpl.html'
   };
 });
 'use strict';
