@@ -6,8 +6,7 @@ $domo-blue: #9ce;
 $domo-link: #8bd;
 $domo-oj: #f92;
 $domo-font: 'Open Sans', Helvetica, Arial, sans-serif;
-$test-border: 1px red solid;
-/////////////////////////////////
+$test-border: 1px red solid; /////////////////////////////////
 ////// Dashboard Nav
 ////////////////////////////////
 .dash-nav-section {
@@ -38,12 +37,12 @@ $test-border: 1px red solid;
         }
     }
     .dash-nav-bottom {
-      display: flex;
-      align-items: center;
-      padding-top: 7px;
-      height: 5vh;
-      width: 100vw;
-      background-color: #333;
+        display: flex;
+        align-items: center;
+        padding-top: 7px;
+        height: 5vh;
+        width: 100vw;
+        background-color: #333;
         ul {
             display: inline-block;
             li {
@@ -63,6 +62,17 @@ $test-border: 1px red solid;
     height: 6.95vh;
     float: left;
 }
+
+@media screen and (max-width: 768px) {
+    .dash-nav-bottom {
+        display: flex;
+        justify-content: center;
+        ul {
+            li {
+                font-size: 12px !important;
+                margin: 5px !important;
+            }
+        }
 
 .dash-nav-mobile {
   display: flex;
@@ -127,7 +137,6 @@ $test-border: 1px red solid;
     ul {
 
     }
-  }
 }
 
 @media screen and (min-width: 768px) {
@@ -161,37 +170,31 @@ $test-border: 1px red solid;
         }
     }
 }
-
 #add-card-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 35px;
-  width: 130px;
-  margin: auto;
-  margin-right: 3vw;
-  background-color: $domo-oj;
-  font-family: $domo-font;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #fff;
-  border: none;
-  text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 130px;
+    margin: auto 3vw auto auto;
+    background-color: $domo-oj;
+    font-family: $domo-font;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+    border: none;
+    text-decoration: none;
 }
-
 #add-card-btn:hover {
-  background-color: $domo-blue;
-  transition: all 0.3s ease-in-out;
-  text-decoration: none;
+    background-color: $domo-blue;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
 }
-
 /////////////////////////////////
 ////// Cards
 ////////////////////////////////
-
 .dash-card-section {
-
   .dash-card-container {
     display: flex;
     flex-wrap: wrap;
@@ -232,26 +235,78 @@ $test-border: 1px red solid;
       }
       .graph-container {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
-
+        width: 100%;
+        .dash-card {
+            height: 100%;
+            width: 300px;
+            margin: 2vh;
+            background-color: #fff;
+            border: 1px #EEEEEE solid;
+            header {
+                display: flex;
+                justify-content: space-between;
+                border: 1px #eee solid;
+                .deleteCard {
+                    i {
+                        cursor: pointer;
+                        margin: 5px;
+                    }
+                    i:hover {
+                        color: red;
+                    }
+                }
+                .card-title-container {
+                    h1 {
+                        font-family: $domo-font;
+                        font-size: 16px;
+                        font-weight: 400;
+                        margin: 5px;
+                    }
+                }
+            }
+            .graph-container {
+                display: flex;
+                justify-content: center;
+                #graph {
+                    width: 100%;
+                    height: 35vh;
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: center;
+                    border-right: 1px #eee solid;
+                    border-left: 1px #eee solid;
+                }
+            }
+            .dash-footer-icons {
+                display: flex;
+                justify-content: flex-end;
+                border: 1px #eee solid;
+                i {
+                    margin: 5px;
+                    align-self: baseline;
+                    cursor: pointer;
+                }
+                i:hover {
+                    opacity: 0.7;
+                }
+            }
         #graph {
           margin-top: 5vh;
           height: auto;
           overflow: hidden;
           display: flex;
           justify-content: center;
-
         }
-      }
     }
-  }
 }
 
 /////////////////////////////////
 ////// Graphs
 ////////////////////////////////
-
 .modal-images {
+
   width: 100%;
   .image-modal {
     display: inline;
@@ -266,49 +321,111 @@ $test-border: 1px red solid;
   }
 }
 .pick-graph {
-  text-align: center;
+    text-align: center;
 }
-
-.axis path,
-.axis line {
-	fill: none;
-	stroke: black;
-	shape-rendering: crispEdges;
+.axis line,
+.axis path {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
 }
-
 .axis text {
-	font-family: sans-serif;
-	font-size: 11px;
+    font-family: sans-serif;
+    font-size: 11px;
 }
-bar-chart, graphs, scatter-plot, pie-chart, line-chart{
-  display:block;
-  width:100%;
-  height:100%;
-  text-align: center;
+bar-chart,
+graphs,
+line-chart,
+pie-chart,
+scatter-plot {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
 }
 path.line {
-  fill: none;
-  stroke: #666;
-  stroke-width: 1.5px;
+    fill: none;
+    stroke: #666;
+    stroke-width: 1.5px;
 }
-
 path.area {
-  fill: #e7e7e7;
+    fill: #e7e7e7;
 }
-
 .axis {
-  shape-rendering: crispEdges;
+    shape-rendering: crispEdges;
 }
-
 .x.axis line {
-  stroke: #fff;
+    stroke: #fff;
 }
-
 .x.axis .minor {
-  stroke-opacity: .5;
+    stroke-opacity: 0.5;
 }
-
-.y.axis line, .y.axis path {
-  fill: none;
-  stroke: #000;
+.y.axis line,
+.y.axis path {
+    fill: none;
+    stroke: #000;
+}
+///////////info page//////////
+#img-info {
+    display: flex;
+    background-color: $domo-grey;
+    justify-content: center;
+    #img-container {
+        // margin-top: 30px;
+    }
+}
+/////////////////////////////////
+////// Settings
+////////////////////////////////
+.settings-container {
+    height: 100vh;
+    background-color: $domo-grey;
+    display: flex;
+    justify-content: center;
+    color: white;
+    .div-settings {
+        background-color: $domo-text;
+        width: 35vw;
+        height: 40vh;
+        margin-top: 12%;
+        h3 {
+            text-align: center;
+            font-family: $domo-font;
+            letter-spacing: 1px;
+        }
+        .sperate-h3 {
+          margin-top: 43px;
+            label{
+              margin-left: 20px;
+              font-family: $domo-font;
+              letter-spacing: 1px;
+            }
+            .input-edit {
+                width: 84%;
+                margin-left: 20px;
+                border-radius: 0;
+            }
+            .edit-profile-buttton {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 35px;
+                width: 130px;
+                margin: auto;
+                background-color: #f92;
+                font-family: "Open Sans", Helvetica, Arial, sans-serif;
+                font-size: 12px;
+                font-weight: 700;
+                letter-spacing: 1px;
+                color: #fff;
+                border: none;
+                text-decoration: none;
+            }
+            .edit-profile-buttton:hover {
+                background-color: #9ce;
+                transition: all 0.3s ease-in-out;
+                text-decoration: none;
+            }
+        }
+    }
 }
