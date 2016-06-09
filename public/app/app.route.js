@@ -28,31 +28,35 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       }
     })
     .state('dashboard.overview', {
-      url: '/dashboard',
+      url: '/overview',
       templateUrl: './app/components/dashboard/overview/dashboard.overview.html',
       controller: 'dashboardCtrl'
     })
     .state('dashboard.twitter', {
-      url: '/dashboard',
+      url: '/twitter',
       templateUrl: './app/components/dashboard/globe/dashboard.twitterTmpl.html'
       // controller: 'globeCtrl'
     })
     .state('dashboard.twitter-globe', {
-      url: '/dashboard',
+      url: '/twitter-globe',
       templateUrl: './app/components/dashboard/globe/dashboard.twitter-globe.html',
       controller: 'globeCtrl'
     })
     .state('dashboard.alerts', {
-      url: '/dashboard',
+      url: '/alerts',
       templateUrl: './app/components/dashboard/alerts/alertTmpl.html',
       controller:'alertsCtrl'
     })
     .state('dashboard.info', {
-      url: '/dashboard',
-      // templateUrl: make new template of picture
-      controller: 'dashboardCtrl',
+      url: '/info',
+      templateUrl:'./app/components/dashboard/info/dashboard.info.html',
+      controller: 'infoCtrl'
     })
-
+    .state('dashboard.settings', {
+      url: '/settings',
+      templateUrl:'./app/components/dashboard/settings/dashboard.settings.html',
+      controller: 'settingsCtrl'
+    });
 
     $urlRouterProvider.otherwise('/home');
 });

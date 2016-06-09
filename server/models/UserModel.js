@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import {Schema} from 'mongoose';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt-nodejs';
 require('mongoose-schematypes-extend')(mongoose);
 
 
@@ -32,7 +32,7 @@ var UserSchema = new Schema({
 
   password: {
     type: String,
-    required: true
+    required: false
   },
 
   phoneNumber: {
