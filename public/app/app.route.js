@@ -18,7 +18,6 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
         checkAuth: function($state, dashboardService) {
           dashboardService.checkAuth()
             .then(function(response) {
-              console.log(response);
               if (response === 'unauthorized') {
                 $state.go('home');
                 alert('Sign in to view dashboard');
@@ -32,6 +31,11 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       url: '/overview',
       templateUrl: './app/components/dashboard/overview/dashboard.overview.html',
       controller: 'dashboardCtrl'
+    })
+    .state('dashboard.twitter', {
+      url: '/dashboard',
+      templateUrl: './app/components/dashboard/globe/dashboard.twitterTmpl.html'
+      // controller: 'globeCtrl'
     })
     .state('dashboard.twitter-globe', {
       url: '/globe',

@@ -1,4 +1,5 @@
 import Twitter from 'twitter';
+import TwitterLocation from '../models/TwitterLocation';
 import config from '../config.js';
 import _ from 'lodash';
 import Promise from 'bluebird';
@@ -71,20 +72,26 @@ const twitter = new Twitter({
 module.exports = {
     getDataByScreenName: (req, res, next) => {
 
-        let idsList, locationName, latitude, longitude;
-        let locationData = {};
-        let index = 0;
-        let locationList = [];
+        let idsList,
+            locationName,
+            latitude,
+            longitude,
+            locationData = {},
+            index = 0,
+            locationList = [],
+            cursorTracker;
         //call for followers ids
-        const getFollowersIdsAsync = (screenName) => {
+        const getFollowersIdsAsync = (screenName, cursor = -1) => {
             return new Promise((resolve, reject) => {
                 twitter.get('followers/ids', {
                     screen_name: screenName,
-                    count: 300
+                    count: 3,
+                    cursor: cursor
                 }, (error, ids, response) => {
                     if (error) console.log(error);
                     //ids.ids is the array of follower ids
                     idsList = ids.ids;
+                    cursorTracker = ids.next_cursor;
                     resolve(idsList);
                 });
             });
@@ -109,7 +116,9 @@ module.exports = {
                         });
                     }
                     // if the loop gets to the end of the ids list then idsListJoined will be an empty string "" - falsey.
-                    if (!idsListJoined) resolve(locationList);
+                    if (!idsListJoined) {
+                        resolve(locationList);
+                    }
                 };
                 // loop through function again until all the ids have been searched
                 getUsersById(idsList);
@@ -165,6 +174,8 @@ module.exports = {
                         });
                     }
                     if (!locationList[index]) {
+                        locationData.cursorTracker = cursorTracker;
+                        locationData.date = new Date();
                         resolve(locationData);
                     }
                 };
@@ -172,8 +183,28 @@ module.exports = {
             });
         };
 
-        const formatLocationDataAsync = (locationData) => {
+        const createLocationDocumentAsync = (locationData) => {
             return new Promise((resolve, reject) => {
+                let twitterLocations = {
+                    data: []
+                };
+                twitterLocations.date = locationData.date;
+                twitterLocations.cursor = locationData.cursorTracker;
+                for (let prop in locationData) {
+                    if (locationData.hasOwnProperty(prop) && prop !== 'date' && prop !== 'cursorTracker') {
+                        twitterLocations.data.push(response[prop]);
+                    }
+                }
+                TwitterLocation.create(twitterLocations, (error, response) => {
+                    if (error) console.log(error);
+                    resolve(response);
+                });
+            });
+        };
+
+        const formatLocationDataAsync = (twitterLocations) => {
+            return new Promise((resolve, reject) => {
+                // TwitterLocation.find({})
                 let latitude,
                     longitude,
                     magnitude,
@@ -184,28 +215,30 @@ module.exports = {
                 // webGL globe takes a max magnitude of 8, but to be visible a max magnitude of 4.
                 // I need to scale the tally field of followers to between 0 and 4
                 // Divide 4 by the max tally to get the magic number I need to scale everything down.
-                for (let location in locationData) {
+                for (let i = 0; i < twitterLocations.data.length; i++) {
                     // find the highest tally so I can use it to scale the others based off of it
-                    if (max === undefined || max < locationData[location].count) max = locationData[location].count;
+                    if (max === undefined || max < twitterLocations.data[i].count) max = twitterLocations.data[i].count;
                 }
                 let scaler = (1 / max);
-                for (let location in locationData) {
+                for (let i = 0; i < twitterLocations.data.length; i++) {
                     // accepted format = [long, lat, mag, color(0 through list of colors defined)]
-                    longitude = Number(locationData[location].longitude.toFixed(3));
-                    latitude = Number(locationData[location].latitude.toFixed(3));
-                    magnitude = Number((locationData[location].count * scaler).toFixed(3));
-                    if (magnitude >= colorRange * 0 && magnitude <= colorRange * 1) color = 0;
-                    if (magnitude >= colorRange * 1 && magnitude <= colorRange * 2) color = 1;
-                    if (magnitude >= colorRange * 2 && magnitude <= colorRange * 3) color = 2;
-                    if (magnitude >= colorRange * 3 && magnitude <= colorRange * 4) color = 3;
-                    if (magnitude >= colorRange * 4 && magnitude <= colorRange * 5) color = 4;
-                    if (magnitude >= colorRange * 5 && magnitude <= colorRange * 6) color = 5;
-                    if (magnitude >= colorRange * 6 && magnitude <= colorRange * 7) color = 6;
-                    if (magnitude >= colorRange * 7 && magnitude <= colorRange * 8) color = 7;
-                    if (magnitude >= colorRange * 8 && magnitude <= colorRange * 9) color = 8;
-                    if (magnitude >= colorRange * 9 && magnitude <= colorRange * 10) color = 9;
-                    if (magnitude >= colorRange * 10 && magnitude <= colorRange * 11) color = 10;
-                    locationJSON.push(latitude, longitude, magnitude, color);
+                    if(twitterLocations.data[i] !== 'date' && twitterLocations.data[i] !== 'cursorTracker') {
+                      longitude = Number(twitterLocations.data[i].longitude.toFixed(3));
+                      latitude = Number(twitterLocations.data[i].latitude.toFixed(3));
+                      magnitude = Number((twitterLocations.data[i].count * scaler).toFixed(3));
+                      if (magnitude >= colorRange * 0 && magnitude <= colorRange * 1) color = 0;
+                      if (magnitude >= colorRange * 1 && magnitude <= colorRange * 2) color = 1;
+                      if (magnitude >= colorRange * 2 && magnitude <= colorRange * 3) color = 2;
+                      if (magnitude >= colorRange * 3 && magnitude <= colorRange * 4) color = 3;
+                      if (magnitude >= colorRange * 4 && magnitude <= colorRange * 5) color = 4;
+                      if (magnitude >= colorRange * 5 && magnitude <= colorRange * 6) color = 5;
+                      if (magnitude >= colorRange * 6 && magnitude <= colorRange * 7) color = 6;
+                      if (magnitude >= colorRange * 7 && magnitude <= colorRange * 8) color = 7;
+                      if (magnitude >= colorRange * 8 && magnitude <= colorRange * 9) color = 8;
+                      if (magnitude >= colorRange * 9 && magnitude <= colorRange * 10) color = 9;
+                      if (magnitude >= colorRange * 10 && magnitude <= colorRange * 11) color = 10;
+                      locationJSON.push(latitude, longitude, magnitude, color);
+                    }
                 }
                 resolve(locationJSON);
             });
@@ -218,10 +251,11 @@ module.exports = {
         getFollowersIdsAsync(req.body.screenName)
             .then(getUsersAsync, handleErr)
             .then(getLocationByQueryAsync, handleErr)
-            .then(formatLocationDataAsync, handleErr)
-            .then((response) => {
-              res.status(200).json(response);
-            });
-
+            .then(createLocationDocumentAsync, handleErr)
+            .then(console.log, handleErr);
+            // .then(formatLocationDataAsync, handleErr);
+        // .then((response) => {
+        //   res.status(200).json(response);
+        // });
     }
 };
