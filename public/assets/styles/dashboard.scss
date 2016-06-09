@@ -199,8 +199,8 @@ $test-border: 1px red solid;
     width: 100%;
 
     .dash-card {
-      height: 100vh;
-      width: 85vw;
+      height: 100%;
+      width: 31%;
       margin: 2vh;
       background-color: #fff;
       border: 1px #EEEEEE solid;
@@ -259,12 +259,16 @@ svg {
 
 .modal-images {
   width: 100%;
-  img {
-    width: 24%;
-    cursor: pointer;
-  }
-  img:hover {
-    background-color: #d0d0d0;
+  .image-modal {
+    display: inline;
+    img {
+      cursor: pointer;
+      width: 24%;
+      opacity: .1;
+    }
+    img:hover {
+      opacity: 1;
+    }
   }
 }
 .pick-graph {
