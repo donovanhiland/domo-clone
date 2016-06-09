@@ -105,15 +105,6 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
     });
   };
 }]);
-'use strict';
-
-angular.module('domoApp').directive('navDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './app/shared/nav/navTmpl.html'
-  };
-});
 "use strict";
 
 angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashboardService", "$state", "checkAuth", function ($scope, $log, dashboardService, $state, checkAuth) {
@@ -293,10 +284,23 @@ angular.module('domoApp').directive('menuDirective', function () {
       $('.hamburger').click(function () {
         console.log('click');
         $('.dash-nav-mobile-menu').find('ul').slideToggle();
+        //test
       });
     }
   };
 });
+'use strict';
+
+angular.module('domoApp').directive('navDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/navTmpl.html'
+  };
+});
+'use strict';
+
+angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
 'use strict';
 
 angular.module('domoApp').controller('alertsCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
@@ -1233,9 +1237,6 @@ angular.module('domoApp').directive('scatterPlot', function () {
     } //link
   };
 });
-'use strict';
-
-angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
 'use strict';
 
 //this will parse data from JSON into usable data for D3.
