@@ -107,6 +107,18 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
 }]);
 'use strict';
 
+<<<<<<< HEAD
+=======
+angular.module('domoApp').directive('navDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/navTmpl.html'
+  };
+});
+"use strict";
+
+>>>>>>> master
 angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashboardService", "$state", "checkAuth", function ($scope, $log, dashboardService, $state, checkAuth) {
 
   $scope.user = checkAuth;
@@ -115,6 +127,7 @@ angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashbo
 
   $scope.setGraphType = function (graphType) {
     $scope.card.graphType = graphType;
+<<<<<<< HEAD
     if (graphType === 'barChart') {
       $scope.imageOpacity1 = { opacity: 1 };
       $scope.imageOpacity2 = { opacity: .1 };
@@ -136,6 +149,8 @@ angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashbo
       $scope.imageOpacity3 = { opacity: .1 };
       $scope.imageOpacity4 = { opacity: 1 };
     }
+=======
+>>>>>>> master
   };
 
   //drop down
@@ -297,11 +312,24 @@ angular.module('domoApp').service('dashboardService', ["$http", function ($http)
 }]);
 'use strict';
 
+<<<<<<< HEAD
 angular.module('domoApp').directive('navDirective', function () {
 
   return {
     restrict: 'E',
     templateUrl: './app/shared/nav/navTmpl.html'
+=======
+angular.module('domoApp').directive('menuDirective', function () {
+  return {
+    restrict: 'E',
+    templateUrl: './app/components/dashboard/menuTmpl.html',
+    link: function link(scope, element, attrs) {
+      $('.hamburger').click(function () {
+        console.log('click');
+        $('.dash-nav-mobile-menu').find('ul').slideToggle();
+      });
+    }
+>>>>>>> master
   };
 });
 'use strict';
@@ -748,11 +776,16 @@ angular.module('domoApp').directive('barChart', function () {
     },
     link: function link(scope, element) {
       // scope.$watch('excelData', function () {
+      // console.log(scope.graphData);
+      // var dataset = scope.graphData;
 
+<<<<<<< HEAD
       // console.log(scope.graphData);
 
       // var dataset = scope.graphData;
 
+=======
+>>>>>>> master
       var dataset = [5, 10, 15, 13, 25, 34, 19, 14, 23, 15, 12, 16, 19, 12, 8, 20];
 
       //Width and height
@@ -871,6 +904,7 @@ angular.module("domoApp").controller("graphCtrl", ["$scope", function ($scope) {
 'use strict';
 
 angular.module('domoApp').directive('groupedBar', function () {
+<<<<<<< HEAD
       return {
             restrict: "AE",
             // controller: 'excelController',
@@ -951,6 +985,88 @@ angular.module('domoApp').directive('groupedBar', function () {
                   // }); //scope.watch
             } //link
       }; //return
+=======
+    return {
+        restrict: "AE",
+        // controller: 'excelController',
+        link: function link(scope, element) {
+            // scope.$watch('excelData', function () {
+            var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            var x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+
+            var x1 = d3.scale.ordinal();
+
+            var y = d3.scale.linear().range([height, 0]);
+
+            var color = d3.scale.ordinal().range(["#98abc5", "#f92"]);
+
+            var xAxis = d3.svg.axis().scale(x0).orient("bottom");
+
+            var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.format(".2s"));
+
+            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            d3.csv("data.csv", function (error, data) {
+                if (error) throw error;
+
+                var ageNames = d3.keys(data[0]).filter(function (key) {
+                    return key !== "State";
+                });
+
+                data.forEach(function (d) {
+                    d.ages = ageNames.map(function (name) {
+                        return { name: name, value: +d[name] };
+                    });
+                });
+
+                x0.domain(data.map(function (d) {
+                    return d.State;
+                }));
+                x1.domain(ageNames).rangeRoundBands([0, x0.rangeBand()]);
+                y.domain([0, d3.max(data, function (d) {
+                    return d3.max(d.ages, function (d) {
+                        return d.value;
+                    });
+                })]);
+
+                svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+                svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 2).attr("dy", ".30em").style("text-anchor", "end").text("Population");
+
+                var state = svg.selectAll(".state").data(data).enter().append("g").attr("class", "state").attr("transform", function (d) {
+                    return "translate(" + x0(d.State) + ",0)";
+                });
+
+                state.selectAll("rect").data(function (d) {
+                    return d.ages;
+                }).enter().append("rect").attr("width", x1.rangeBand()).attr("x", function (d) {
+                    return x1(d.name);
+                }).attr("y", function (d) {
+                    return y(d.value);
+                }).attr("height", function (d) {
+                    return height - y(d.value);
+                }).style("fill", function (d) {
+                    return color(d.name);
+                });
+
+                var legend = svg.selectAll(".legend").data(ageNames.slice().reverse()).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
+                    return "translate(0," + i * 20 + ")";
+                });
+
+                legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", color);
+
+                legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
+                    return d;
+                });
+            });
+
+            // }); //scope.watch
+        } //link
+    }; //return
+>>>>>>> master
 }); //directive
 'use strict';
 
@@ -1025,12 +1141,41 @@ angular.module('domoApp').directive('graphs', function () {
 });
 'use strict';
 
+angular.module('domoApp').directive('graphs', function () {
+  return {
+    retrict: "AE",
+    templateUrl: 'app/components/dashboard/graphs/graphs.html',
+    // controller: 'graphCtrl',
+    scope: {
+      graphType: '=',
+      graphData: '='
+    }
+  };
+});
+'use strict';
+
+//make a parent directive
+//plug in the children directives into the parent
+// make scope on parent
+// scope: {
+//   chartType: '=',
+//   chartData: '='
+// }
+// add <chart chart-type="myChartType" chart-data="myData"> into the html
+//use ng-if to toggle between graphs
+//make an api call on the ctrl to get the data and pass the data through the HTML
+
 angular.module('domoApp').directive('pieChart', function () {
   return {
     restrict: "AE",
+<<<<<<< HEAD
     scope: {
       graphData: '='
     },
+=======
+
+    // controller: 'dashboardCtrl',
+>>>>>>> master
     link: function link(scope, element) {
       // scope.$watch('excelData', function () {
 
@@ -5715,6 +5860,7 @@ if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
 
 Detector = {
 
+<<<<<<< HEAD
     canvas: !!window.CanvasRenderingContext2D,
     webgl: function () {
         try {
@@ -5761,5 +5907,53 @@ Detector = {
 
         parent.appendChild(domElement);
     }
+=======
+  canvas: !!window.CanvasRenderingContext2D,
+  webgl: function () {
+    try {
+      return !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
+    } catch (e) {
+      return false;
+    }
+  }(),
+  workers: !!window.Worker,
+  fileapi: window.File && window.FileReader && window.FileList && window.Blob,
+
+  getWebGLErrorMessage: function getWebGLErrorMessage() {
+
+    var domElement = document.createElement('div');
+
+    domElement.style.fontFamily = 'monospace';
+    domElement.style.fontSize = '13px';
+    domElement.style.textAlign = 'center';
+    domElement.style.background = '#eee';
+    domElement.style.color = '#000';
+    domElement.style.padding = '1em';
+    domElement.style.width = '475px';
+    domElement.style.margin = '5em auto 0';
+
+    if (!this.webgl) {
+
+      domElement.innerHTML = window.WebGLRenderingContext ? ['Sorry, your graphics card doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>'].join('\n') : ['Sorry, your browser doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a><br/>', 'Please try with', '<a href="http://www.google.com/chrome">Chrome</a>, ', '<a href="http://www.mozilla.com/en-US/firefox/new/">Firefox 4</a> or', '<a href="http://nightly.webkit.org/">Webkit Nightly (Mac)</a>'].join('\n');
+    }
+
+    return domElement;
+  },
+
+  addGetWebGLMessage: function addGetWebGLMessage(parameters) {
+
+    var parent, id, domElement;
+
+    parameters = parameters || {};
+
+    parent = parameters.parent !== undefined ? parameters.parent : document.body;
+    id = parameters.id !== undefined ? parameters.id : 'oldie';
+
+    domElement = Detector.getWebGLErrorMessage();
+    domElement.id = id;
+
+    parent.appendChild(domElement);
+  }
+>>>>>>> master
 
 };
