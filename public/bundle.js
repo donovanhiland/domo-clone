@@ -29,7 +29,7 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap']).config(["$stateProvider
       }]
     }
   }).state('dashboard.overview', {
-    url: '/dashboard',
+    url: '/overview',
     templateUrl: './app/components/dashboard/overview/dashboard.overview.html',
     controller: 'dashboardCtrl'
   }).state('dashboard.twitter-globe', {
@@ -117,7 +117,6 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
 "use strict";
 
 angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashboardService", "$state", "checkAuth", function ($scope, $log, dashboardService, $state, checkAuth) {
-
   $scope.user = checkAuth;
   $scope.card = {};
 
@@ -139,13 +138,18 @@ angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashbo
   };
   $scope.sendText = function (message) {
     var newMessage = {
-      to: ["+12406780268"],
+      to: ["+12404782587"],
       from: "+18013969302",
       message: message
     };
     dashboardService.sendText(newMessage).then(function (response) {
+      clear1();
       $scope.message = response;
     });
+  };
+  var clear1 = function clear1() {
+    $scope.newMessage = null;
+    alert('message Recieved!');
   };
   $scope.sendEmail = function (email) {
     dashboardService.sendEmail({
@@ -277,6 +281,28 @@ angular.module('domoApp').service('dashboardService', ["$http", function ($http)
             method: "POST",
             url: "/email",
             data: email
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    //Settings Page
+    this.getCurrentUser = function (id) {
+        return $http({
+            method: "GET",
+            url: "/me"
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.updateUser = function (user, newpass) {
+        if (newpass.password) {
+            user.password = newpass.password;
+        }
+        console.log(user);
+        return $http({
+            method: "PUT",
+            url: "/users/" + user._id,
+            data: user
         }).then(function (response) {
             return response.data;
         });
@@ -1235,7 +1261,29 @@ angular.module('domoApp').controller('globeCtrl', ["$scope", function ($scope) {
 'use strict';
 
 angular.module('domoApp').controller('infoCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
-"use strict";
+'use strict';
+
+angular.module('domoApp').controller('settingsCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
+    $scope.getCurrentUser = function () {
+        dashboardService.getCurrentUser().then(function (response) {
+            if (!response) {
+                $state.go('Signin');
+            }
+            $scope.user = response;
+        }).catch(function (err) {
+            $state.go('Signin');
+        });
+    };
+    $scope.newpass = {};
+
+    $scope.getCurrentUser();
+    $scope.updateUser = function () {
+        dashboardService.updateUser($scope.user, $scope.newpass).then(function (response) {
+            $scope.getCurrentUser();
+            alert('Profile Updated!');
+        });
+    };
+}]);
 'use strict';
 
 angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);

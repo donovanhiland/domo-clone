@@ -29,7 +29,7 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       }
     })
     .state('dashboard.overview', {
-      url: '/dashboard',
+      url: '/overview',
       templateUrl: './app/components/dashboard/overview/dashboard.overview.html',
       controller: 'dashboardCtrl'
     })

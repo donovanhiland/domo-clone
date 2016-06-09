@@ -1,0 +1,54 @@
+<!-- <button type="button" class="btn update-profile btn-info btn-lg" data-toggle="modal" data-target="#anotherModal">Edit Profile</button>
+
+ Modal
+div id="anotherModal" class="modal fade" role="dialog">
+    <div class="modal-dialog"> -->
+
+<!-- Modal content-->
+<!-- <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Profile</h4>
+            </div>
+            <div class="modal-body3">
+                <p class="p5">Email:</p>
+                <input class="form-control input-box4" ng-model="user.email"></input>
+                <p class="p5">Password:</p>
+                <input class="form-control input-box4" ng-model="newpass.password" type="password"></input>
+                <p class="p5">Phone Number:</p>
+                <input class="form-control input-box4" ng-model="user.phoneNumber" type="text"></input>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="love btn btn-primary" ng-click="updateUser()">Save</button>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+<section class="settings-container">
+    <div class="div-settings">
+        <h3>Edit Profile</h3>
+        <div class="sperate-h3">
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 form-control-label">Email</label>
+            <div class="col-sm-8">
+                <input type="email" class="form-control input-edit" id="inputEmail3" ng-model="user.email">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3 " class="col-sm-2 form-control-label">Password</label>
+            <div class="col-sm-8">
+                <input class="form-control input-edit" id="inputPassword3" ng-model="newpass.password" type="password">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 form-control-label">Phone Number</label>
+            <div class="col-sm-8">
+                <input type="phoneNumber" class="form-control input-edit" id="inputPassword3" ng-model="user.phoneNumber">
+            </div>
+        </div>
+        <button type="button" name="button" class="edit-profile-buttton" ng-click="updateUser()">Save</button>
+      </div>
+    </div>
+</section>
