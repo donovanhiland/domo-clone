@@ -10,7 +10,7 @@ angular.module('domoApp')
     height = 500 - margin.top - margin.bottom;
 
     var x0 = d3.scale.ordinal()
-        .rangeRoundBands([0, width], .1);
+        .rangeRoundBands([0, width], 0.1);
 
     var x1 = d3.scale.ordinal();
 
@@ -71,7 +71,7 @@ angular.module('domoApp')
               .attr("transform", "rotate(-90)")
               .attr("y", 2)
               .attr("dy", ".30em")
-              .style("text-anchor", "end")
+              .style("text-anchor", "end");
 
           var date = svg.selectAll(".date")
               .data(data)
@@ -83,7 +83,7 @@ angular.module('domoApp')
               .data(function(d) { return d.data; })
             .enter().append("rect")
               .attr("width", x1.rangeBand())
-              .attr("x", function(d) { return x1(d.name);
+              .attr("x", function(d) { return x1(d.name);})
               .attr("y", function(d) {return y(d.value);})
               .attr("height", function(d) { return height - y(d.value); })
               .style("fill", function(d) { return color(d.name); });
@@ -107,12 +107,12 @@ angular.module('domoApp')
               .style("text-anchor", "end")
               .text(function(d) { return d; });
         // } //for loop
-      })
-    }
+      });
+    };
     getData();
 
 
       // }); //scope.watch
     } //link
-  } //return
-}]) //directive
+  }; //return
+}]); //directive

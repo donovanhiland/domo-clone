@@ -28,21 +28,29 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap']).config(["$stateProvider
       }]
     }
   }).state('dashboard.overview', {
-    url: '/dashboard',
+    url: '/overview',
     templateUrl: './app/components/dashboard/overview/dashboard.overview.html',
     controller: 'dashboardCtrl'
+  }).state('dashboard.twitter', {
+    url: '/twitter',
+    templateUrl: './app/components/dashboard/globe/dashboard.twitterTmpl.html'
+    // controller: 'globeCtrl'
   }).state('dashboard.twitter-globe', {
-    url: '/dashboard',
+    url: '/twitter-globe',
     templateUrl: './app/components/dashboard/globe/dashboard.twitter-globe.html',
     controller: 'globeCtrl'
   }).state('dashboard.alerts', {
-    url: '/dashboard',
+    url: '/alerts',
     templateUrl: './app/components/dashboard/alerts/alertTmpl.html',
     controller: 'alertsCtrl'
   }).state('dashboard.info', {
-    url: '/dashboard',
-    // templateUrl: make new template of picture
-    controller: 'dashboardCtrl'
+    url: '/info',
+    templateUrl: './app/components/dashboard/info/dashboard.info.html',
+    controller: 'infoCtrl'
+  }).state('dashboard.settings', {
+    url: '/settings',
+    templateUrl: './app/components/dashboard/settings/dashboard.settings.html',
+    controller: 'settingsCtrl'
   });
 
   $urlRouterProvider.otherwise('/home');
@@ -289,6 +297,27 @@ angular.module('domoApp').service('dashboardService', ["$http", function ($http)
             method: "POST",
             url: "/email",
             data: email
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.getCurrentUser = function (id) {
+        return $http({
+            method: "GET",
+            url: "/me"
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+    this.updateUser = function (user, newpass) {
+        if (newpass.password) {
+            user.password = newpass.password;
+        }
+        console.log(user);
+        return $http({
+            method: "PUT",
+            url: "/users/" + user._id,
+            data: user
         }).then(function (response) {
             return response.data;
         });
@@ -754,6 +783,9 @@ angular.module('domoApp').controller('globeCtrl', ["$scope", function ($scope) {
 }]);
 'use strict';
 
+angular.module('domoApp').controller('infoCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
+'use strict';
+
 angular.module('domoApp').directive('barChart', function () {
   return {
     restrict: "AE",
@@ -897,61 +929,154 @@ angular.module('domoApp').service('graphService', ["$http", function ($http) {
 }]);
 'use strict';
 
+angular.module('domoApp').directive('groupedBar', ['graphService', function (graphService) {
+    return {
+        restrict: "E",
+        link: function link(scope, element) {
+            // scope.$watch('excelData', function () {
+            var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            var x0 = d3.scale.ordinal().rangeRoundBands([0, width], 0.1);
+
+            var x1 = d3.scale.ordinal();
+
+            var y = d3.scale.linear().range([height, 0]);
+
+            var color = d3.scale.ordinal().range(["#98abc5", "#f92"]);
+
+            var xAxis = d3.svg.axis().scale(x0).orient("bottom");
+
+            var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.format(".2s"));
+
+            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var getData = function getData() {
+                graphService.getData().then(function (response) {
+                    console.log(response);
+
+                    var dataNames = ["retweets", "favorites"];
+
+                    var data = response;
+                    data.forEach(function (d) {
+                        d.data = dataNames.map(function (name) {
+                            return { name: name, value: +d[name] };
+                        });
+                    });
+                    // for (var i = 0; i < data.length; i++) {
+                    // console.log(data[i]);
+                    // data = data[i];
+
+                    //the date gives 2016-06-08T22:35:08.000Z
+                    // var date = d3.time.format("%A").parse();
+
+                    x0.domain(data.map(function (d) {
+                        return d.date;
+                    }));
+                    x1.domain(dataNames).rangeRoundBands([0, x0.rangeBand()]);
+                    y.domain([0, d3.max(data, function (d) {
+                        return d3.max(d.data, function (d) {
+                            return d.value;
+                        });
+                    })]);
+
+                    svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+                    svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 2).attr("dy", ".30em").style("text-anchor", "end");
+
+                    var date = svg.selectAll(".date").data(data).enter().append("g").attr("class", "date").attr("transform", function (d) {
+                        return "translate(" + x0(d.date) + ",0)";
+                    });
+
+                    date.selectAll("rect").data(function (d) {
+                        return d.data;
+                    }).enter().append("rect").attr("width", x1.rangeBand()).attr("x", function (d) {
+                        return x1(d.name);
+                    }).attr("y", function (d) {
+                        return y(d.value);
+                    }).attr("height", function (d) {
+                        return height - y(d.value);
+                    }).style("fill", function (d) {
+                        return color(d.name);
+                    });
+
+                    var legend = svg.selectAll(".legend").data(dataNames).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
+                        return "translate(0," + i * 20 + ")";
+                    });
+
+                    legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", color);
+
+                    legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
+                        return d;
+                    });
+                    // } //for loop
+                });
+            };
+            getData();
+
+            // }); //scope.watch
+        } //link
+    }; //return
+}]); //directive
+'use strict';
+
 angular.module('domoApp').directive('lineChart', function () {
-  return {
-    restrict: "AE",
-    // controller: 'dashboardCtrl',
-    link: function link(scope, element) {
-      // scope.$watch('excelData', function () {
-      console.log(element);
-      var margin = { top: 20, right: 20, bottom: 30, left: 50 },
-          width = 960 - margin.left - margin.right,
-          height = 500 - margin.top - margin.bottom;
+    return {
+        restrict: "AE",
+        // controller: 'dashboardCtrl',
+        link: function link(scope, element) {
+            // scope.$watch('excelData', function () {
+            console.log(element);
+            var margin = { top: 20, right: 20, bottom: 30, left: 50 },
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
 
-      var formatDate = d3.time.format("%d-%b-%y");
+            var formatDate = d3.time.format("%d-%b-%y");
 
-      var x = d3.time.scale().range([0, width]);
+            var x = d3.time.scale().range([0, width]);
 
-      var y = d3.scale.linear().range([height, 0]);
+            var y = d3.scale.linear().range([height, 0]);
 
-      var xAxis = d3.svg.axis().scale(x).orient("bottom");
+            var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
-      var yAxis = d3.svg.axis().scale(y).orient("left");
+            var yAxis = d3.svg.axis().scale(y).orient("left");
 
-      var line = d3.svg.line().x(function (d) {
-        return x(d.date);
-      }).y(function (d) {
-        return y(d.close);
-      });
+            var line = d3.svg.line().x(function (d) {
+                return x(d.date);
+            }).y(function (d) {
+                return y(d.close);
+            });
 
-      var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      d3.tsv("data.tsv", type, function (error, data) {
-        if (error) throw error;
+            d3.tsv("data.tsv", type, function (error, data) {
+                if (error) throw error;
 
-        x.domain(d3.extent(data, function (d) {
-          return d.date;
-        }));
-        y.domain(d3.extent(data, function (d) {
-          return d.close;
-        }));
+                x.domain(d3.extent(data, function (d) {
+                    return d.date;
+                }));
+                y.domain(d3.extent(data, function (d) {
+                    return d.close;
+                }));
 
-        svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+                svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
 
-        svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("Price ($)");
+                svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("Price ($)");
 
-        svg.append("path").datum(data).attr("class", "line").attr("d", line);
-      });
+                svg.append("path").datum(data).attr("class", "line").attr("d", line);
+            });
 
-      function type(d) {
-        d.date = formatDate.parse(d.date);
-        d.close = +d.close;
-        return d;
-      }
+            function type(d) {
+                d.date = formatDate.parse(d.date);
+                d.close = +d.close;
+                return d;
+            }
 
-      // }); //scope.watch
-    } //link
-  };
+            // }); //scope.watch
+        } //link
+    };
 });
 'use strict';
 
@@ -1201,7 +1326,87 @@ angular.module('domoApp').directive('scatterPlot', function () {
 });
 'use strict';
 
+angular.module('domoApp').controller('settingsCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
+    $scope.getCurrentUser = function () {
+        dashboardService.getCurrentUser().then(function (response) {
+            if (!response) {
+                $state.go('Signin');
+            }
+            $scope.user = response;
+        }).catch(function (err) {
+            $state.go('Signin');
+        });
+    };
+    $scope.newpass = {};
+
+    $scope.getCurrentUser();
+    $scope.updateUser = function () {
+        dashboardService.updateUser($scope.user, $scope.newpass).then(function (response) {
+            $scope.getCurrentUser();
+            alert('Profile Updated!');
+        });
+    };
+}]);
+'use strict';
+
 angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
+'use strict';
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ * @author mr.doob / http://mrdoob.com/
+ */
+
+Detector = {
+
+  canvas: !!window.CanvasRenderingContext2D,
+  webgl: function () {
+    try {
+      return !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
+    } catch (e) {
+      return false;
+    }
+  }(),
+  workers: !!window.Worker,
+  fileapi: window.File && window.FileReader && window.FileList && window.Blob,
+
+  getWebGLErrorMessage: function getWebGLErrorMessage() {
+
+    var domElement = document.createElement('div');
+
+    domElement.style.fontFamily = 'monospace';
+    domElement.style.fontSize = '13px';
+    domElement.style.textAlign = 'center';
+    domElement.style.background = '#eee';
+    domElement.style.color = '#000';
+    domElement.style.padding = '1em';
+    domElement.style.width = '475px';
+    domElement.style.margin = '5em auto 0';
+
+    if (!this.webgl) {
+
+      domElement.innerHTML = window.WebGLRenderingContext ? ['Sorry, your graphics card doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>'].join('\n') : ['Sorry, your browser doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a><br/>', 'Please try with', '<a href="http://www.google.com/chrome">Chrome</a>, ', '<a href="http://www.mozilla.com/en-US/firefox/new/">Firefox 4</a> or', '<a href="http://nightly.webkit.org/">Webkit Nightly (Mac)</a>'].join('\n');
+    }
+
+    return domElement;
+  },
+
+  addGetWebGLMessage: function addGetWebGLMessage(parameters) {
+
+    var parent, id, domElement;
+
+    parameters = parameters || {};
+
+    parent = parameters.parent !== undefined ? parameters.parent : document.body;
+    id = parameters.id !== undefined ? parameters.id : 'oldie';
+
+    domElement = Detector.getWebGLErrorMessage();
+    domElement.id = id;
+
+    parent.appendChild(domElement);
+  }
+
+};
 'use strict';
 
 //this will parse data from JSON into usable data for D3.
@@ -5668,60 +5873,3 @@ if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
 	};
 	if (typeof module !== 'undefined' && require.main === module) exports.main(process.argv.slice(2));
 }
-'use strict';
-
-/**
- * @author alteredq / http://alteredqualia.com/
- * @author mr.doob / http://mrdoob.com/
- */
-
-Detector = {
-
-    canvas: !!window.CanvasRenderingContext2D,
-    webgl: function () {
-        try {
-            return !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
-        } catch (e) {
-            return false;
-        }
-    }(),
-    workers: !!window.Worker,
-    fileapi: window.File && window.FileReader && window.FileList && window.Blob,
-
-    getWebGLErrorMessage: function getWebGLErrorMessage() {
-
-        var domElement = document.createElement('div');
-
-        domElement.style.fontFamily = 'monospace';
-        domElement.style.fontSize = '13px';
-        domElement.style.textAlign = 'center';
-        domElement.style.background = '#eee';
-        domElement.style.color = '#000';
-        domElement.style.padding = '1em';
-        domElement.style.width = '475px';
-        domElement.style.margin = '5em auto 0';
-
-        if (!this.webgl) {
-
-            domElement.innerHTML = window.WebGLRenderingContext ? ['Sorry, your graphics card doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>'].join('\n') : ['Sorry, your browser doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a><br/>', 'Please try with', '<a href="http://www.google.com/chrome">Chrome</a>, ', '<a href="http://www.mozilla.com/en-US/firefox/new/">Firefox 4</a> or', '<a href="http://nightly.webkit.org/">Webkit Nightly (Mac)</a>'].join('\n');
-        }
-
-        return domElement;
-    },
-
-    addGetWebGLMessage: function addGetWebGLMessage(parameters) {
-
-        var parent, id, domElement;
-
-        parameters = parameters || {};
-
-        parent = parameters.parent !== undefined ? parameters.parent : document.body;
-        id = parameters.id !== undefined ? parameters.id : 'oldie';
-
-        domElement = Detector.getWebGLErrorMessage();
-        domElement.id = id;
-
-        parent.appendChild(domElement);
-    }
-
-};

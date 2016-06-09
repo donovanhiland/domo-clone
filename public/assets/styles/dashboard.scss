@@ -303,4 +303,71 @@ path.area {
     justify-content: center;
     #img-container {
         // margin-top: 30px;
-    }
+  }
+}
+
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: #000;
+}
+///////////info///////////
+#img-info{
+  display: flex;
+  justify-content: center;
+  background-color: $domo-grey;
+}
+/////////////////////////////////
+ ////// Settings
+ ////////////////////////////////
+ .settings-container {
+     height: 100vh;
+     background-color: $domo-grey;
+     display: flex;
+     justify-content: center;
+     color: white;
+     .div-settings {
+         background-color: $domo-text;
+         width: 35vw;
+         height: 40vh;
+         margin-top: 12%;
+         h3 {
+             text-align: center;
+             font-family: $domo-font;
+             letter-spacing: 1px;
+         }
+         .sperate-h3 {
+           margin-top: 43px;
+             label{
+               margin-left: 20px;
+               font-family: $domo-font;
+               letter-spacing: 1px;
+             }
+             .input-edit {
+                 width: 84%;
+                 margin-left: 20px;
+                 border-radius: 0;
+             }
+             .edit-profile-buttton {
+                 display: flex;
+                 justify-content: center;
+                 align-items: center;
+                 height: 35px;
+                 width: 130px;
+                 margin: auto;
+                 background-color: #f92;
+                 font-family: "Open Sans", Helvetica, Arial, sans-serif;
+                 font-size: 12px;
+                 font-weight: 700;
+                 letter-spacing: 1px;
+                 color: #fff;
+                 border: none;
+                 text-decoration: none;
+             }
+             .edit-profile-buttton:hover {
+                 background-color: #9ce;
+                 transition: all 0.3s ease-in-out;
+                 text-decoration: none;
+             }
+         }
+     }
+  }
