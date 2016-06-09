@@ -78,6 +78,13 @@ $test-border: 1px red solid;
       border: none;
       color: #fff;
     }
+    .hamburger:hover {
+      color: $domo-blue;
+    }
+
+    .hamburger:focus {
+      outline: 0;
+    }
   }
 }
 
