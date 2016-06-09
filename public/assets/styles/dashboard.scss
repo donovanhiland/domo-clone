@@ -235,8 +235,7 @@ $test-border: 1px red solid;
         justify-content: center;
 
         #graph {
-          margin-top: 10vh;
-          width: 65vh;
+          margin-top: 5vh;
           height: auto;
           overflow: hidden;
           display: flex;
@@ -246,11 +245,6 @@ $test-border: 1px red solid;
       }
     }
   }
-}
-
-svg {
-  height: 100vh;
-  width: 100vw;
 }
 
 /////////////////////////////////
@@ -292,7 +286,6 @@ bar-chart, graphs, scatter-plot, pie-chart, line-chart{
   height:100%;
   text-align: center;
 }
-
 path.line {
   fill: none;
   stroke: #666;
