@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
+import {Schema} from 'mongoose';
 import bcrypt from 'bcryptjs';
 require('mongoose-schematypes-extend')(mongoose);
 
-import {Schema} from 'mongoose';
 
 
-var User = new Schema({
+var UserSchema = new Schema({
 
   firstname: {
     type: String,
@@ -44,14 +44,14 @@ var User = new Schema({
   ]
 });
 
-User.pre('save', function(next) {
+UserSchema.pre('save', function(next) {
     this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10), null);
     next();
 });
 
-User.methods.verifyPassword = function(reqBodyPassword) {
+UserSchema.methods.verifyPassword = function(reqBodyPassword) {
     var user = this;
     return bcrypt.compareSync(reqBodyPassword, user.password);
 };
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('User', UserSchema);

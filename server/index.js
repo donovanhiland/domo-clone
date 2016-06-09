@@ -7,9 +7,6 @@ import config from './config.js';
 import session from 'express-session';
 import nodemailer from 'nodemailer';
 
-
-
-
 // Controllers
 import TwitterLocationCtrl from './controllers/TwitterLocationCtrl';
 import TwitterTweetsCtrl from './controllers/TwitterTweetsCtrl';
@@ -29,12 +26,8 @@ import passport from './services/passport.js';
 // initilize app
 const app = express();
 
-const corsOptions = {
-  origin: '*'
-};
-
 // initilize dependencies
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(session({
   secret: config.SESSION_SECRET,
@@ -45,7 +38,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + './../public'));
 
-// UserEndpoint
+// User Endpoints
 app.get('/checkAuth', UserCtrl.checkAuth);
 app.post('/users', UserCtrl.register);
 app.get('/logout', UserCtrl.logout);
@@ -55,19 +48,21 @@ app.put('/users/:_id', isAuthed, UserCtrl.update);
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/me'
 }));
-//card
+// Card Endpoints
 app.post('/card', CardCtrl.createCard);
 app.get('/card', CardCtrl.readCard);
 app.delete('/card/:id', CardCtrl.deleteCard);
-//email
+// Email Endpoints
 app.post('/email', FormCtrl.sendEmail);
 
-//=======uncomment this for testing=======//
-app.post('/followers', TwitterLocationCtrl.getDataByScreenName);
-app.post('/tweetData', TwitterTweetsCtrl.tweetData);
+// Twitter Data Endpoints
+app.post('/followers/location', TwitterLocationCtrl.getDataByScreenName);
+app.post('/tweets/aggregate', TwitterTweetsCtrl.aggregateTweets);
+app.post('/tweets/engagement', TwitterTweetsCtrl.tweetEngagement);
+app.post('/tweets/analysis', TwitterTweetsCtrl.tweetAnalysis);
 
 // MongoDB connection
-mongoose.set('debug', true);
+// mongoose.set('debug', true);
 mongoose.connect(config.mongoURI);
 mongoose.connection.once('open', () => {
     console.log('Connected to mongo at: ', config.mongoURI);
