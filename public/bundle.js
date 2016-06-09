@@ -105,6 +105,15 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
     });
   };
 }]);
+'use strict';
+
+angular.module('domoApp').directive('navDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/navTmpl.html'
+  };
+});
 "use strict";
 
 angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashboardService", "$state", "checkAuth", function ($scope, $log, dashboardService, $state, checkAuth) {
@@ -276,13 +285,33 @@ angular.module('domoApp').service('dashboardService', ["$http", function ($http)
 }]);
 'use strict';
 
-angular.module('domoApp').directive('navDirective', function () {
-
+angular.module('domoApp').directive('menuDirective', function () {
   return {
     restrict: 'E',
-    templateUrl: './app/shared/nav/navTmpl.html'
+    templateUrl: './app/components/dashboard/menuTmpl.html',
+    link: function link(scope, element, attrs) {
+      $('.hamburger').click(function () {
+        console.log('click');
+        $('.dash-nav-mobile-menu').find('ul').slideToggle();
+      });
+    }
   };
 });
+'use strict';
+
+angular.module('domoApp').controller('alertsCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
+
+    $scope.sendEmail = function (email) {
+        dashboardService.sendEmail({
+            toField: $scope.email.toField,
+            subjectField: $scope.email.subjectField,
+            textField: $scope.email.textField
+        }).then(function (response) {
+            clear();
+            console.log("sendEmail", response);
+        });
+    };
+}]);
 'use strict';
 
 /**
@@ -1206,79 +1235,7 @@ angular.module('domoApp').directive('scatterPlot', function () {
 });
 'use strict';
 
-angular.module('domoApp').controller('alertsCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
-
-    $scope.sendEmail = function (email) {
-        dashboardService.sendEmail({
-            toField: $scope.email.toField,
-            subjectField: $scope.email.subjectField,
-            textField: $scope.email.textField
-        }).then(function (response) {
-            clear();
-            console.log("sendEmail", response);
-        });
-    };
-}]);
-'use strict';
-
 angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
-'use strict';
-
-/**
- * @author alteredq / http://alteredqualia.com/
- * @author mr.doob / http://mrdoob.com/
- */
-
-Detector = {
-
-  canvas: !!window.CanvasRenderingContext2D,
-  webgl: function () {
-    try {
-      return !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
-    } catch (e) {
-      return false;
-    }
-  }(),
-  workers: !!window.Worker,
-  fileapi: window.File && window.FileReader && window.FileList && window.Blob,
-
-  getWebGLErrorMessage: function getWebGLErrorMessage() {
-
-    var domElement = document.createElement('div');
-
-    domElement.style.fontFamily = 'monospace';
-    domElement.style.fontSize = '13px';
-    domElement.style.textAlign = 'center';
-    domElement.style.background = '#eee';
-    domElement.style.color = '#000';
-    domElement.style.padding = '1em';
-    domElement.style.width = '475px';
-    domElement.style.margin = '5em auto 0';
-
-    if (!this.webgl) {
-
-      domElement.innerHTML = window.WebGLRenderingContext ? ['Sorry, your graphics card doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>'].join('\n') : ['Sorry, your browser doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a><br/>', 'Please try with', '<a href="http://www.google.com/chrome">Chrome</a>, ', '<a href="http://www.mozilla.com/en-US/firefox/new/">Firefox 4</a> or', '<a href="http://nightly.webkit.org/">Webkit Nightly (Mac)</a>'].join('\n');
-    }
-
-    return domElement;
-  },
-
-  addGetWebGLMessage: function addGetWebGLMessage(parameters) {
-
-    var parent, id, domElement;
-
-    parameters = parameters || {};
-
-    parent = parameters.parent !== undefined ? parameters.parent : document.body;
-    id = parameters.id !== undefined ? parameters.id : 'oldie';
-
-    domElement = Detector.getWebGLErrorMessage();
-    domElement.id = id;
-
-    parent.appendChild(domElement);
-  }
-
-};
 'use strict';
 
 //this will parse data from JSON into usable data for D3.
@@ -5745,3 +5702,60 @@ if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
 	};
 	if (typeof module !== 'undefined' && require.main === module) exports.main(process.argv.slice(2));
 }
+'use strict';
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ * @author mr.doob / http://mrdoob.com/
+ */
+
+Detector = {
+
+  canvas: !!window.CanvasRenderingContext2D,
+  webgl: function () {
+    try {
+      return !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
+    } catch (e) {
+      return false;
+    }
+  }(),
+  workers: !!window.Worker,
+  fileapi: window.File && window.FileReader && window.FileList && window.Blob,
+
+  getWebGLErrorMessage: function getWebGLErrorMessage() {
+
+    var domElement = document.createElement('div');
+
+    domElement.style.fontFamily = 'monospace';
+    domElement.style.fontSize = '13px';
+    domElement.style.textAlign = 'center';
+    domElement.style.background = '#eee';
+    domElement.style.color = '#000';
+    domElement.style.padding = '1em';
+    domElement.style.width = '475px';
+    domElement.style.margin = '5em auto 0';
+
+    if (!this.webgl) {
+
+      domElement.innerHTML = window.WebGLRenderingContext ? ['Sorry, your graphics card doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>'].join('\n') : ['Sorry, your browser doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a><br/>', 'Please try with', '<a href="http://www.google.com/chrome">Chrome</a>, ', '<a href="http://www.mozilla.com/en-US/firefox/new/">Firefox 4</a> or', '<a href="http://nightly.webkit.org/">Webkit Nightly (Mac)</a>'].join('\n');
+    }
+
+    return domElement;
+  },
+
+  addGetWebGLMessage: function addGetWebGLMessage(parameters) {
+
+    var parent, id, domElement;
+
+    parameters = parameters || {};
+
+    parent = parameters.parent !== undefined ? parameters.parent : document.body;
+    id = parameters.id !== undefined ? parameters.id : 'oldie';
+
+    domElement = Detector.getWebGLErrorMessage();
+    domElement.id = id;
+
+    parent.appendChild(domElement);
+  }
+
+};
