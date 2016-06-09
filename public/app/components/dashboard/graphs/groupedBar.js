@@ -47,13 +47,6 @@ angular.module('domoApp')
             return {name: name, value: +d[name]};
            });
         });
-        // for (var i = 0; i < data.length; i++) {
-          // console.log(data[i]);
-          // data = data[i];
-
-          //the date gives 2016-06-08T22:35:08.000Z
-          // var date = d3.time.format("%A").parse();
-
 
           x0.domain(data.map(function(d) {return d.date;}));
           x1.domain(dataNames).rangeRoundBands([0, x0.rangeBand()]);
@@ -83,7 +76,7 @@ angular.module('domoApp')
               .data(function(d) { return d.data; })
             .enter().append("rect")
               .attr("width", x1.rangeBand())
-              .attr("x", function(d) { return x1(d.name);
+              .attr("x", function(d) { return x1(d.name)})
               .attr("y", function(d) {return y(d.value);})
               .attr("height", function(d) { return height - y(d.value); })
               .style("fill", function(d) { return color(d.name); });
@@ -106,9 +99,8 @@ angular.module('domoApp')
               .attr("dy", ".35em")
               .style("text-anchor", "end")
               .text(function(d) { return d; });
-        // } //for loop
       })
-    }
+  }
     getData();
 
 
