@@ -11,15 +11,15 @@ angular.module('domoApp')
         // console.log(scope.graphData);
 
         // var dataset = scope.graphData;
-
+        console.log(element[0]);
+        console.log(parseInt(d3.select(element[0])));
         var dataset = [5,10,15,13,25,34,19,14,23,15, 12, 16, 19, 12, 8, 20];
-
         //Width and height
-        var margin = {top: 65, right: 10, bottom: 10, left: 40};
-        var w = parseInt(d3.select(element[0]).style('width'), 11)
+        var margin = {top: 20, right: 10, bottom: 10, left: 10};
+        // var w = parseInt(d3.select(element[0]).style('width'), 11)
+        var w = 450;
         w = w - margin.left - margin.right;
-        var h = parseInt(d3.select(element[0]).style('height'), 11)
-        h = h - margin.top - margin.bottom;
+        var h = 300 - margin.top - margin.bottom;
         var formatAs = d3.format(".1"); //when data is messy
 
         var sortOrder = false;
@@ -125,7 +125,7 @@ angular.module('domoApp')
           //Create Y axis
           svg.append("g")
               .attr("class", "y axis")
-              .attr("transform", "translate(" + w + ",0)")
+              .attr("transform", "translate(" + 5 + ",0)")
               .call(yAxis);
 
         //Makes Graph responsive

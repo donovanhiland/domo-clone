@@ -107,18 +107,6 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
 }]);
 'use strict';
 
-<<<<<<< HEAD
-=======
-angular.module('domoApp').directive('navDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './app/shared/nav/navTmpl.html'
-  };
-});
-"use strict";
-
->>>>>>> master
 angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashboardService", "$state", "checkAuth", function ($scope, $log, dashboardService, $state, checkAuth) {
 
   $scope.user = checkAuth;
@@ -127,7 +115,6 @@ angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashbo
 
   $scope.setGraphType = function (graphType) {
     $scope.card.graphType = graphType;
-<<<<<<< HEAD
     if (graphType === 'barChart') {
       $scope.imageOpacity1 = { opacity: 1 };
       $scope.imageOpacity2 = { opacity: .1 };
@@ -149,8 +136,6 @@ angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashbo
       $scope.imageOpacity3 = { opacity: .1 };
       $scope.imageOpacity4 = { opacity: 1 };
     }
-=======
->>>>>>> master
   };
 
   //drop down
@@ -312,13 +297,6 @@ angular.module('domoApp').service('dashboardService', ["$http", function ($http)
 }]);
 'use strict';
 
-<<<<<<< HEAD
-angular.module('domoApp').directive('navDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './app/shared/nav/navTmpl.html'
-=======
 angular.module('domoApp').directive('menuDirective', function () {
   return {
     restrict: 'E',
@@ -329,7 +307,15 @@ angular.module('domoApp').directive('menuDirective', function () {
         $('.dash-nav-mobile-menu').find('ul').slideToggle();
       });
     }
->>>>>>> master
+  };
+});
+'use strict';
+
+angular.module('domoApp').directive('navDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './app/shared/nav/navTmpl.html'
   };
 });
 'use strict';
@@ -776,24 +762,19 @@ angular.module('domoApp').directive('barChart', function () {
     },
     link: function link(scope, element) {
       // scope.$watch('excelData', function () {
-      // console.log(scope.graphData);
-      // var dataset = scope.graphData;
 
-<<<<<<< HEAD
       // console.log(scope.graphData);
 
       // var dataset = scope.graphData;
-
-=======
->>>>>>> master
+      console.log(element[0]);
+      console.log(parseInt(d3.select(element[0])));
       var dataset = [5, 10, 15, 13, 25, 34, 19, 14, 23, 15, 12, 16, 19, 12, 8, 20];
-
       //Width and height
-      var margin = { top: 65, right: 10, bottom: 10, left: 40 };
-      var w = parseInt(d3.select(element[0]).style('width'), 11);
+      var margin = { top: 20, right: 10, bottom: 10, left: 10 };
+      // var w = parseInt(d3.select(element[0]).style('width'), 11)
+      var w = 450;
       w = w - margin.left - margin.right;
-      var h = parseInt(d3.select(element[0]).style('height'), 11);
-      h = h - margin.top - margin.bottom;
+      var h = 300 - margin.top - margin.bottom;
       var formatAs = d3.format(".1"); //when data is messy
 
       var sortOrder = false;
@@ -866,7 +847,7 @@ angular.module('domoApp').directive('barChart', function () {
       .call(xAxis); //takes the incoming selection and hands it off to any function
 
       //Create Y axis
-      svg.append("g").attr("class", "y axis").attr("transform", "translate(" + w + ",0)").call(yAxis);
+      svg.append("g").attr("class", "y axis").attr("transform", "translate(" + 5 + ",0)").call(yAxis);
 
       //Makes Graph responsive
       d3.select(window).on('resize', function () {
@@ -904,7 +885,6 @@ angular.module("domoApp").controller("graphCtrl", ["$scope", function ($scope) {
 'use strict';
 
 angular.module('domoApp').directive('groupedBar', function () {
-<<<<<<< HEAD
       return {
             restrict: "AE",
             // controller: 'excelController',
@@ -985,88 +965,6 @@ angular.module('domoApp').directive('groupedBar', function () {
                   // }); //scope.watch
             } //link
       }; //return
-=======
-    return {
-        restrict: "AE",
-        // controller: 'excelController',
-        link: function link(scope, element) {
-            // scope.$watch('excelData', function () {
-            var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-                width = 960 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
-
-            var x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1);
-
-            var x1 = d3.scale.ordinal();
-
-            var y = d3.scale.linear().range([height, 0]);
-
-            var color = d3.scale.ordinal().range(["#98abc5", "#f92"]);
-
-            var xAxis = d3.svg.axis().scale(x0).orient("bottom");
-
-            var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.format(".2s"));
-
-            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            d3.csv("data.csv", function (error, data) {
-                if (error) throw error;
-
-                var ageNames = d3.keys(data[0]).filter(function (key) {
-                    return key !== "State";
-                });
-
-                data.forEach(function (d) {
-                    d.ages = ageNames.map(function (name) {
-                        return { name: name, value: +d[name] };
-                    });
-                });
-
-                x0.domain(data.map(function (d) {
-                    return d.State;
-                }));
-                x1.domain(ageNames).rangeRoundBands([0, x0.rangeBand()]);
-                y.domain([0, d3.max(data, function (d) {
-                    return d3.max(d.ages, function (d) {
-                        return d.value;
-                    });
-                })]);
-
-                svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
-
-                svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 2).attr("dy", ".30em").style("text-anchor", "end").text("Population");
-
-                var state = svg.selectAll(".state").data(data).enter().append("g").attr("class", "state").attr("transform", function (d) {
-                    return "translate(" + x0(d.State) + ",0)";
-                });
-
-                state.selectAll("rect").data(function (d) {
-                    return d.ages;
-                }).enter().append("rect").attr("width", x1.rangeBand()).attr("x", function (d) {
-                    return x1(d.name);
-                }).attr("y", function (d) {
-                    return y(d.value);
-                }).attr("height", function (d) {
-                    return height - y(d.value);
-                }).style("fill", function (d) {
-                    return color(d.name);
-                });
-
-                var legend = svg.selectAll(".legend").data(ageNames.slice().reverse()).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
-                    return "translate(0," + i * 20 + ")";
-                });
-
-                legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", color);
-
-                legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
-                    return d;
-                });
-            });
-
-            // }); //scope.watch
-        } //link
-    }; //return
->>>>>>> master
 }); //directive
 'use strict';
 
@@ -1141,85 +1039,82 @@ angular.module('domoApp').directive('graphs', function () {
 });
 'use strict';
 
-angular.module('domoApp').directive('graphs', function () {
-  return {
-    retrict: "AE",
-    templateUrl: 'app/components/dashboard/graphs/graphs.html',
-    // controller: 'graphCtrl',
-    scope: {
-      graphType: '=',
-      graphData: '='
-    }
-  };
-});
-'use strict';
-
-//make a parent directive
-//plug in the children directives into the parent
-// make scope on parent
-// scope: {
-//   chartType: '=',
-//   chartData: '='
-// }
-// add <chart chart-type="myChartType" chart-data="myData"> into the html
-//use ng-if to toggle between graphs
-//make an api call on the ctrl to get the data and pass the data through the HTML
-
 angular.module('domoApp').directive('pieChart', function () {
-  return {
-    restrict: "AE",
-<<<<<<< HEAD
-    scope: {
-      graphData: '='
-    },
-=======
+    return {
+        restrict: "AE",
+        scope: {
+            graphData: '='
+        },
+        link: function link(scope, element) {
+            // scope.$watch('excelData', function () {
 
-    // controller: 'dashboardCtrl',
->>>>>>> master
-    link: function link(scope, element) {
-      // scope.$watch('excelData', function () {
+            // var dataset = scope.excelData[0];
+            var dataset = [5, 10, 20, 45, 6, 25];
 
-      // var dataset = scope.excelData[0];
-      var dataset = [5, 10, 20, 45, 6, 25];
+            var pie = d3.layout.pie();
+            var w = 230;
+            var h = 250;
+            var color = d3.scale.ordinal().range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
+            function randomColor() {
+                return color([Math.floor(Math.random() * 5)]);
+            }
+            var outerRadius = w / 2;
+            var innerRadius = w / 4; //change this for the
+            //arcs require inner and outer radii
+            var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
 
-      var pie = d3.layout.pie();
-      var w = 230;
-      var h = 250;
-      var color = d3.scale.ordinal().range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
-      function randomColor() {
-        return color([Math.floor(Math.random() * 5)]);
-      }
-      var outerRadius = w / 2;
-      var innerRadius = w / 4; //change this for the
-      //arcs require inner and outer radii
-      var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+            //Create SVG element
+            var svg = d3.select(element[0]).append("svg").attr("width", w).attr("height", h);
 
-      //Create SVG element
-      var svg = d3.select(element[0]).append("svg").attr("width", w).attr("height", h);
+            //Set up groups
+            var arcs = svg.selectAll("g.arc").data(pie(dataset)).enter().append("g").attr("class", "arc").attr("transform", "translate( " + outerRadius + ", " + outerRadius + " )");
 
-      //Set up groups
-      var arcs = svg.selectAll("g.arc").data(pie(dataset)).enter().append("g").attr("class", "arc").attr("transform", "translate( " + outerRadius + ", " + outerRadius + " )");
+            //paths - SVG’s answer to drawing irregular forms
+            //Draw arc paths
+            arcs.append("path") //within each new g, we append a path. A paths path description is defined in the d attribute.
+            .attr("fill", function (d, i) {
+                return color(i);
+            }).attr("d", arc).on("mouseover", function (d) {
+                d3.select(this).attr("fill", "#f92");
+            }).on("mouseout", function (d) {
+                d3.select(this).transition().duration(250).attr("fill", randomColor());
+            });
+            //labels
+            arcs.append("text").attr("transform", function (d) {
+                return "translate(" + arc.centroid(d) + ")"; //A centroid is the calculated center point of any shape
+            }).attr("text-anchor", "middle").attr("fill", "white").text(function (d) {
+                return d.value; //pie-ified data has to return d.value
+            });
 
-      //paths - SVG’s answer to drawing irregular forms
-      //Draw arc paths
-      arcs.append("path") //within each new g, we append a path. A paths path description is defined in the d attribute.
-      .attr("fill", function (d, i) {
-        return color(i);
-      }).attr("d", arc).on("mouseover", function (d) {
-        d3.select(this).attr("fill", "#f92");
-      }).on("mouseout", function (d) {
-        d3.select(this).transition().duration(250).attr("fill", randomColor());
-      });
-      //labels
-      arcs.append("text").attr("transform", function (d) {
-        return "translate(" + arc.centroid(d) + ")"; //A centroid is the calculated center point of any shape
-      }).attr("text-anchor", "middle").attr("fill", "white").text(function (d) {
-        return d.value; //pie-ified data has to return d.value
-      });
+            //Makes Graph responsive
+            d3.select(window).on('resize', function () {
+                // update width
+                w = parseInt(d3.select(element[0]).style('width'), 10);
+                w = w - margin.left - margin.right;
+                // reset x range
+                xScale.range([0, w]);
 
-      // }); //scope.watch
-    } //link
-  };
+                d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
+
+                svg.selectAll('circle.background').attr('width', w);
+
+                svg.selectAll('circle.formatAs').attr('width', function (d) {
+                    return xScale(d.formatAs);
+                });
+
+                // update median ticks
+                var median = d3.median(svg.selectAll('.bar').data(), function (d) {
+                    return d.formatAs;
+                });
+
+                svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
+                // update axes
+                svg.select('.x.axis.top').call(xAxis.orient('top'));
+                svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
+            }); //responsive
+            // }); //scope.watch
+        } //link
+    };
 });
 'use strict';
 
@@ -1234,9 +1129,9 @@ angular.module('domoApp').directive('scatterPlot', function () {
       // var dataset = scope.graphData;
       var dataset = [[5, 20], [480, 90], [250, 50], [100, 33], [330, 95], [410, 12], [475, 44], [25, 67], [85, 21], [220, 88], [300, 150]];
       var margin = { top: 20, right: 20, bottom: 30, left: 40 };
-      var w = 960 - margin.left - margin.right;
-      var h = 500 - margin.top - margin.bottom;
-      var padding = 0;
+      var w = 450 - margin.left - margin.right;
+      var h = 300 - margin.top - margin.bottom;
+      var padding = 35;
       var formatAs = d3.format(".1"); //when data is messy
 
       var xScale = d3.scale.linear().domain([0, d3.max(dataset, function (d) {
@@ -1297,13 +1192,6 @@ angular.module('domoApp').directive('scatterPlot', function () {
 
       //Create Y axis
       svg.append("g").attr("class", "y axis").attr("transform", "translate(" + padding + ",0)").call(yAxis);
-
-      d3.select(element[0]).append("div").classed("svg-container", true) //container class to make it responsive
-      .append("svg")
-      //responsive SVG needs these 2 attributes and no width and height attr
-      .attr("preserveAspectRatio", "xMinYMin meet").attr("viewBox", "0 0 600 400")
-      //class to make it responsive
-      .classed("svg-content-responsive", true);
 
       //random button
       d3.select(element[0]).on('click', function () {
@@ -5860,7 +5748,6 @@ if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
 
 Detector = {
 
-<<<<<<< HEAD
     canvas: !!window.CanvasRenderingContext2D,
     webgl: function () {
         try {
@@ -5907,53 +5794,5 @@ Detector = {
 
         parent.appendChild(domElement);
     }
-=======
-  canvas: !!window.CanvasRenderingContext2D,
-  webgl: function () {
-    try {
-      return !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
-    } catch (e) {
-      return false;
-    }
-  }(),
-  workers: !!window.Worker,
-  fileapi: window.File && window.FileReader && window.FileList && window.Blob,
-
-  getWebGLErrorMessage: function getWebGLErrorMessage() {
-
-    var domElement = document.createElement('div');
-
-    domElement.style.fontFamily = 'monospace';
-    domElement.style.fontSize = '13px';
-    domElement.style.textAlign = 'center';
-    domElement.style.background = '#eee';
-    domElement.style.color = '#000';
-    domElement.style.padding = '1em';
-    domElement.style.width = '475px';
-    domElement.style.margin = '5em auto 0';
-
-    if (!this.webgl) {
-
-      domElement.innerHTML = window.WebGLRenderingContext ? ['Sorry, your graphics card doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>'].join('\n') : ['Sorry, your browser doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a><br/>', 'Please try with', '<a href="http://www.google.com/chrome">Chrome</a>, ', '<a href="http://www.mozilla.com/en-US/firefox/new/">Firefox 4</a> or', '<a href="http://nightly.webkit.org/">Webkit Nightly (Mac)</a>'].join('\n');
-    }
-
-    return domElement;
-  },
-
-  addGetWebGLMessage: function addGetWebGLMessage(parameters) {
-
-    var parent, id, domElement;
-
-    parameters = parameters || {};
-
-    parent = parameters.parent !== undefined ? parameters.parent : document.body;
-    id = parameters.id !== undefined ? parameters.id : 'oldie';
-
-    domElement = Detector.getWebGLErrorMessage();
-    domElement.id = id;
-
-    parent.appendChild(domElement);
-  }
->>>>>>> master
 
 };
