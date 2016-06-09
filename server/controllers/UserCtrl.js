@@ -40,7 +40,6 @@
       },
 
       update: function(req, res, next) {
-        console.log(req.body);
           User.findByIdAndUpdate(req.params._id, req.body, function(err, result) {
               if (err) next(err);
               else {
@@ -48,7 +47,7 @@
                   result.save(function(err, result) {
                       if (err) next(err);
                       else res.status(200).send('user updated');
-                  });
+                  })
               }
           });
       },

@@ -1,5 +1,8 @@
-angular.module("domoApp").controller('dashboardCtrl', function($scope, $log, dashboardService, $state, checkAuth){
+angular.module("domoApp")
+.controller('dashboardCtrl', function($scope, $log, dashboardService, $state, checkAuth){
+
     $scope.user = checkAuth;
+    console.log(checkAuth);
     $scope.card = {};
 
     $scope.setGraphType = function(graphType) {
@@ -41,18 +44,13 @@ angular.module("domoApp").controller('dashboardCtrl', function($scope, $log, das
     };
     $scope.sendText = (message) =>{
       var newMessage = {
-        to: ["+12404782587"],
+        to: ["+12406780268"],
         from: "+18013969302",
         message: message
       };
       dashboardService.sendText(newMessage).then(function(response){
-        clear1();
         $scope.message = response;
       });
-    };
-    var clear1 = function(){
-      $scope.newMessage = null;
-      alert('message Recieved!');
     };
     $scope.sendEmail = (email) => {
           dashboardService.sendEmail({

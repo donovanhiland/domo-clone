@@ -44,8 +44,8 @@ app.get('/checkAuth', UserCtrl.checkAuth);
 app.post('/users', UserCtrl.register);
 app.get('/logout', UserCtrl.logout);
 app.get('/users', UserCtrl.getUsers);
-app.get('/me', UserCtrl.me);
-app.put('/users/:_id', UserCtrl.update);
+app.get('/me', isAuthed, UserCtrl.me);
+app.put('/users/:_id', isAuthed, UserCtrl.update);
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/me'
 }));

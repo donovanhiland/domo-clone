@@ -11,9 +11,4 @@ angular.module('domoApp').controller('alertsCtrl', function($scope, dashboardSer
         });
     };
 
-    var clear = function(){
-      $scope.email = null;
-      alert('Email Recieved!');
-    };
-
 });
