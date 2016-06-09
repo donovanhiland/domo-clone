@@ -7,6 +7,14 @@
                 <button type="button" data-toggle="modal" data-target="#myModal" id="add-card-btn">
                     Add Chart
                 </button>
+
+            </div>
+            <!-- Single button with keyboard nav -->
+            <div class="btn-group" uib-dropdown keyboard-nav>
+                <button id="simple-btn-keyboard-nav" type="button" class="btn" uib-dropdown-toggle>
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                    <span class="caret"></span>
+                </button>
             </div>
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
@@ -24,74 +32,33 @@
                         <div class="modal-footer">
                             <button type="button" class="love btn btn-primary" ng-click="createCard(newTitle)" data-dismiss="modal">Create</button>
                         </div>
-
                     </div>
+                    <section class="modal-images">
+                      <h3 class="pick-graph">Pick a graph to display your data:</h3>
+                      <!-- <img ng-click=card.grap = "bar"> -->
+                      <div class="image-modal">
+                        <img src="../../../assets/images/bar-chart.png" alt="Bar Chart" ng-click="setGraphType('barChart')" ng-style="imageOpacity1"/>
+                      </div>
+                      <div class="image-modal">
+                        <img src="../../../assets/images/scatterplot.png" alt="Scatter Plot" ng-click="setGraphType('scatterPlot')" ng-style="imageOpacity2"/>
+                      </div>
+                      <div class="image-modal">
+                        <img src="../../../assets/images/pie-chart.png" alt="Pie Chart" ng-click="setGraphType('pieChart')" ng-style="imageOpacity3"/>
+                      </div>
+                      <div class="image-modal">
+                        <img src="../../../assets/images/line-graph.png" alt="Line Graph" ng-click="setGraphType('lineGraph')" ng-style="imageOpacity4"/>
+                      </div>
+
+
+
+                    </section>
                 </div>
             </div>
 
-            <!-- Single button with keyboard nav -->
-            <div class="btn-group" uib-dropdown keyboard-nav>
-                <button id="simple-btn-keyboard-nav" type="button" class="btn" uib-dropdown-toggle>
-                    <i class="fa fa-wrench" aria-hidden="true"></i>
-                    <span class="caret"></span>
-                </button>
-            </div>
+
         </div>
 
     </div>
-
-
-
-
-
-    <!-- <div class="container">
-         Trigger the modal with a button
-        <br>
-        <button id="button" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create new board...</button> -->
-
-    <!-- Modal -->
-    <!-- <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-    <!-- <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Create Board</h4>
-                    </div>
-                    <div class="modal-body">
-                        <label id="label" for="inputdefault">Title:</label>
-                        <input id="text-box" class="form-control" id="inputdefault" type="text" ng-model="newTitle">
-                    </div> -->
-    <!-- <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" class="love btn btn-primary" ng-click="createBoard()">Create</button>
-                    </div> -->
-
-    <!-- </div>
-            </div>
-        </div> -->
-    <!-- <div id="div-outer" ng-repeat="card in cards"> -->
-    <!-- <div class="cards">
-      <div class="lg-card-container">
-        <div class="lg-card">
-
-        </div>
-
-
-      </div>
-      <div class="sm-card-container">
-        <div class="sm-card">
-
-        </div>
-        <div class="sm-card" ng-repeat="card in cards">
-            {{card.title}}
-        </div>
-
-        </div>
-
-
-      </div> -->
-
 
 <section class="dash-card-section">
   <div class="dash-card-container">
@@ -106,18 +73,15 @@
       </header>
       <div class="graph-container">
         <div id="graph">
-          <img id='test' src="" alt="" />
+          <graphs graph-data="card.dataElement" graph-type="card.graphType"></graphs>
+          <!-- <grouped-bar></grouped-bar> -->
         </div>
-      </div>
-      <div class="dash-footer-icons">
-        <i class="fa fa-expand fa-lg card-lg" aria-hidden="true"></i>
-        <i class="fa fa-compress fa-lg card-sm" aria-hidden="true"></i>
       </div>
     </div>
   </div>
 </section>
 
-
+{{user}}
 
         <!-- <a ui-sref="card({id:user._id})"> -->
         <!-- <button id="button2" type="button" class="btn " data-target="#myModal">{{card.title}}</button> -->

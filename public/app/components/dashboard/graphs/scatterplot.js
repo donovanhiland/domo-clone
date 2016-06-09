@@ -2,10 +2,13 @@ angular.module('domoApp')
   .directive('scatterPlot', function () {
     return {
       restrict: "AE",
-      // controller: 'dashboardCtrl',
+      scope: {
+        graphData: '='
+      },
       link: function (scope, element) {
-        // scope.$watch('excelData', function () {
-        // var dataset = scope.excelData[0];
+
+
+        // var dataset = scope.graphData;
         var dataset = [
                   [ 5,     20 ],
                   [ 480,   90 ],
@@ -17,11 +20,12 @@ angular.module('domoApp')
                   [ 25,    67 ],
                   [ 85,    21 ],
                   [ 220,   88 ],
-                  [ 600,   150]
+                  [ 300,   150]
               ];
-        var w = 210;
-        var h = 200;
-        var padding = 0;
+        var margin = {top: 20, right: 20, bottom: 30, left: 40};
+        var w = 450 - margin.left - margin.right;
+        var h = 300 - margin.top - margin.bottom;
+        var padding = 35;
         var formatAs = d3.format(".1"); //when data is messy
 
         var xScale = d3.scale.linear()
@@ -86,8 +90,8 @@ angular.module('domoApp')
              y: function(d){return yScale(d[1]) + 2},
              "font-family": "sans-serif",
              "font-sizee": "11px",
-             "fill": "red"
-           })
+             "fill": "#5DAEF8"
+           });
 
         // create x-axis
         svg.append('g')
@@ -116,7 +120,7 @@ angular.module('domoApp')
               .duration(1000)
               .each("start", function() {      // <-- Executes at start of transition
                d3.select(this) //selects the current element
-                 .attr("fill", "magenta")
+                 .attr("fill", "#f92")
                  .attr("r", 7);
                })
               .attr({
@@ -140,8 +144,8 @@ angular.module('domoApp')
                  x: function(d){return xScale(d[0])},
                  y: function(d){return yScale(d[1])},
                  "font-family": "sans-serif",
-                 "font-sizee": "11px",
-                 "fill": "red"
+                 "font-size": "11px",
+                 "fill": "#5DAEF8"
                })
             //update x-axis
             svg.select(".x.axis")
@@ -186,7 +190,6 @@ angular.module('domoApp')
               svg.select('.x.axis.top').call(xAxis.orient('top'));
               svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
           });
-      // }); //scope.watch
     } //link
   }
 })

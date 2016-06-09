@@ -2,10 +2,12 @@ angular.module('domoApp')
   .directive('pieChart', function () {
     return {
       restrict: "AE",
-      // controller: 'dashboardCtrl',
+      scope: {
+        graphData: '=',
+      },
       link: function (scope, element) {
         // scope.$watch('excelData', function () {
-        
+
 
         // var dataset = scope.excelData[0];
         var dataset = [ 5, 10, 20, 45, 6, 25 ];
@@ -69,6 +71,35 @@ angular.module('domoApp')
                 })
 
 
+            //Makes Graph responsive
+            d3.select(window).on('resize', function () {
+                // update width
+                w = parseInt(d3.select(element[0]).style('width'), 10);
+                w = w - margin.left - margin.right;
+                // reset x range
+                xScale.range([0, w]);
+
+                d3.select(svg.node().parentNode)
+                .style('height', (200 + margin.top + margin.bottom) + 'px')
+                .style('width', (200 + margin.left + margin.right) + 'px');
+
+                svg.selectAll('circle.background')
+                    .attr('width', w);
+
+                svg.selectAll('circle.formatAs')
+                    .attr('width', function(d) { return xScale(d.formatAs); });
+
+                // update median ticks
+                var median = d3.median(svg.selectAll('.bar').data(),
+                    function(d) { return d.formatAs; });
+
+                svg.selectAll('line.median')
+                    .attr('x1', xScale(median))
+                    .attr('x2', xScale(median));
+                // update axes
+                svg.select('.x.axis.top').call(xAxis.orient('top'));
+                svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
+            }); //responsive
         // }); //scope.watch
       } //link
   }

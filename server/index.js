@@ -11,6 +11,7 @@ import nodemailer from 'nodemailer';
 import TwitterLocationCtrl from './controllers/TwitterLocationCtrl';
 import TwitterTweetsCtrl from './controllers/TwitterTweetsCtrl';
 import UserCtrl from './controllers/UserCtrl.js';
+import TextCtrl from './controllers/TextCtrl.js';
 import CardCtrl from './controllers/CardCtrl.js';
 import FormCtrl from './controllers/FormCtrl.js';
 
@@ -48,12 +49,17 @@ app.put('/users/:_id', isAuthed, UserCtrl.update);
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/me'
 }));
+
 // Card Endpoints
 app.post('/card', CardCtrl.createCard);
 app.get('/card', CardCtrl.readCard);
 app.delete('/card/:id', CardCtrl.deleteCard);
+
 // Email Endpoints
 app.post('/email', FormCtrl.sendEmail);
+
+// Texting Endpoints
+app.post('/text', TextCtrl.sendText);
 
 // Twitter Data Endpoints
 app.post('/followers/location', TwitterLocationCtrl.getDataByScreenName);
