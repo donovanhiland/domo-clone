@@ -149,6 +149,7 @@ $test-border: 1px red solid;
         }
     }
 }
+
 #add-card-btn {
   display: flex;
   justify-content: center;
@@ -166,15 +167,19 @@ $test-border: 1px red solid;
   border: none;
   text-decoration: none;
 }
+
 #add-card-btn:hover {
   background-color: $domo-blue;
   transition: all 0.3s ease-in-out;
   text-decoration: none;
 }
+
 /////////////////////////////////
 ////// Cards
 ////////////////////////////////
+
 .dash-card-section {
+
   .dash-card-container {
     display: flex;
     flex-wrap: wrap;
@@ -211,12 +216,17 @@ $test-border: 1px red solid;
       .graph-container {
         display: flex;
         justify-content: center;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         #graph {
           margin-top: 5vh;
           height: auto;
           overflow: hidden;
           display: flex;
           justify-content: center;
+
         }
       }
     }
@@ -225,6 +235,10 @@ $test-border: 1px red solid;
 /////////////////////////////////
 ////// Graphs
 ////////////////////////////////
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 .modal-images {
   width: 100%;
   .image-modal {
@@ -242,15 +256,17 @@ $test-border: 1px red solid;
 .pick-graph {
   text-align: center;
 }
+
 .axis path,
 .axis line {
-    fill: none;
-    stroke: black;
-    shape-rendering: crispEdges;
+	fill: none;
+	stroke: black;
+	shape-rendering: crispEdges;
 }
+
 .axis text {
-    font-family: sans-serif;
-    font-size: 11px;
+	font-family: sans-serif;
+	font-size: 11px;
 }
 bar-chart, graphs, scatter-plot, pie-chart, line-chart{
   display:block;
@@ -263,17 +279,22 @@ path.line {
   stroke: #666;
   stroke-width: 1.5px;
 }
+
 path.area {
   fill: #e7e7e7;
 }
+
 .axis {
   shape-rendering: crispEdges;
 }
+
 .x.axis line {
   stroke: #fff;
 }
+
 .x.axis .minor {
   stroke-opacity: .5;
+<<<<<<< HEAD
 }
 .y.axis line, .y.axis path {
   fill: none;
@@ -288,59 +309,11 @@ path.area {
     #img-container {
         // margin-top: 30px;
     }
+=======
+>>>>>>> master
 }
-/////////////////////////////////
-////// Settings
-////////////////////////////////
-.settings-container {
-    height: 100vh;
-    background-color: $domo-grey;
-    display: flex;
-    justify-content: center;
-    color: white;
-    .div-settings {
-        background-color: $domo-text;
-        width: 35vw;
-        height: 40vh;
-        margin-top: 12%;
-        h3 {
-            text-align: center;
-            font-family: $domo-font;
-            letter-spacing: 1px;
-        }
-        .sperate-h3 {
-          margin-top: 43px;
-            label{
-              margin-left: 20px;
-              font-family: $domo-font;
-              letter-spacing: 1px;
-            }
-            .input-edit {
-                width: 84%;
-                margin-left: 20px;
-                border-radius: 0;
-            }
-            .edit-profile-buttton {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 35px;
-                width: 130px;
-                margin: auto;
-                background-color: #f92;
-                font-family: "Open Sans", Helvetica, Arial, sans-serif;
-                font-size: 12px;
-                font-weight: 700;
-                letter-spacing: 1px;
-                color: #fff;
-                border: none;
-                text-decoration: none;
-            }
-            .edit-profile-buttton:hover {
-                background-color: #9ce;
-                transition: all 0.3s ease-in-out;
-                text-decoration: none;
-            }
-        }
-    }
+
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: #000;
 }
