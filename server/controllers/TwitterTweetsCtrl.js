@@ -25,7 +25,7 @@ module.exports = {
                 count: 200,
                 max_id: maxId
             }, (error, tweets, response) => {
-                console.log(tweets.length);
+                // console.log(tweets.length);
                 let tweetInfo = {};
                 for (let i = 0; i < tweets.length - 1; i++) {
                     tweetInfo = {

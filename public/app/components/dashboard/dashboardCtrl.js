@@ -8,10 +8,10 @@ angular.module("domoApp")
                 .then(function(response) {
                     $scope.twitterAnalysis = response;
                     console.log(response);
-                })
+                });
         })();
 
-        $scope.user = user
+        $scope.user = user;
         console.log($scope.user);
         $scope.card = {};
 

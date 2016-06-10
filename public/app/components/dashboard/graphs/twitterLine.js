@@ -162,5 +162,5 @@ angular.module('domoApp')
     // } //getData
 
     } //link
-  }
-})
+  };
+}]);

@@ -34,17 +34,8 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap']).config(["$stateProvider
   }).state('dashboard.overview', {
     url: '/overview',
     templateUrl: './app/components/dashboard/overview/dashboard.overview.html',
-<<<<<<< HEAD
-    controller: 'dashboardCtrl'
-  }).state('dashboard.twitter', {
-    url: '/dashboard',
-    templateUrl: './app/components/dashboard/globe/dashboard.twitterTmpl.html'
-    // controller: 'globeCtrl'
-  }).state('dashboard.twitter-globe', {
-=======
     controller: 'overviewCtrl'
   }).state('dashboard.twitter', {
->>>>>>> master
     url: '/dashboard',
     templateUrl: './app/components/dashboard/twitter/twitterTmpl.html',
     controller: 'twitterCtrl'
@@ -426,6 +417,9 @@ angular.module('domoApp').directive('navDirective', function () {
 });
 'use strict';
 
+angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
+'use strict';
+
 angular.module('domoApp').controller('alertsCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
 
     $scope.sendEmail = function (email) {
@@ -438,6 +432,783 @@ angular.module('domoApp').controller('alertsCtrl', ["$scope", "dashboardService"
             console.log("sendEmail", response);
         });
     };
+}]);
+'use strict';
+
+angular.module('domoApp').directive('barChart', function () {
+  return {
+    restrict: "AE",
+    scope: {
+      graphData: '='
+    },
+    link: function link(scope, element) {
+      // console.log(scope.graphData);
+
+      // var dataset = scope.graphData;
+      var dataset = [5, 10, 15, 13, 25, 34, 19, 14, 23, 15, 12, 16, 19, 12, 8, 20];
+      //Width and height
+      var margin = { top: 20, right: 20, bottom: 30, left: 40 };
+      var w = parseInt(d3.select(element[0]).style('width'), 11);
+      // var w = 450;
+      w = w - margin.left - margin.right;
+      // var h = parseInt(d3.select(element[0]).style('width'), 11);
+      var h = 250 - margin.top - margin.bottom;
+      var formatAs = d3.format(".1"); //when data is messy
+
+      var sortOrder = false;
+      var sortBars = function sortBars() {
+        sortOrder = !sortOrder;
+        svg.selectAll("rect").sort(function (a, b) {
+          //sorts the bars in asc/desc order
+          if (sortOrder) {
+            return d3.ascending(a, b);
+          } else {
+            return d3.descending(a, b);
+          }
+        }).transition().delay(function (d, i) {
+          return i * 50;
+        }).duration(1000).attr("x", function (d, i) {
+          return xScale(i);
+        });
+      };
+
+      var xScale = d3.scale.ordinal() //an ordinal scale instead of linear
+      .domain(d3.range(dataset.length + 2)).rangeRoundBands([0, w], 0.05); //discreet outputs are rounded to the nearest integer
+
+      var yScale = d3.scale.linear().domain([0, d3.max(dataset)]).range([0, h]);
+
+      //Define x-axis
+      var xAxis = d3.svg.axis().scale(xScale) //which scale to operate
+      .orient('bottom') //where
+      .ticks(5) //how many little lines(ticks) on the axis
+      .tickFormat(formatAs);
+
+      //Define Y axis
+      var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5).tickFormat(formatAs);
+
+      //Create SVG element[0]
+      var svg = d3.select(element[0]).append("svg").attr("width", w + margin.left + margin.right).attr("height", h + margin.top + margin.bottom);
+
+      svg.selectAll("rect").data(dataset).enter().append("rect").attr({
+        x: function x(d, i) {
+          return xScale(i);
+        }, //bar width
+        y: function y(d) {
+          return h - yScale(d);
+        }, //sets height and flips it
+        width: xScale.rangeBand(), //width in between bars
+        height: function height(d) {
+          return yScale(d);
+        },
+        fill: function fill(d) {
+          return "rgb(0, 0, " + d * 10 + ")";
+        }
+      }).on("mouseover", function (d) {
+        //Get this bar's x/y values, then augment for the tooltip
+        var xPosition = parseFloat(d3.select(this).attr("x")) + xScale.rangeBand() / 2;
+        var yPosition = parseFloat(d3.select(this).attr("y")) + 20;
+        d3.select(this).attr("fill", "#f92");
+
+        //Create the tooltip label
+        svg.append("text").attr("id", "tooltip").attr("x", xPosition).attr("y", yPosition).attr("text-anchor", "middle").attr("font-family", "sans-serif").attr("font-size", "12px").attr("font-weight", "bold").attr("fill", "black").attr("cursor", "context-menu").text(d);
+      }).on("mouseout", function (d) {
+        d3.select(this).transition().duration(250).attr("fill", "rgb(0, 0, " + d * 10 + ")");
+        //Remove the tooltip
+        d3.select("#tooltip").remove();
+      }).on("click", function () {
+        sortBars();
+      });
+
+      // create x-axis
+      svg.append('g').attr('class', 'x axis') //assigns 'x' and 'axis' class
+      .attr("transform", "translate(0," + h + ")") //pushes line to bottom
+      .call(xAxis); //takes the incoming selection and hands it off to any function
+
+      //Create Y axis
+      svg.append("g").attr("class", "y axis").attr("transform", "translate(" + 5 + ",0)").call(yAxis);
+
+      //Makes Graph responsive
+      d3.select(window).on('resize', function () {
+        // update width
+        w = parseInt(d3.select(element[0]).style('width'), 10);
+        w = w - margin.left - margin.right;
+        // reset x range
+        xScale.range([0, w]);
+
+        d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
+
+        svg.selectAll('rect.background').attr('width', w);
+
+        svg.selectAll('rect.formatAs').attr('width', function (d) {
+          return xScale(d.formatAs);
+        });
+
+        // update median ticks
+        var median = d3.median(svg.selectAll('.bar').data(), function (d) {
+          return d.formatAs;
+        });
+
+        svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
+        // update axes
+        svg.select('.x.axis.top').call(xAxis.orient('top'));
+        svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
+      });
+    } //link
+  }; //return
+}); //directive
+"use strict";
+
+angular.module("domoApp").controller("graphCtrl", ["$scope", function ($scope) {}]);
+'use strict';
+
+angular.module('domoApp').service('graphService', ["$http", function ($http) {
+
+    this.getTwitterData = function () {
+        return $http({
+            method: "POST",
+            url: "/tweets/engagement",
+            data: { "screenName": "devmtn" }
+        }).then(function (response) {
+            return response.data;
+        });
+    };
+
+    // this.getInstaData = () => {
+    //     return $http({
+    //         method: "POST",
+    //         url: "/tweets/engagement",
+    //         data: {"screenName" : "devmtn"}
+    //     }).then(function(response) {
+    //         return response.data;
+    //     });
+    // };
+}]);
+'use strict';
+
+angular.module('domoApp').directive('instaBar', ['graphService', function (graphService) {
+    return {
+        restrict: "E",
+        link: function link(scope, element) {
+            var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                width = 760 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            var x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+
+            var x1 = d3.scale.ordinal();
+
+            var y = d3.scale.linear().range([height, 0]);
+
+            var color = d3.scale.ordinal().range(["#98abc5", "#f92"]);
+
+            var xAxis = d3.svg.axis().scale(x0).orient("bottom");
+
+            var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.format(".2s"));
+
+            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var getData = function getData() {
+                graphService.getInstaData().then(function (response) {
+                    console.log(response);
+
+                    var dataNames = ["retweets", "favorites"];
+
+                    var data = response;
+                    data.forEach(function (d) {
+                        d.data = dataNames.map(function (name) {
+                            return { name: name, value: +d[name] };
+                        });
+                    });
+
+                    x0.domain(data.map(function (d) {
+                        return d.date;
+                    }));
+                    x1.domain(dataNames).rangeRoundBands([0, x0.rangeBand()]);
+                    y.domain([0, d3.max(data, function (d) {
+                        return d3.max(d.data, function (d) {
+                            return d.value;
+                        });
+                    })]);
+
+                    svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+                    svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 2).attr("dy", ".30em").style("text-anchor", "end");
+
+                    var date = svg.selectAll(".date").data(data).enter().append("g").attr("class", "date").attr("transform", function (d) {
+                        return "translate(" + x0(d.date) + ",0)";
+                    });
+
+                    date.selectAll("rect").data(function (d) {
+                        return d.data;
+                    }).enter().append("rect").attr("width", x1.rangeBand()).attr("x", function (d) {
+                        return x1(d.name);
+                    }).attr("y", function (d) {
+                        return y(d.value);
+                    }).attr("height", function (d) {
+                        return height - y(d.value);
+                    }).style("fill", function (d) {
+                        return color(d.name);
+                    });
+
+                    var legend = svg.selectAll(".legend").data(dataNames).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
+                        return "translate(0," + i * 20 + ")";
+                    });
+
+                    legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", color);
+
+                    legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
+                        return d;
+                    });
+                });
+            };
+            getData();
+        } //link
+    }; //return
+}]); //directive
+"use strict";
+'use strict';
+
+angular.module('domoApp').directive('lineChart', function () {
+    return {
+        restrict: "AE",
+        // controller: 'dashboardCtrl',
+        link: function link(scope, element) {
+            // scope.$watch('excelData', function () {
+            console.log(element);
+            var margin = { top: 20, right: 20, bottom: 30, left: 50 },
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            var formatDate = d3.time.format("%d-%b-%y");
+
+            var x = d3.time.scale().range([0, width]);
+
+            var y = d3.scale.linear().range([height, 0]);
+
+            var xAxis = d3.svg.axis().scale(x).orient("bottom");
+
+            var yAxis = d3.svg.axis().scale(y).orient("left");
+
+            var line = d3.svg.line().x(function (d) {
+                return x(d.date);
+            }).y(function (d) {
+                return y(d.close);
+            });
+
+            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            d3.tsv("data.tsv", type, function (error, data) {
+                if (error) throw error;
+
+                x.domain(d3.extent(data, function (d) {
+                    return d.date;
+                }));
+                y.domain(d3.extent(data, function (d) {
+                    return d.close;
+                }));
+
+                svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+                svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("Price ($)");
+
+                svg.append("path").datum(data).attr("class", "line").attr("d", line);
+            });
+
+            function type(d) {
+                d.date = formatDate.parse(d.date);
+                d.close = +d.close;
+                return d;
+            }
+
+            // }); //scope.watch
+        } //link
+    };
+});
+'use strict';
+
+angular.module('domoApp').directive('graphs', function () {
+  return {
+    retrict: "AE",
+    templateUrl: 'app/components/dashboard/graphs/graphs.html',
+    // controller: 'graphCtrl',
+    scope: {
+      graphType: '=',
+      graphData: '='
+    }
+  };
+});
+'use strict';
+
+angular.module('domoApp').directive('pieChart', function () {
+    return {
+        restrict: "AE",
+        scope: {
+            graphData: '='
+        },
+        link: function link(scope, element) {
+            // scope.$watch('excelData', function () {
+
+            // var dataset = scope.excelData[0];
+            var dataset = [5, 10, 20, 45, 6, 25];
+
+            var pie = d3.layout.pie();
+            var w = 230;
+            var h = 250;
+            var color = d3.scale.ordinal().range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
+            function randomColor() {
+                return color([Math.floor(Math.random() * 5)]);
+            }
+            var outerRadius = w / 2;
+            var innerRadius = w / 4; //change this for the
+            //arcs require inner and outer radii
+            var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+
+            //Create SVG element
+            var svg = d3.select(element[0]).append("svg").attr("width", w).attr("height", h);
+
+            //Set up groups
+            var arcs = svg.selectAll("g.arc").data(pie(dataset)).enter().append("g").attr("class", "arc").attr("transform", "translate( " + outerRadius + ", " + outerRadius + " )");
+
+            //paths - SVG’s answer to drawing irregular forms
+            //Draw arc paths
+            arcs.append("path") //within each new g, we append a path. A paths path description is defined in the d attribute.
+            .attr("fill", function (d, i) {
+                return color(i);
+            }).attr("d", arc).on("mouseover", function (d) {
+                d3.select(this).attr("fill", "#f92");
+            }).on("mouseout", function (d) {
+                d3.select(this).transition().duration(250).attr("fill", randomColor());
+            });
+            //labels
+            arcs.append("text").attr("transform", function (d) {
+                return "translate(" + arc.centroid(d) + ")"; //A centroid is the calculated center point of any shape
+            }).attr("text-anchor", "middle").attr("fill", "white").text(function (d) {
+                return d.value; //pie-ified data has to return d.value
+            });
+
+            //Makes Graph responsive
+            d3.select(window).on('resize', function () {
+                // update width
+                w = parseInt(d3.select(element[0]).style('width'), 10);
+                w = w - margin.left - margin.right;
+                // reset x range
+                xScale.range([0, w]);
+
+                d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
+
+                svg.selectAll('g.arc.background').attr('width', w);
+
+                svg.selectAll('g.arc.formatAs').attr('width', function (d) {
+                    return xScale(d.formatAs);
+                });
+
+                // update median ticks
+                var median = d3.median(svg.selectAll('.bar').data(), function (d) {
+                    return d.formatAs;
+                });
+
+                svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
+                // update axes
+                svg.select('.x.axis.top').call(xAxis.orient('top'));
+                svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
+            }); //responsive
+            // }); //scope.watch
+        } //link
+    };
+});
+'use strict';
+
+angular.module('domoApp').directive('scatterPlot', function () {
+  return {
+    restrict: "AE",
+    scope: {
+      graphData: '='
+    },
+    link: function link(scope, element) {
+
+      // var dataset = scope.graphData;
+      var dataset = [[5, 20], [480, 90], [250, 50], [100, 33], [330, 95], [410, 12], [475, 44], [25, 67], [85, 21], [220, 88], [300, 150]];
+      var margin = { top: 20, right: 20, bottom: 30, left: 40 };
+      var w = 450 - margin.left - margin.right;
+      var h = 300 - margin.top - margin.bottom;
+      var padding = 35;
+      var formatAs = d3.format(".1"); //when data is messy
+
+      var xScale = d3.scale.linear().domain([0, d3.max(dataset, function (d) {
+        return d[0];
+      })]).range([padding, w - padding * 2]);
+
+      var yScale = d3.scale.linear().domain([0, d3.max(dataset, function (d) {
+        return d[1];
+      })]).range([h - padding, padding]);
+
+      var rScale = d3.scale.linear().domain([0, d3.max(dataset, function (d) {
+        return d[1];
+      })]).range([2, 5]);
+      //define x-axis
+      var xAxis = d3.svg.axis().scale(xScale) //which scale to operate
+      .orient('bottom') //where
+      .ticks(5) //how many little lines(ticks) on the axis
+      .tickFormat(formatAs);
+
+      //Define Y axis
+      var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5).tickFormat(formatAs);
+
+      //create svg
+      var svg = d3.select(element[0]).append('svg').attr('width', w).attr('height', h);
+
+      //create circles
+      svg.selectAll('circle').data(dataset).enter().append('circle').attr({
+        cx: function cx(d) {
+          return xScale(d[0]);
+        },
+        cy: function cy(d) {
+          return yScale(d[1]);
+        },
+        r: function r(d) {
+          return rScale(d[1]);
+        }
+      });
+
+      //labels
+      svg.selectAll("text").data(dataset).enter().append("text").text(function (d) {
+        return d[0] + "," + d[1];
+      }).attr({
+        x: function x(d) {
+          return xScale(d[0]) + 5;
+        },
+        y: function y(d) {
+          return yScale(d[1]) + 3;
+        },
+        "font-family": "sans-serif",
+        "font-size": "11px",
+        "fill": "#5DAEF8"
+      });
+
+      // create x-axis
+      svg.append('g').attr('class', 'x axis') //assigns 'x' and 'axis' class
+      .attr("transform", "translate(0," + (h - padding) + ")") //pushes line to bottom
+      .call(xAxis); //takes the incoming selection and hands it off to any function
+
+      //Create Y axis
+      svg.append("g").attr("class", "y axis").attr("transform", "translate(" + padding + ",0)").call(yAxis);
+
+      //random button
+      d3.select(element[0]).on('click', function () {
+
+        //Update scale domains
+        xScale.domain([0, d3.max(dataset, function (d) {
+          return d[0];
+        })]);
+        yScale.domain([0, d3.max(dataset, function (d) {
+          return d[1];
+        })]);
+
+        svg.selectAll('circle').data(dataset).transition().duration(1000).each("start", function () {
+          // <-- Executes at start of transition
+          d3.select(this) //selects the current element
+          .attr("fill", "#f92").attr("r", 7);
+        }).attr({
+          cx: function cx(d) {
+            return xScale(d[0]);
+          },
+          cy: function cy(d) {
+            return yScale(d[1]);
+          },
+          r: function r(d) {
+            return rScale(d[1]);
+          }
+        }).transition() // <-- 2nd transition
+        .duration(500).attr("fill", "black").attr("r", 2);
+
+        svg.selectAll("text").data(dataset).transition().duration(1000).text(function (d) {
+          return d[0] + "," + d[1];
+        }).attr({
+          x: function x(d) {
+            return xScale(d[0]) + 5;
+          },
+          y: function y(d) {
+            return yScale(d[1]) + 3;
+          },
+          "font-family": "sans-serif",
+          "font-size": "11px",
+          "fill": "#5DAEF8"
+        });
+        //update x-axis
+        svg.select(".x.axis").transition().duration(1000).call(xAxis);
+
+        //update y axis
+        svg.select(".y.axis").transition().duration(1000).call(yAxis);
+      }); //on click
+
+      //Makes Graph responsive
+      d3.select(window).on('resize', function () {
+        // update width
+        w = parseInt(d3.select(element[0]).style('width'), 10);
+        w = w - margin.left - margin.right;
+        // reset x range
+        xScale.range([0, w]);
+
+        d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
+
+        svg.selectAll('circle.background').attr('width', w);
+
+        svg.selectAll('circle.formatAs').attr('width', function (d) {
+          return xScale(d.formatAs);
+        });
+
+        // update median ticks
+        var median = d3.median(svg.selectAll('.bar').data(), function (d) {
+          return d.formatAs;
+        });
+
+        svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
+        // update axes
+        svg.select('.x.axis.top').call(xAxis.orient('top'));
+        svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
+      });
+    } //link
+  };
+});
+'use strict';
+
+angular.module('domoApp').directive('twitterBar', ['graphService', function (graphService) {
+    return {
+        restrict: "E",
+        link: function link(scope, element) {
+
+            var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                width = 760 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            var x0 = d3.scale.ordinal().rangeRoundBands([0, width], 0.1);
+
+            var x1 = d3.scale.ordinal();
+
+            var y = d3.scale.linear().range([height, 0]);
+
+            var color = d3.scale.ordinal().range(["#98abc5", "#f92"]);
+
+            var xAxis = d3.svg.axis().scale(x0).orient("bottom");
+
+            var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.format(".2s"));
+
+            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var getData = function getData() {
+                graphService.getTwitterData().then(function (response) {
+                    console.log(response);
+
+                    var dataNames = ["retweets", "favorites"];
+
+                    var data = response;
+                    data.forEach(function (d) {
+                        d.data = dataNames.map(function (name) {
+                            return { name: name, value: +d[name] };
+                        });
+                    });
+
+                    x0.domain(data.map(function (d) {
+                        return d.date;
+                    }));
+                    x1.domain(dataNames).rangeRoundBands([0, x0.rangeBand()]);
+                    y.domain([0, d3.max(data, function (d) {
+                        return d3.max(d.data, function (d) {
+                            return d.value;
+                        });
+                    })]);
+
+                    svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+                    svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 2).attr("dy", ".30em").style("text-anchor", "end");
+
+                    var date = svg.selectAll(".date").data(data).enter().append("g").attr("class", "date").attr("transform", function (d) {
+                        return "translate(" + x0(d.date) + ",0)";
+                    });
+
+                    date.selectAll("rect").data(function (d) {
+                        return d.data;
+                    }).enter().append("rect").attr("width", x1.rangeBand()).attr("x", function (d) {
+                        return x1(d.name);
+                    }).attr("y", function (d) {
+                        return y(d.value);
+                    }).attr("height", function (d) {
+                        return height - y(d.value);
+                    }).style("fill", function (d) {
+                        return color(d.name);
+                    });
+
+                    var legend = svg.selectAll(".legend").data(dataNames).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
+                        return "translate(0," + i * 20 + ")";
+                    });
+
+                    legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", color);
+
+                    legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
+                        return d;
+                    });
+                });
+            };
+
+            getData();
+        } //link
+    }; //return
+}]); //directive
+'use strict';
+
+angular.module('domoApp').directive('twitterLine', ['graphService', function (graphService) {
+  return {
+    restrict: "E",
+    link: function link(scope, element) {
+
+      var margin = { top: 20, right: 50, bottom: 30, left: 50 },
+          width = 760 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+
+      var parseDate = d3.time.format("%y-%b-%d").parse,
+          formatPercent = d3.format(".0%");
+
+      var x = d3.time.scale().range([0, width]);
+
+      var y = d3.scale.linear().range([height, 0]);
+
+      var color = d3.scale.category20();
+
+      var xAxis = d3.svg.axis().scale(x).orient("bottom");
+
+      var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(formatPercent);
+
+      var line = d3.svg.area().interpolate("basis").x(function (d) {
+        return x(d.date);
+      }).y0(function (d) {
+        return y(d.y);
+      }).y1(function (d) {
+        return y(d.y);
+      });
+
+      function line_to_stacked(t) {
+        return d3.svg.area().interpolate("basis").x(function (d) {
+          return x(d.date);
+        }).y0(function (d) {
+          return y(t * d.y0 + d.y);
+        }).y1(function (d) {
+          return y(t * d.y0 + d.y);
+        });
+      }
+
+      function area_to_stacked(t) {
+        return d3.svg.area().interpolate("basis").x(function (d) {
+          return x(d.date);
+        }).y0(function (d) {
+          return y(d.y0 + (1 - t) * d.y);
+        }).y1(function (d) {
+          return y(d.y0 + d.y);
+        });
+      }
+
+      var stack = d3.layout.stack().values(function (d) {
+        return d.values;
+      });
+
+      var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      // let getData = () => {
+      //   graphService.getTwitterLineData().then((response) => {
+      //     console.log(response);
+
+      d3.tsv("data.tsv", function (error, data) {
+        color.domain(d3.keys(data[0]).filter(function (key) {
+          return key !== "date";
+        }));
+
+        data.forEach(function (d) {
+          d.date = parseDate(d.date);
+        });
+
+        var browsers = stack(color.domain().map(function (name) {
+          return {
+            name: name,
+            values: data.map(function (d) {
+              return { date: d.date, y: d[name] / 100 };
+            })
+          };
+        }));
+
+        x.domain(d3.extent(data, function (d) {
+          return d.date;
+        }));
+
+        var browser = svg.selectAll(".browser").data(browsers).enter().append("g").attr("class", "browser").on("click", function () {
+          transition();
+        });
+
+        browser.append("path").attr("class", "area").attr("d", function (d) {
+          return line(d.values);
+        }).style("stroke", function (d) {
+          return color(d.name);
+        }).style("fill", function (d) {
+          return color(d.name);
+        });
+
+        browser.append("text").datum(function (d) {
+          return { name: d.name, value: d.values[d.values.length - 1] };
+        }).attr("transform", function (d) {
+          return "translate(" + x(d.value.date) + "," + y(d.value.y) + ")";
+        }).attr("x", 3).attr("dy", ".35em").style("fill", function (d) {
+          return color(d.name);
+        }).text(function (d) {
+          return d.name;
+        });svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis).on("click", function () {
+          transition();
+        });
+
+        svg.append("g").attr("class", "y axis").call(yAxis).on("click", function () {
+          transition();
+        });
+      });
+
+      var is_area_plot = false;
+      function transition() {
+        var duration = 750;
+        var browser = svg.selectAll(".browser");
+        var transition = browser.transition().delay(function (d, i) {
+          return i * 1000;
+        }).duration(duration);
+        var postTransition = transition.transition();
+        if (!is_area_plot) {
+          transition.selectAll("path").attrTween("d", shapeTween(line_to_stacked, 1));
+          transition.selectAll("text").attr("transform", function (d) {
+            return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y) + ")";
+          });
+          postTransition.selectAll("path").attrTween("d", shapeTween(area_to_stacked, 1)).style("stroke-opacity", 0.0);
+          postTransition.selectAll("text").attr("transform", function (d) {
+            return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")";
+          });
+        } else {
+          transition.selectAll("path").style("stroke-opacity", 1.0).attrTween("d", shapeTween(area_to_stacked, 0));
+          transition.selectAll("text").attr("transform", function (d) {
+            return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y) + ")";
+          });
+          postTransition.selectAll("path").attrTween("d", shapeTween(line_to_stacked, 0));
+          postTransition.selectAll("text").attr("transform", function (d) {
+            return "translate(" + x(d.value.date) + "," + y(d.value.y) + ")";
+          });
+        }
+        is_area_plot = !is_area_plot;
+      }
+
+      function shapeTween(shape, direction) {
+        return function (d, i, a) {
+          return function (t) {
+            return shape(direction ? t : 1.0 - t)(d.values);
+          };
+        };
+      }
+
+      //   }) //service
+      // } //getData
+    } //link
+  };
 }]);
 'use strict';
 
@@ -860,661 +1631,6 @@ angular.module('domoApp').controller('globeCtrl', ["$scope", function ($scope) {
 }]);
 'use strict';
 
-angular.module('domoApp').directive('barChart', function () {
-  return {
-    restrict: "AE",
-    scope: {
-      graphData: '='
-    },
-    link: function link(scope, element) {
-      // console.log(scope.graphData);
-
-      // var dataset = scope.graphData;
-      var dataset = [5, 10, 15, 13, 25, 34, 19, 14, 23, 15, 12, 16, 19, 12, 8, 20];
-      //Width and height
-      var margin = { top: 20, right: 20, bottom: 30, left: 40 };
-      var w = parseInt(d3.select(element[0]).style('width'), 11);
-      // var w = 450;
-      w = w - margin.left - margin.right;
-      // var h = parseInt(d3.select(element[0]).style('width'), 11);
-      var h = 250 - margin.top - margin.bottom;
-      var formatAs = d3.format(".1"); //when data is messy
-
-      var sortOrder = false;
-      var sortBars = function sortBars() {
-        sortOrder = !sortOrder;
-        svg.selectAll("rect").sort(function (a, b) {
-          //sorts the bars in asc/desc order
-          if (sortOrder) {
-            return d3.ascending(a, b);
-          } else {
-            return d3.descending(a, b);
-          }
-        }).transition().delay(function (d, i) {
-          return i * 50;
-        }).duration(1000).attr("x", function (d, i) {
-          return xScale(i);
-        });
-      };
-
-      var xScale = d3.scale.ordinal() //an ordinal scale instead of linear
-      .domain(d3.range(dataset.length + 2)).rangeRoundBands([0, w], 0.05); //discreet outputs are rounded to the nearest integer
-
-      var yScale = d3.scale.linear().domain([0, d3.max(dataset)]).range([0, h]);
-
-      //Define x-axis
-      var xAxis = d3.svg.axis().scale(xScale) //which scale to operate
-      .orient('bottom') //where
-      .ticks(5) //how many little lines(ticks) on the axis
-      .tickFormat(formatAs);
-
-      //Define Y axis
-      var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5).tickFormat(formatAs);
-
-      //Create SVG element[0]
-      var svg = d3.select(element[0]).append("svg").attr("width", w + margin.left + margin.right).attr("height", h + margin.top + margin.bottom);
-
-      svg.selectAll("rect").data(dataset).enter().append("rect").attr({
-        x: function x(d, i) {
-          return xScale(i);
-        }, //bar width
-        y: function y(d) {
-          return h - yScale(d);
-        }, //sets height and flips it
-        width: xScale.rangeBand(), //width in between bars
-        height: function height(d) {
-          return yScale(d);
-        },
-        fill: function fill(d) {
-          return "rgb(0, 0, " + d * 10 + ")";
-        }
-      }).on("mouseover", function (d) {
-        //Get this bar's x/y values, then augment for the tooltip
-        var xPosition = parseFloat(d3.select(this).attr("x")) + xScale.rangeBand() / 2;
-        var yPosition = parseFloat(d3.select(this).attr("y")) + 20;
-        d3.select(this).attr("fill", "#f92");
-
-        //Create the tooltip label
-        svg.append("text").attr("id", "tooltip").attr("x", xPosition).attr("y", yPosition).attr("text-anchor", "middle").attr("font-family", "sans-serif").attr("font-size", "12px").attr("font-weight", "bold").attr("fill", "black").attr("cursor", "context-menu").text(d);
-      }).on("mouseout", function (d) {
-        d3.select(this).transition().duration(250).attr("fill", "rgb(0, 0, " + d * 10 + ")");
-        //Remove the tooltip
-        d3.select("#tooltip").remove();
-      }).on("click", function () {
-        sortBars();
-      });
-
-      // create x-axis
-      svg.append('g').attr('class', 'x axis') //assigns 'x' and 'axis' class
-      .attr("transform", "translate(0," + h + ")") //pushes line to bottom
-      .call(xAxis); //takes the incoming selection and hands it off to any function
-
-      //Create Y axis
-      svg.append("g").attr("class", "y axis").attr("transform", "translate(" + 5 + ",0)").call(yAxis);
-
-      //Makes Graph responsive
-      d3.select(window).on('resize', function () {
-        // update width
-        w = parseInt(d3.select(element[0]).style('width'), 10);
-        w = w - margin.left - margin.right;
-        // reset x range
-        xScale.range([0, w]);
-
-        d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
-
-        svg.selectAll('rect.background').attr('width', w);
-
-        svg.selectAll('rect.formatAs').attr('width', function (d) {
-          return xScale(d.formatAs);
-        });
-
-        // update median ticks
-        var median = d3.median(svg.selectAll('.bar').data(), function (d) {
-          return d.formatAs;
-        });
-
-        svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
-        // update axes
-        svg.select('.x.axis.top').call(xAxis.orient('top'));
-        svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
-      });
-    } //link
-  }; //return
-}); //directive
-"use strict";
-
-angular.module("domoApp").controller("graphCtrl", ["$scope", function ($scope) {}]);
-'use strict';
-
-angular.module('domoApp').service('graphService', ["$http", function ($http) {
-
-    this.getTwitterData = function () {
-        return $http({
-            method: "POST",
-            url: "/tweets/engagement",
-            data: { "screenName": "devmtn" }
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-
-    // this.getInstaData = () => {
-    //     return $http({
-    //         method: "POST",
-    //         url: "/tweets/engagement",
-    //         data: {"screenName" : "devmtn"}
-    //     }).then(function(response) {
-    //         return response.data;
-    //     });
-    // };
-}]);
-'use strict';
-
-<<<<<<< HEAD
-angular.module('domoApp').directive('instaBar', ['graphService', function (graphService) {
-    return {
-        restrict: "E",
-        link: function link(scope, element) {
-            var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-                width = 760 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
-
-            var x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1);
-=======
-angular.module('domoApp').directive('groupedBar', ['graphService', function (graphService) {
-    return {
-        restrict: "E",
-        link: function link(scope, element) {
-            // scope.$watch('excelData', function () {
-            var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-                width = 960 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
-
-            var x0 = d3.scale.ordinal().rangeRoundBands([0, width], 0.1);
->>>>>>> master
-
-            var x1 = d3.scale.ordinal();
-
-            var y = d3.scale.linear().range([height, 0]);
-
-            var color = d3.scale.ordinal().range(["#98abc5", "#f92"]);
-
-            var xAxis = d3.svg.axis().scale(x0).orient("bottom");
-
-            var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.format(".2s"));
-
-            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            var getData = function getData() {
-<<<<<<< HEAD
-                graphService.getInstaData().then(function (response) {
-=======
-                graphService.getData().then(function (response) {
->>>>>>> master
-                    console.log(response);
-
-                    var dataNames = ["retweets", "favorites"];
-
-                    var data = response;
-                    data.forEach(function (d) {
-                        d.data = dataNames.map(function (name) {
-                            return { name: name, value: +d[name] };
-                        });
-                    });
-<<<<<<< HEAD
-=======
-                    // for (var i = 0; i < data.length; i++) {
-                    // console.log(data[i]);
-                    // data = data[i];
-
-                    //the date gives 2016-06-08T22:35:08.000Z
-                    // var date = d3.time.format("%A").parse();
->>>>>>> master
-
-                    x0.domain(data.map(function (d) {
-                        return d.date;
-                    }));
-                    x1.domain(dataNames).rangeRoundBands([0, x0.rangeBand()]);
-                    y.domain([0, d3.max(data, function (d) {
-                        return d3.max(d.data, function (d) {
-                            return d.value;
-                        });
-                    })]);
-
-                    svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
-
-                    svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 2).attr("dy", ".30em").style("text-anchor", "end");
-
-                    var date = svg.selectAll(".date").data(data).enter().append("g").attr("class", "date").attr("transform", function (d) {
-                        return "translate(" + x0(d.date) + ",0)";
-                    });
-
-                    date.selectAll("rect").data(function (d) {
-                        return d.data;
-                    }).enter().append("rect").attr("width", x1.rangeBand()).attr("x", function (d) {
-                        return x1(d.name);
-                    }).attr("y", function (d) {
-                        return y(d.value);
-                    }).attr("height", function (d) {
-                        return height - y(d.value);
-                    }).style("fill", function (d) {
-                        return color(d.name);
-                    });
-
-                    var legend = svg.selectAll(".legend").data(dataNames).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
-                        return "translate(0," + i * 20 + ")";
-                    });
-
-                    legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", color);
-
-                    legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
-                        return d;
-                    });
-<<<<<<< HEAD
-                });
-            };
-            getData();
-=======
-                    // } //for loop
-                });
-            };
-            getData();
-
-            // }); //scope.watch
->>>>>>> master
-        } //link
-    }; //return
-}]); //directive
-'use strict';
-
-angular.module('domoApp').directive('lineChart', function () {
-    return {
-        restrict: "AE",
-        // controller: 'dashboardCtrl',
-        link: function link(scope, element) {
-            // scope.$watch('excelData', function () {
-            console.log(element);
-            var margin = { top: 20, right: 20, bottom: 30, left: 50 },
-                width = 960 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
-
-            var formatDate = d3.time.format("%d-%b-%y");
-
-            var x = d3.time.scale().range([0, width]);
-
-            var y = d3.scale.linear().range([height, 0]);
-
-            var xAxis = d3.svg.axis().scale(x).orient("bottom");
-
-            var yAxis = d3.svg.axis().scale(y).orient("left");
-
-            var line = d3.svg.line().x(function (d) {
-                return x(d.date);
-            }).y(function (d) {
-                return y(d.close);
-            });
-
-            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            d3.tsv("data.tsv", type, function (error, data) {
-                if (error) throw error;
-
-                x.domain(d3.extent(data, function (d) {
-                    return d.date;
-                }));
-                y.domain(d3.extent(data, function (d) {
-                    return d.close;
-                }));
-
-                svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
-
-                svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("Price ($)");
-
-                svg.append("path").datum(data).attr("class", "line").attr("d", line);
-            });
-
-            function type(d) {
-                d.date = formatDate.parse(d.date);
-                d.close = +d.close;
-                return d;
-            }
-
-            // }); //scope.watch
-        } //link
-    };
-});
-'use strict';
-
-angular.module('domoApp').directive('graphs', function () {
-  return {
-    retrict: "AE",
-    templateUrl: 'app/components/dashboard/graphs/graphs.html',
-    // controller: 'graphCtrl',
-    scope: {
-      graphType: '=',
-      graphData: '='
-    }
-  };
-});
-'use strict';
-
-angular.module('domoApp').directive('pieChart', function () {
-    return {
-        restrict: "AE",
-        scope: {
-            graphData: '='
-        },
-        link: function link(scope, element) {
-            // scope.$watch('excelData', function () {
-
-            // var dataset = scope.excelData[0];
-            var dataset = [5, 10, 20, 45, 6, 25];
-
-            var pie = d3.layout.pie();
-            var w = 230;
-            var h = 250;
-            var color = d3.scale.ordinal().range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
-            function randomColor() {
-                return color([Math.floor(Math.random() * 5)]);
-            }
-            var outerRadius = w / 2;
-            var innerRadius = w / 4; //change this for the
-            //arcs require inner and outer radii
-            var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
-
-            //Create SVG element
-            var svg = d3.select(element[0]).append("svg").attr("width", w).attr("height", h);
-
-            //Set up groups
-            var arcs = svg.selectAll("g.arc").data(pie(dataset)).enter().append("g").attr("class", "arc").attr("transform", "translate( " + outerRadius + ", " + outerRadius + " )");
-
-            //paths - SVG’s answer to drawing irregular forms
-            //Draw arc paths
-            arcs.append("path") //within each new g, we append a path. A paths path description is defined in the d attribute.
-            .attr("fill", function (d, i) {
-                return color(i);
-            }).attr("d", arc).on("mouseover", function (d) {
-                d3.select(this).attr("fill", "#f92");
-            }).on("mouseout", function (d) {
-                d3.select(this).transition().duration(250).attr("fill", randomColor());
-            });
-            //labels
-            arcs.append("text").attr("transform", function (d) {
-                return "translate(" + arc.centroid(d) + ")"; //A centroid is the calculated center point of any shape
-            }).attr("text-anchor", "middle").attr("fill", "white").text(function (d) {
-                return d.value; //pie-ified data has to return d.value
-            });
-
-            //Makes Graph responsive
-            d3.select(window).on('resize', function () {
-                // update width
-                w = parseInt(d3.select(element[0]).style('width'), 10);
-                w = w - margin.left - margin.right;
-                // reset x range
-                xScale.range([0, w]);
-
-                d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
-
-                svg.selectAll('g.arc.background').attr('width', w);
-
-                svg.selectAll('g.arc.formatAs').attr('width', function (d) {
-                    return xScale(d.formatAs);
-                });
-
-                // update median ticks
-                var median = d3.median(svg.selectAll('.bar').data(), function (d) {
-                    return d.formatAs;
-                });
-
-                svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
-                // update axes
-                svg.select('.x.axis.top').call(xAxis.orient('top'));
-                svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
-            }); //responsive
-            // }); //scope.watch
-        } //link
-    };
-});
-'use strict';
-
-angular.module('domoApp').directive('scatterPlot', function () {
-  return {
-    restrict: "AE",
-    scope: {
-      graphData: '='
-    },
-    link: function link(scope, element) {
-
-      // var dataset = scope.graphData;
-      var dataset = [[5, 20], [480, 90], [250, 50], [100, 33], [330, 95], [410, 12], [475, 44], [25, 67], [85, 21], [220, 88], [300, 150]];
-      var margin = { top: 20, right: 20, bottom: 30, left: 40 };
-      var w = 450 - margin.left - margin.right;
-      var h = 300 - margin.top - margin.bottom;
-      var padding = 35;
-      var formatAs = d3.format(".1"); //when data is messy
-
-      var xScale = d3.scale.linear().domain([0, d3.max(dataset, function (d) {
-        return d[0];
-      })]).range([padding, w - padding * 2]);
-
-      var yScale = d3.scale.linear().domain([0, d3.max(dataset, function (d) {
-        return d[1];
-      })]).range([h - padding, padding]);
-
-      var rScale = d3.scale.linear().domain([0, d3.max(dataset, function (d) {
-        return d[1];
-      })]).range([2, 5]);
-      //define x-axis
-      var xAxis = d3.svg.axis().scale(xScale) //which scale to operate
-      .orient('bottom') //where
-      .ticks(5) //how many little lines(ticks) on the axis
-      .tickFormat(formatAs);
-
-      //Define Y axis
-      var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5).tickFormat(formatAs);
-
-      //create svg
-      var svg = d3.select(element[0]).append('svg').attr('width', w).attr('height', h);
-
-      //create circles
-      svg.selectAll('circle').data(dataset).enter().append('circle').attr({
-        cx: function cx(d) {
-          return xScale(d[0]);
-        },
-        cy: function cy(d) {
-          return yScale(d[1]);
-        },
-        r: function r(d) {
-          return rScale(d[1]);
-        }
-      });
-
-      //labels
-      svg.selectAll("text").data(dataset).enter().append("text").text(function (d) {
-        return d[0] + "," + d[1];
-      }).attr({
-        x: function x(d) {
-          return xScale(d[0]) + 5;
-        },
-        y: function y(d) {
-          return yScale(d[1]) + 3;
-        },
-        "font-family": "sans-serif",
-        "font-size": "11px",
-        "fill": "#5DAEF8"
-      });
-
-      // create x-axis
-      svg.append('g').attr('class', 'x axis') //assigns 'x' and 'axis' class
-      .attr("transform", "translate(0," + (h - padding) + ")") //pushes line to bottom
-      .call(xAxis); //takes the incoming selection and hands it off to any function
-
-      //Create Y axis
-      svg.append("g").attr("class", "y axis").attr("transform", "translate(" + padding + ",0)").call(yAxis);
-
-      //random button
-      d3.select(element[0]).on('click', function () {
-
-        //Update scale domains
-        xScale.domain([0, d3.max(dataset, function (d) {
-          return d[0];
-        })]);
-        yScale.domain([0, d3.max(dataset, function (d) {
-          return d[1];
-        })]);
-
-        svg.selectAll('circle').data(dataset).transition().duration(1000).each("start", function () {
-          // <-- Executes at start of transition
-          d3.select(this) //selects the current element
-          .attr("fill", "#f92").attr("r", 7);
-        }).attr({
-          cx: function cx(d) {
-            return xScale(d[0]);
-          },
-          cy: function cy(d) {
-            return yScale(d[1]);
-          },
-          r: function r(d) {
-            return rScale(d[1]);
-          }
-        }).transition() // <-- 2nd transition
-        .duration(500).attr("fill", "black").attr("r", 2);
-
-        svg.selectAll("text").data(dataset).transition().duration(1000).text(function (d) {
-          return d[0] + "," + d[1];
-        }).attr({
-          x: function x(d) {
-            return xScale(d[0]) + 5;
-          },
-          y: function y(d) {
-            return yScale(d[1]) + 3;
-          },
-          "font-family": "sans-serif",
-          "font-size": "11px",
-          "fill": "#5DAEF8"
-        });
-        //update x-axis
-        svg.select(".x.axis").transition().duration(1000).call(xAxis);
-
-        //update y axis
-        svg.select(".y.axis").transition().duration(1000).call(yAxis);
-      }); //on click
-
-      //Makes Graph responsive
-      d3.select(window).on('resize', function () {
-        // update width
-        w = parseInt(d3.select(element[0]).style('width'), 10);
-        w = w - margin.left - margin.right;
-        // reset x range
-        xScale.range([0, w]);
-
-        d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
-
-        svg.selectAll('circle.background').attr('width', w);
-
-        svg.selectAll('circle.formatAs').attr('width', function (d) {
-          return xScale(d.formatAs);
-        });
-
-        // update median ticks
-        var median = d3.median(svg.selectAll('.bar').data(), function (d) {
-          return d.formatAs;
-        });
-
-        svg.selectAll('line.median').attr('x1', xScale(median)).attr('x2', xScale(median));
-        // update axes
-        svg.select('.x.axis.top').call(xAxis.orient('top'));
-        svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
-      });
-    } //link
-  };
-});
-'use strict';
-
-<<<<<<< HEAD
-angular.module('domoApp').directive('twitterBar', ['graphService', function (graphService) {
-    return {
-        restrict: "E",
-        link: function link(scope, element) {
-
-            var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-                width = 760 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
-
-            var x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1);
-
-            var x1 = d3.scale.ordinal();
-
-            var y = d3.scale.linear().range([height, 0]);
-
-            var color = d3.scale.ordinal().range(["#98abc5", "#f92"]);
-
-            var xAxis = d3.svg.axis().scale(x0).orient("bottom");
-
-            var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.format(".2s"));
-
-            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            var getData = function getData() {
-                graphService.getTwitterData().then(function (response) {
-                    console.log(response);
-
-                    var dataNames = ["retweets", "favorites"];
-
-                    var data = response;
-                    data.forEach(function (d) {
-                        d.data = dataNames.map(function (name) {
-                            return { name: name, value: +d[name] };
-                        });
-                    });
-
-                    x0.domain(data.map(function (d) {
-                        return d.date;
-                    }));
-                    x1.domain(dataNames).rangeRoundBands([0, x0.rangeBand()]);
-                    y.domain([0, d3.max(data, function (d) {
-                        return d3.max(d.data, function (d) {
-                            return d.value;
-                        });
-                    })]);
-
-                    svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
-
-                    svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 2).attr("dy", ".30em").style("text-anchor", "end");
-
-                    var date = svg.selectAll(".date").data(data).enter().append("g").attr("class", "date").attr("transform", function (d) {
-                        return "translate(" + x0(d.date) + ",0)";
-                    });
-
-                    date.selectAll("rect").data(function (d) {
-                        return d.data;
-                    }).enter().append("rect").attr("width", x1.rangeBand()).attr("x", function (d) {
-                        return x1(d.name);
-                    }).attr("y", function (d) {
-                        return y(d.value);
-                    }).attr("height", function (d) {
-                        return height - y(d.value);
-                    }).style("fill", function (d) {
-                        return color(d.name);
-                    });
-
-                    var legend = svg.selectAll(".legend").data(dataNames).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
-                        return "translate(0," + i * 20 + ")";
-                    });
-
-                    legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", color);
-
-                    legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
-                        return d;
-                    });
-                });
-            };
-            getData();
-        } //link
-    }; //return
-}]); //directive
-=======
 angular.module('domoApp').controller('infoCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
 'use strict';
 
@@ -1545,10 +1661,6 @@ angular.module('domoApp').controller('settingsCtrl', ["$scope", "dashboardServic
 'use strict';
 
 angular.module('domoApp').controller('twitterCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
->>>>>>> master
-'use strict';
-
-angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
 'use strict';
 
 //this will parse data from JSON into usable data for D3.
