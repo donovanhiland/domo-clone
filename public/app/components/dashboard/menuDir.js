@@ -4,9 +4,7 @@ angular.module('domoApp').directive('menuDirective', function(){
       templateUrl: './app/components/dashboard/menuTmpl.html',
       link: function (scope, element, attrs) {
         $('.hamburger').click(function(){
-          console.log('click');
-           $('.dash-nav-mobile-menu').find('ul').slideToggle();
-           //test
+           $('.dash-nav-mobile-menu').stop().slideToggle();
         })
       }
     };

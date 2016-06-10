@@ -17,24 +17,28 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap']).config(["$stateProvider
     templateUrl: './app/components/dashboard/dashboardTmpl.html',
     controller: 'dashboardCtrl',
     resolve: {
-      checkAuth: ["$state", "dashboardService", function checkAuth($state, dashboardService) {
-        dashboardService.checkAuth().then(function (response) {
+
+      user: ["$state", "dashboardService", function user($state, dashboardService) {
+        return dashboardService.checkAuth().then(function (response) {
+          console.log(response);
           if (response === 'unauthorized') {
             $state.go('home');
             alert('Sign in to view dashboard');
+          } else {
+            return response;
           }
-          return response;
         });
       }]
+
     }
   }).state('dashboard.overview', {
     url: '/overview',
     templateUrl: './app/components/dashboard/overview/dashboard.overview.html',
-    controller: 'dashboardCtrl'
+    controller: 'overviewCtrl'
   }).state('dashboard.twitter', {
-    url: '/twitter',
-    templateUrl: './app/components/dashboard/globe/dashboard.twitterTmpl.html'
-    // controller: 'globeCtrl'
+    url: '/dashboard',
+    templateUrl: './app/components/dashboard/twitter/twitterTmpl.html',
+    controller: 'twitterCtrl'
   }).state('dashboard.twitter-globe', {
     url: '/twitter-globe',
     templateUrl: './app/components/dashboard/globe/dashboard.twitter-globe.html',
@@ -114,213 +118,180 @@ angular.module("domoApp").service("loginService", ["$http", function ($http) {
 }]);
 'use strict';
 
-angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashboardService", "$state", "checkAuth", function ($scope, $log, dashboardService, $state, checkAuth) {
+angular.module("domoApp").controller('dashboardCtrl', ["$scope", "$log", "dashboardService", "$state", "user", function ($scope, $log, dashboardService, $state, user) {
 
-  $scope.user = checkAuth;
-  console.log(checkAuth);
-  $scope.card = {};
+    (function () {
+        dashboardService.getTwitterData({
+            screenName: 'devmtn'
+        }).then(function (response) {
+            $scope.twitterAnalysis = response;
+            console.log(response);
+        });
+    })();
 
-  $scope.setGraphType = function (graphType) {
-    $scope.card.graphType = graphType;
-    if (graphType === 'barChart') {
-      $scope.imageOpacity1 = { opacity: 1 };
-      $scope.imageOpacity2 = { opacity: .1 };
-      $scope.imageOpacity3 = { opacity: .1 };
-      $scope.imageOpacity4 = { opacity: .1 };
-    } else if (graphType === 'scatterPlot') {
-      $scope.imageOpacity1 = { opacity: .1 };
-      $scope.imageOpacity2 = { opacity: 1 };
-      $scope.imageOpacity3 = { opacity: .1 };
-      $scope.imageOpacity4 = { opacity: .1 };
-    } else if (graphType === 'pieChart') {
-      $scope.imageOpacity1 = { opacity: .1 };
-      $scope.imageOpacity2 = { opacity: .1 };
-      $scope.imageOpacity3 = { opacity: 1 };
-      $scope.imageOpacity4 = { opacity: .1 };
-    } else if (graphType === 'lineGraph') {
-      $scope.imageOpacity1 = { opacity: .1 };
-      $scope.imageOpacity2 = { opacity: .1 };
-      $scope.imageOpacity3 = { opacity: .1 };
-      $scope.imageOpacity4 = { opacity: 1 };
-    }
-  };
+    $scope.user = user;
+    console.log($scope.user);
+    $scope.card = {};
 
-  //drop down
-  // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
-  //create card
-  $scope.createCard = function (newTitle) {
-    $scope.card.title = newTitle;
-    // $scope.card.user = $scope.user._id;
-    //$scope.card.dataElement = excel crap
-    dashboardService.createCard($scope.card).then(function (response) {
-      $scope.readCard();
-      $scope.newTitle = "";
-    });
-  };
-  $scope.sendText = function (message) {
-    var newMessage = {
-      to: ["+12406780268"],
-      from: "+18013969302",
-      message: message
+    $scope.setGraphType = function (graphType) {
+        $scope.card.graphType = graphType;
+        if (graphType === 'barChart') {
+            $scope.imageOpacity1 = {
+                opacity: 1
+            };
+            $scope.imageOpacity2 = {
+                opacity: .1
+            };
+            $scope.imageOpacity3 = {
+                opacity: .1
+            };
+            $scope.imageOpacity4 = {
+                opacity: .1
+            };
+        } else if (graphType === 'scatterPlot') {
+            $scope.imageOpacity1 = {
+                opacity: .1
+            };
+            $scope.imageOpacity2 = {
+                opacity: 1
+            };
+            $scope.imageOpacity3 = {
+                opacity: .1
+            };
+            $scope.imageOpacity4 = {
+                opacity: .1
+            };
+        } else if (graphType === 'pieChart') {
+            $scope.imageOpacity1 = {
+                opacity: .1
+            };
+            $scope.imageOpacity2 = {
+                opacity: .1
+            };
+            $scope.imageOpacity3 = {
+                opacity: 1
+            };
+            $scope.imageOpacity4 = {
+                opacity: .1
+            };
+        } else if (graphType === 'lineGraph') {
+            $scope.imageOpacity1 = {
+                opacity: .1
+            };
+            $scope.imageOpacity2 = {
+                opacity: .1
+            };
+            $scope.imageOpacity3 = {
+                opacity: .1
+            };
+            $scope.imageOpacity4 = {
+                opacity: 1
+            };
+        }
     };
-    dashboardService.sendText(newMessage).then(function (response) {
-      $scope.message = response;
-    });
-  };
-  $scope.sendEmail = function (email) {
-    dashboardService.sendEmail({
-      toField: $scope.email.toField,
-      subjectField: $scope.email.subjectField,
-      textField: $scope.email.textField
-    }).then(function (response) {
-      clear();
-      console.log("sendEmail", response);
-    });
-  };
 
-  var clear = function clear() {
-    $scope.email = null;
-    return alert("email received!");
-  };
+    //drop down
+    // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+    //create card
+    $scope.createCard = function (newTitle) {
+        $scope.card.title = newTitle;
+        // $scope.card.user = $scope.user._id;
+        //$scope.card.dataElement = excel crap
+        dashboardService.createCard($scope.card).then(function (response) {
+            $scope.readCard();
+            $scope.newTitle = "";
+        });
+    };
+    $scope.sendText = function (message) {
+        var newMessage = {
+            to: ["+12406780268"],
+            from: "+18013969302",
+            message: message
+        };
+        dashboardService.sendText(newMessage).then(function (response) {
+            $scope.message = response;
+        });
+    };
+    $scope.sendEmail = function (email) {
+        dashboardService.sendEmail({
+            toField: $scope.email.toField,
+            subjectField: $scope.email.subjectField,
+            textField: $scope.email.textField
+        }).then(function (response) {
+            clear();
+            console.log("sendEmail", response);
+        });
+    };
 
-  $scope.readCard = function () {
-    dashboardService.readCard().then(function (response) {
-      $scope.cards = response;
-    });
-  };
-  $scope.readCard();
-  // $scope.user = user;
+    var clear = function clear() {
+        $scope.email = null;
+        return alert("email received!");
+    };
 
-  $scope.getCardByUser = function () {
-    dashboardService.getCardByUser(). /*$scope.user._id*/then(function (results) {
-      $scope.userCards = results;
-    });
-  };
+    $scope.readCard = function () {
+        dashboardService.readCard().then(function (response) {
+            $scope.cards = response;
+        });
+    };
+    $scope.readCard();
+    // $scope.user = user;
 
-  $scope.deleteCard = function (id) {
-    dashboardService.deleteCard(id).then(function (results) {
-      $scope.readCard();
-    });
-  };
-  $scope.deleteCard();
-  $scope.readCard();
+    $scope.getCardByUser = function () {
+        dashboardService.getCardByUser(). /*$scope.user._id*/then(function (results) {
+            $scope.userCards = results;
+        });
+    };
+
+    $scope.deleteCard = function (id) {
+        dashboardService.deleteCard(id).then(function (results) {
+            $scope.readCard();
+        });
+    };
+    $scope.deleteCard();
+    $scope.readCard();
+
+    // twitter view
+
+    // (function() {
+    //   dashboardService.getTwitterData({
+    //     screenName: 'devmtn'
+    //   })
+    //     .then(function(response){
+    //       $scope.twitterAnalysis = response;
+    //       console.log(response);
+    //     })
+    //   })();
 }]).factory("excelReader", ['$q', '$rootScope', function ($q, $rootScope) {
-  var _this = this;
+    var _this = this;
 
-  var service = function service(data) {
-    angular.extend(_this, data);
-  };
-  service.readFile = function (file, showPreview) {
-    var deferred = $q.defer();
-    XLSXReader(file, showPreview, function (data) {
-      $rootScope.$apply(function () {
-        deferred.resolve(data);
-      });
-    });
-    return deferred.promise;
-  };
-  return service;
+    var service = function service(data) {
+        angular.extend(_this, data);
+    };
+    service.readFile = function (file, showPreview) {
+        var deferred = $q.defer();
+        XLSXReader(file, showPreview, function (data) {
+            $rootScope.$apply(function () {
+                deferred.resolve(data);
+            });
+        });
+        return deferred.promise;
+    };
+    return service;
 }]).controller('excelController', ["$scope", "excelReader", function ($scope, excelReader) {
 
-  $scope.json_string = "";
-  $scope.fileChanged = function (files) {
-    $scope.isProcessing = true;
-    $scope.sheets = [];
-    $scope.excelFile = files[0];
-    excelReader.readFile($scope.excelFile, true).then(function (xlsxData) {
-      $scope.sheets = xlsxData.sheets;
-      $scope.isProcessing = false;
-    });
-  };
-  $scope.updateJSONString = function () {
-    $scope.excelData = $scope.sheets[$scope.selectedSheetName];
-    $scope.excelData = $scope.excelData.data;
-  };
-}]);
-'use strict';
-
-angular.module('domoApp').service('dashboardService', ["$http", function ($http) {
-
-    this.checkAuth = function () {
-        return $http({
-            method: 'GET',
-            url: '/checkAuth'
-        }).then(function (response) {
-            return response.data;
+    $scope.json_string = "";
+    $scope.fileChanged = function (files) {
+        $scope.isProcessing = true;
+        $scope.sheets = [];
+        $scope.excelFile = files[0];
+        excelReader.readFile($scope.excelFile, true).then(function (xlsxData) {
+            $scope.sheets = xlsxData.sheets;
+            $scope.isProcessing = false;
         });
     };
-
-    this.createCard = function (card) {
-        return $http({
-            method: "POST",
-            url: "/card",
-            data: card
-
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.readCard = function () {
-        return $http({
-            method: "GET",
-            url: "/card"
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.getCardByUser = function (id) {
-        return $http.get('/card?user=' + id).then(function (response) {
-            return response.data;
-        });
-    };
-    this.deleteCard = function (id) {
-        return $http({
-            method: "DELETE",
-            url: "/card/" + id
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-
-    // alerts (email, text)
-    this.sendText = function (message) {
-        return $http({
-            method: "POST",
-            url: "/text",
-            data: message
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.sendEmail = function (email) {
-        return $http({
-            method: "POST",
-            url: "/email",
-            data: email
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.getCurrentUser = function (id) {
-        return $http({
-            method: "GET",
-            url: "/me"
-        }).then(function (response) {
-            return response.data;
-        });
-    };
-    this.updateUser = function (user, newpass) {
-        if (newpass.password) {
-            user.password = newpass.password;
-        }
-        console.log(user);
-        return $http({
-            method: "PUT",
-            url: "/users/" + user._id,
-            data: user
-        }).then(function (response) {
-            return response.data;
-        });
+    $scope.updateJSONString = function () {
+        $scope.excelData = $scope.sheets[$scope.selectedSheetName];
+        $scope.excelData = $scope.excelData.data;
     };
 }]);
 'use strict';
@@ -331,9 +302,7 @@ angular.module('domoApp').directive('menuDirective', function () {
     templateUrl: './app/components/dashboard/menuTmpl.html',
     link: function link(scope, element, attrs) {
       $('.hamburger').click(function () {
-        console.log('click');
-        $('.dash-nav-mobile-menu').find('ul').slideToggle();
-        //test
+        $('.dash-nav-mobile-menu').stop().slideToggle();
       });
     }
   };
@@ -781,9 +750,6 @@ angular.module('domoApp').controller('globeCtrl', ["$scope", function ($scope) {
     xhr.send(null);
   }
 }]);
-'use strict';
-
-angular.module('domoApp').controller('infoCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
 'use strict';
 
 angular.module('domoApp').directive('barChart', function () {
@@ -1326,6 +1292,12 @@ angular.module('domoApp').directive('scatterPlot', function () {
 });
 'use strict';
 
+angular.module('domoApp').controller('infoCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
+'use strict';
+
+angular.module('domoApp').controller('overviewCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
+'use strict';
+
 angular.module('domoApp').controller('settingsCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
     $scope.getCurrentUser = function () {
         dashboardService.getCurrentUser().then(function (response) {
@@ -1349,64 +1321,10 @@ angular.module('domoApp').controller('settingsCtrl', ["$scope", "dashboardServic
 }]);
 'use strict';
 
-angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
+angular.module('domoApp').controller('twitterCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
 'use strict';
 
-/**
- * @author alteredq / http://alteredqualia.com/
- * @author mr.doob / http://mrdoob.com/
- */
-
-Detector = {
-
-  canvas: !!window.CanvasRenderingContext2D,
-  webgl: function () {
-    try {
-      return !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
-    } catch (e) {
-      return false;
-    }
-  }(),
-  workers: !!window.Worker,
-  fileapi: window.File && window.FileReader && window.FileList && window.Blob,
-
-  getWebGLErrorMessage: function getWebGLErrorMessage() {
-
-    var domElement = document.createElement('div');
-
-    domElement.style.fontFamily = 'monospace';
-    domElement.style.fontSize = '13px';
-    domElement.style.textAlign = 'center';
-    domElement.style.background = '#eee';
-    domElement.style.color = '#000';
-    domElement.style.padding = '1em';
-    domElement.style.width = '475px';
-    domElement.style.margin = '5em auto 0';
-
-    if (!this.webgl) {
-
-      domElement.innerHTML = window.WebGLRenderingContext ? ['Sorry, your graphics card doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>'].join('\n') : ['Sorry, your browser doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a><br/>', 'Please try with', '<a href="http://www.google.com/chrome">Chrome</a>, ', '<a href="http://www.mozilla.com/en-US/firefox/new/">Firefox 4</a> or', '<a href="http://nightly.webkit.org/">Webkit Nightly (Mac)</a>'].join('\n');
-    }
-
-    return domElement;
-  },
-
-  addGetWebGLMessage: function addGetWebGLMessage(parameters) {
-
-    var parent, id, domElement;
-
-    parameters = parameters || {};
-
-    parent = parameters.parent !== undefined ? parameters.parent : document.body;
-    id = parameters.id !== undefined ? parameters.id : 'oldie';
-
-    domElement = Detector.getWebGLErrorMessage();
-    domElement.id = id;
-
-    parent.appendChild(domElement);
-  }
-
-};
+angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
 'use strict';
 
 //this will parse data from JSON into usable data for D3.
@@ -5873,3 +5791,60 @@ if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
 	};
 	if (typeof module !== 'undefined' && require.main === module) exports.main(process.argv.slice(2));
 }
+'use strict';
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ * @author mr.doob / http://mrdoob.com/
+ */
+
+Detector = {
+
+  canvas: !!window.CanvasRenderingContext2D,
+  webgl: function () {
+    try {
+      return !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
+    } catch (e) {
+      return false;
+    }
+  }(),
+  workers: !!window.Worker,
+  fileapi: window.File && window.FileReader && window.FileList && window.Blob,
+
+  getWebGLErrorMessage: function getWebGLErrorMessage() {
+
+    var domElement = document.createElement('div');
+
+    domElement.style.fontFamily = 'monospace';
+    domElement.style.fontSize = '13px';
+    domElement.style.textAlign = 'center';
+    domElement.style.background = '#eee';
+    domElement.style.color = '#000';
+    domElement.style.padding = '1em';
+    domElement.style.width = '475px';
+    domElement.style.margin = '5em auto 0';
+
+    if (!this.webgl) {
+
+      domElement.innerHTML = window.WebGLRenderingContext ? ['Sorry, your graphics card doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>'].join('\n') : ['Sorry, your browser doesn\'t support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a><br/>', 'Please try with', '<a href="http://www.google.com/chrome">Chrome</a>, ', '<a href="http://www.mozilla.com/en-US/firefox/new/">Firefox 4</a> or', '<a href="http://nightly.webkit.org/">Webkit Nightly (Mac)</a>'].join('\n');
+    }
+
+    return domElement;
+  },
+
+  addGetWebGLMessage: function addGetWebGLMessage(parameters) {
+
+    var parent, id, domElement;
+
+    parameters = parameters || {};
+
+    parent = parameters.parent !== undefined ? parameters.parent : document.body;
+    id = parameters.id !== undefined ? parameters.id : 'oldie';
+
+    domElement = Detector.getWebGLErrorMessage();
+    domElement.id = id;
+
+    parent.appendChild(domElement);
+  }
+
+};

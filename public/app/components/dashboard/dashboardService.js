@@ -60,6 +60,20 @@ angular.module('domoApp').service('dashboardService', function($http) {
             return response.data;
         });
     };
+    // twitter view
+
+    this.getTwitterData = (screenname) => {
+      return $http({
+        method: "POST",
+        url: "/tweets/analysis",
+        data: screenname
+      }).then(function(response){
+          return response.data;
+      });
+    };
+
+})
+
     this.getCurrentUser = function(id) {
        return $http({
              method: "GET",
@@ -82,3 +96,4 @@ angular.module('domoApp').service('dashboardService', function($http) {
          });
      };
 });
+>>>>>>> master
