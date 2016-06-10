@@ -54,6 +54,7 @@ header {
       }
       .engagement-data-container {
         width: 40vw;
+        margin-top: 30px;
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
@@ -100,7 +101,7 @@ header {
             color: $domo-blue;
             margin: 5px;
             margin-top: 10px;
-            margin-bottom: 0px;
+            margin-bottom: 5px;
           }
         }
         .line {
@@ -113,11 +114,12 @@ header {
         }
         .engagement-retweets {
           display: flex;
-          justify-content: center;
+          flex-direction: column;
+          align-items: center;
 
           h3 {
             font-family: $domo-font;
-            font-size: 15px;
+            font-size: 20px;
             font-weight: 600;
             color: #fff;
             margin: 5px;
@@ -132,11 +134,12 @@ header {
         }
         .engagement-favorites {
           display: flex;
-          justify-content: center;
+          flex-direction: column;
+          align-items: center;
 
           h3 {
             font-family: $domo-font;
-            font-size: 15px;
+            font-size: 20px;
             font-weight: 600;
             color: #fff;
             margin: 5px;
@@ -149,40 +152,63 @@ header {
             margin: 5px;
           }
         }
-        .line2 {
-          display: flex;
-          justify-content: center;
-
-          hr {
-            color: #fff;
-            width: 15vw;
-          }
-        }
-        .engagement-daily {
+        .engagement-hour {
           display: flex;
           flex-direction: column;
-          justify-content: flex-start;
+          align-items: center;
 
           h3 {
-            align-self: center;
             font-family: $domo-font;
-            font-size: 15px;
+            font-size: 20px;
             font-weight: 600;
             color: #fff;
             margin: 5px;
           }
           h1 {
-            align-self: center;
             font-family: $domo-font;
             font-size: 15px;
             font-weight: 600;
             color: $domo-blue;
             margin: 5px;
-            margin-bottom: -2px;
-            margin-top: 0px;
           }
         }
       }
     }
   }
 }
+
+
+
+// .line2 {
+//   display: flex;
+//   justify-content: center;
+//
+//   hr {
+//     color: #fff;
+//     width: 15vw;
+//   }
+// }
+// .engagement-daily {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//
+//   h3 {
+//     align-self: center;
+//     font-family: $domo-font;
+//     font-size: 15px;
+//     font-weight: 600;
+//     color: #fff;
+//     margin: 5px;
+//   }
+//   h1 {
+//     align-self: center;
+//     font-family: $domo-font;
+//     font-size: 15px;
+//     font-weight: 600;
+//     color: $domo-blue;
+//     margin: 5px;
+//     margin-bottom: -2px;
+//     margin-top: 0px;
+//   }
+// }
