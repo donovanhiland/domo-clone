@@ -6,8 +6,6 @@ angular.module('domoApp')
         graphData: '=',
       },
       link: function (scope, element) {
-        // scope.$watch('excelData', function () {
-
         // console.log(scope.graphData);
 
         // var dataset = scope.graphData;
@@ -156,7 +154,6 @@ angular.module('domoApp')
             svg.select('.x.axis.top').call(xAxis.orient('top'));
             svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
         });
-      // }); //scope.watch
     } //link
   } //return
 }) //directive

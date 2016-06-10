@@ -1,12 +1,11 @@
 angular.module('domoApp')
-  .directive('groupedBar', ['graphService', function (graphService) {
+  .directive('twitterBar', ['graphService', function (graphService) {
     return {
       restrict: "E",
       link: function (scope, element) {
-        // scope.$watch('excelData', function () {
-    var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
+    width = 760 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
     var x0 = d3.scale.ordinal()
@@ -36,7 +35,7 @@ angular.module('domoApp')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
      let getData = () => {
-      graphService.getData().then((response) => {
+      graphService.getTwitterData().then((response) => {
         console.log(response);
 
         let dataNames = ["retweets", "favorites"];
@@ -47,13 +46,6 @@ angular.module('domoApp')
             return {name: name, value: +d[name]};
            });
         });
-        // for (var i = 0; i < data.length; i++) {
-          // console.log(data[i]);
-          // data = data[i];
-
-          //the date gives 2016-06-08T22:35:08.000Z
-          // var date = d3.time.format("%A").parse();
-
 
           x0.domain(data.map(function(d) {return d.date;}));
           x1.domain(dataNames).rangeRoundBands([0, x0.rangeBand()]);
@@ -83,7 +75,7 @@ angular.module('domoApp')
               .data(function(d) { return d.data; })
             .enter().append("rect")
               .attr("width", x1.rangeBand())
-              .attr("x", function(d) { return x1(d.name);})
+              .attr("x", function(d) { return x1(d.name)})
               .attr("y", function(d) {return y(d.value);})
               .attr("height", function(d) { return height - y(d.value); })
               .style("fill", function(d) { return color(d.name); });
@@ -106,13 +98,16 @@ angular.module('domoApp')
               .attr("dy", ".35em")
               .style("text-anchor", "end")
               .text(function(d) { return d; });
+<<<<<<< HEAD:public/app/components/dashboard/graphs/twitterBar.js
+      })
+  }
+=======
         // } //for loop
       });
     };
+>>>>>>> master:public/app/components/dashboard/graphs/groupedBar.js
     getData();
 
-
-      // }); //scope.watch
     } //link
   }; //return
 }]); //directive
