@@ -1,5 +1,5 @@
 angular.module("domoApp")
-    .controller('dashboardCtrl',($scope, $log, dashboardService, $state, user) => {
+    .controller('dashboardCtrl', function($scope, $log, dashboardService, $state, user) {
 
         (() => {
             dashboardService.getTwitterData({
@@ -10,7 +10,7 @@ angular.module("domoApp")
                 });
         })();
 
-        $scope.user = user;
+        // $scope.user = user;
         $scope.card = {};
 
         $scope.setGraphType = (graphType) => {
@@ -143,7 +143,7 @@ angular.module("domoApp")
     })
 
 .factory("excelReader", ['$q', '$rootScope',
-        ($q, $rootScope) => {
+        function($q, $rootScope) {
             let service = (data) => {
                 angular.extend(this, data);
             };
@@ -159,7 +159,7 @@ angular.module("domoApp")
             return service;
         }
     ])
-    .controller('excelController', ($scope, excelReader) => {
+    .controller('excelController', function($scope, excelReader) {
 
         $scope.json_string = "";
         $scope.fileChanged = (files) => {

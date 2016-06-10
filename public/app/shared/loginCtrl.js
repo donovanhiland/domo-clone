@@ -1,24 +1,27 @@
 angular.module("domoApp").controller("loginCtrl", function($scope, loginService, $state) {
 
-  $scope.register = function() {
-    loginService.register($scope.newUser).then(function(response){
+  $scope.register = () => {
+    loginService.register($scope.newUser)
+    .then((response) =>{
       clear();
     });
   };
 
-  $scope.login = function() {
-    loginService.login($scope.credentials).then(function(response) {
+  $scope.login = () => {
+    loginService.login($scope.credentials)
+    .then((response) => {
+      console.log(response);
       $state.go('dashboard.overview');
-      $scope.user = response.data._id;
       $scope.credentials = null;
+      $scope.user = response.data._id;
       alert("Welcome " + response.data.firstname + " " + response.data.lastname);
-    })
-  }
+    });
+  };
 
-  var clear = function() {
+  let clear = () => {
     $scope.newUser = null;
     return alert("account creation successful");
-  }
+  };
 
 
 

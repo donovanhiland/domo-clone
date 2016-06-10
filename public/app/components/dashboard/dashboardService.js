@@ -1,4 +1,4 @@
-angular.module('domoApp').service('dashboardService', ($http) => {
+angular.module("domoApp").service("dashboardService", function($http){
 
     this.checkAuth = () => {
         return $http({
@@ -75,10 +75,19 @@ angular.module('domoApp').service('dashboardService', ($http) => {
         return $http({
             method: "POST",
             url: "/tweets/engagement",
-            data: {"screenName" : "devmtn"}
+            data: {"screenName": "devmtn"}
         }).then((response) => {
             return response.data;
         });
+    };
+    this.getTwitterData = () => {
+      return $http({
+              method: "POST",
+              url: "/tweets/engagement",
+              data: {"screenName": "devmtn"}
+          }).then((response) => {
+              return response.data;
+          });
     };
 
     this.getCurrentUser = (id) => {

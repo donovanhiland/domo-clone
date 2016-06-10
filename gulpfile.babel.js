@@ -47,4 +47,4 @@ gulp.task('watch', () =>  {
   gulp.watch(paths.sassSource, ['styles']);
 });
 
-gulp.task('default', ['watch', /*'js',*/ 'styles']);
+gulp.task('default', ['watch', 'js', 'styles']);

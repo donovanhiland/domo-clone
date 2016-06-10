@@ -26,7 +26,8 @@ module.exports = {
                 count: 200,
                 max_id: maxId
             }, (error, tweets, response) => {
-                if (error) console.log("Twitter Response Error : ", error);
+                if (error) console.log(error);
+                console.log(tweets.length);
                 let tweetInfo = {};
                 for (let i = 0; i < tweets.length - 1; i++) {
                     tweetInfo = {
@@ -40,12 +41,12 @@ module.exports = {
                         if (error) console.log(error);
                     });
                 }
-                counter += 200;
-                maxId = tweets[tweets.length - 1].id;
-                if (counter >= 3000 || tweets.length === 1) {
-                    res.status(200).send('tweets aggregated');
-                }
-                aggregateTweetsRecursive(screenName, maxId);
+                // counter += 200;
+                // maxId = tweets[tweets.length - 1].id;
+                // if (counter >= 3000 || tweets.length === 1) {
+                //     res.status(200).send('tweets aggregated');
+                // }
+                // aggregateTweetsRecursive(screenName, maxId);
             });
         };
         aggregateTweetsRecursive(req.body.screenName);
