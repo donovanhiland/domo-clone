@@ -305,8 +305,8 @@ path.area {
     display: flex;
     background-color: $domo-grey;
     justify-content: center;
-    #img-container {
-        // margin-top: 30px;
+    img {
+      margin-top: 30px;
   }
 }
 
@@ -328,12 +328,15 @@ path.area {
      background-color: $domo-grey;
      display: flex;
      justify-content: center;
-     color: white;
+     color: #fff;
+
      .div-settings {
-         background-color: $domo-text;
-         width: 35vw;
-         height: 40vh;
-         margin-top: 12%;
+      background-color: $domo-blue;
+      width: 55vw;
+      height: 50vh;
+      margin-top: 15vh;
+      border-radius: 1%;
+
          h3 {
              text-align: center;
              font-family: $domo-font;
@@ -344,6 +347,7 @@ path.area {
              label{
                margin-left: 20px;
                font-family: $domo-font;
+               font-weight: 300;
                letter-spacing: 1px;
              }
              .input-edit {
@@ -351,6 +355,10 @@ path.area {
                  margin-left: 20px;
                  border-radius: 0;
              }
+             .settings-button-container {
+               display: flex;
+               justify-content: center;
+
              .edit-profile-buttton {
                  display: flex;
                  justify-content: center;
@@ -372,6 +380,7 @@ path.area {
                  transition: all 0.3s ease-in-out;
                  text-decoration: none;
              }
+           }
          }
      }
   }
