@@ -7,12 +7,10 @@ angular.module("domoApp")
                 })
                 .then((response) => {
                     $scope.twitterAnalysis = response;
-                    console.log(response);
-                })
+                });
         })();
 
-        $scope.user = user
-        console.log($scope.user);
+        $scope.user = user;
         $scope.card = {};
 
         $scope.setGraphType = (graphType) => {

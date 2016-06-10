@@ -75,6 +75,7 @@ angular.module('domoApp')
               .data((d) => { return d.data; })
             .enter().append("rect")
               .attr("width", x1.rangeBand())
+
               .attr("x", (d) => { return x1(d.name)})
               .attr("y", (d) => {return y(d.value);})
               .attr("height", (d) => { return height - y(d.value); })
