@@ -5,7 +5,9 @@ angular.module('domoApp').directive('menuDirective', function(){
       link: function (scope, element, attrs) {
         $('.hamburger').click(function(){
            $('.dash-nav-mobile-menu').stop().slideToggle();
-        });
+        })
       }
     };
 })
+
+//test
