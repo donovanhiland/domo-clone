@@ -1,12 +1,11 @@
 angular.module('domoApp')
-  .directive('groupedBar', ['graphService', function (graphService) {
+  .directive('twitterBar', ['graphService', function (graphService) {
     return {
       restrict: "E",
       link: function (scope, element) {
-        // scope.$watch('excelData', function () {
-    var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
+    width = 760 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
     var x0 = d3.scale.ordinal()
@@ -36,7 +35,7 @@ angular.module('domoApp')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
      let getData = () => {
-      graphService.getData().then((response) => {
+      graphService.getTwitterData().then((response) => {
         console.log(response);
 
         let dataNames = ["retweets", "favorites"];
@@ -103,8 +102,6 @@ angular.module('domoApp')
   }
     getData();
 
-
-      // }); //scope.watch
     } //link
   } //return
 }]) //directive
