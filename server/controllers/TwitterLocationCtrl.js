@@ -219,7 +219,7 @@ module.exports = {
                     // find the highest tally so I can use it to scale the others based off of it
                     if (max === undefined || max < twitterLocations.data[i].count) max = twitterLocations.data[i].count;
                 }
-                let scaler = (1 / max);
+                let scaler = (0.75 / max);
                 for (let i = 0; i < twitterLocations.data.length; i++) {
                     // accepted format = [long, lat, mag, color(0 through list of colors defined)]
                     if(twitterLocations.data[i] !== 'date' && twitterLocations.data[i] !== 'cursorTracker') {

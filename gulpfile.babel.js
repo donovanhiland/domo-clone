@@ -15,16 +15,16 @@ const paths = {
 
 };
 
-gulp.task('js', () =>  {
-  return gulp.src(paths.jsSource)
-  .pipe(plumber())
-  .pipe(babel({
-    presets: ["es2015"]
-  }))
-  .pipe(concat('bundle.js'))
-  .pipe(annotate())
-  .pipe(gulp.dest('./public'));
-});
+// gulp.task('js', () =>  {
+//   return gulp.src(paths.jsSource)
+//   .pipe(plumber())
+//   .pipe(babel({
+//     presets: ["es2015"]
+//   }))
+//   .pipe(concat('bundle.js'))
+//   .pipe(annotate())
+//   .pipe(gulp.dest('./public'));
+// });
 
 // gulp.task('server', () => {
 //   return gulp.src(paths.serverSource)
@@ -43,8 +43,8 @@ gulp.task('styles', () => {
 });
 
 gulp.task('watch', () =>  {
-  gulp.watch(paths.jsSource, ['js']);
+  // gulp.watch(paths.jsSource, ['js']);
   gulp.watch(paths.sassSource, ['styles']);
 });
 
-gulp.task('default', ['watch', 'js', 'styles']);
+gulp.task('default', ['watch', /*'js',*/ 'styles']);

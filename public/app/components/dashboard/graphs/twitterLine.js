@@ -94,7 +94,7 @@ angular.module('domoApp')
               .attr("class", "area")
               .attr("d", function(d) { return line(d.values); })
               .style("stroke", function(d) { return color(d.name); })
-              .style("fill", function(d) { return color(d.name); })
+              .style("fill", function(d) { return color(d.name);});
 
           browser.append("text")
               .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
@@ -121,7 +121,7 @@ angular.module('domoApp')
         var is_area_plot = false;
         function transition() {
           var duration = 750;
-          var browser = svg.selectAll(".browser")
+          var browser = svg.selectAll(".browser");
           var transition = browser.transition()
               .delay(function(d, i) { return i * 1000; })
               .duration(duration);
@@ -162,5 +162,5 @@ angular.module('domoApp')
     // } //getData
 
     } //link
-  }
-}])
+  };
+}]);
