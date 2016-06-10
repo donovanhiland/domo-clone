@@ -87,6 +87,7 @@ $test-border: 1px red solid;
 }
 .dash-nav-mobile-menu {
   background-color: $domo-grey;
+  margin: -10px;
   ul {
     a {
       display: flex;
@@ -125,6 +126,12 @@ $test-border: 1px red solid;
 }
 @media screen and (min-width: 768px) {
   menu-directive {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dash-nav-mobile-menu {
     display: none;
   }
 }

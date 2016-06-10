@@ -25,7 +25,6 @@ const paths = {
 //   .pipe(annotate())
 //   .pipe(gulp.dest('./public'));
 // });
-//
 
 // gulp.task('server', () => {
 //   return gulp.src(paths.serverSource)
