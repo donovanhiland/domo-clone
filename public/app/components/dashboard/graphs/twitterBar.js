@@ -75,7 +75,7 @@ angular.module('domoApp')
               .data(function(d) { return d.data; })
             .enter().append("rect")
               .attr("width", x1.rangeBand())
-              .attr("x", function(d) { return x1(d.name)})
+              .attr("x", function(d) { return x1(d.name);})
               .attr("y", function(d) {return y(d.value);})
               .attr("height", function(d) { return height - y(d.value); })
               .style("fill", function(d) { return color(d.name); });
@@ -99,7 +99,7 @@ angular.module('domoApp')
               .style("text-anchor", "end")
               .text(function(d) { return d; });
       });
-    };
+  };
     getData();
 
     } //link
