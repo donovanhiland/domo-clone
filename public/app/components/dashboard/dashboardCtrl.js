@@ -1,11 +1,12 @@
 angular.module("domoApp")
     .controller('dashboardCtrl', function($scope, $log, dashboardService, $state, user) {
 
-        (() => {
+        (function() {
             dashboardService.getTwitterData({
                     screenName: 'devmtn'
                 })
-                .then((response) => {
+                .then(function (response) {
+                  console.log(response);
                     $scope.twitterAnalysis = response;
                 });
         })();

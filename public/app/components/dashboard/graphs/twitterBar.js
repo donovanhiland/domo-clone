@@ -1,11 +1,11 @@
 angular.module('domoApp')
-  .directive('twitterBar', ['dashboardService', (dashboardService) => {
+  .directive('twitterBar', ['graphService', function(graphService) {
     return {
       restrict: "E",
       link: (scope, element) => {
 
     let margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 760 - margin.left - margin.right,
+    width = 740 - margin.left - margin.right,
     height = 415 - margin.top - margin.bottom;
 
     let x0 = d3.scale.ordinal()
@@ -35,7 +35,7 @@ angular.module('domoApp')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
      let getData = () => {
-      dashboardService.getTwitterBarData().then((response) => {
+      graphService.getTwitterBarData().then((response) => {
         console.log(response);
 
         let dataNames = ["retweets", "favorites"];
