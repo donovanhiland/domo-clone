@@ -1397,6 +1397,12 @@ angular.module('domoApp').controller('infoCtrl', ["$scope", "dashboardService", 
 angular.module('domoApp').controller('overviewCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
 'use strict';
 
+angular.module('domoApp').controller('twitterCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
+'use strict';
+
+angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
+'use strict';
+
 angular.module('domoApp').controller('settingsCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
     $scope.getCurrentUser = function () {
         dashboardService.getCurrentUser().then(function (response) {
@@ -1418,12 +1424,6 @@ angular.module('domoApp').controller('settingsCtrl', ["$scope", "dashboardServic
         });
     };
 }]);
-'use strict';
-
-angular.module('domoApp').controller('twitterCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
-'use strict';
-
-angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
 'use strict';
 
 //this will parse data from JSON into usable data for D3.
