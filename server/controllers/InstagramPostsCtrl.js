@@ -1,8 +1,6 @@
 let ig = require('instagram-node').instagram();
 import config from '../config.js';
 
-console.log(config.instagram.INSTAGRAM_ACCESS_TOKEN);
-
 module.exports = {
 
     aggregateInstaPosts: (req, res, next) => {

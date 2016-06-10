@@ -69,7 +69,7 @@ app.post('/tweets/engagement', TwitterTweetsCtrl.tweetEngagement);
 app.post('/tweets/analysis', TwitterTweetsCtrl.tweetAnalysis);
 
 // Instagram Data Endpoints
-app.get('/insta', InstagramPostsCtrl.aggregateInstaPosts)
+app.get('/insta', InstagramPostsCtrl.aggregateInstaPosts);
 
 // MongoDB connection
 // mongoose.set('debug', true);
