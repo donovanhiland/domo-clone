@@ -68,6 +68,7 @@ module.exports = {
                 screenname: req.body.screenName
             })
             .exec((error, response) => {
+              // Declare variabled for data tracking and analysis
                 let tweets = response,
                     retweets = 0,
                     favorites = 0,
@@ -133,6 +134,7 @@ module.exports = {
                         Saturday: 0
                     },
                     tweetCount = tweets.length;
+                // loop through tweets, populate variabled for data analysis
                 _.forEach(tweets, (tweet) => {
                     tweetTime = moment(tweet.date).startOf('hour').format('LT');
                     tweetDay = moment(tweet.date).format('dddd');

@@ -116,6 +116,10 @@ $test-border: 1px red solid;
   .dash-nav-bottom {
     display: none !important;
     ul {
+      li {
+        font-size: 10px !important;
+        margin: 2px !important;
+      }
     }
   }
 }
