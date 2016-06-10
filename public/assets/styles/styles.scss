@@ -17,6 +17,11 @@ $test-border: 1px red solid;
 
 ////////////////////////////////
 
+html,body
+{
+    overflow-x: hidden;
+}
+
 .nav-section {
   height: 10vh;
   width: 100vw;

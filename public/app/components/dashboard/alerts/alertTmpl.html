@@ -1,24 +1,30 @@
-<form role="form">
-    <div class="form-group">
-        <label for="email">Email address:</label>
-        <input type="email" class="form-control" ng-model="email.toField" id="email">
-    </div>
-    <div class="form-group">
-        <label for="pwd">Subject:</label>
-        <input type="text" class="form-control" id="pwd" ng-model="email.subjectField">
-    </div>
-    <div class="form-group">
-        <label for="pwd">Message:</label>
-        <input type="text" class="form-control" id="pwd" ng-model="email.textField">
-    </div>
-    <div class="checkbox">
+<section class="alerts-section">
+  <form role="form">
+      <div class="form-group">
+          <label for="email" id="pwd" class="form-text">Email address:</label>
+          <input type="email" class="form-control test" ng-model="email.toField" id="email">
+      </div>
+      <div class="form-group">
+          <label for="pwd" class="form-text">Subject:</label>
+          <input type="text" class="form-control" id="pwd" ng-model="email.subjectField">
+      </div>
+      <div class="form-group">
+          <label for="pwd" class="form-text">Message:</label>
+          <input type="text" class="form-control" id="pwd" ng-model="email.textField">
+      </div>
+      <div class="checkbox">
 
-    </div>
-    <button type="submit" class="btn btn-default" ng-click="sendEmail(email)">Submit</button>
-</form>
+      </div>
+      <div class="form-display">
+        <button type="submit" ng-click="sendEmail(email)" class="form-btn">Submit</button>
+      </div>
+  </form>
 
-<div class="message-sender form-group">
-    <h5>Text your FWBS:</h5>
-    <textarea class="message-input-box form-control" rows="2" ng-model="message" placeholder="message..."></textarea>
-    <button class="send-message-button btn btn-raised btn-danger" type="submit" ng-click="sendText(message)">Send Text</button>
-</div>
+  <div class="message-sender form-group">
+      <h5 class="form-text">Text your Team:</h5>
+      <textarea class="message-input-box form-control" rows="2" ng-model="message" placeholder="message..."></textarea>
+      <div class="form-display">
+        <button type="submit" ng-click="sendText(message)" class="form-btn">Send Text</button>
+      </div>
+  </div>
+</section>
