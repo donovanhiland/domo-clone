@@ -15,27 +15,32 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       templateUrl: './app/components/dashboard/dashboardTmpl.html',
       controller: 'dashboardCtrl',
       resolve: {
-        checkAuth: function($state, dashboardService) {
-          dashboardService.checkAuth()
+
+        user: function($state, dashboardService) {
+            return dashboardService.checkAuth()
             .then(function(response) {
+              console.log(response);
               if (response === 'unauthorized') {
                 $state.go('home');
                 alert('Sign in to view dashboard');
               }
-              return response;
+              else {
+                return response;
+              }
             });
+          }
+
         }
-      }
     })
     .state('dashboard.overview', {
       url: '/dashboard',
       templateUrl: './app/components/dashboard/overview/dashboard.overview.html',
-      controller: 'dashboardCtrl'
+      controller: 'overviewCtrl'
     })
     .state('dashboard.twitter', {
       url: '/dashboard',
-      templateUrl: './app/components/dashboard/globe/dashboard.twitterTmpl.html'
-      // controller: 'globeCtrl'
+      templateUrl: './app/components/dashboard/twitter/twitterTmpl.html',
+      controller: 'twitterCtrl'
     })
     .state('dashboard.twitter-globe', {
       url: '/dashboard',
@@ -50,7 +55,7 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
     .state('dashboard.info', {
       url: '/dashboard',
       // templateUrl: make new template of picture
-      controller: 'dashboardCtrl',
+      controller: 'infoCtrl',
     })
 
 
