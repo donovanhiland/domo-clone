@@ -1,10 +1,10 @@
-angular.module('domoApp').service('dashboardService', function($http) {
+angular.module('domoApp').service('dashboardService', ($http) => {
 
-    this.checkAuth = function() {
+    this.checkAuth = () => {
         return $http({
             method: 'GET',
             url: '/checkAuth'
-        }).then(function(response) {
+        }).then((response) => {
             return response.data;
         });
     };
@@ -15,7 +15,7 @@ angular.module('domoApp').service('dashboardService', function($http) {
             url: "/card",
             data: card
 
-        }).then(function(response) {
+        }).then((response) => {
             return response.data;
         });
     };
@@ -23,12 +23,12 @@ angular.module('domoApp').service('dashboardService', function($http) {
         return $http({
             method: "GET",
             url: "/card"
-        }).then(function(response) {
+        }).then((response) => {
             return response.data;
         });
     };
     this.getCardByUser = (id) => {
-        return $http.get('/card?user=' + id).then(function(response) {
+        return $http.get('/card?user=' + id).then((response) => {
             return response.data;
         });
     };
@@ -36,7 +36,7 @@ angular.module('domoApp').service('dashboardService', function($http) {
         return $http({
             method: "DELETE",
             url: "/card/" + id
-        }).then(function(response) {
+        }).then((response) => {
             return response.data;
         });
     };
@@ -47,7 +47,7 @@ angular.module('domoApp').service('dashboardService', function($http) {
             method: "POST",
             url: "/text",
             data: message
-        }).then(function(response) {
+        }).then((response) => {
             return response.data;
         });
     };
@@ -56,32 +56,41 @@ angular.module('domoApp').service('dashboardService', function($http) {
             method: "POST",
             url: "/email",
             data: email
-        }).then(function(response) {
+        }).then((response) => {
             return response.data;
         });
     };
     // twitter view
 
-    this.getTwitterData = (screenname) => {
+    this.getTwitterLineData = (screenname) => {
       return $http({
         method: "POST",
         url: "/tweets/analysis",
         data: screenname
-      }).then(function(response){
+      }).then((response) => {
           return response.data;
       });
     };
+    this.getTwitterBarData = () => {
+        return $http({
+            method: "POST",
+            url: "/tweets/engagement",
+            data: {"screenName" : "devmtn"}
+        }).then((response) => {
+            return response.data;
+        });
+    };
 
-    this.getCurrentUser = function(id) {
+    this.getCurrentUser = (id) => {
        return $http({
              method: "GET",
              url: "/me",
-         }).then(function(response) {
+         }).then((response) => {
              return response.data;
          });
      };
 
-     this.updateUser = function(user, newpass) {
+     this.updateUser = (user, newpass) => {
        if (newpass.password) {
          user.password = newpass.password;
        }
@@ -90,7 +99,7 @@ angular.module('domoApp').service('dashboardService', function($http) {
              method: "PUT",
              url: "/users/" + user._id,
              data: user
-         }).then(function(response) {
+         }).then((response) => {
              return response.data;
          });
      };
