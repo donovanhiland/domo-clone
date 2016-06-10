@@ -10,6 +10,7 @@ import nodemailer from 'nodemailer';
 // Controllers
 import TwitterLocationCtrl from './controllers/TwitterLocationCtrl';
 import TwitterTweetsCtrl from './controllers/TwitterTweetsCtrl';
+import InstagramPostsCtrl from './controllers/InstagramPostsCtrl.js';
 import UserCtrl from './controllers/UserCtrl.js';
 import TextCtrl from './controllers/TextCtrl.js';
 import CardCtrl from './controllers/CardCtrl.js';
@@ -67,13 +68,15 @@ app.post('/tweets/aggregate', TwitterTweetsCtrl.aggregateTweets);
 app.post('/tweets/engagement', TwitterTweetsCtrl.tweetEngagement);
 app.post('/tweets/analysis', TwitterTweetsCtrl.tweetAnalysis);
 
+// Instagram Data Endpoints
+app.get('/insta', InstagramPostsCtrl.aggregateInstaPosts)
+
 // MongoDB connection
 // mongoose.set('debug', true);
 mongoose.connect(config.mongoURI);
 mongoose.connection.once('open', () => {
     console.log('Connected to mongo at: ', config.mongoURI);
 });
-
 
 // App Listen
 app.listen(config.port, () => {
