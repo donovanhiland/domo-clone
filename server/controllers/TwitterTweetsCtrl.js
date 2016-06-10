@@ -16,16 +16,17 @@ const twitter = new Twitter({
 module.exports = {
 
     aggregateTweets: (req, res, next) => {
+      console.log(req.body.screenName);
         let counter = 0,
             maxId;
         const aggregateTweetsRecursive = (screenName, maxId = undefined) => {
             twitter.get('statuses/user_timeline', {
-                screen_name: req.body.screenName,
+                screen_name: screenName,
                 // max of 200 per api call
                 count: 200,
                 max_id: maxId
             }, (error, tweets, response) => {
-                // console.log(tweets.length);
+                if (error) console.log("Twitter Response Error : ", error);
                 let tweetInfo = {};
                 for (let i = 0; i < tweets.length - 1; i++) {
                     tweetInfo = {
@@ -68,7 +69,7 @@ module.exports = {
                 screenname: req.body.screenName
             })
             .exec((error, response) => {
-              // Declare variabled for data tracking and analysis
+                // Declare variabled for data tracking and analysis
                 let tweets = response,
                     retweets = 0,
                     favorites = 0,

@@ -15,25 +15,25 @@ const paths = {
 
 };
 
-// gulp.task('js', () =>  {
-//   return gulp.src(paths.jsSource)
-//   .pipe(plumber())
-//   .pipe(babel({
-//     presets: ["es2015"]
-//   }))
-//   .pipe(concat('bundle.js'))
-//   .pipe(annotate())
-//   .pipe(gulp.dest('./public'));
-// });
+gulp.task('js', () =>  {
+  return gulp.src(paths.jsSource)
+  .pipe(plumber())
+  .pipe(babel({
+    presets: ["es2015"]
+  }))
+  .pipe(concat('bundle.js'))
+  .pipe(annotate())
+  .pipe(gulp.dest('./public'));
+});
 
-// gulp.task('server', () => {
-//   return gulp.src(paths.serverSource)
-//   .pipe(plumber())
-//   .pipe(babel({
-//     presets: ["es2015"]
-//   }))
-//   .pipe(gulp.dest('./server/index.js'))
-// })
+gulp.task('server', () => {
+  return gulp.src(paths.serverSource)
+  .pipe(plumber())
+  .pipe(babel({
+    presets: ["es2015"]
+  }))
+  .pipe(gulp.dest('./server/index.js'))
+})
 
 gulp.task('styles', () => {
   return gulp.src(paths.sassSource)
@@ -43,7 +43,7 @@ gulp.task('styles', () => {
 });
 
 gulp.task('watch', () =>  {
-  // gulp.watch(paths.jsSource, ['js']);
+  gulp.watch(paths.jsSource, ['js']);
   gulp.watch(paths.sassSource, ['styles']);
 });
 
