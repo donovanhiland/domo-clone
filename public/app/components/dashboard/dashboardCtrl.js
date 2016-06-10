@@ -1,11 +1,11 @@
 angular.module("domoApp")
-    .controller('dashboardCtrl', function($scope, $log, dashboardService, $state, user) {
+    .controller('dashboardCtrl',($scope, $log, dashboardService, $state, user) => {
 
-        (function() {
+        (() => {
             dashboardService.getTwitterData({
                     screenName: 'devmtn'
                 })
-                .then(function(response) {
+                .then((response) => {
                     $scope.twitterAnalysis = response;
                 });
         })();
@@ -13,7 +13,7 @@ angular.module("domoApp")
         $scope.user = user;
         $scope.card = {};
 
-        $scope.setGraphType = function(graphType) {
+        $scope.setGraphType = (graphType) => {
             $scope.card.graphType = graphType;
             if (graphType === 'barChart') {
                 $scope.imageOpacity1 = {
@@ -70,25 +70,23 @@ angular.module("domoApp")
             }
         };
 
-        //drop down
-        // $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
         //create card
         $scope.createCard = (newTitle) => {
             $scope.card.title = newTitle;
             // $scope.card.user = $scope.user._id;
             //$scope.card.dataElement = excel crap
-            dashboardService.createCard($scope.card).then(function(response) {
+            dashboardService.createCard($scope.card).then((response) => {
                 $scope.readCard();
                 $scope.newTitle = "";
             });
         };
         $scope.sendText = (message) => {
-            var newMessage = {
+            let newMessage = {
                 to: ["+12406780268"],
                 from: "+18013969302",
                 message: message
             };
-            dashboardService.sendText(newMessage).then(function(response) {
+            dashboardService.sendText(newMessage).then((response) => {
                 $scope.message = response;
             });
         };
@@ -97,20 +95,20 @@ angular.module("domoApp")
                 toField: $scope.email.toField,
                 subjectField: $scope.email.subjectField,
                 textField: $scope.email.textField
-            }).then(function(response) {
+            }).then((response) => {
                 clear();
                 console.log("sendEmail", response);
             });
         };
 
-        const clear = function() {
+        const clear = () => {
             $scope.email = null;
             return alert("email received!");
         };
 
 
         $scope.readCard = () => {
-            dashboardService.readCard().then(function(response) {
+            dashboardService.readCard().then((response) => {
                 $scope.cards = response;
             });
         };
@@ -118,13 +116,13 @@ angular.module("domoApp")
         // $scope.user = user;
 
         $scope.getCardByUser = () => {
-            dashboardService.getCardByUser( /*$scope.user._id*/ ).then(function(results) {
+            dashboardService.getCardByUser( /*$scope.user._id*/ ).then((results) => {
                 $scope.userCards = results;
             });
         };
 
         $scope.deleteCard = (id) => {
-            dashboardService.deleteCard(id).then(function(results) {
+            dashboardService.deleteCard(id).then((results) => {
                 $scope.readCard();
             });
         };
@@ -145,14 +143,14 @@ angular.module("domoApp")
     })
 
 .factory("excelReader", ['$q', '$rootScope',
-        function($q, $rootScope) {
-            var service = (data) => {
+        ($q, $rootScope) => {
+            let service = (data) => {
                 angular.extend(this, data);
             };
             service.readFile = (file, showPreview) => {
-                var deferred = $q.defer();
-                XLSXReader(file, showPreview, function(data) {
-                    $rootScope.$apply(function() {
+                let deferred = $q.defer();
+                XLSXReader(file, showPreview, (data) => {
+                    $rootScope.$apply(() => {
                         deferred.resolve(data);
                     });
                 });
@@ -161,14 +159,14 @@ angular.module("domoApp")
             return service;
         }
     ])
-    .controller('excelController', function($scope, excelReader) {
+    .controller('excelController', ($scope, excelReader) => {
 
         $scope.json_string = "";
         $scope.fileChanged = (files) => {
             $scope.isProcessing = true;
             $scope.sheets = [];
             $scope.excelFile = files[0];
-            excelReader.readFile($scope.excelFile, true).then(function(xlsxData) {
+            excelReader.readFile($scope.excelFile, true).then((xlsxData) => {
                 $scope.sheets = xlsxData.sheets;
                 $scope.isProcessing = false;
             });
