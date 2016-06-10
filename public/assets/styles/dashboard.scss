@@ -270,8 +270,8 @@ bar-chart, graphs, scatter-plot, pie-chart, line-chart{
   height:100%;
   text-align: center;
 }
-twitter-bar {
-  background-color: $domo-text;
+twitter-bar, twitter-line{
+  background-color: #fff;
 }
 path.line {
   fill: none;

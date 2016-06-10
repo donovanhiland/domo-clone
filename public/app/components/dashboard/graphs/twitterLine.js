@@ -6,7 +6,7 @@ angular.module('domoApp')
 
         var margin = {top: 20, right: 50, bottom: 30, left: 50},
             width = 760 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+            height = 430 - margin.top - margin.bottom;
 
         var parseDate = d3.time.format("%y-%b-%d").parse,
             formatPercent = d3.format(".0%");

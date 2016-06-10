@@ -5,7 +5,7 @@ angular.module('domoApp')
       link: function (scope, element) {
 
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 800 - margin.left - margin.right,
+    width = 760 - margin.left - margin.right,
     height = 415 - margin.top - margin.bottom;
 
     var x0 = d3.scale.ordinal()
