@@ -378,6 +378,7 @@ angular.module('domoApp').service('dashboardService', ["$http", function ($http)
             return response.data;
         });
     };
+
     this.updateUser = function (user, newpass) {
         if (newpass.password) {
             user.password = newpass.password;
