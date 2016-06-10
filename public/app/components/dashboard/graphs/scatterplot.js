@@ -1,15 +1,15 @@
 angular.module('domoApp')
-  .directive('scatterPlot', function () {
+  .directive('scatterPlot', () => {
     return {
       restrict: "AE",
       scope: {
         graphData: '='
       },
-      link: function (scope, element) {
+      link: (scope, element) => {
 
 
-        // var dataset = scope.graphData;
-        var dataset = [
+        // let dataset = scope.graphData;
+        let dataset = [
                   [ 5,     20 ],
                   [ 480,   90 ],
                   [ 250,   50 ],
@@ -22,45 +22,45 @@ angular.module('domoApp')
                   [ 220,   88 ],
                   [ 300,   150]
               ];
-        var margin = {top: 20, right: 20, bottom: 30, left: 40};
-        var w = 450 - margin.left - margin.right;
-        var h = 300 - margin.top - margin.bottom;
-        var padding = 35;
-        var formatAs = d3.format(".1"); //when data is messy
+        let margin = {top: 20, right: 20, bottom: 30, left: 40};
+        let w = 450 - margin.left - margin.right;
+        let h = 300 - margin.top - margin.bottom;
+        let padding = 35;
+        let formatAs = d3.format(".1"); //when data is messy
 
-        var xScale = d3.scale.linear()
-                              .domain([0, d3.max(dataset, function(d){
+        let xScale = d3.scale.linear()
+                              .domain([0, d3.max(dataset, (d) =>{
                                 return d[0];
                               })])
                               .range([padding, w-padding * 2]);
 
-        var yScale = d3.scale.linear()
-                             .domain([0, d3.max(dataset, function(d) {
+        let yScale = d3.scale.linear()
+                             .domain([0, d3.max(dataset, (d) => {
                                return d[1];
                              })])
                              .range([h-padding, padding]);
 
-        var rScale = d3.scale.linear()
-                            .domain([0, d3.max(dataset, function(d) {
+        let rScale = d3.scale.linear()
+                            .domain([0, d3.max(dataset, (d) => {
                               return d[1];
                              })])
                             .range([2, 5]);
         //define x-axis
-        var xAxis = d3.svg.axis()
+        let xAxis = d3.svg.axis()
                       .scale(xScale) //which scale to operate
                       .orient('bottom') //where
                       .ticks(5) //how many little lines(ticks) on the axis
                       .tickFormat(formatAs);
 
         //Define Y axis
-        var yAxis = d3.svg.axis()
+        let yAxis = d3.svg.axis()
                           .scale(yScale)
                           .orient("left")
                           .ticks(5)
                           .tickFormat(formatAs);
 
         //create svg
-        var svg = d3.select(element[0])
+        let svg = d3.select(element[0])
                   .append('svg')
                   .attr('width', w)
                   .attr('height', h)
@@ -72,9 +72,9 @@ angular.module('domoApp')
           .enter()
           .append('circle')
           .attr({
-            cx: function(d){return xScale(d[0])},
-            cy: function(d){return yScale(d[1])},
-            r: function(d){return rScale(d[1])}
+            cx: (d) => {return xScale(d[0])},
+            cy: (d) => {return yScale(d[1])},
+            r: (d) => {return rScale(d[1])}
           })
 
         //labels
@@ -82,12 +82,12 @@ angular.module('domoApp')
            .data(dataset)
            .enter()
            .append("text")
-           .text(function(d) {
+           .text((d) =>  {
                 return d[0] + "," + d[1];
            })
            .attr({
-             x: function(d){return xScale(d[0]) + 5},
-             y: function(d){return yScale(d[1]) + 3},
+             x: (d) => {return xScale(d[0]) + 5},
+             y: (d) => {return yScale(d[1]) + 3},
              "font-family": "sans-serif",
              "font-size": "11px",
              "fill": "#5DAEF8"
@@ -108,25 +108,25 @@ angular.module('domoApp')
 
           //random button
         d3.select(element[0])
-          .on('click', function () {
+          .on('click', () => {
 
                   //Update scale domains
-        		xScale.domain([0, d3.max(dataset, function(d) { return d[0]; })]);
-        		yScale.domain([0, d3.max(dataset, function(d) { return d[1]; })]);
+        		xScale.domain([0, d3.max(dataset, (d) => { return d[0]; })]);
+        		yScale.domain([0, d3.max(dataset, (d) => { return d[1]; })]);
 
             svg.selectAll('circle')
               .data(dataset)
               .transition()
               .duration(1000)
-              .each("start", function() {      // <-- Executes at start of transition
+              .each("start", () => {      // <-- Executes at start of transition
                d3.select(this) //selects the current element
                  .attr("fill", "#f92")
                  .attr("r", 7);
                })
               .attr({
-                cx: function(d){return xScale(d[0])},
-                cy: function(d){return yScale(d[1])},
-                r: function(d){return rScale(d[1])}
+                cx: (d) => {return xScale(d[0])},
+                cy: (d) => {return yScale(d[1])},
+                r: (d) => {return rScale(d[1])}
               })
               .transition() // <-- 2nd transition
               .duration(500)
@@ -137,12 +137,12 @@ angular.module('domoApp')
                .data(dataset)
                .transition()
                .duration(1000)
-               .text(function(d) {
+               .text((d) =>  {
                     return d[0] + "," + d[1];
                })
                .attr({
-                 x: function(d){return xScale(d[0]) + 5},
-                 y: function(d){return yScale(d[1]) + 3},
+                 x: (d) => {return xScale(d[0]) + 5},
+                 y: (d) => {return yScale(d[1]) + 3},
                  "font-family": "sans-serif",
                  "font-size": "11px",
                  "fill": "#5DAEF8"
@@ -162,7 +162,7 @@ angular.module('domoApp')
               }) //on click
 
           //Makes Graph responsive
-          d3.select(window).on('resize', function () {
+          d3.select(window).on('resize', () => {
               // update width
               w = parseInt(d3.select(element[0]).style('width'), 10);
               w = w - margin.left - margin.right;
@@ -177,11 +177,11 @@ angular.module('domoApp')
                   .attr('width', w);
 
               svg.selectAll('circle.formatAs')
-                  .attr('width', function(d) { return xScale(d.formatAs); });
+                  .attr('width', (d) => { return xScale(d.formatAs); });
 
               // update median ticks
-              var median = d3.median(svg.selectAll('.bar').data(),
-                  function(d) { return d.formatAs; });
+              let median = d3.median(svg.selectAll('.bar').data(),
+                  (d) => { return d.formatAs; });
 
               svg.selectAll('line.median')
                   .attr('x1', xScale(median))
