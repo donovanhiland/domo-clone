@@ -5,8 +5,8 @@ angular.module('domoApp')
       link: function (scope, element) {
 
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 760 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 800 - margin.left - margin.right,
+    height = 415 - margin.top - margin.bottom;
 
     var x0 = d3.scale.ordinal()
         .rangeRoundBands([0, width], 0.1);
@@ -17,7 +17,7 @@ angular.module('domoApp')
         .range([height, 0]);
 
     var color = d3.scale.ordinal()
-        .range(["#98abc5", "#f92"]);
+        .range(["#9ce", "#f92"]);
 
     var xAxis = d3.svg.axis()
         .scale(x0)
@@ -28,7 +28,7 @@ angular.module('domoApp')
         .orient("left")
         .tickFormat(d3.format(".2s"));
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select(element[0]).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -98,14 +98,8 @@ angular.module('domoApp')
               .attr("dy", ".35em")
               .style("text-anchor", "end")
               .text(function(d) { return d; });
-<<<<<<< HEAD:public/app/components/dashboard/graphs/twitterBar.js
-      })
-  }
-=======
-        // } //for loop
       });
     };
->>>>>>> master:public/app/components/dashboard/graphs/groupedBar.js
     getData();
 
     } //link
