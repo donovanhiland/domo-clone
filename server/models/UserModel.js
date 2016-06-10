@@ -5,7 +5,7 @@ require('mongoose-schematypes-extend')(mongoose);
 
 
 
-var UserSchema = new Schema({
+let UserSchema = new Schema({
 
   firstname: {
     type: String,
@@ -46,13 +46,13 @@ var UserSchema = new Schema({
   dataFiles: [String]
 });
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', (next) => {
     this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10), null);
     next();
 });
 
-UserSchema.methods.verifyPassword = function(reqBodyPassword) {
-    var user = this;
+UserSchema.methods.verifyPassword = (reqBodyPassword) => {
+    let user = this;
     return bcrypt.compareSync(reqBodyPassword, user.password);
 };
 

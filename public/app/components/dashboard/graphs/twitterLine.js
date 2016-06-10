@@ -1,166 +1,160 @@
 angular.module('domoApp')
-  .directive('twitterLine', ['graphService', function (graphService) {
+  .directive('twitterLineHour', ['dashboardService', (dashboardService) => {
     return {
       restrict: "E",
-      link: function (scope, element) {
+      link: (scope, element, attrs) => {
+        let getData = () => {
+        dashboardService.getTwitterLineData().then((response) => {
+          console.log(response);
+          let data = response;
 
-        var margin = {top: 20, right: 50, bottom: 30, left: 50},
-            width = 760 - margin.left - margin.right,
-            height = 430 - margin.top - margin.bottom;
+      // STYLING
+      let margin = {top: 20, right: 20, bottom: 30, left: 40},
+        width = 760 - margin.left - margin.right,
+        height = 415 - margin.top - margin.bottom;
 
-        var parseDate = d3.time.format("%y-%b-%d").parse,
-            formatPercent = d3.format(".0%");
+      let parseDate = d3.time.format("%Y-%m").parse,
+        formatPercent = d3.format(".02");
 
-        var x = d3.time.scale()
-            .range([0, width]);
+      let x = d3.time.scale()
+        .range([0, width]);
 
-        var y = d3.scale.linear()
-            .range([height, 0]);
+      let y = d3.scale.linear()
+        .range([height, 0]);
 
-        var color = d3.scale.category20();
+      // let color = d3.scale.category10();
+      let color = d3.scale.ordinal()
+        .range(["#1F77B4", "#F7E100", "#FF7F0E", "#D62728"]);
 
-        var xAxis = d3.svg.axis()
-            .scale(x)
-            .orient("bottom");
+      let xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .ticks(d3.time.month).tickFormat(d3.time.format("%b"));
 
-        var yAxis = d3.svg.axis()
-            .scale(y)
-            .orient("left")
-            .tickFormat(formatPercent);
+      let yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .tickFormat(formatPercent);
 
-        var line = d3.svg.area()
-            .interpolate("basis")
-            .x(function(d) { return x(d.date); })
-            .y0(function(d) { return y(d.y); })
-            .y1(function(d) { return y(d.y); });
+      let line = d3.svg.area()
+        .interpolate("cardinal")
+        .x((d) => { return x(d.date); })
+        .y0((d) => { return y(d.y); })
+        .y1((d) => { return y(d.y); });
 
         function line_to_stacked(t) {
-          return d3.svg.area()
-            .interpolate("basis")
-            .x(function(d) { return x(d.date); })
-            .y0(function(d) { return y(t * d.y0 + d.y); })
-            .y1(function(d) { return y(t * d.y0 + d.y); });
-        }
+        return d3.svg.area()
+          .interpolate("cardinal")
+          .x((d) => { return x(d.date); })
+          .y0((d) => { return y(t * d.y0 + d.y); })
+          .y1((d) => { return y(t * d.y0 + d.y); });
+      }
 
         function area_to_stacked(t) {
-          return d3.svg.area()
-            .interpolate("basis")
-            .x(function(d) { return x(d.date); })
-            .y0(function(d) { return y(d.y0 + (1 - t) * d.y); })
-            .y1(function(d) { return y(d.y0 + d.y); });
+        return d3.svg.area()
+          .interpolate("cardinal")
+          .x((d) => { return x(d.date); })
+          .y0((d) => { return y(d.y0 + (1 - t) * d.y); })
+          .y1((d) => { return y(d.y0 + d.y); });
+      }
+
+      let stack = d3.layout.stack()
+        .values((d) => { return d.values; });
+
+      // CREATE CHART CONTAINER //
+      let svg = d3.select(".total-ar-chart")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      // DEFINITIONS
+      color.domain(d3.keys(dailyData[0]).filter((key) => { return key !== "date"; }));
+
+      dailyData.forEach((d) => {
+        d.date = parseDate(d.date);
+      });
+
+      let collPeriods = stack(color.domain().map((name) => {
+        return { name: name, values: dailyData.map((d) => {
+          return {date: d.date, y: d[name] / 100};
+        })};
+      }));
+
+      x.domain(d3.extent(dailyData, (d) => { return d.date; }));
+
+      let collPeriod = svg.selectAll(".collPeriod")
+        .data(collPeriods)
+        .enter().append("g")
+        .attr("class", "collPeriod");
+
+      collPeriod.append("path")
+        .attr("class", "area")
+        .attr("d", (d) => { return line(d.values); })
+        .style("stroke", (d) => { return color(d.name); })
+        .style("stroke-width", "3px")
+        .style("fill", (d) => { return color(d.name); });
+
+      collPeriod.append("text")
+        .datum((d) => { return {name: d.name, value: d.values[d.values.length - 1]}; })
+        .attr("transform", (d) => { return "translate(" + x(d.value.date) + "," + y(d.value.y) + ")"; })
+        .attr("x", 4)
+        .attr("dy", ".35em")
+        .style("fill", (d) => { return color(d.name); })
+        .text((d) => { return d.name; });
+
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+      svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+      // TRANSITIONS //
+      let is_area_plot = false;
+      scope.transitionLineStacked = () => {
+        let duration = 1500;
+        let collPeriod = svg.selectAll(".collPeriod");
+        let transition = collPeriod.transition()
+          .delay((d, i) => { return i * 500; })
+          .duration(duration);
+        let postTransition = transition.transition();
+        if (!is_area_plot) {
+          transition.selectAll("path")
+            .attrTween("d", shapeTween(line_to_stacked, 1));
+          transition.selectAll("text")
+            .attr("transform", (d) => { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y) + ")"; });
+          postTransition.selectAll("path")
+            .attrTween("d", shapeTween(area_to_stacked, 1))
+            .style("stroke-opacity", 0.0);
+          postTransition.selectAll("text")
+            .attr("transform", (d) => { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")"; });
+        } else {
+          transition.selectAll("path")
+            .style("stroke-opacity", 1.0)
+            .attrTween("d", shapeTween(area_to_stacked, 0));
+          transition.selectAll("text")
+            .attr("transform", (d) => { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y) + ")"; });
+          postTransition.selectAll("path")
+            .attrTween("d", shapeTween(line_to_stacked, 0));
+          postTransition.selectAll("text")
+            .attr("transform", (d) => { return "translate(" + x(d.value.date) + "," + y(d.value.y) + ")"; });
         }
+        is_area_plot = !is_area_plot;
+      };
 
-        var stack = d3.layout.stack()
-            .values(function(d) { return d.values; });
-
-        var svg = d3.select("body").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-        // let getData = () => {
-        //   graphService.getTwitterLineData().then((response) => {
-        //     console.log(response);
-
-
-        d3.tsv("data.tsv", function(error, data) {
-          color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
-
-          data.forEach(function(d) {
-            d.date = parseDate(d.date);
-          });
-
-          var browsers = stack(color.domain().map(function(name) {
-            return {
-              name: name,
-              values: data.map(function(d) {
-                return {date: d.date, y: d[name] / 100};
-              })
-            };
-          }));
-
-          x.domain(d3.extent(data, function(d) { return d.date; }));
-
-          var browser = svg.selectAll(".browser")
-              .data(browsers)
-              .enter().append("g")
-              .attr("class", "browser")
-              .on("click", function() {
-                    transition();
-            });
-
-          browser.append("path")
-              .attr("class", "area")
-              .attr("d", function(d) { return line(d.values); })
-              .style("stroke", function(d) { return color(d.name); })
-              .style("fill", function(d) { return color(d.name); })
-
-          browser.append("text")
-              .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
-              .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y) + ")"; })
-              .attr("x", 3)
-              .attr("dy", ".35em")
-              .style("fill", function(d) { return color(d.name); })
-              .text(function(d) { return d.name; }); svg.append("g")
-              .attr("class", "x axis")
-              .attr("transform", "translate(0," + height + ")")
-              .call(xAxis)
-              .on("click", function() {
-                    transition();
-            });
-
-          svg.append("g")
-              .attr("class", "y axis")
-              .call(yAxis)
-              .on("click", function() {
-                    transition();
-            });
-        });
-
-        var is_area_plot = false;
-        function transition() {
-          var duration = 750;
-          var browser = svg.selectAll(".browser")
-          var transition = browser.transition()
-              .delay(function(d, i) { return i * 1000; })
-              .duration(duration);
-          var postTransition = transition.transition();
-          if (!is_area_plot) {
-            transition.selectAll("path")
-              .attrTween("d", shapeTween(line_to_stacked, 1));
-            transition.selectAll("text")
-              .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y) + ")"; });
-            postTransition.selectAll("path")
-              .attrTween("d", shapeTween(area_to_stacked, 1))
-              .style("stroke-opacity", 0.0);
-            postTransition.selectAll("text")
-              .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")"; });
-          } else {
-            transition.selectAll("path")
-              .style("stroke-opacity", 1.0)
-              .attrTween("d", shapeTween(area_to_stacked, 0));
-            transition.selectAll("text")
-                .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y) + ")"; });
-            postTransition.selectAll("path")
-              .attrTween("d", shapeTween(line_to_stacked, 0));
-            postTransition.selectAll("text")
-              .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y) + ")"; });
-          }
-          is_area_plot = !is_area_plot;
-        }
-
-        function shapeTween(shape, direction) {
-          return function(d, i, a) {
-            return function(t) {
-              return shape(direction ? t : 1.0 - t)(d.values);
-            };
+      function shapeTween(shape, direction) {
+        return (d, i, a) => {
+          return (t) => {
+            return shape(direction ? t : 1.0 - t)(d.values);
           };
+        };
         }
 
-    //   }) //service
-    // } //getData
 
+      }) //Service
+      } //getData
     } //link
-  }
-}])
+  }; //return
+}]); //the directive
