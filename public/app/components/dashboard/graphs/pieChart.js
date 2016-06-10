@@ -83,10 +83,10 @@ angular.module('domoApp')
                 .style('height', (200 + margin.top + margin.bottom) + 'px')
                 .style('width', (200 + margin.left + margin.right) + 'px');
 
-                svg.selectAll('circle.background')
+                svg.selectAll('g.arc.background')
                     .attr('width', w);
 
-                svg.selectAll('circle.formatAs')
+                svg.selectAll('g.arc.formatAs')
                     .attr('width', function(d) { return xScale(d.formatAs); });
 
                 // update median ticks
