@@ -1,4 +1,4 @@
-angular.module('domoApp').service('dashboardService', ($http) => {
+angular.module("domoApp").service("dashboardService", function($http){
 
     this.checkAuth = () => {
         return $http({
@@ -62,23 +62,32 @@ angular.module('domoApp').service('dashboardService', ($http) => {
     };
     // twitter view
 
-    this.getTwitterLineData = (screenname) => {
+    // this.getTwitterLineData = (screenname) => {
+    //   return $http({
+    //     method: "POST",
+    //     url: "/tweets/analysis",
+    //     data: screenname
+    //   }).then((response) => {
+    //       return response.data;
+    //   });
+    // };
+    // this.getTwitterBarData = () => {
+    //     return $http({
+    //         method: "POST",
+    //         url: "/tweets/engagement",
+    //         data: {"screenName": "devmtn"}
+    //     }).then((response) => {
+    //         return response.data;
+    //     });
+    // };
+    this.getTwitterData = () => {
       return $http({
-        method: "POST",
-        url: "/tweets/analysis",
-        data: screenname
-      }).then((response) => {
-          return response.data;
-      });
-    };
-    this.getTwitterBarData = () => {
-        return $http({
-            method: "POST",
-            url: "/tweets/engagement",
-            data: {"screenName" : "devmtn"}
-        }).then((response) => {
-            return response.data;
-        });
+              method: "POST",
+              url: "/tweets/engagement",
+              data: {"screenName": "devmtn"}
+          }).then((response) => {
+              return response.data;
+          });
     };
 
     this.getCurrentUser = (id) => {

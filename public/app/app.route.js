@@ -16,9 +16,9 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
       controller: 'dashboardCtrl',
       resolve: {
 
-        user: function($state, dashboardService) {
+        user: ($state, dashboardService) => {
             return dashboardService.checkAuth()
-            .then(function(response) {
+            .then((response) => {
               if (response === 'unauthorized') {
                 $state.go('home');
                 alert('Sign in to view dashboard');
