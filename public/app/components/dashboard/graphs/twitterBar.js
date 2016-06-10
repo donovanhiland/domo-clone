@@ -9,7 +9,7 @@ angular.module('domoApp')
     height = 500 - margin.top - margin.bottom;
 
     var x0 = d3.scale.ordinal()
-        .rangeRoundBands([0, width], .1);
+        .rangeRoundBands([0, width], 0.1);
 
     var x1 = d3.scale.ordinal();
 
@@ -63,7 +63,7 @@ angular.module('domoApp')
               .attr("transform", "rotate(-90)")
               .attr("y", 2)
               .attr("dy", ".30em")
-              .style("text-anchor", "end")
+              .style("text-anchor", "end");
 
           var date = svg.selectAll(".date")
               .data(data)
@@ -98,10 +98,16 @@ angular.module('domoApp')
               .attr("dy", ".35em")
               .style("text-anchor", "end")
               .text(function(d) { return d; });
+<<<<<<< HEAD:public/app/components/dashboard/graphs/twitterBar.js
       })
   }
+=======
+        // } //for loop
+      });
+    };
+>>>>>>> master:public/app/components/dashboard/graphs/groupedBar.js
     getData();
 
     } //link
-  } //return
-}]) //directive
+  }; //return
+}]); //directive

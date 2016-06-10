@@ -60,4 +60,38 @@ angular.module('domoApp').service('dashboardService', function($http) {
             return response.data;
         });
     };
-})
+    // twitter view
+
+    this.getTwitterData = (screenname) => {
+      return $http({
+        method: "POST",
+        url: "/tweets/analysis",
+        data: screenname
+      }).then(function(response){
+          return response.data;
+      });
+    };
+
+    this.getCurrentUser = function(id) {
+       return $http({
+             method: "GET",
+             url: "/me",
+         }).then(function(response) {
+             return response.data;
+         });
+     };
+
+     this.updateUser = function(user, newpass) {
+       if (newpass.password) {
+         user.password = newpass.password;
+       }
+       console.log(user);
+         return $http({
+             method: "PUT",
+             url: "/users/" + user._id,
+             data: user
+         }).then(function(response) {
+             return response.data;
+         });
+     };
+});
