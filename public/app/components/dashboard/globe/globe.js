@@ -164,14 +164,14 @@ DAT.Globe = function(container, opts) {
         point = new THREE.Mesh(geometry);
 
         // create the geometry sphere
-        geometry = new THREE.SphereGeometry(2000, 32, 32)
+        geometry = new THREE.SphereGeometry(2000, 32, 32);
             // create the material, using a texture of startfield
-        material = new THREE.MeshBasicMaterial()
-        material.map = THREE.ImageUtils.loadTexture(imgDir + 'starfield.png')
-        material.side = THREE.BackSide
+        material = new THREE.MeshBasicMaterial();
+        material.map = THREE.ImageUtils.loadTexture(imgDir + 'starfield.png');
+        material.side = THREE.BackSide;
             // create the mesh based on geometry and material
-        mesh = new THREE.Mesh(geometry, material)
-        scene.add(mesh)
+        mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
 
         renderer = new THREE.WebGLRenderer({
             antialias: true
@@ -209,12 +209,12 @@ DAT.Globe = function(container, opts) {
             step = 3;
             colorFnWrapper = function(data, i) {
                 return colorFn(data[i + 2]);
-            }
+            };
         } else if (opts.format === 'legend') {
             step = 4;
             colorFnWrapper = function(data, i) {
                 return colorFn(data[i + 3]);
-            }
+            };
         } else {
             throw ('error: format not supported: ' + opts.format);
         }
@@ -256,7 +256,7 @@ DAT.Globe = function(container, opts) {
             this._baseGeometry = subgeo;
         }
 
-    };
+    }
 
     function createPoints() {
         if (this._baseGeometry !== undefined) {
@@ -377,11 +377,13 @@ DAT.Globe = function(container, opts) {
         }
     }
 
-    function onWindowResize(event) {
-        camera.aspect = container.offsetWidth / container.offsetHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.offsetWidth, container.offsetHeight);
-    }
+    function onWindowResize(){
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    render();
+
+}
 
     function zoom(delta) {
         distanceTarget -= delta;
