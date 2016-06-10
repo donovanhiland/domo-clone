@@ -1,7 +1,7 @@
 angular.module('domoApp').service('graphService', function($http) {
 
 
-    this.getData = () => {
+    this.getTwitterData = () => {
         return $http({
             method: "POST",
             url: "/tweets/engagement",
@@ -10,6 +10,16 @@ angular.module('domoApp').service('graphService', function($http) {
             return response.data;
         });
     };
+
+    // this.getInstaData = () => {
+    //     return $http({
+    //         method: "POST",
+    //         url: "/tweets/engagement",
+    //         data: {"screenName" : "devmtn"}
+    //     }).then(function(response) {
+    //         return response.data;
+    //     });
+    // };
 
 
 

@@ -34,8 +34,17 @@ angular.module("domoApp", ["ui.router", 'ui.bootstrap']).config(["$stateProvider
   }).state('dashboard.overview', {
     url: '/overview',
     templateUrl: './app/components/dashboard/overview/dashboard.overview.html',
+<<<<<<< HEAD
+    controller: 'dashboardCtrl'
+  }).state('dashboard.twitter', {
+    url: '/dashboard',
+    templateUrl: './app/components/dashboard/globe/dashboard.twitterTmpl.html'
+    // controller: 'globeCtrl'
+  }).state('dashboard.twitter-globe', {
+=======
     controller: 'overviewCtrl'
   }).state('dashboard.twitter', {
+>>>>>>> master
     url: '/dashboard',
     templateUrl: './app/components/dashboard/twitter/twitterTmpl.html',
     controller: 'twitterCtrl'
@@ -858,8 +867,6 @@ angular.module('domoApp').directive('barChart', function () {
       graphData: '='
     },
     link: function link(scope, element) {
-      // scope.$watch('excelData', function () {
-
       // console.log(scope.graphData);
 
       // var dataset = scope.graphData;
@@ -971,7 +978,6 @@ angular.module('domoApp').directive('barChart', function () {
         svg.select('.x.axis.top').call(xAxis.orient('top'));
         svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
       });
-      // }); //scope.watch
     } //link
   }; //return
 }); //directive
@@ -982,7 +988,7 @@ angular.module("domoApp").controller("graphCtrl", ["$scope", function ($scope) {
 
 angular.module('domoApp').service('graphService', ["$http", function ($http) {
 
-    this.getData = function () {
+    this.getTwitterData = function () {
         return $http({
             method: "POST",
             url: "/tweets/engagement",
@@ -991,9 +997,30 @@ angular.module('domoApp').service('graphService', ["$http", function ($http) {
             return response.data;
         });
     };
+
+    // this.getInstaData = () => {
+    //     return $http({
+    //         method: "POST",
+    //         url: "/tweets/engagement",
+    //         data: {"screenName" : "devmtn"}
+    //     }).then(function(response) {
+    //         return response.data;
+    //     });
+    // };
 }]);
 'use strict';
 
+<<<<<<< HEAD
+angular.module('domoApp').directive('instaBar', ['graphService', function (graphService) {
+    return {
+        restrict: "E",
+        link: function link(scope, element) {
+            var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                width = 760 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            var x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+=======
 angular.module('domoApp').directive('groupedBar', ['graphService', function (graphService) {
     return {
         restrict: "E",
@@ -1005,6 +1032,7 @@ angular.module('domoApp').directive('groupedBar', ['graphService', function (gra
                 height = 500 - margin.top - margin.bottom;
 
             var x0 = d3.scale.ordinal().rangeRoundBands([0, width], 0.1);
+>>>>>>> master
 
             var x1 = d3.scale.ordinal();
 
@@ -1019,7 +1047,11 @@ angular.module('domoApp').directive('groupedBar', ['graphService', function (gra
             var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
             var getData = function getData() {
+<<<<<<< HEAD
+                graphService.getInstaData().then(function (response) {
+=======
                 graphService.getData().then(function (response) {
+>>>>>>> master
                     console.log(response);
 
                     var dataNames = ["retweets", "favorites"];
@@ -1030,12 +1062,15 @@ angular.module('domoApp').directive('groupedBar', ['graphService', function (gra
                             return { name: name, value: +d[name] };
                         });
                     });
+<<<<<<< HEAD
+=======
                     // for (var i = 0; i < data.length; i++) {
                     // console.log(data[i]);
                     // data = data[i];
 
                     //the date gives 2016-06-08T22:35:08.000Z
                     // var date = d3.time.format("%A").parse();
+>>>>>>> master
 
                     x0.domain(data.map(function (d) {
                         return d.date;
@@ -1076,12 +1111,18 @@ angular.module('domoApp').directive('groupedBar', ['graphService', function (gra
                     legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
                         return d;
                     });
+<<<<<<< HEAD
+                });
+            };
+            getData();
+=======
                     // } //for loop
                 });
             };
             getData();
 
             // }); //scope.watch
+>>>>>>> master
         } //link
     }; //return
 }]); //directive
@@ -1215,9 +1256,9 @@ angular.module('domoApp').directive('pieChart', function () {
 
                 d3.select(svg.node().parentNode).style('height', 200 + margin.top + margin.bottom + 'px').style('width', 200 + margin.left + margin.right + 'px');
 
-                svg.selectAll('circle.background').attr('width', w);
+                svg.selectAll('g.arc.background').attr('width', w);
 
-                svg.selectAll('circle.formatAs').attr('width', function (d) {
+                svg.selectAll('g.arc.formatAs').attr('width', function (d) {
                     return xScale(d.formatAs);
                 });
 
@@ -1391,6 +1432,89 @@ angular.module('domoApp').directive('scatterPlot', function () {
 });
 'use strict';
 
+<<<<<<< HEAD
+angular.module('domoApp').directive('twitterBar', ['graphService', function (graphService) {
+    return {
+        restrict: "E",
+        link: function link(scope, element) {
+
+            var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                width = 760 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            var x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+
+            var x1 = d3.scale.ordinal();
+
+            var y = d3.scale.linear().range([height, 0]);
+
+            var color = d3.scale.ordinal().range(["#98abc5", "#f92"]);
+
+            var xAxis = d3.svg.axis().scale(x0).orient("bottom");
+
+            var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.format(".2s"));
+
+            var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var getData = function getData() {
+                graphService.getTwitterData().then(function (response) {
+                    console.log(response);
+
+                    var dataNames = ["retweets", "favorites"];
+
+                    var data = response;
+                    data.forEach(function (d) {
+                        d.data = dataNames.map(function (name) {
+                            return { name: name, value: +d[name] };
+                        });
+                    });
+
+                    x0.domain(data.map(function (d) {
+                        return d.date;
+                    }));
+                    x1.domain(dataNames).rangeRoundBands([0, x0.rangeBand()]);
+                    y.domain([0, d3.max(data, function (d) {
+                        return d3.max(d.data, function (d) {
+                            return d.value;
+                        });
+                    })]);
+
+                    svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+                    svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 2).attr("dy", ".30em").style("text-anchor", "end");
+
+                    var date = svg.selectAll(".date").data(data).enter().append("g").attr("class", "date").attr("transform", function (d) {
+                        return "translate(" + x0(d.date) + ",0)";
+                    });
+
+                    date.selectAll("rect").data(function (d) {
+                        return d.data;
+                    }).enter().append("rect").attr("width", x1.rangeBand()).attr("x", function (d) {
+                        return x1(d.name);
+                    }).attr("y", function (d) {
+                        return y(d.value);
+                    }).attr("height", function (d) {
+                        return height - y(d.value);
+                    }).style("fill", function (d) {
+                        return color(d.name);
+                    });
+
+                    var legend = svg.selectAll(".legend").data(dataNames).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
+                        return "translate(0," + i * 20 + ")";
+                    });
+
+                    legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", color);
+
+                    legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
+                        return d;
+                    });
+                });
+            };
+            getData();
+        } //link
+    }; //return
+}]); //directive
+=======
 angular.module('domoApp').controller('infoCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
 'use strict';
 
@@ -1421,6 +1545,7 @@ angular.module('domoApp').controller('settingsCtrl', ["$scope", "dashboardServic
 'use strict';
 
 angular.module('domoApp').controller('twitterCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {}]);
+>>>>>>> master
 'use strict';
 
 angular.module('domoApp').controller('mainCtrl', ["$scope", function ($scope) {}]);
