@@ -72,8 +72,6 @@ angular.module('domoApp').service('dashboardService', function($http) {
       });
     };
 
-})
-
     this.getCurrentUser = function(id) {
        return $http({
              method: "GET",
@@ -82,6 +80,7 @@ angular.module('domoApp').service('dashboardService', function($http) {
              return response.data;
          });
      };
+
      this.updateUser = function(user, newpass) {
        if (newpass.password) {
          user.password = newpass.password;
@@ -96,4 +95,3 @@ angular.module('domoApp').service('dashboardService', function($http) {
          });
      };
 });
->>>>>>> master
