@@ -72,8 +72,6 @@ angular.module('domoApp').service('dashboardService', function($http) {
       });
     };
 
-})
-
     this.getCurrentUser = function(id) {
        return $http({
              method: "GET",
@@ -96,4 +94,3 @@ angular.module('domoApp').service('dashboardService', function($http) {
          });
      };
 });
->>>>>>> master
