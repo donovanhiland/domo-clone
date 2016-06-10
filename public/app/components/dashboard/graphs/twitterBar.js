@@ -100,7 +100,6 @@ angular.module('domoApp')
               .text(function(d) { return d; });
       });
   };
-
     getData();
 
     } //link

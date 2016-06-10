@@ -116,6 +116,10 @@ $test-border: 1px red solid;
   .dash-nav-bottom {
     display: none !important;
     ul {
+      li {
+        font-size: 10px !important;
+        margin: 2px !important;
+      }
     }
   }
 }
@@ -327,7 +331,7 @@ path.area {
      color: #fff;
 
      .div-settings {
-      background-color: $domo-blue;
+      background-color: $domo-grey;
       width: 55vw;
       height: 50vh;
       margin-top: 15vh;
@@ -340,6 +344,7 @@ path.area {
          }
          .sperate-h3 {
            margin-top: 43px;
+
              label{
                margin-left: 20px;
                font-family: $domo-font;
