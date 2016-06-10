@@ -63,7 +63,6 @@ $test-border: 1px red solid;
     height: 6.95vh;
     float: left;
 }
-
 .dash-nav-mobile {
   display: flex;
   align-items: center;
@@ -81,13 +80,11 @@ $test-border: 1px red solid;
     .hamburger:hover {
       color: $domo-blue;
     }
-
     .hamburger:focus {
       outline: 0;
     }
   }
 }
-
 .dash-nav-mobile-menu {
   background-color: $domo-grey;
   ul {
@@ -95,7 +92,6 @@ $test-border: 1px red solid;
       display: flex;
       flex-direction: column;
       text-decoration: none;
-
       li {
         height: 50px;
         padding-top: 8px;
@@ -107,7 +103,6 @@ $test-border: 1px red solid;
         cursor: pointer;
         border-bottom: 1px #555 solid;
       }
-
       li:hover {
         text-decoration: none;
         background-color: $domo-text;
@@ -116,26 +111,19 @@ $test-border: 1px red solid;
     }
   }
 }
-
-
-
 // < 769 px, nav changes to drop down menu
-
 @media screen and (max-width: 768px) {
   .dash-nav-bottom {
     display: none !important;
     ul {
-
     }
   }
 }
-
 @media screen and (min-width: 768px) {
   menu-directive {
     display: none;
   }
 }
-
 /////////////////////////////////
 ////// Dashboard backdrop
 ////////////////////////////////
@@ -197,31 +185,26 @@ $test-border: 1px red solid;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-
     .dash-card {
       height: 100%;
       width: 31%;
       margin: 2vh;
       background-color: #fff;
       border: 1px #EEEEEE solid;
-
       header {
         display: flex;
         justify-content: space-between;
         border: 1px #eee solid;
-
         .deleteCard {
           i {
             cursor: pointer;
             margin: 5px;
           }
-
           i:hover {
             color: red;
           }
         }
         .card-title-container {
-
           h1 {
             font-family: $domo-font;
             font-size: 16px;
@@ -235,8 +218,9 @@ $test-border: 1px red solid;
         justify-content: center;
 
         #graph {
-          margin-top: 5vh;
-          height: auto;
+          margin-top: 10vh;
+          width: 100%;
+          height: 38vh;
           overflow: hidden;
           display: flex;
           justify-content: center;
@@ -246,7 +230,6 @@ $test-border: 1px red solid;
     }
   }
 }
-
 /////////////////////////////////
 ////// Graphs
 ////////////////////////////////
@@ -306,9 +289,85 @@ path.area {
 
 .x.axis .minor {
   stroke-opacity: .5;
+
+}
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: #000;
+}
+
+///////////info page//////////
+#img-info {
+    display: flex;
+    background-color: $domo-grey;
+    justify-content: center;
+    #img-container {
+        // margin-top: 30px;
+  }
 }
 
 .y.axis line, .y.axis path {
   fill: none;
   stroke: #000;
 }
+///////////info///////////
+#img-info{
+  display: flex;
+  justify-content: center;
+  background-color: $domo-grey;
+}
+/////////////////////////////////
+ ////// Settings
+ ////////////////////////////////
+ .settings-container {
+     height: 100vh;
+     background-color: $domo-grey;
+     display: flex;
+     justify-content: center;
+     color: white;
+     .div-settings {
+         background-color: $domo-text;
+         width: 35vw;
+         height: 40vh;
+         margin-top: 12%;
+         h3 {
+             text-align: center;
+             font-family: $domo-font;
+             letter-spacing: 1px;
+         }
+         .sperate-h3 {
+           margin-top: 43px;
+             label{
+               margin-left: 20px;
+               font-family: $domo-font;
+               letter-spacing: 1px;
+             }
+             .input-edit {
+                 width: 84%;
+                 margin-left: 20px;
+                 border-radius: 0;
+             }
+             .edit-profile-buttton {
+                 display: flex;
+                 justify-content: center;
+                 align-items: center;
+                 height: 35px;
+                 width: 130px;
+                 margin: auto;
+                 background-color: #f92;
+                 font-family: "Open Sans", Helvetica, Arial, sans-serif;
+                 font-size: 12px;
+                 font-weight: 700;
+                 letter-spacing: 1px;
+                 color: #fff;
+                 border: none;
+                 text-decoration: none;
+             }
+             .edit-profile-buttton:hover {
+                 background-color: #9ce;
+                 transition: all 0.3s ease-in-out;
+                 text-decoration: none;
+             }
+         }
+     }
+  }

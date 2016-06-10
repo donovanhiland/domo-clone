@@ -86,10 +86,10 @@ angular.module('domoApp')
                 return d[0] + "," + d[1];
            })
            .attr({
-             x: function(d){return xScale(d[0]) + 4},
-             y: function(d){return yScale(d[1]) + 2},
+             x: function(d){return xScale(d[0]) + 5},
+             y: function(d){return yScale(d[1]) + 3},
              "font-family": "sans-serif",
-             "font-sizee": "11px",
+             "font-size": "11px",
              "fill": "#5DAEF8"
            });
 
@@ -141,8 +141,8 @@ angular.module('domoApp')
                     return d[0] + "," + d[1];
                })
                .attr({
-                 x: function(d){return xScale(d[0])},
-                 y: function(d){return yScale(d[1])},
+                 x: function(d){return xScale(d[0]) + 5},
+                 y: function(d){return yScale(d[1]) + 3},
                  "font-family": "sans-serif",
                  "font-size": "11px",
                  "fill": "#5DAEF8"
