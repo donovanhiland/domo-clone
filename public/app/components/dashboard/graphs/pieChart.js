@@ -1,5 +1,5 @@
 angular.module('domoApp')
-  .directive('pieChart', () => {
+  .directive('pieChart', function() {
     return {
       restrict: "AE",
       scope: {

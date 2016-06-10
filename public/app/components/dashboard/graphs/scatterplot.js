@@ -1,5 +1,5 @@
 angular.module('domoApp')
-  .directive('scatterPlot', () => {
+  .directive('scatterPlot', function() {
     return {
       restrict: "AE",
       scope: {

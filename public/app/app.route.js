@@ -1,5 +1,5 @@
 angular.module("domoApp", ["ui.router", 'ui.bootstrap'])
-.config(($stateProvider, $urlRouterProvider) => {
+.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
     .state('home', {

@@ -62,6 +62,7 @@ angular.module("domoApp").service("dashboardService", function($http){
     };
     // twitter view
 
+<<<<<<< HEAD
     this.getTwitterLineData = (screenname) => {
       return $http({
         method: "POST",
@@ -81,14 +82,27 @@ angular.module("domoApp").service("dashboardService", function($http){
         });
     };
     this.getTwitterData = () => {
+=======
+    this.getTwitterData = (screenname) => {
+>>>>>>> 4a9941ef5fb16b332d0b25b601c26df04758c9a2
       return $http({
-              method: "POST",
-              url: "/tweets/engagement",
-              data: {"screenName": "devmtn"}
-          }).then((response) => {
-              return response.data;
-          });
+        method: "POST",
+        url: "/tweets/analysis",
+        data: screenname
+      }).then((response) => {
+          return response.data;
+      });
     };
+    this.getTwitterBarData = () => {
+        return $http({
+            method: "POST",
+            url: "/tweets/engagement",
+            data: {"screenName": "devmtn"}
+        }).then((response) => {
+            return response.data;
+        });
+    };
+
 
     this.getCurrentUser = (id) => {
        return $http({

@@ -1,5 +1,5 @@
 angular.module('domoApp')
-  .directive('barChart', () => {
+  .directive('barChart', function() {
     return {
       restrict: "AE",
       scope: {
