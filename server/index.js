@@ -74,7 +74,6 @@ mongoose.connection.once('open', () => {
     console.log('Connected to mongo at: ', config.mongoURI);
 });
 
-
 // App Listen
 app.listen(config.port, () => {
     console.log('listening on port ', config.port);

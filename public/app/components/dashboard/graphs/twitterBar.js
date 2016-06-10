@@ -98,14 +98,8 @@ angular.module('domoApp')
               .attr("dy", ".35em")
               .style("text-anchor", "end")
               .text(function(d) { return d; });
-<<<<<<< HEAD:public/app/components/dashboard/graphs/twitterBar.js
-      })
-  }
-=======
-        // } //for loop
       });
     };
->>>>>>> master:public/app/components/dashboard/graphs/groupedBar.js
     getData();
 
     } //link
