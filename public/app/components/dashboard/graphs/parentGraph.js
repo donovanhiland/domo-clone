@@ -1,5 +1,5 @@
 angular.module('domoApp')
-.directive('graphs', () => {
+.directive('graphs', function() {
   return {
     retrict: "AE",
     templateUrl: 'app/components/dashboard/graphs/graphs.html',

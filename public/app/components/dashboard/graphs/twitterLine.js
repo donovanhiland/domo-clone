@@ -1,5 +1,5 @@
 angular.module('domoApp')
-  .directive('twitterLineHour', ['dashboardService', (dashboardService) => {
+  .directive('twitterLineHour', ['dashboardService', function(dashboardService) {
     return {
       restrict: "E",
       link: (scope, element, attrs) => {
