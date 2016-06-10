@@ -1,40 +1,42 @@
 angular.module('domoApp')
-  .directive('pieChart', function () {
+  .directive('pieChart', () => {
     return {
       restrict: "AE",
       scope: {
         graphData: '=',
       },
-      link: function (scope, element) {
+      link: (scope, element) => {
         // scope.$watch('excelData', function () {
 
 
-        // var dataset = scope.excelData[0];
-        var dataset = [ 5, 10, 20, 45, 6, 25 ];
+        // let dataset = scope.excelData[0];
+        let dataset = [ 5, 10, 20, 45, 6, 25 ];
 
-        var pie = d3.layout.pie()
-        var w = 230;
-        var h = 250;
-        var color = d3.scale.ordinal()
-	.range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
+        let pie = d3.layout.pie()
+        let w = 230;
+        let h = 250;
+        let color = d3.scale.ordinal()
+	                          .range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
+
         function randomColor() {
           return color([Math.floor(Math.random()*5)])
-        }
-        var outerRadius = w / 2;
-        var innerRadius = w / 4; //change this for the
+        };
+
+        let outerRadius = w / 2;
+        let innerRadius = w / 4; //change this for the
         //arcs require inner and outer radii
-        var arc = d3.svg.arc()
+        let arc = d3.svg.arc()
                         .innerRadius(innerRadius)
                         .outerRadius(outerRadius);
 
         //Create SVG element
-        var svg = d3.select(element[0])
+        let svg = d3.select(element[0])
                     .append("svg")
                     .attr("width", w)
                     .attr("height", h);
 
         //Set up groups
-        var arcs = svg.selectAll("g.arc")
+        let arcs = svg.selectAll("g.arc")
                 .data(pie(dataset))
                 .enter()
                 .append("g")
@@ -45,15 +47,15 @@ angular.module('domoApp')
         //paths - SVG’s answer to drawing irregular forms
         //Draw arc paths
         arcs.append("path") //within each new g, we append a path. A paths path description is defined in the d attribute.
-            .attr("fill", function(d, i) {
+            .attr("fill", (d, i) => {
                 return color(i);
             })
             .attr("d", arc)
-            .on("mouseover", function(d) {
+            .on("mouseover", (d) => {
               d3.select(this)
                 .attr("fill", "#f92");
             })
-            .on("mouseout", function(d) {
+            .on("mouseout", (d) => {
                   d3.select(this)
                     .transition()
                     .duration(250)
@@ -61,18 +63,18 @@ angular.module('domoApp')
           })
             //labels
             arcs.append("text")
-                .attr("transform", function(d) {
+                .attr("transform", (d) => {
                     return "translate(" + arc.centroid(d) + ")"; //A centroid is the calculated center point of any shape
                 })
                 .attr("text-anchor", "middle")
                 .attr("fill", "white")
-                .text(function(d) {
+                .text((d) => {
                     return d.value; //pie-ified data has to return d.value
                 })
 
 
             //Makes Graph responsive
-            d3.select(window).on('resize', function () {
+            d3.select(window).on('resize', () => {
                 // update width
                 w = parseInt(d3.select(element[0]).style('width'), 10);
                 w = w - margin.left - margin.right;
@@ -87,11 +89,11 @@ angular.module('domoApp')
                     .attr('width', w);
 
                 svg.selectAll('g.arc.formatAs')
-                    .attr('width', function(d) { return xScale(d.formatAs); });
+                    .attr('width', (d) => { return xScale(d.formatAs); });
 
                 // update median ticks
-                var median = d3.median(svg.selectAll('.bar').data(),
-                    function(d) { return d.formatAs; });
+                let median = d3.median(svg.selectAll('.bar').data(),
+                    (d) => { return d.formatAs; });
 
                 svg.selectAll('line.median')
                     .attr('x1', xScale(median))
@@ -100,7 +102,6 @@ angular.module('domoApp')
                 svg.select('.x.axis.top').call(xAxis.orient('top'));
                 svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
             }); //responsive
-        // }); //scope.watch
       } //link
   }
 })
