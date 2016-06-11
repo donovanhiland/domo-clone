@@ -6,7 +6,6 @@ angular.module('domoApp')
         graphData: '=',
       },
       link: function(scope, element) {
-        // scope.$watch('excelData', function () {
 
 
         // let dataset = scope.excelData[0];

@@ -3,20 +3,12 @@ angular.module('domoApp')
     return {
       restrict: "E",
       link: function(scope, element) {
-        var getData = function() {
-        graphService.getTwitterLineData().then(function(response) {
-          console.log(response);
-          console.log(response.engagementByHour);
-          let data = response.engagementByHour;
-          console.log(data['1:00 AM']);
-          for(var key in data) {
-          }
 
-          var margin = {top: 20, right: 20, bottom: 30, left: 50},
+        var margin = {top: 20, right: 20, bottom: 30, left: 50},
             width = 740 - margin.left - margin.right,
             height = 415 - margin.top - margin.bottom;
 
-        var parseDate = d3.time.format("%d-%b-%y").parse;
+        var parseDate = d3.time.format("%I");
 
         var x = d3.time.scale()
             .range([0, width]);
@@ -33,9 +25,9 @@ angular.module('domoApp')
             .orient("left");
 
         var area = d3.svg.area()
-            .x(function(d) { return x(d); })
+            .x(function(d) {return x(d.date); })
             .y0(height)
-            .y1(function(d) { return y(d); });
+            .y1(function(d) { return y(d.tweets); });
 
         var svg = d3.select(element[0]).append("svg")
             .attr("width", width + margin.left + margin.right)
@@ -43,25 +35,30 @@ angular.module('domoApp')
           .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+            //Data coming in
+        var getData = function() {
+        graphService.getTwitterLineData().then(function(response) {
+          console.log(response.engagementByHour);
+          let data = response.engagementByHour;
+          let newData = [];
+          for (var key in data) {
+            newData.push(data);
+          }
+          console.log(newData);
+          // newData.forEach(function(d) {
+          //       d.date = parseDate(d.date);
+          //       d.tweets = +d.tweets;
+          //     });
+          // console.log(newData);
 
-          // data.forEach(function(d) {
-          //   d.date = parseDate(d.date);
-          //   d.close = +d.close;
-          // });
-
-          x.domain(d3.extent(data, function(d) {
-            console.log(d);
-            return d;
-           }));
-          y.domain([0, d3.max(data, function(d) {
-            return d;
-           })]);
+          x.domain(d3.extent(newData, function(d) {return d.date; }));
+          y.domain([0, d3.max(newData, function(d) {return d.tweets; })]);
 
           svg.append("path")
-              .datum(data)
+              .datum(newData)
               .attr("class", "twitter-line")
               .attr("d", area)
-              .attr("fill", "steelblue");
+              .attr("fill", "#9ce");
 
           svg.append("g")
               .attr("class", "x axis")
@@ -76,7 +73,7 @@ angular.module('domoApp')
               .attr("y", 6)
               .attr("dy", ".71em")
               .style("text-anchor", "end")
-              .text("Price ($)");
+              .text("tweets");
 
       }); //Service
     }; //getData

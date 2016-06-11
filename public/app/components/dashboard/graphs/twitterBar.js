@@ -72,9 +72,8 @@ angular.module('domoApp')
 
           date.selectAll("rect")
               .data((d) => { return d.data; })
-            .enter().append("rect")
+              .enter().append("rect")
               .attr("width", x1.rangeBand())
-
               .attr("x", function(d) { return x1(d.name);})
               .attr("y", function(d) {return y(d.value);})
               .attr("height", function(d) { return height - y(d.value)})
@@ -82,7 +81,7 @@ angular.module('domoApp')
 
           let legend = svg.selectAll(".legend")
               .data(dataNames)
-            .enter().append("g")
+              .enter().append("g")
               .attr("class", "legend")
               .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
