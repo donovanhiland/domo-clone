@@ -6,7 +6,6 @@ angular.module("domoApp")
                     screenName: 'devmtn'
                 })
                 .then(function (response) {
-                  console.log(response);
                     $scope.twitterAnalysis = response;
                 });
         })();

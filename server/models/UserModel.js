@@ -46,12 +46,12 @@ var UserSchema = new Schema({
   dataFiles: [String]
 });
 
-UserSchema.pre('save', function (next) {
+UserSchema.pre('save', function(next) {
     this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10), null);
     next();
 });
 
-UserSchema.methods.verifyPassword = function (reqBodyPassword) {
+UserSchema.methods.verifyPassword = function(reqBodyPassword) {
     var user = this;
     return bcrypt.compareSync(reqBodyPassword, user.password);
 };

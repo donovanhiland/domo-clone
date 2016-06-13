@@ -5,7 +5,7 @@ angular.module('domoApp')
       scope: {
         graphData: '=',
       },
-      link: (scope, element) => {
+      link: function(scope, element) {
         // console.log(scope.graphData);
 
         // let dataset = scope.graphData;
@@ -76,12 +76,12 @@ angular.module('domoApp')
                 x: (d, i) => { return xScale(i); }, //bar width
                 y: (d) => { return h - yScale(d); }, //sets height and flips it
                 width: xScale.rangeBand(), //width in between bars
-                height: (d) => { return yScale(d) },
+                height: (d) => { return yScale(d);},
                 fill: (d) => { return "rgb(0, 0, " + (d * 10) + ")"; }
            })
 
 
-           .on("mouseover", (d) => {
+           .on("mouseover", function(d) {
                //Get this bar's x/y values, then augment for the tooltip
              let xPosition = parseFloat(d3.select(this).attr("x")) + xScale.rangeBand() / 2;
              let yPosition = parseFloat(d3.select(this).attr("y")) + 20;
@@ -101,7 +101,7 @@ angular.module('domoApp')
                     .attr("cursor", "context-menu")
                     .text(d);
                 })
-            .on("mouseout", (d) => {
+            .on("mouseout", function(d) {
                   d3.select(this)
                     .transition()
                     .duration(250)
@@ -109,7 +109,7 @@ angular.module('domoApp')
                   //Remove the tooltip
                   d3.select("#tooltip").remove();
           })
-            .on("click", () => {
+            .on("click", function() {
                   sortBars();
           });
 
@@ -126,7 +126,7 @@ angular.module('domoApp')
               .call(yAxis);
 
         //Makes Graph responsive
-        d3.select(window).on('resize', () => {
+        d3.select(window).on('resize', function() {
             // update width
             w = parseInt(d3.select(element[0]).style('width'), 10);
             w = w - margin.left - margin.right;
@@ -145,7 +145,7 @@ angular.module('domoApp')
 
             // update median ticks
             let median = d3.median(svg.selectAll('.bar').data(),
-                (d) => { return d.formatAs; });
+                function(d) { return d.formatAs; });
 
             svg.selectAll('line.median')
                 .attr('x1', xScale(median))
@@ -155,5 +155,5 @@ angular.module('domoApp')
             svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
         });
     } //link
-  } //return
-}) //directive
+  }; //return
+}); //directive

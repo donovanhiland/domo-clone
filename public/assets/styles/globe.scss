@@ -6,8 +6,8 @@
   font-family: sans-serif;
   font-size: 13px;
   line-height: 20px;
-  height: 90vh;
-  width: 100%;
+  height: 100%;
+  margin-bottom: -10px;
 }
 
 #title {
@@ -20,4 +20,10 @@
   font: 20px Georgia;
   padding: 10px;
   color: white;
+}
+
+@media screen and (max-width: 768px) {
+  #title {
+    display: none;
+  }
 }

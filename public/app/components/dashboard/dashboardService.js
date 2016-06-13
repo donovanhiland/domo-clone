@@ -71,16 +71,6 @@ angular.module("domoApp").service("dashboardService", function($http){
           return response.data;
       });
     };
-    this.getTwitterBarData = () => {
-        return $http({
-            method: "POST",
-            url: "/tweets/engagement",
-            data: {"screenName": "devmtn"}
-        }).then((response) => {
-            return response.data;
-        });
-    };
-
 
     this.getCurrentUser = (id) => {
        return $http({

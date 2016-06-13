@@ -1,0 +1,56 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
+
+$domo-grey: #333;
+$domo-text: #555;
+$domo-footer: #888;
+$domo-solutions-border: rgb(125, 125, 125);
+$domo-blue: #9ce;
+$domo-link: #8bd;
+$domo-oj: #f92;
+$domo-font: 'Open Sans', Helvetica, Arial, sans-serif;
+$test-border: 1px red solid;
+
+.alerts-section {
+  padding: 10%;
+  background-color: $domo-grey;
+}
+
+.form-text {
+  font-family: $domo-font;
+  color: #fff;
+}
+
+.form-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 130px;
+  margin: auto;
+  margin-right: 3vw;
+  margin-top: 10px;
+  background-color: $domo-oj;
+  font-family: $domo-font;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  border: none;
+  text-decoration: none;
+}
+
+.form-btn:hover {
+  background-color: $domo-blue;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.form-display {
+  display: flex;
+  justify-content: flex-start;
+  width: 130px;
+}
+
+#pwd {
+  border-radius: none;
+}
