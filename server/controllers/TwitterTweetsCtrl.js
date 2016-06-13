@@ -40,12 +40,12 @@ module.exports = {
                         if (error) console.log(error);
                     });
                 }
-                // counter += 200;
-                // maxId = tweets[tweets.length - 1].id;
-                // if (counter >= 3000 || tweets.length === 1) {
-                //     res.status(200).send('tweets aggregated');
-                // }
-                // aggregateTweetsRecursive(screenName, maxId);
+                counter += 200;
+                maxId = tweets[tweets.length - 1].id;
+                if (counter >= 3000 || tweets.length === 1) {
+                    res.status(200).send('tweets aggregated');
+                }
+                aggregateTweetsRecursive(screenName, maxId);
             });
         };
         aggregateTweetsRecursive(req.body.screenName);
