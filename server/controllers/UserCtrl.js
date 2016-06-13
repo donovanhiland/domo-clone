@@ -14,7 +14,6 @@
       },
 
       checkAuth: function(req, res, next) {
-        console.log('checkauth server side', req.user);
           if (req.user) {
               res.status(200).json(req.user);
           }

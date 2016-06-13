@@ -10,6 +10,15 @@ angular.module("domoApp").service("graphService", function($http){
         }).then((response) => {
             return response.data;
         });
+    }
+    this.getTwitterLineData = () => {
+      return $http({
+        method: "POST",
+        url: "/tweets/analysis",
+        data: {"screenName": "devmtn"}
+      }).then((response) => {
+          return response.data;
+      });
     };
 
 });
