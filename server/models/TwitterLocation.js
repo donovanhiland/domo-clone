@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 import {Schema} from 'mongoose';
 
 const TwitterLocationSchema = new Schema({
+  screenName: {
+    type: String,
+    requried: true
+  },
   date: {
     type: Date,
     required: true
