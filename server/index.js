@@ -10,7 +10,7 @@ import nodemailer from 'nodemailer';
 // Controllers
 import TwitterLocationCtrl from './controllers/TwitterLocationCtrl';
 import TwitterTweetsCtrl from './controllers/TwitterTweetsCtrl';
-import InstagramPostsCtrl from './controllers/InstagramPostsCtrl.js';
+// import InstagramPostsCtrl from './controllers/InstagramPostsCtrl.js';
 import UserCtrl from './controllers/UserCtrl.js';
 import TextCtrl from './controllers/TextCtrl.js';
 import CardCtrl from './controllers/CardCtrl.js';
@@ -63,13 +63,17 @@ app.post('/email', FormCtrl.sendEmail);
 app.post('/text', TextCtrl.sendText);
 
 // Twitter Data Endpoints
-app.post('/followers/location', TwitterLocationCtrl.getDataByScreenName);
+app.post('/location/aggregate', TwitterLocationCtrl.getDataByScreenName);
+app.get('/location/data', TwitterLocationCtrl.formatLocationDataFromDB);
 app.post('/tweets/aggregate', TwitterTweetsCtrl.aggregateTweets);
 app.post('/tweets/engagement', TwitterTweetsCtrl.tweetEngagement);
 app.post('/tweets/analysis', TwitterTweetsCtrl.tweetAnalysis);
 
-// Instagram Data Endpoints
-app.get('/insta', InstagramPostsCtrl.aggregateInstaPosts);
+// // Instagram Data Endpoints
+// app.get('/instagram/authorize_user', InstagramPostsCtrl.authorize_user);
+// app.get('/instagram/handleauth', InstagramPostsCtrl.handleauth);
+// app.get('/instagram/aggregate', InstagramPostsCtrl.aggregateInstaPosts);
+
 
 // MongoDB connection
 // mongoose.set('debug', true);
