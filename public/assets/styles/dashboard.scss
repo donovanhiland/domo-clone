@@ -6,8 +6,7 @@ $domo-blue: #9ce;
 $domo-link: #8bd;
 $domo-oj: #f92;
 $domo-font: 'Open Sans', Helvetica, Arial, sans-serif;
-$test-border: 1px red solid;
-/////////////////////////////////
+$test-border: 1px red solid; /////////////////////////////////
 ////// Dashboard Nav
 ////////////////////////////////
 .dash-nav-section {
@@ -38,12 +37,12 @@ $test-border: 1px red solid;
         }
     }
     .dash-nav-bottom {
-      display: flex;
-      align-items: center;
-      padding-top: 7px;
-      height: 5vh;
-      width: 100vw;
-      background-color: #333;
+        display: flex;
+        align-items: center;
+        padding-top: 7px;
+        height: 5vh;
+        width: 100vw;
+        background-color: #333;
         ul {
             display: inline-block;
             li {
@@ -64,77 +63,75 @@ $test-border: 1px red solid;
     float: left;
 }
 .dash-nav-mobile {
-  display: flex;
-  align-items: center;
-  padding-top: 7px;
-  height: 5vh;
-  width: 100vw;
-  background-color: #333;
-  .hamburger-container {
-    .hamburger {
-      margin-bottom: 5px;
-      background: none;
-      border: none;
-      color: #fff;
+    display: flex;
+    align-items: center;
+    padding-top: 7px;
+    height: 5vh;
+    width: 100vw;
+    background-color: #333;
+    .hamburger-container {
+        .hamburger {
+            margin-bottom: 5px;
+            background: none;
+            border: none;
+            color: #fff;
+        }
+        .hamburger:hover {
+            color: $domo-blue;
+        }
+        .hamburger:focus {
+            outline: 0;
+        }
     }
-    .hamburger:hover {
-      color: $domo-blue;
-    }
-    .hamburger:focus {
-      outline: 0;
-    }
-  }
 }
 .dash-nav-mobile-menu {
-  background-color: $domo-grey;
-  margin-bottom: -10px;
-  ul {
-    a {
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      li {
-        height: 50px;
-        padding-top: 8px;
-        font-family: "Open Sans", Helvetica, Arial, sans-serif;
-        text-align: center;
-        font-size: 20px;
-        font-weight: 600;
-        color: #fff;
-        cursor: pointer;
-        border-bottom: 1px #555 solid;
-      }
-      li:hover {
-        text-decoration: none;
-        background-color: $domo-text;
-        color: $domo-blue;
-      }
+    background-color: $domo-grey;
+    margin-bottom: -10px;
+    ul {
+        a {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            li {
+                height: 50px;
+                padding-top: 8px;
+                font-family: "Open Sans", Helvetica, Arial, sans-serif;
+                text-align: center;
+                font-size: 20px;
+                font-weight: 600;
+                color: #fff;
+                cursor: pointer;
+                border-bottom: 1px #555 solid;
+            }
+            li:hover {
+                text-decoration: none;
+                background-color: $domo-text;
+                color: $domo-blue;
+            }
+        }
     }
-  }
 }
 // < 769 px, nav changes to drop down menu
 @media screen and (max-width: 768px) {
-  .dash-nav-bottom {
-    display: none !important;
-    ul {
-      li {
-        font-size: 10px !important;
-        margin: 2px !important;
-      }
+    .dash-nav-bottom {
+        display: none !important;
+        ul {
+            li {
+                font-size: 10px !important;
+                margin: 2px !important;
+            }
+        }
     }
-  }
 }
-
 @media screen and (min-width: 768px) {
-  menu-directive {
-    display: none;
-  }
+    menu-directive {
+        display: none;
+    }
 }
-
 @media screen and (max-width: 768px) {
-  .dash-nav-mobile-menu {
-    display: none;
-  }
+    .dash-nav-mobile-menu {
+        display: none;
+    }
 }
 /////////////////////////////////
 ////// Dashboard backdrop
@@ -161,247 +158,242 @@ $test-border: 1px red solid;
         }
     }
 }
-
 #add-card-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 35px;
-  width: 130px;
-  margin: auto;
-  margin-right: 3vw;
-  background-color: $domo-oj;
-  font-family: $domo-font;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #fff;
-  border: none;
-  text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 130px;
+    margin: auto 3vw auto auto;
+    background-color: $domo-oj;
+    font-family: $domo-font;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+    border: none;
+    text-decoration: none;
 }
-
 #add-card-btn:hover {
-  background-color: $domo-blue;
-  transition: all 0.3s ease-in-out;
-  text-decoration: none;
+    background-color: $domo-blue;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
 }
-
+.modal-body {
+  .modal-header{
+    .title-modal {
+        text-align: center;
+    }
+  }
+    #label-title {
+        margin-right: 20px;
+    }
+}
 /////////////////////////////////
 ////// Cards
 ////////////////////////////////
-
 .dash-card-section {
-
-  .dash-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    .dash-card {
-      height: 100%;
-      width: 31%;
-      margin: 2vh;
-      background-color: #fff;
-      border: 1px #EEEEEE solid;
-      header {
+    .dash-card-container {
         display: flex;
-        justify-content: space-between;
-        border: 1px #eee solid;
-        .deleteCard {
-          i {
-            cursor: pointer;
-            margin: 5px;
-          }
-          i:hover {
-            color: red;
-          }
-        }
-        .card-title-container {
-          h1 {
-            font-family: $domo-font;
-            font-size: 16px;
-            font-weight: 400;
-            margin: 5px;
-          }
-        }
-      }
-      .graph-container {
-        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
-
-        #graph {
-          margin-top: 10vh;
-          width: 100%;
-          height: 38vh;
-          overflow: hidden;
-          display: flex;
-          justify-content: center;
-
+        width: 100%;
+        .dash-card {
+            height: 100%;
+            width: 31%;
+            margin: 2vh;
+            background-color: #fff;
+            border: 1px #EEEEEE solid;
+            header {
+                display: flex;
+                justify-content: space-between;
+                border: 1px #eee solid;
+                .deleteCard {
+                    i {
+                        cursor: pointer;
+                        margin: 5px;
+                    }
+                    i:hover {
+                        color: red;
+                    }
+                }
+                .card-title-container {
+                    h1 {
+                        font-family: $domo-font;
+                        font-size: 16px;
+                        font-weight: 400;
+                        margin: 5px;
+                    }
+                }
+            }
+            .graph-container {
+                display: flex;
+                justify-content: center;
+                #graph {
+                    margin-top: 10vh;
+                    width: 100%;
+                    height: 38vh;
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: center;
+                }
+            }
         }
-      }
     }
-  }
 }
 /////////////////////////////////
 ////// Graphs
 ////////////////////////////////
-
 .modal-images {
-  width: 100%;
-  .image-modal {
-    display: inline;
-    img {
-      cursor: pointer;
-      width: 24%;
-      opacity: .1;
+    width: 100%;
+    .image-modal {
+        display: inline;
+        img {
+            cursor: pointer;
+            width: 24%;
+            opacity: 0.1;
+        }
+        img:hover {
+            opacity: 1;
+        }
     }
-    img:hover {
-      opacity: 1;
-    }
-  }
 }
 .pick-graph {
-  text-align: center;
+    text-align: center;
 }
-
-.axis path,
-.axis line {
-	fill: none;
-	stroke: black;
-	shape-rendering: crispEdges;
+.axis line,
+.axis path {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
 }
-
 .axis text {
-	font-family: sans-serif;
-	font-size: 11px;
-  color: white;
+    font-family: sans-serif;
+    font-size: 11px;
+    color: white;
 }
-bar-chart, graphs, scatter-plot, pie-chart, line-chart{
-  display:block;
-  width:100%;
-  height:100%;
-  text-align: center;
+bar-chart,
+graphs,
+line-chart,
+pie-chart,
+scatter-plot {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
 }
-twitter-bar, twitter-line-hour{
-  background-color: #fff;
+twitter-bar,
+twitter-line-hour {
+    background-color: #fff;
 }
 path.line {
-  fill: none;
-  stroke: #666;
-  stroke-width: 1.5px;
+    fill: none;
+    stroke: #666;
+    stroke-width: 1.5px;
 }
-
 path.area {
-  fill: #e7e7e7;
+    fill: #e7e7e7;
 }
-
 .axis {
-  shape-rendering: crispEdges;
+    shape-rendering: crispEdges;
 }
-
 .x.axis line {
-  stroke: #fff;
+    stroke: #fff;
 }
-
 .x.axis .minor {
-  stroke-opacity: .5;
-
+    stroke-opacity: 0.5;
 }
-.y.axis line, .y.axis path {
-  fill: none;
-  stroke: #000;
+.y.axis line,
+.y.axis path {
+    fill: none;
+    stroke: #000;
 }
-
-.y.axis line, .y.axis path {
-  fill: none;
-  stroke: #000;
+.y.axis line,
+.y.axis path {
+    fill: none;
+    stroke: #000;
 }
 ///////////info///////////
-#img-info{
-  display: flex;
-  justify-content: center;
-  background-color: $domo-grey;
-  img {
-    margin-top: 10vh;
-    height: 100%;
-    width: 80vw;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  #img-info{
+#img-info {
     display: flex;
     justify-content: center;
     background-color: $domo-grey;
     img {
-      margin-top: 10vh;
-      height: 200vh;
-      width: 100%;
+        margin-top: 10vh;
+        height: 100%;
+        width: 80vw;
     }
-  }
+}
+@media screen and (max-width: 768px) {
+    #img-info {
+        display: flex;
+        justify-content: center;
+        background-color: $domo-grey;
+        img {
+            margin-top: 10vh;
+            height: 200vh;
+            width: 100%;
+        }
+    }
 }
 /////////////////////////////////
- ////// Settings
- ////////////////////////////////
- .settings-container {
-     height: 100vh;
-     background-color: $domo-grey;
-     display: flex;
-     justify-content: center;
-     color: #fff;
-
-     .div-settings {
-      background-color: $domo-grey;
-      width: 55vw;
-      height: 50vh;
-      margin-top: 15vh;
-      border-radius: 1%;
-
-         h3 {
-             text-align: center;
-             font-family: $domo-font;
-             letter-spacing: 1px;
-         }
-         .sperate-h3 {
-           margin-top: 43px;
-
-             label{
-               margin-left: 20px;
-               font-family: $domo-font;
-               font-weight: 300;
-               letter-spacing: 1px;
-             }
-             .input-edit {
-                 width: 84%;
-                 margin-left: 20px;
-                 border-radius: 0;
-             }
-             .settings-button-container {
-               display: flex;
-               justify-content: center;
-
-             .edit-profile-buttton {
-                 display: flex;
-                 justify-content: center;
-                 align-items: center;
-                 height: 35px;
-                 width: 130px;
-                 margin: auto;
-                 background-color: #f92;
-                 font-family: "Open Sans", Helvetica, Arial, sans-serif;
-                 font-size: 12px;
-                 font-weight: 700;
-                 letter-spacing: 1px;
-                 color: #fff;
-                 border: none;
-                 text-decoration: none;
-             }
-             .edit-profile-buttton:hover {
-                 background-color: #9ce;
-                 transition: all 0.3s ease-in-out;
-                 text-decoration: none;
-             }
-           }
-         }
-     }
-  }
+////// Settings
+////////////////////////////////
+.settings-container {
+    height: 100vh;
+    background-color: $domo-grey;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    .div-settings {
+        background-color: $domo-grey;
+        width: 55vw;
+        height: 50vh;
+        margin-top: 15vh;
+        border-radius: 1%;
+        h3 {
+            text-align: center;
+            font-family: $domo-font;
+            letter-spacing: 1px;
+        }
+        .sperate-h3 {
+            margin-top: 43px;
+            label {
+                margin-left: 20px;
+                font-family: $domo-font;
+                font-weight: 300;
+                letter-spacing: 1px;
+            }
+            .input-edit {
+                width: 84%;
+                margin-left: 20px;
+                border-radius: 0;
+            }
+            .settings-button-container {
+                display: flex;
+                justify-content: center;
+                .edit-profile-buttton {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 35px;
+                    width: 130px;
+                    margin: auto;
+                    background-color: #f92;
+                    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+                    font-size: 12px;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    color: #fff;
+                    border: none;
+                    text-decoration: none;
+                }
+                .edit-profile-buttton:hover {
+                    background-color: #9ce;
+                    transition: all 0.3s ease-in-out;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
