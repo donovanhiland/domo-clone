@@ -10,7 +10,7 @@ angular.module("domoApp").service("graphService", function($http){
         }).then((response) => {
             return response.data;
         });
-    }
+    };
     this.getTwitterLineData = () => {
       return $http({
         method: "POST",
@@ -20,5 +20,8 @@ angular.module("domoApp").service("graphService", function($http){
           return response.data;
       });
     };
+
+  
+
 
 });
