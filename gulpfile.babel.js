@@ -6,11 +6,11 @@ import uglify from 'gulp-uglify';
 import watch from 'gulp-watch';
 import sass from 'gulp-sass';
 import path from 'path';
-import babel from 'gulp-babel'
+import babel from 'gulp-babel';
 
 const paths = {
   jsSource: ['./public/app/**/*.js', '!/public/bundle.js'],
-  serverSource: ['./server/es6-index.js'],
+  serverSource: ['./server/**/*.js'],
   sassSource: ['./public/assets/styles/**/*.scss']
 
 };
@@ -26,14 +26,14 @@ gulp.task('js', () =>  {
   .pipe(gulp.dest('./public'));
 });
 
-// gulp.task('server', () => {
-//   return gulp.src(paths.serverSource)
-//   .pipe(plumber())
-//   .pipe(babel({
-//     presets: ["es2015"]
-//   }))
-//   .pipe(gulp.dest('./server/index.js'))
-// })
+gulp.task('server', () => {
+  return gulp.src(paths.serverSource)
+  .pipe(plumber())
+  .pipe(babel({
+    presets: ["es2015"]
+  }))
+  .pipe(gulp.dest('./dist'));
+});
 
 gulp.task('styles', () => {
   return gulp.src(paths.sassSource)
@@ -44,7 +44,8 @@ gulp.task('styles', () => {
 
 gulp.task('watch', () =>  {
   gulp.watch(paths.jsSource, ['js']);
+  gulp.watch(paths.serverSource, ['server']);
   gulp.watch(paths.sassSource, ['styles']);
 });
 
-gulp.task('default', ['watch', 'js', 'styles']);
+gulp.task('default', ['watch', 'js', 'server', 'styles']);
