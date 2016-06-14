@@ -241,6 +241,42 @@ $test-border: 1px red solid; /////////////////////////////////
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+  .dashboard {
+    .dash-top {
+      .dash-menu {
+        margin-right: 0;
+        .btn-group {
+
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dash-card-section {
+    .dash-card-container {
+      .dash-card {
+        width: 90%;
+        header {
+          .card-title-container {
+
+          }
+        }
+        .graph-container {
+          #graph {
+            height: 50vh;
+            graphs {
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
 /////////////////////////////////
 ////// Graphs
 ////////////////////////////////
