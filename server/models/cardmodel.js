@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 var cardSchema = new Schema({
 
     title: String,
