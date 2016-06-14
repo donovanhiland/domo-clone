@@ -4,7 +4,8 @@ angular.module('domoApp')
       restrict: "E",
       link: function(scope, element) {
 
-
+        //this line graph is not in use currently
+        //It is a stacked line graph that can transition between being filled in and not
       // STYLING
       let margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = 760 - margin.left - margin.right,
@@ -147,7 +148,7 @@ angular.module('domoApp')
           };
         };
         }
-        
+
     } //link
   }; //return
 }]); //the directive

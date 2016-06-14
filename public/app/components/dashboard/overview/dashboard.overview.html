@@ -28,11 +28,17 @@
                         <div class="modal-body">
                             <label id="label" for="inputdefault">Title:</label>
                             <input id="text-box" class="form-control" id="inputdefault" type="text" ng-model="newTitle">
-                            <!-- <excel-form></excel-form> -->
                         <div class="modal-footer">
                             <button type="button" class="love btn btn-primary" ng-click="createCard(newTitle)" data-dismiss="modal">Create</button>
                         </div>
                     </div>
+                    <div>
+                       <input type="file" id="file" name="file" multiple
+                           onchange="angular.element(this).scope().getFileDetails(this)" />
+                       <!-- <input type="button" ng-click="uploadFiles()" value="Upload" /> -->
+                       <!--ADD A PROGRESS BAR ELEMENT.-->
+                       <!-- <p><progress id="pro" value="0"></progress></p> -->
+                   </div>
                     <section class="modal-images">
                       <h3 class="pick-graph">Pick a graph to display your data:</h3>
                       <!-- <img ng-click=card.grap = "bar"> -->
