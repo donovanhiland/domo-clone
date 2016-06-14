@@ -60,6 +60,7 @@ angular.module("domoApp").service("dashboardService", function($http){
             return response.data;
         });
     };
+    
     // twitter view
 
     this.getTwitterData = (screenname) => {

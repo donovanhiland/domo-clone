@@ -80,4 +80,4 @@ angular.module('domoApp')
     getData();
     } //link
   }; //return
-}]); //the directive
+}); //the directive
