@@ -28,7 +28,24 @@
                         <div class="modal-body">
                             <label id="label" for="inputdefault">Title:</label>
                             <input id="text-box" class="form-control" id="inputdefault" type="text" ng-model="newTitle">
-                            <!-- <excel-form></excel-form> -->
+
+                            <!-- <form action="" method="post" enctype="multipart/form-data">
+                                <div class='form-group'>
+                                    <label for='excel_file'>Enter Excel Data</label>
+                                    <input type="file" name="excel_file" accept=".xlsx" onchange="angular.element(this).scope().fileChanged(this.files);" required="true">
+                                </div>
+                                <div ng-show="isProcessing">
+                                    <span>Processing ...</span>
+                                </div>
+                                <div class='form-group'>
+                                    <label for='sheet_name'>Sheet Name</label>
+
+                                    <select id="sheet_name" class="form-control" ng-change="updateJSONString()" ng-model="selectedSheetName" ng-options="sheetName as sheetName for (sheetName, sheetData) in sheets">
+                                        <option value="">---- Select a sheet ----</option>
+                                    </select>
+                                </div>
+                            </form> -->
+
                         <div class="modal-footer">
                             <button type="button" class="love btn btn-primary" ng-click="createCard(newTitle)" data-dismiss="modal">Create</button>
                         </div>

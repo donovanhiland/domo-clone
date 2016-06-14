@@ -16,57 +16,25 @@ angular.module("domoApp")
         $scope.setGraphType = (graphType) => {
             $scope.card.graphType = graphType;
             if (graphType === 'barChart') {
-                $scope.imageOpacity1 = {
-                    opacity: 1
-                };
-                $scope.imageOpacity2 = {
-                    opacity: .1
-                };
-                $scope.imageOpacity3 = {
-                    opacity: .1
-                };
-                $scope.imageOpacity4 = {
-                    opacity: .1
-                };
+                $scope.imageOpacity1 = {opacity: 1};
+                $scope.imageOpacity2 = {opacity: .1};
+                $scope.imageOpacity3 = {opacity: .1};
+                $scope.imageOpacity4 = {opacity: .1};
             } else if (graphType === 'scatterPlot') {
-                $scope.imageOpacity1 = {
-                    opacity: .1
-                };
-                $scope.imageOpacity2 = {
-                    opacity: 1
-                };
-                $scope.imageOpacity3 = {
-                    opacity: .1
-                };
-                $scope.imageOpacity4 = {
-                    opacity: .1
-                };
+                $scope.imageOpacity1 = {opacity: .1};
+                $scope.imageOpacity2 = {opacity: 1};
+                $scope.imageOpacity3 = {opacity: .1};
+                $scope.imageOpacity4 = {opacity: .1};
             } else if (graphType === 'pieChart') {
-                $scope.imageOpacity1 = {
-                    opacity: .1
-                };
-                $scope.imageOpacity2 = {
-                    opacity: .1
-                };
-                $scope.imageOpacity3 = {
-                    opacity: 1
-                };
-                $scope.imageOpacity4 = {
-                    opacity: .1
-                };
+                $scope.imageOpacity1 = {opacity: .1};
+                $scope.imageOpacity2 = {opacity: .1};
+                $scope.imageOpacity3 = {opacity: 1};
+                $scope.imageOpacity4 = {opacity: .1};
             } else if (graphType === 'lineGraph') {
-                $scope.imageOpacity1 = {
-                    opacity: .1
-                };
-                $scope.imageOpacity2 = {
-                    opacity: .1
-                };
-                $scope.imageOpacity3 = {
-                    opacity: .1
-                };
-                $scope.imageOpacity4 = {
-                    opacity: 1
-                };
+                $scope.imageOpacity1 = {opacity: .1};
+                $scope.imageOpacity2 = {opacity: .1};
+                $scope.imageOpacity3 = {opacity: .1};
+                $scope.imageOpacity4 = {opacity: 1};
             }
         };
 
@@ -159,7 +127,8 @@ angular.module("domoApp")
             return service;
         }
     ])
-    .controller('excelController', function($scope, excelReader) {
+    .controller('excelController', ['excelReader', 'graphService'
+     function($scope, excelReader, graphService) {
 
         $scope.json_string = "";
         $scope.fileChanged = (files) => {
@@ -175,4 +144,4 @@ angular.module("domoApp")
             $scope.excelData = $scope.sheets[$scope.selectedSheetName];
             $scope.excelData = $scope.excelData.data;
         };
-    });
+    }]);
