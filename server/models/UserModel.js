@@ -9,52 +9,52 @@ require('mongoose-schematypes-extend')(mongoose);
 
 var UserSchema = new Schema({
 
-    firstname: {
-        type: String,
-        trim: true,
-        required: true,
-        capitalize: true,
-        nomultispaces: true
-    },
+  firstname: {
+    type: String,
+    trim: true,
+    required: true,
+    capitalize: true,
+    nomultispaces: true
+  },
 
-    lastname: {
-        type: String,
-        trim: true,
-        required: true,
-        capitalize: true,
-        nomultispaces: true
-    },
+  lastname: {
+    type: String,
+    trim: true,
+    required: true,
+    capitalize: true,
+    nomultispaces: true
+  },
 
-    // screenName: {
-    //     type: String,
-    //     trim: true,
-    //     required: true,
-    //     capitalize: true,
-    //     nomultispaces: true
-    // },
+  screenName: {
+   type: String,
+   trim: true,
+   required: true,
+   capitalize: false,
+   nomultispaces: true
+   },
 
-    email: {
-        type: String,
-        trim: true,
-        unique: true,
-        required: true
-    },
+  email: {
+    type: String,
+    trim: true,
+    unique: true,
+    required: true
+  },
 
-    password: {
-        type: String,
-        required: false
-    },
+  password: {
+    type: String,
+    required: false
+  },
 
-    phoneNumber: {
-        type: String
-    },
+  phoneNumber: {
+    type: String
+  },
 
-    card: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Card'
-    }],
+  card: [
+    {type: Schema.Types.ObjectId, ref: 'Card'}
+  ],
 
-    dataFiles: [String]
+  dataFiles: [String]
+
 });
 
 UserSchema.pre('save', function(next) {

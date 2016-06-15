@@ -9,7 +9,7 @@ angular.module("domoApp")
                     $scope.twitterAnalysis = response;
                 });
         })();
-        // $scope.user = user;
+        $scope.user = user;
         $scope.card = {};
 
         $scope.setGraphType = (graphType) => {
@@ -131,6 +131,7 @@ angular.module("domoApp")
            $scope.getTheFiles = function ($files) {
                 console.log($files);
             };
+
    })
    .directive('ngFiles', ['$parse', function ($parse) {
 
