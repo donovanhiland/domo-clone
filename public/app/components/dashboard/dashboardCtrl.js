@@ -71,12 +71,11 @@ angular.module("domoApp")
                 subjectField: $scope.email.subjectField,
                 textField: $scope.email.textField
             }).then((response) => {
-                clear();
-                console.log("sendEmail", response);
+                clear2();
             });
         };
 
-        const clear = () => {
+        const clear2 = () => {
             $scope.email = null;
             return alert("email received!");
         };
@@ -87,6 +86,12 @@ angular.module("domoApp")
                 $scope.cards = response;
             });
         };
+        $scope.logout = () => {
+                    dashboardService.logout()
+                        .then(function(response) {
+                            $state.go('home');
+                        });
+                };
         $scope.readCard();
         // $scope.user = user;
 

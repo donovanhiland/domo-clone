@@ -1,27 +1,27 @@
 <section class="alerts-section">
-  <form role="form">
-      <div class="form-group">
+  <form role="form" class="form-container">
+      <div class="alerts-form-group">
           <label for="email" id="pwd" class="form-text">Email address:</label>
           <input type="email" class="form-control test" ng-model="email.toField" id="email">
       </div>
-      <div class="form-group">
+      <div class="alerts-form-group">
           <label for="pwd" class="form-text">Subject:</label>
           <input type="text" class="form-control" id="pwd" ng-model="email.subjectField">
       </div>
-      <div class="form-group">
+      <div class="alerts-form-group">
           <label for="pwd" class="form-text">Message:</label>
           <input type="text" class="form-control" id="pwd" ng-model="email.textField">
       </div>
       <div class="checkbox">
 
       </div>
-      <div class="form-display">
+      <div class="alerts-form-display">
         <button type="submit" ng-click="sendEmail(email)" class="form-btn">Submit</button>
       </div>
   </form>
 
-  <div class="message-sender form-group">
-      <h5 class="form-text">Text your Team:</h5>
+  <div class="message-sender alerts-form-group">
+      <h5 class="alerts-form-text">Text your Team:</h5>
       <textarea class="message-input-box form-control" rows="2" ng-model="message" placeholder="message..."></textarea>
       <div class="form-display">
         <button type="submit" ng-click="sendText(message)" class="form-btn">Send Text</button>

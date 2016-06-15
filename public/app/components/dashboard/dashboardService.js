@@ -60,7 +60,7 @@ angular.module("domoApp").service("dashboardService", function($http){
             return response.data;
         });
     };
-    
+
     // twitter view
 
     this.getTwitterData = (screenname) => {
@@ -81,6 +81,14 @@ angular.module("domoApp").service("dashboardService", function($http){
              return response.data;
          });
      };
+     this.logout = () => {
+          return $http({
+            method: 'GET',
+            url: '/logout'
+          }).then(function(response) {
+            return response;
+          });
+        };
 
      this.updateUser = (user, newpass) => {
        if (newpass.password) {
