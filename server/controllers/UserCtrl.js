@@ -53,10 +53,9 @@
       },
 
       logout: function(req, res, next) {
-          // user logout
-          req.logout();
-          return res.status(200).json('logged out');
-      }
-
+        // user logout
+        req.logout();
+        return res.status(200).json('logged out');
+    }
 
   };
