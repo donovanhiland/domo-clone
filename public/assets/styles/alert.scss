@@ -24,11 +24,15 @@ $test-border: 1px red solid;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 5vh;
 }
 
-.form-group {
+.alerts-form-group {
   width: 50vw;
   border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form-text {
@@ -37,8 +41,16 @@ $test-border: 1px red solid;
   color: #fff;
 }
 
+.form-text {
+  align-self: flex-start;
+  font-family: $domo-font;
+  font-weight: 300;
+  color: #fff;
+}
+
 .form-control {
   border-radius: 0;
+  margin-bottom: 5vh;
 }
 
 .form-btn {
@@ -69,7 +81,7 @@ $test-border: 1px red solid;
 .form-display {
   display: flex;
   justify-content: flex-start;
-  width: 130px;
+
 }
 
 #pwd {
