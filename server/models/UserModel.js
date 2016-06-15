@@ -23,6 +23,14 @@ var UserSchema = new Schema({
     nomultispaces: true
   },
 
+  screenName: {
+   type: String,
+   trim: true,
+   required: true,
+   capitalize: false,
+   nomultispaces: true
+   },
+
   email: {
     type: String,
     trim: true,
