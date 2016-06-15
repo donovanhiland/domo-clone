@@ -162,8 +162,17 @@ module.exports = {
                 topHourToPost.percentOfTotal = Number((topHourToPost.engagement / totalEngagement * 100).toFixed(1));
                 retweetsPerTweet = (retweets / tweetCount);
                 favoritesPerTweet = (favorites / tweetCount);
+                // twitter.get('/users/show', {
+                //   screen_name: 'devmtn'
+                // }, (error, user,response) => {
+                //   console.log(user);
+                // });
                 let analysisData = {
                     totalEngagement: totalEngagement,
+                    // totalFollowers: totalFollowers,
+                    // engagementAsPercentOfFollowers: engagementAsPercentOfFollowers,
+                    totalRetweets: retweets,
+                    totalFavorites: favorites,
                     retweetsPerTweet: retweetsPerTweet,
                     favoritesPerTweet: favoritesPerTweet,
                     postsByDay: postsByDay,

@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
-import {Schema} from 'mongoose';
+import {
+    Schema
+} from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
 require('mongoose-schematypes-extend')(mongoose);
 
@@ -52,6 +54,7 @@ var UserSchema = new Schema({
   ],
 
   dataFiles: [String]
+
 });
 
 UserSchema.pre('save', function(next) {
