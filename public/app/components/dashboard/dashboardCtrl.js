@@ -57,7 +57,7 @@ angular.module("domoApp")
         };
         $scope.sendText = (message) => {
             let newMessage = {
-                to: ["+12406780268"],
+                to: ["+12404782587"],
                 from: "+18013969302",
                 message: message
             };

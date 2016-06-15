@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
-import {Schema} from 'mongoose';
+import {
+    Schema
+} from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
 require('mongoose-schematypes-extend')(mongoose);
 
@@ -7,43 +9,52 @@ require('mongoose-schematypes-extend')(mongoose);
 
 var UserSchema = new Schema({
 
-  firstname: {
-    type: String,
-    trim: true,
-    required: true,
-    capitalize: true,
-    nomultispaces: true
-  },
+    firstname: {
+        type: String,
+        trim: true,
+        required: true,
+        capitalize: true,
+        nomultispaces: true
+    },
 
-  lastname: {
-    type: String,
-    trim: true,
-    required: true,
-    capitalize: true,
-    nomultispaces: true
-  },
+    lastname: {
+        type: String,
+        trim: true,
+        required: true,
+        capitalize: true,
+        nomultispaces: true
+    },
 
-  email: {
-    type: String,
-    trim: true,
-    unique: true,
-    required: true
-  },
+    // screenName: {
+    //     type: String,
+    //     trim: true,
+    //     required: true,
+    //     capitalize: true,
+    //     nomultispaces: true
+    // },
 
-  password: {
-    type: String,
-    required: false
-  },
+    email: {
+        type: String,
+        trim: true,
+        unique: true,
+        required: true
+    },
 
-  phoneNumber: {
-    type: String
-  },
+    password: {
+        type: String,
+        required: false
+    },
 
-  card: [
-    {type: Schema.Types.ObjectId, ref: 'Card'}
-  ],
+    phoneNumber: {
+        type: String
+    },
 
-  dataFiles: [String]
+    card: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Card'
+    }],
+
+    dataFiles: [String]
 });
 
 UserSchema.pre('save', function(next) {
