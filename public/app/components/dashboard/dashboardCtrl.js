@@ -86,6 +86,12 @@ angular.module("domoApp")
                 $scope.cards = response;
             });
         };
+        $scope.logout = () => {
+                    dashboardService.logout()
+                        .then(function(response) {
+                            $state.go('home');
+                        });
+                };
         $scope.readCard();
         // $scope.user = user;
 
