@@ -22,8 +22,8 @@ angular.module('domoApp')
                   [ 220,   88 ],
                   [ 300,   150]
               ];
-        let margin = {top: 20, right: 20, bottom: 30, left: 40};
-        let w = 450 - margin.left - margin.right;
+        let margin = {top: 5, right: 20, bottom: 25, left: 40};
+        let w = 470 - margin.left - margin.right;
         let h = 300 - margin.top - margin.bottom;
         let padding = 35;
         let formatAs = d3.format(".1"); //when data is messy

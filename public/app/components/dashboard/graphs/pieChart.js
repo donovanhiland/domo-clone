@@ -12,8 +12,9 @@ angular.module('domoApp')
         let dataset = [ 5, 10, 20, 45, 6, 25 ];
 
         let pie = d3.layout.pie();
-        let w = 230;
-        let h = 250;
+        // let w = 300;
+        let w = parseInt(d3.select(element[0]).style('width'), 4);
+        let h = 240;
         let color = d3.scale.ordinal()
 	                          .range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
 
