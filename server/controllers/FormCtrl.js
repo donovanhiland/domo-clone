@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import config from '../config.js'
+import config from '../config.js';
 
 
 var EMAIL_ACCOUNT_USER = config.emailAccountUser;
@@ -18,7 +18,7 @@ module.exports = {
 
     sendEmail: function(req, res, next) {
       smtpTransport.sendMail({  //email options
-        from: "Domo Clone <domoclone@gmail.com>", // sender address.  Must be the same as authenticated user if using GMail.
+        from: "Domo Clone <domoclone@gmail.com>", req.body.toField, // sender address.  Must be the same as authenticated user if using GMail.
         to: req.body.toField, // receiver
         subject: req.body.subjectField, // subject
         text: req.body.textField // body
