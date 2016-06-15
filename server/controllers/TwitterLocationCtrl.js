@@ -269,7 +269,7 @@ module.exports = {
     },
 
     formatLocationDataFromDB: (req, res, next) => {
-      TwitterLocation.findOne({}, (error, response) => {
+      TwitterLocation.findOne({screenName: 'devmtn'}, (error, response) => {
         formatLocationDataAsync(response)
         .then((response) => {
           res.status(200).send(response);
