@@ -273,7 +273,7 @@ $test-border: 1px red solid; /////////////////////////////////
 /////////////////////////////////
 ////// Graphs
 ////////////////////////////////
-<<<<<<< HEAD
+
 .engagement-section-container {
     .svg-container {
         height: 300px;
@@ -307,14 +307,13 @@ $test-border: 1px red solid; /////////////////////////////////
         }
     }
 }
-=======
+
 
 .choose-file {
   display: flex;
   justify-content: center;
 }
 
->>>>>>> master
 .modal-images {
     width: 100%;
     .image-modal {
@@ -356,7 +355,7 @@ scatter-plot {
 twitter-bar,
 twitter-line-hour {
     background-color: #fff;
-      div.tooltip {
+    .tooltip {
       position: absolute;
       text-align: center;
       width: 60px;
@@ -367,7 +366,7 @@ twitter-line-hour {
       border: 0px;
       border-radius: 8px;
       pointer-events: none;
-  }
+    }
 }
 path.line {
     fill: none;

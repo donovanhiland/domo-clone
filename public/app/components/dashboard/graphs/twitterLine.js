@@ -63,11 +63,6 @@ angular.module('domoApp')
                         .append("g")
                         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                      // Define the div for the tooltip
-                     var div = d3.select(element[0]).append("div")
-                         .attr("class", "tooltip")
-                         .style("opacity", 0);
-
                     //Data coming in
                     var getData = function() {
                         graphService.getTwitterLineData().then(function(response) {
@@ -105,37 +100,48 @@ angular.module('domoApp')
                                 .attr("transform", "translate(0," + height + ")")
                                 .call(xAxis);
 
+                              svg.append("g")
+                                  .attr("class", "y axis")
+                                  .call(yAxis)
+                                  .append("text")
+                                  .attr("transform", "rotate(-90)")
+                                  .attr("y", 6)
+                                  .attr("dy", ".71em")
+                                  .style("text-anchor", "end")
+                                  .text("tweets");
+
+                            // Define the div for the tooltip
+                           var hov = d3.select(element[0]).append("div")
+                               .attr("class", "tooltip")
+                               .style("opacity", 0);
+
+
                             svg.selectAll("dot")
+                              .classed("svg-content", false)
                               .data(data)
                               .enter().append("circle")
                               .attr("r", 20)
-                              .attr("opacity", "0")
+                              .attr("opacity", ".9")
                               .attr("cx", function(d) { return x(d.time); })
                               .attr("cy", function(d) { return y(d.engagement); })
                               .on("mouseover", function(d) {
-                                  div.transition()
+                                  hov.transition()
                                       .duration(200)
-                                      .style("opacity", .9);
-                                  div	.html(d.time + "<br/>"  + d.engagement)
+                                      .style("opacity", .9)
+                                      .style("background", "#f92")
+                                      .style("cursor", "pointer");
+                                  hov	.html(d.time + "<br/>"  + d.engagement)
                                       .style("left", (d3.event.pageX) + "px")
                                       .style("top", (d3.event.pageY - 28) + "px");
                                   })
                               .on("mouseout", function(d) {
-                                  div.transition()
+                                  hov.transition()
                                       .duration(500)
                                       .style("opacity", 0);
                               });
 
 
-                            svg.append("g")
-                                .attr("class", "y axis")
-                                .call(yAxis)
-                                .append("text")
-                                .attr("transform", "rotate(-90)")
-                                .attr("y", 6)
-                                .attr("dy", ".71em")
-                                .style("text-anchor", "end")
-                                .text("tweets");
+
 
                         }); //Service
                     }; //getData
