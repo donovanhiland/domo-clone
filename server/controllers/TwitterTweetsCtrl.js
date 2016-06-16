@@ -162,26 +162,26 @@ module.exports = {
                 topHourToPost.percentOfTotal = Number((topHourToPost.engagement / totalEngagement * 100).toFixed(1));
                 retweetsPerTweet = (retweets / tweetCount);
                 favoritesPerTweet = (favorites / tweetCount);
-                // twitter.get('/users/show', {
-                //   screen_name: 'devmtn'
-                // }, (error, user,response) => {
-                //   console.log(user);
-                // });
-                let analysisData = {
-                    totalEngagement: totalEngagement,
-                    // totalFollowers: totalFollowers,
-                    // engagementAsPercentOfFollowers: engagementAsPercentOfFollowers,
-                    totalRetweets: retweets,
-                    totalFavorites: favorites,
-                    retweetsPerTweet: retweetsPerTweet,
-                    favoritesPerTweet: favoritesPerTweet,
-                    postsByDay: postsByDay,
-                    engagementByDay: engagementByDay,
-                    engagementByHour: engagementByHour,
-                    topDayToPost: topDayToPost,
-                    topHourToPost: topHourToPost
-                };
-                res.status(200).send(analysisData);
+                twitter.get('/users/show', {
+                    screen_name: 'devmtn'
+                }, (error, user, response) => {
+                    let followerCount = user.followers_count;
+                    let analysisData = {
+                        totalEngagement: totalEngagement,
+                        followerCount: followerCount,
+                        totalRetweets: retweets,
+                        totalFavorites: favorites,
+                        retweetsPerTweet: retweetsPerTweet,
+                        favoritesPerTweet: favoritesPerTweet,
+                        postsByDay: postsByDay,
+                        engagementByDay: engagementByDay,
+                        engagementByHour: engagementByHour,
+                        topDayToPost: topDayToPost,
+                        topHourToPost: topHourToPost
+                    };
+                    analysisData.engagementAsPercentOfFollowers = analysisData.totalEngagement / analysisData.followerCount;
+                    res.status(200).send(analysisData);
+                });
             });
     }
 };

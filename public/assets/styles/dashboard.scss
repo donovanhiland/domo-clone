@@ -181,11 +181,11 @@ $test-border: 1px red solid; /////////////////////////////////
     text-decoration: none;
 }
 .modal-body {
-  .modal-header{
-    .title-modal {
-        text-align: center;
+    .modal-header {
+        .title-modal {
+            text-align: center;
+        }
     }
-  }
     #label-title {
         margin-right: 20px;
     }
@@ -242,51 +242,79 @@ $test-border: 1px red solid; /////////////////////////////////
         }
     }
 }
-
 @media screen and (max-width: 768px) {
-  .dashboard {
-    .dash-top {
-      .dash-menu {
-        margin-right: 0;
-        .btn-group {
-
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .dash-card-section {
-    .dash-card-container {
-      .dash-card {
-        width: 90%;
-        header {
-          .card-title-container {
-
-          }
-        }
-        .graph-container {
-          #graph {
-            height: 50vh;
-            graphs {
-
+    .dashboard {
+        .dash-top {
+            .dash-menu {
+                margin-right: 0;
+                .btn-group {}
             }
-          }
         }
-      }
     }
-  }
+}
+@media screen and (max-width: 768px) {
+    .dash-card-section {
+        .dash-card-container {
+            .dash-card {
+                width: 90%;
+                header {
+                    .card-title-container {}
+                }
+                .graph-container {
+                    #graph {
+                        height: 50vh;
+                        graphs {}
+                    }
+                }
+            }
+        }
+    }
 }
 /////////////////////////////////
 ////// Graphs
 ////////////////////////////////
+<<<<<<< HEAD
+.engagement-section-container {
+    .svg-container {
+        height: 300px;
+        width: 70%;
+        display: inline-block;
+        position: relative;
+        vertical-align: top;
+        overflow: hidden;
+    }
+    .svg-content {
+        height: 100%;
+        width: 100%;
+        display: inline-block;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        .x-axis {
+            // transform: translateY(-100%);
+            .domain {
+                fill: none;
+                stroke: black;
+                stroke-width: 1;
+            }
+        }
+        .y-axis {
+            .domain {
+                fill: none;
+                stroke: black;
+                stroke-width: 1;
+            }
+        }
+    }
+}
+=======
 
 .choose-file {
   display: flex;
   justify-content: center;
 }
 
+>>>>>>> master
 .modal-images {
     width: 100%;
     .image-modal {
@@ -368,7 +396,6 @@ path.area {
     fill: none;
     stroke: #000;
 }
-
 ///////////info///////////
 #img-info {
     display: flex;
