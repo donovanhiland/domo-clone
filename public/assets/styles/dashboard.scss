@@ -273,7 +273,6 @@ $test-border: 1px red solid; /////////////////////////////////
 /////////////////////////////////
 ////// Graphs
 ////////////////////////////////
-<<<<<<< HEAD
 .engagement-section-container {
     .svg-container {
         height: 300px;
@@ -290,6 +289,9 @@ $test-border: 1px red solid; /////////////////////////////////
         position: absolute;
         top: 5px;
         left: 5px;
+        .twitter-line-day {
+          transform: translateX(8%);
+        }
         .x-axis {
             // transform: translateY(-100%);
             .domain {
@@ -307,14 +309,10 @@ $test-border: 1px red solid; /////////////////////////////////
         }
     }
 }
-=======
-
 .choose-file {
   display: flex;
   justify-content: center;
 }
-
->>>>>>> master
 .modal-images {
     width: 100%;
     .image-modal {
@@ -383,6 +381,10 @@ path.area {
 .y.axis path {
     fill: none;
     stroke: #000;
+}
+footer {
+  height: 50px;
+  width: 100%;
 }
 ///////////info///////////
 #img-info {
