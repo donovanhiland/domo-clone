@@ -11,10 +11,8 @@ angular.module('domoApp')
                       bottom: 30,
                       left: 40
                   },
-                  width = 1000 - margin.left - margin.right,
-                  height = 415 - margin.top - margin.bottom;
-
-              // let dateFormat = d3.time.format("%b-%d %H:%M");
+                  width = (window.innerWidth / 3) * 2,
+                  height = (window.innerHeight / 3);
 
               let x0 = d3.scale.ordinal()
                   .rangeRoundBands([0, width], 0.1);
@@ -36,9 +34,12 @@ angular.module('domoApp')
                   .orient("left")
                   .tickFormat(d3.format(".2s"));
 
-              let svg = d3.select(element[0]).append("svg")
-                  .attr("width", width + margin.left + margin.right)
-                  .attr("height", height + margin.top + margin.bottom)
+              let svg = d3.select('.svg-container').append("svg")
+                  .classed("svg-content", true)
+                  // .attr("preserveAspectRatio", "xMinYMin meet")
+                  // .attr("viewBox", "0 0 300 300");
+                  // .attr("width", width + margin.left + margin.right)
+                  // .attr("class", 'svg-content')
                   .append("g")
                   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -57,7 +58,7 @@ angular.module('domoApp')
                           });
                       });
                       data.forEach(function(d) {
-                          d.date = moment(d.date).format('MMM Do h:mm a');
+                          d.date = moment(d.date).format('MMM Do');
                       });
 
                       x0.domain(data.map(function(d) {
@@ -71,12 +72,12 @@ angular.module('domoApp')
                       })]);
 
                       svg.append("g")
-                          .attr("class", "x axis")
+                          .classed("x-axis", true)
                           .attr("transform", "translate(0," + height + ")")
                           .call(xAxis);
 
                       svg.append("g")
-                          .attr("class", "y axis")
+                          .classed("y-axis", true)
                           .call(yAxis)
                           .append("text")
                           .attr("transform", "rotate(-90)")
@@ -86,9 +87,6 @@ angular.module('domoApp')
 
                       let date = svg.selectAll(".date")
                           .data(data)
-                          // .sort((a, b) => {
-                          //   return d3.ascending(a, b);
-                          // })
                           .enter().append("g")
                           .attr("class", " date")
                           .attr("transform", function(d) {
@@ -138,6 +136,11 @@ angular.module('domoApp')
                           });
                   });
               };
+
+              function resize() {
+
+              }
+              d3.select(window).on('resize', resize);
                     getData();
 
                 } //link

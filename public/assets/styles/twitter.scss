@@ -27,131 +27,126 @@ header {
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    .engagement-container {
-        height: 100%;
-        width: 95%;
-        margin: 2vh;
-        background-color: $domo-grey;
-        .graph-container {
+    .graph-container {
+        display: flex;
+        #graph {
+            height: auto;
+            overflow: hidden;
             display: flex;
-            #graph {
+            justify-content: center;
+            img {
                 height: auto;
-                overflow: hidden;
+                width: 55vw;
+            }
+        }
+    }
+    .engagement-data-container {
+        width: 30%;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: $domo-grey;
+        .engagement-data {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            h3 {
+                font-family: $domo-font;
+                font-size: 15px;
+                font-weight: 600;
+                color: #fff;
+                margin: 5px;
+            }
+            h1 {
+                font-family: $domo-font;
+                font-size: 40px;
+                font-weight: 600;
+                color: $domo-blue;
+                margin: -5px 5px 5px;
+            }
+        }
+        .engagement-percent {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            h3 {
+                font-family: $domo-font;
+                font-size: 12px;
+                font-weight: 600;
+                color: #fff;
+                margin: 5px;
+            }
+            h1 {
+                font-family: $domo-font;
+                font-size: 30px;
+                font-weight: 600;
+                color: $domo-blue;
+                margin: 10px 5px 5px;
+            }
+        }
+        .line {
+            display: flex;
+            justify-content: center;
+            hr {
+                color: white;
+                width: 20vw;
+            }
+        }
+        .tweet-stats {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .engagement-stats {
+            .main-stats,
+            .sub-stats {
                 display: flex;
-                justify-content: center;
-                img {
-                    height: auto;
-                    width: 55vw;
+                justify-content: space-between;
+            }
+            .main-stats {
+                border-bottom: 1px solid white;
+                margin-bottom: 5px;
+            }
+            .sub-stats {
+                h3 {
+                    font-weight: 300 !important;
                 }
             }
-            .engagement-data-container {
-                width: 50%;
-                padding: 30px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                .engagement-data {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    text-align: center;
-                    h3 {
-                        font-family: $domo-font;
-                        font-size: 15px;
-                        font-weight: 600;
-                        color: #fff;
-                        margin: 5px;
-                    }
-                    h1 {
-                        font-family: $domo-font;
-                        font-size: 40px;
-                        font-weight: 600;
-                        color: $domo-blue;
-                        margin: -5px 5px 5px;
-                    }
-                }
-                .engagement-percent {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    text-align: center;
-                    h3 {
-                        font-family: $domo-font;
-                        font-size: 12px;
-                        font-weight: 600;
-                        color: #fff;
-                        margin: 5px;
-                    }
-                    h1 {
-                        font-family: $domo-font;
-                        font-size: 30px;
-                        font-weight: 600;
-                        color: $domo-blue;
-                        margin: 10px 5px 5px;
-                    }
-                }
-                .line {
-                    display: flex;
-                    justify-content: center;
-                    hr {
-                        color: white;
-                        width: 20vw;
-                    }
-                }
-                .tweet-stats {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                }
-                .engagement-stats {
-                    .main-stats,
-                    .sub-stats {
-                        display: flex;
-                        justify-content: space-between;
-                    }
-                    .main-stats {
-                        border-bottom: 1px solid white;
-                        margin-bottom: 5px;
-                    }
-                    .sub-stats {
-                        h3 {
-                            font-weight: 300 !important;
-                        }
-                    }
-                    h3 {
-                        font-family: $domo-font;
-                        font-size: 15px;
-                        font-weight: 600;
-                        color: #fff;
-                        margin: 5px;
-                    }
-                    h1 {
-                        font-family: $domo-font;
-                        font-size: 15px;
-                        font-weight: 600;
-                        color: $domo-blue;
-                        margin: 5px;
-                    }
-                }
-                .engagement-hour {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    h3 {
-                        font-family: $domo-font;
-                        font-size: 15px;
-                        font-weight: 600;
-                        color: #fff;
-                        margin: 5px;
-                    }
-                    h1 {
-                        font-family: $domo-font;
-                        font-size: 15px;
-                        font-weight: 600;
-                        color: $domo-blue;
-                        margin: 5px;
-                    }
-                }
+            h3 {
+                font-family: $domo-font;
+                font-size: 15px;
+                font-weight: 600;
+                color: #fff;
+                margin: 5px;
+            }
+            h1 {
+                font-family: $domo-font;
+                font-size: 15px;
+                font-weight: 600;
+                color: $domo-blue;
+                margin: 5px;
+            }
+        }
+        .engagement-hour {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            h3 {
+                font-family: $domo-font;
+                font-size: 15px;
+                font-weight: 600;
+                color: #fff;
+                margin: 5px;
+            }
+            h1 {
+                font-family: $domo-font;
+                font-size: 15px;
+                font-weight: 600;
+                color: $domo-blue;
+                margin: 5px;
             }
         }
     }
