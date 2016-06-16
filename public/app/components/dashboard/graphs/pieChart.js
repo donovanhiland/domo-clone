@@ -13,8 +13,8 @@ angular.module('domoApp')
 
         let pie = d3.layout.pie();
         // let w = 300;
-        let w = parseInt(d3.select(element[0]).style('width'), 4);
-        let h = 240;
+        let w = 230;
+        let h = 210;
         let color = d3.scale.ordinal()
 	                          .range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
 
@@ -73,35 +73,35 @@ angular.module('domoApp')
                 });
 
 
-            //Makes Graph responsive
-            d3.select(window).on('resize', function() {
-                // update width
-                w = parseInt(d3.select(element[0]).style('width'), 10);
-                w = w - margin.left - margin.right;
-                // reset x range
-                xScale.range([0, w]);
-
-                d3.select(svg.node().parentNode)
-                .style('height', (200 + margin.top + margin.bottom) + 'px')
-                .style('width', (200 + margin.left + margin.right) + 'px');
-
-                svg.selectAll('g.arc.background')
-                    .attr('width', w);
-
-                svg.selectAll('g.arc.formatAs')
-                    .attr('width', (d) => { return xScale(d.formatAs); });
-
-                // update median ticks
-                let median = d3.median(svg.selectAll('.bar').data(),
-                    function(d) { return d.formatAs; });
-
-                svg.selectAll('line.median')
-                    .attr('x1', xScale(median))
-                    .attr('x2', xScale(median));
-                // update axes
-                svg.select('.x.axis.top').call(xAxis.orient('top'));
-                svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
-            }); //responsive
+            // //Makes Graph responsive
+            // d3.select(window).on('resize', function() {
+            //     // update width
+            //     w = parseInt(d3.select(element[0]).style('width'), 10);
+            //     w = w - margin.left - margin.right;
+            //     // reset x range
+            //     xScale.range([0, w]);
+            //
+            //     d3.select(svg.node().parentNode)
+            //     .style('height', (200 + margin.top + margin.bottom) + 'px')
+            //     .style('width', (200 + margin.left + margin.right) + 'px');
+            //
+            //     svg.selectAll('g.arc.background')
+            //         .attr('width', w);
+            //
+            //     svg.selectAll('g.arc.formatAs')
+            //         .attr('width', (d) => { return xScale(d.formatAs); });
+            //
+            //     // update median ticks
+            //     let median = d3.median(svg.selectAll('.bar').data(),
+            //         function(d) { return d.formatAs; });
+            //
+            //     svg.selectAll('line.median')
+            //         .attr('x1', xScale(median))
+            //         .attr('x2', xScale(median));
+            //     // update axes
+            //     svg.select('.x.axis.top').call(xAxis.orient('top'));
+            //     svg.select('.x.axis.bottom').call(xAxis.orient('bottom'));
+            // }); //responsive
       } //link
   };
 });
