@@ -311,3 +311,60 @@ header {
         }
     }
 }
+
+#top-hour {
+  border: none;
+  display: flex;
+  flex-direction: column;
+
+  h4 {
+    width: 50vh;
+    font-size: 20px;
+    color: #fff;
+  }
+
+  h5 {
+    margin-bottom: -5px;
+    margin-top: -5px;
+    font-size: 40px;
+    font-family: $domo-font;
+    font-weight: 600;
+    color: $domo-blue;
+  }
+
+  h6 {
+    font-size: 15px;
+    font-family: $domo-font;
+    font-weight: 600;
+    color: $domo-blue;
+  }
+}
+
+#top-day {
+  border: none;
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    margin-bottom: -10px;
+    width: 50vh;
+    font-size: 20px;
+    color: #fff;
+  }
+
+  h2 {
+    margin-bottom: -5px;
+    margin-top: 15px;
+    font-size: 40px;
+    font-family: $domo-font;
+    font-weight: 600;
+    color: $domo-blue;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-family: $domo-font;
+    font-weight: 600;
+    color: $domo-blue;
+  }
+}
