@@ -89,11 +89,14 @@ html,body
   float: left;
 }
 
-.modal-header {
-  button {
-    h4 {
+.domo-modal-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
 
-    }
+  .domo-modal-img {
+    height: 15vh;
   }
 }
 
@@ -105,12 +108,19 @@ html,body
       }
       .domo-register-container {
         display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
 
         input {
-          margin: 2vh;
-          border: 1px $domo-grey solid;
+          margin: 5px;
+          width: 25vw;
+          border-radius: 2px;
+          border: 1px $domo-text solid;
+          padding:10px;
+          font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          text-decoration: inherit;
         }
       }
     }
@@ -125,7 +135,7 @@ html,body
     justify-content: center;
     align-items: center;
     height: 35px;
-    width: 130px;
+    width: 25vw;
     margin: auto;
     background-color: $domo-oj;
     font-family: $domo-font;
@@ -135,6 +145,7 @@ html,body
     color: #fff;
     border: none;
     text-decoration: none;
+    border-radius: 2px;
   }
 
   button:hover {
@@ -148,9 +159,23 @@ html,body
   form {
     fieldset {
       .domo-login-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 5px;
+        margin-bottom: 5px;
+
+
         input {
-          margin: 2vh;
-          border: 1px $domo-grey solid;
+          margin: 5px;
+          width: 25vw;
+          border-radius: 2px;
+          border: 1px #222 solid;
+          padding:10px;
+          font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          text-decoration: inherit;
         }
       }
       .domo-login-btn-container {
@@ -160,7 +185,7 @@ html,body
           justify-content: center;
           align-items: center;
           height: 35px;
-          width: 130px;
+          width: 25vw;
           margin: auto;
           background-color: $domo-oj;
           font-family: $domo-font;
@@ -170,6 +195,7 @@ html,body
           color: #fff;
           border: none;
           text-decoration: none;
+          border-radius: 2px;
         }
 
         button:hover {
@@ -214,6 +240,114 @@ html,body
   #domo-logo {
 
   }
+}
+
+@media screen and (max-width: 768px) {
+  .modal-body {
+    form {
+      fieldset {
+        legend {
+          font-family: $domo-font;
+        }
+        .domo-register-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          input {
+            margin-bottom: 5px;
+            width: 100%;
+            border-radius: 2px;
+            border: 1px $domo-text solid;
+            padding:10px;
+          	font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: inherit;
+          }
+        }
+      }
+    }
+  }
+
+
+  .domo-register-btn-container {
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 35px;
+      width: 100%;
+      margin: auto;
+      background-color: $domo-oj;
+      font-family: $domo-font;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+      border: none;
+      text-decoration: none;
+      border-radius: 2px;
+    }
+
+    button:hover {
+      background-color: $domo-blue;
+      transition: all 0.3s ease-in-out;
+      text-decoration: none;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal-body {
+    form {
+      fieldset {
+        .domo-login-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-top: 5px;
+          margin-bottom: 5px;
+
+
+          input {
+            margin: 5px;
+            width: 100%;
+            border-radius: 2px;
+            border: 1px #222 solid;
+          }
+        }
+        .domo-login-btn-container {
+
+          button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 35px;
+            width: 100%;
+            margin: auto;
+            background-color: $domo-oj;
+            font-family: $domo-font;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            border: none;
+            text-decoration: none;
+            border-radius: 2px;
+          }
+
+          button:hover {
+            background-color: $domo-blue;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
 }
 
 
@@ -1911,7 +2045,7 @@ html,body
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 3vh;
+  margin-bottom: 5px;
 }
 
 /////////////////////////////////

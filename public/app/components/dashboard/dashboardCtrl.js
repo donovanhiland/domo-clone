@@ -9,7 +9,7 @@ angular.module("domoApp")
                     $scope.twitterAnalysis = response;
                 });
         })();
-        // $scope.user = user;
+        $scope.user = user;
         $scope.card = {};
 
         $scope.setGraphType = (graphType) => {
@@ -57,7 +57,7 @@ angular.module("domoApp")
         };
         $scope.sendText = (message) => {
             let newMessage = {
-                to: ["+12406780268"],
+                to: ["+12404782587"],
                 from: "+18013969302",
                 message: message
             };
@@ -86,6 +86,12 @@ angular.module("domoApp")
                 $scope.cards = response;
             });
         };
+        $scope.logout = () => {
+                    dashboardService.logout()
+                        .then(function(response) {
+                            $state.go('home');
+                        });
+                };
         $scope.readCard();
         // $scope.user = user;
 
@@ -125,6 +131,7 @@ angular.module("domoApp")
            $scope.getTheFiles = function ($files) {
                 console.log($files);
             };
+
    })
    .directive('ngFiles', ['$parse', function ($parse) {
 

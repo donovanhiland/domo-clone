@@ -8,5 +8,5 @@ angular.module('domoApp')
       graphType: '=',
       graphData: '='
     }
-  }
-})
+  };
+});
