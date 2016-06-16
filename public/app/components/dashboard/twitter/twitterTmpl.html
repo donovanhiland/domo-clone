@@ -48,36 +48,19 @@
     <div class="svg-container">
         <twitter-line-hour></twitter-line-hour>
     </div>
-    <div class="engagement-data-container">
-        <div class="engagement-data">
-            <h3>Total Engagement</h3>
-            <h1>{{twitterAnalysis.totalEngagement}}</h1>
-        </div>
-        <div class="engagement-percent">
+    <div class="engagement-data-container" id="top-day">
+        <!-- <div class="engagement-data"> -->
+          <h1>Top Day for Engagement</h3>
+          <h2>{{twitterAnalysis.topDayToPost.day}}</h1>
+          <h3>{{twitterAnalysis.topDayToPost.percentOfTotal}}% of your total comments</h1>
+        <!-- </div> -->
+        <!-- <div class="engagement-percent">
             <h3>Engagement as a % of Followers</h3>
             <h1>{{twitterAnalysis.engagementAsPercentOfFollowers | limitTo: 3}}%</h1>
-        </div>
+        </div> -->
         <div class="engagement-stats">
-            <div class="main-stats">
-                <h3>Retweets</h3>
-                <h1>{{twitterAnalysis.totalRetweets}}</h1>
+            <div class="main-stats" id="top-hour">
+                <h4>Top Hour for Engagement</h3>
+                <h5>{{twitterAnalysis.topHourToPost.hour}}</h1>
+                <h6>{{twitterAnalysis.topHourToPost.percentOfTotal}}% of your total comments</h1>
             </div>
-            <div class="sub-stats">
-                <h3>Retweets Per Tweet</h3>
-                <h1>{{twitterAnalysis.retweetsPerTweet | limitTo : 3}}</h1>
-            </div>
-        </div>
-
-        <div class="engagement-stats">
-            <div class="main-stats">
-                <h3>Favorites</h3>
-                <h1>{{twitterAnalysis.totalFavorites}}</h1>
-            </div>
-            <div class="sub-stats">
-                <h3>Favorites Per Tweet</h3>
-                <h1>{{twitterAnalysis.favoritesPerTweet | limitTo : 3}}</h1>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- test -->
