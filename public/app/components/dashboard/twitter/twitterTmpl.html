@@ -41,26 +41,41 @@
 </section>
 <header>
     <div class="engagement-title-container">
-        <h1>Twitter Engagement By Day And Time</h1>
+        <h1>Twitter Engagement By Day</h1>
+    </div>
+</header>
+<section class="engagement-section-container">
+    <div class="svg-container">
+        <twitter-line-day></twitter-line-day>
+    </div>
+    <div class="engagement-data-container">
+        <div class="engagement-stats vertical-center">
+            <div class="day-hour-stats">
+                <h3>Top Day for Engagement</h3>
+                <h5>{{twitterAnalysis.topDayToPost.day}}</h5>
+                <h6>{{twitterAnalysis.topDayToPost.percentOfTotal}}% of your total comments</h6>
+            </div>
+        </div>
+    </div>
+</section>
+<header>
+    <div class="engagement-title-container">
+        <h1>Twitter Engagement By Time</h1>
     </div>
 </header>
 <section class="engagement-section-container">
     <div class="svg-container">
         <twitter-line-hour></twitter-line-hour>
     </div>
-    <div class="engagement-data-container" id="top-day">
-        <!-- <div class="engagement-data"> -->
-          <h1>Top Day for Engagement</h3>
-          <h2>{{twitterAnalysis.topDayToPost.day}}</h1>
-          <h3>{{twitterAnalysis.topDayToPost.percentOfTotal}}% of your total comments</h1>
-        <!-- </div> -->
-        <!-- <div class="engagement-percent">
-            <h3>Engagement as a % of Followers</h3>
-            <h1>{{twitterAnalysis.engagementAsPercentOfFollowers | limitTo: 3}}%</h1>
-        </div> -->
-        <div class="engagement-stats">
-            <div class="main-stats" id="top-hour">
-                <h4>Top Hour for Engagement</h3>
-                <h5>{{twitterAnalysis.topHourToPost.hour}}</h1>
-                <h6>{{twitterAnalysis.topHourToPost.percentOfTotal}}% of your total comments</h1>
-            </div>
+    <div class="engagement-data-container">
+        <div class="engagement-stats vertical-center">
+          <div class="day-hour-stats">
+                <h3>Top Hour for Engagement</h3>
+                <h5>{{twitterAnalysis.topHourToPost.hour}}</h5>
+                <h6>{{twitterAnalysis.topHourToPost.percentOfTotal}}% of your total comments</h6>
+              </div>
+        </div>
+    </div>
+</section>
+<footer></footer>
+<!-- test -->
