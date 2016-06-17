@@ -49,12 +49,10 @@
         <twitter-line-day></twitter-line-day>
     </div>
     <div class="engagement-data-container">
-        <div class="engagement-stats vertical-center">
-            <div class="day-hour-stats">
-                <h3>Top Day for Engagement</h3>
-                <h5>{{twitterAnalysis.topDayToPost.day}}</h5>
-                <h6>{{twitterAnalysis.topDayToPost.percentOfTotal}}% of your total comments</h6>
-            </div>
+        <div class="engagement-stats vertical-center-stats">
+            <div class="data-title">Top Day for Engagement</div>
+            <div class="data-number">{{twitterAnalysis.topDayToPost.day}}</div>
+            <div class="data-percent">{{twitterAnalysis.topDayToPost.percentOfTotal}}% of your total comments</div>
         </div>
     </div>
 </section>
@@ -68,12 +66,10 @@
         <twitter-line-hour></twitter-line-hour>
     </div>
     <div class="engagement-data-container">
-        <div class="engagement-stats vertical-center">
-          <div class="day-hour-stats">
-                <h3>Top Hour for Engagement</h3>
-                <h5>{{twitterAnalysis.topHourToPost.hour}}</h5>
-                <h6>{{twitterAnalysis.topHourToPost.percentOfTotal}}% of your total comments</h6>
-              </div>
+        <div class="engagement-stats vertical-center-stats">
+            <div class="data-title">Top Hour for Engagement</div>
+            <div class="data-number">{{twitterAnalysis.topHourToPost.hour}}</div>
+            <div class="data-percent">{{twitterAnalysis.topHourToPost.percentOfTotal}}% of your total comments</div>
         </div>
     </div>
 </section>
