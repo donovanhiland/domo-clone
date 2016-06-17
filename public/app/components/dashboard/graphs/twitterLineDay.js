@@ -51,7 +51,6 @@ angular.module('domoApp')
                     var getData = function() {
                         graphService.getTwitterLineData().then(function(response) {
                             let oldData = response.engagementByDay;
-                            // console.log(oldData);
                             let data = [];
                             class Data {
                                 constructor(date, engagement) {
