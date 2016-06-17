@@ -2,20 +2,25 @@ angular.module("domoApp").service("graphService", function($http){
 
     // twitter view
 
-    this.getTwitterBarData = () => {
+    this.getTwitterBarData = (screenName) => {
         return $http({
             method: "POST",
             url: "/tweets/engagement",
-            data: {"screenName": "devmtn"}
+            data: {
+              screenName: screenName
+            }
         }).then((response) => {
             return response.data;
         });
     };
-    this.getTwitterLineData = () => {
+    this.getTwitterLineData = (screenName) => {
+      console.log(screenName);
       return $http({
         method: "POST",
         url: "/tweets/analysis",
-        data: {"screenName": "devmtn"}
+        data: {
+          screenName: screenName
+        }
       }).then((response) => {
           return response.data;
       });

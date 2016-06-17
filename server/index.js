@@ -64,7 +64,7 @@ app.post('/text', TextCtrl.sendText);
 
 // Twitter Data Endpoints
 app.post('/location/aggregate', TwitterLocationCtrl.getDataByScreenName);
-app.get('/location/data', TwitterLocationCtrl.formatLocationDataFromDB);
+app.post('/location/data', TwitterLocationCtrl.formatLocationDataFromDB);
 app.post('/tweets/aggregate', TwitterTweetsCtrl.aggregateTweets);
 app.post('/tweets/engagement', TwitterTweetsCtrl.tweetEngagement);
 app.post('/tweets/analysis', TwitterTweetsCtrl.tweetAnalysis);

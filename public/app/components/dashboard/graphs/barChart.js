@@ -157,10 +157,3 @@ angular.module('domoApp')
     } //link
   }; //return
 }); //directive
-
-
-
-
-
-                //AST (asynchonous syntax tree)
-//

@@ -29,7 +29,7 @@ var UserSchema = new Schema({
    type: String,
    trim: true,
    required: true,
-   capitalize: false,
+   lowercase: true,
    nomultispaces: true
    },
 

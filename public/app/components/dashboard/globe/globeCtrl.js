@@ -14,8 +14,11 @@ if (!Detector.webgl) {
     });
 
     return $http({
-        method: 'GET',
-        url: '/location/data'
+        method: 'POST',
+        url: '/location/data',
+        data: {
+          screenName: $scope.user.screenName
+        }
     }).then((response) => {
             var data = response.data;
             window.data = data;
