@@ -45,8 +45,9 @@ header {
         padding: 30px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
         background-color: $domo-grey;
+        position: relative;
         .engagement-data {
             display: flex;
             flex-direction: column;
@@ -115,9 +116,6 @@ header {
                     font-weight: 300 !important;
                 }
             }
-            .day-hour-stats {
-
-            }
             h3 {
                 font-family: $domo-font;
                 font-size: 15px;
@@ -133,24 +131,25 @@ header {
                 margin: 5px;
             }
         }
-        .engagement-hour {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            h3 {
-                font-family: $domo-font;
-                font-size: 15px;
-                font-weight: 600;
-                color: #fff;
-                margin: 5px;
-            }
-            h1 {
-                font-family: $domo-font;
-                font-size: 15px;
-                font-weight: 600;
-                color: $domo-blue;
-                margin: 5px;
-            }
+        .vertical-center-stats {
+          align-self: center;
+          text-align: center;
+          .data-title {
+            font-size: 20px;
+            color: #fff;
+          }
+          .data-number {
+            font-size: 40px;
+            font-family: $domo-font;
+            font-weight: 600;
+            color: $domo-blue;
+          }
+          .data-percent {
+            font-size: 15px;
+            font-family: $domo-font;
+            font-weight: 600;
+            color: $domo-blue;
+          }
         }
     }
 }
