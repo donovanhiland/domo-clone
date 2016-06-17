@@ -79,6 +79,7 @@ module.exports = {
                     tweetDay,
                     tweetEngagement,
                     topDayPercent,
+                    totalPosts = 0,
                     topDayToPost = {
                         day: '',
                         engagement: 0,
@@ -87,6 +88,16 @@ module.exports = {
                     topHourToPost = {
                         hour: '',
                         engagement: 0,
+                        percentOfTotal: 0
+                    },
+                    favoritePostDay = {
+                        day: '',
+                        posts: 0,
+                        percentOfTotal: 0
+                    },
+                    favoritePostHour = {
+                        hour: '',
+                        posts: 0,
                         percentOfTotal: 0
                     },
                     totalEngagement = 0,
@@ -134,15 +145,43 @@ module.exports = {
                         Friday: 0,
                         Saturday: 0
                     },
+                    postsByHour = {
+                      "12:00 AM": 0,
+                      "1:00 AM": 0,
+                      "2:00 AM": 0,
+                      "3:00 AM": 0,
+                      "4:00 AM": 0,
+                      "5:00 AM": 0,
+                      "6:00 AM": 0,
+                      "7:00 AM": 0,
+                      "8:00 AM": 0,
+                      "9:00 AM": 0,
+                      "10:00 AM": 0,
+                      "11:00 AM": 0,
+                      "12:00 PM": 0,
+                      "1:00 PM": 0,
+                      "2:00 PM": 0,
+                      "3:00 PM": 0,
+                      "4:00 PM": 0,
+                      "5:00 PM": 0,
+                      "6:00 PM": 0,
+                      "7:00 PM": 0,
+                      "8:00 PM": 0,
+                      "9:00 PM": 0,
+                      "10:00 PM": 0,
+                      "11:00 PM": 0,
+                    },
                     tweetCount = tweets.length;
                 // loop through tweets, populate variabled for data analysis
                 _.forEach(tweets, (tweet) => {
+                    totalPosts += 1;
                     tweetTime = moment(tweet.date).startOf('hour').format('LT');
                     tweetDay = moment(tweet.date).format('dddd');
                     engagementByDay[tweetDay] += (tweet.favorites + tweet.retweets);
                     engagementByHour[tweetTime] += (tweet.favorites + tweet.retweets);
                     totalEngagement += (tweet.favorites + tweet.retweets);
                     postsByDay[tweetDay] += 1;
+                    postsByHour[tweetTime] += 1;
                     retweets += tweet.retweets;
                     favorites += tweet.favorites;
                 });
@@ -158,12 +197,26 @@ module.exports = {
                         engagement: value
                     };
                 });
+                _.forEach(postsByDay, (value, key) => {
+                    if (favoritePostDay.posts < value) favoritePostDay = {
+                        day: key,
+                        posts: value
+                    };
+                });
+                _.forEach(postsByHour, (value, key) => {
+                    if (favoritePostHour.posts < value) favoritePostHour = {
+                        hour: key,
+                        posts: value
+                    };
+                });
                 topDayToPost.percentOfTotal = Number((topDayToPost.engagement / totalEngagement * 100).toFixed(1));
                 topHourToPost.percentOfTotal = Number((topHourToPost.engagement / totalEngagement * 100).toFixed(1));
+                favoritePostDay.percentOfTotal = Number((favoritePostDay.posts / totalPosts * 100).toFixed(1));
+                favoritePostHour.percentOfTotal = Number((favoritePostHour.posts / totalPosts * 100).toFixed(1));
                 retweetsPerTweet = (retweets / tweetCount);
                 favoritesPerTweet = (favorites / tweetCount);
                 twitter.get('/users/show', {
-                    screen_name: 'devmtn'
+                    screen_name: req.body.screenName
                 }, (error, user, response) => {
                     let followerCount = user.followers_count;
                     let analysisData = {
@@ -174,6 +227,9 @@ module.exports = {
                         retweetsPerTweet: retweetsPerTweet,
                         favoritesPerTweet: favoritesPerTweet,
                         postsByDay: postsByDay,
+                        postsByHour: postsByHour,
+                        favoritePostDay: favoritePostDay,
+                        favoritePostHour: favoritePostHour,
                         engagementByDay: engagementByDay,
                         engagementByHour: engagementByHour,
                         topDayToPost: topDayToPost,

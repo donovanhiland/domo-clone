@@ -37,7 +37,7 @@ angular.module('domoApp')
 
             //Data coming in
         var getData = function() {
-        graphService.getTwitterLineData().then(function(response) {
+        graphService.getTwitterLineData(scope.user.screenName).then(function(response) {
           console.log(response.engagementByHour);
           let data = response.engagementByHour;
           let newData = [];

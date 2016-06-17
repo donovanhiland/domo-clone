@@ -278,7 +278,6 @@ $test-border: 1px red solid; /////////////////////////////////
         height: 300px;
         width: 70%;
         display: inline-block;
-        position: relative;
         vertical-align: top;
         overflow: hidden;
     }
@@ -286,10 +285,9 @@ $test-border: 1px red solid; /////////////////////////////////
         height: 100%;
         width: 100%;
         display: inline-block;
-        position: absolute;
         top: 5px;
         left: 5px;
-        .twitter-line-day {
+        .twitter-line-translate {
           transform: translateX(8%);
         }
         .x-axis {
@@ -351,21 +349,17 @@ scatter-plot {
     height: 100%;
     text-align: center;
 }
-twitter-bar,
-twitter-line-hour {
-    background-color: #fff;
-      div.tooltip {
-      position: absolute;
-      text-align: center;
-      width: 60px;
-      height: 28px;
-      padding: 2px;
-      font: 12px sans-serif;
-      background: $domo-oj;
-      border: 0px;
-      border-radius: 8px;
-      pointer-events: none;
-  }
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
 }
 path.line {
     fill: none;
