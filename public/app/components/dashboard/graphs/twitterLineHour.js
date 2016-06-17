@@ -10,7 +10,7 @@ angular.module('domoApp')
                             bottom: 30,
                             left: 50
                         },
-                        width = (window.innerWidth / 3) * 2,
+                        width = (window.innerWidth / 3) * 1.8,
                         height = (window.innerHeight / 3);
 
                     function parseTime(timeString) {
@@ -58,10 +58,8 @@ angular.module('domoApp')
 
                     var svg = d3.select(element[0]).append("svg")
                         .classed("svg-content", true)
-                        // .attr("width", width + margin.left + margin.right)
-                        // .attr("height", height + margin.top + margin.bottom)
                         .append("g")
-                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                        .attr("transform", "translate(" + margin.left + "," + 60 + ")");
 
                       // Define the div for the tooltip
                      var div = d3.select(element[0]).append("div")
@@ -115,7 +113,7 @@ angular.module('domoApp')
                               .on("mouseover", function(d) {
                                   div.transition()
                                       .duration(200)
-                                      .style("opacity", .9);
+                                      .style("opacity", 0.9);
                                   div	.html(d.time + "<br/>"  + d.engagement)
                                       .style("left", (d3.event.pageX) + "px")
                                       .style("top", (d3.event.pageY - 28) + "px");

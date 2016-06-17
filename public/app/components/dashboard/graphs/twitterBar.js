@@ -11,7 +11,7 @@ angular.module('domoApp')
                       bottom: 30,
                       left: 40
                   },
-                  width = (window.innerWidth / 3) * 2,
+                  width = (window.innerWidth / 3) * 1.8,
                   height = (window.innerHeight / 3);
 
               let x0 = d3.scale.ordinal()
@@ -36,12 +36,8 @@ angular.module('domoApp')
 
               let svg = d3.select('.svg-container').append("svg")
                   .classed("svg-content", true)
-                  // .attr("preserveAspectRatio", "xMinYMin meet")
-                  // .attr("viewBox", "0 0 300 300");
-                  // .attr("width", width + margin.left + margin.right)
-                  // .attr("class", 'svg-content')
                   .append("g")
-                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                  .attr("transform", "translate(" + margin.left + "," + 60 + ")");
 
               let getData = () => {
                   graphService.getTwitterBarData().then(function(response) {
@@ -106,7 +102,7 @@ angular.module('domoApp')
                               return y(d.value);
                           })
                           .attr("height", function(d) {
-                              return height - y(d.value)
+                              return height - y(d.value);
                           })
                           .style("fill", function(d) {
                               return color(d.name);

@@ -10,13 +10,8 @@ angular.module('domoApp')
                             bottom: 30,
                             left: 50
                         },
-                        width = (window.innerWidth / 3) * 2,
+                        width = (window.innerWidth / 3) * 1.8,
                         height = (window.innerHeight / 3);
-                        // width = element.parent().width(),
-                        // height = element.parent().height();
-
-                        console.log('width', element.parent().width());
-                        console.log('height', element.parent().height());
 
                     var x = d3.scale.ordinal()
                         .rangeRoundBands([0, width]);
@@ -45,7 +40,7 @@ angular.module('domoApp')
                     var svg = d3.select(element[0]).append("svg")
                         .classed("svg-content", true)
                         .append("g")
-                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                        .attr("transform", "translate(" + margin.left + "," + 60 + ")");
 
                     //Data coming in
                     var getData = function() {
