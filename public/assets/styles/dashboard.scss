@@ -275,6 +275,7 @@ $test-border: 1px red solid; /////////////////////////////////
 ////////////////////////////////
 
 .engagement-section-container {
+
     .svg-container {
         height: 300px;
         width: 70%;
@@ -283,13 +284,16 @@ $test-border: 1px red solid; /////////////////////////////////
         vertical-align: top;
         overflow: hidden;
     }
+
     .svg-content {
+
         height: 100%;
         width: 100%;
         display: inline-block;
         position: absolute;
-        top: 5px;
+        top: 0px;
         left: 5px;
+
         .x-axis {
             // transform: translateY(-100%);
             .domain {
@@ -355,19 +359,19 @@ scatter-plot {
 twitter-bar,
 twitter-line-hour {
     background-color: #fff;
-    .tooltip {
-      position: absolute;
-      text-align: center;
-      width: 60px;
-      height: 28px;
-      padding: 2px;
-      font: 12px sans-serif;
-      background: $domo-oj;
-      border: 0px;
-      border-radius: 8px;
-      pointer-events: none;
-    }
 }
+div.tooly {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: $domo-oj;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+  }
 path.line {
     fill: none;
     stroke: #666;

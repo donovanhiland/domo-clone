@@ -57,7 +57,7 @@ angular.module('domoApp')
                         });
 
                     var svg = d3.select(element[0]).append("svg")
-                        .classed("svg-content", true)
+                        .attr("class", "svg-content")
                         // .attr("width", width + margin.left + margin.right)
                         // .attr("height", height + margin.top + margin.bottom)
                         .append("g")
@@ -95,6 +95,43 @@ angular.module('domoApp')
                                 .attr("d", area)
                                 .attr("fill", "#9ce");
 
+                            // Define the div for the tooltip
+                           var div = d3.select(element[0]).append("div")
+                               .attr("class", "tooly")
+                               .style("opacity", 0);
+
+                            svg.selectAll("dot")
+                              .data(data)
+                              .enter().append("circle")
+                              .attr("r", 20)
+                              .attr("opacity", ".9")
+                              .attr("cx", function(d) { return x(d.time); })
+                              .attr("cy", function(d) { return y(d.engagement); })
+                              .on("mouseover", function(d) {
+                                  div.transition()
+                                      .duration(200)
+                                      .style("opacity", .9)
+                                      .style("background", "#f92")
+                                      .style("position","absolute")
+                                      .style("text-align", "center")
+                                      .style("width", "60px")
+                                      .style("height", "28px")
+                                      .style("padding", "2px")
+                                      .style("font", "12px sans-serif")
+                                      .style("border", "1px")
+                                      .style("border-radius", "8px")
+                                      .style("pointer-events", "none");
+
+                                  div.html(d.time + "<br/>"  + d.engagement)
+                                      .style("left", (d3.event.pageX) + "px")
+                                      .style("top", (d3.event.pageY - 28) + "px");
+                                  })
+                              .on("mouseout", function(d) {
+                                  div.transition()
+                                      .duration(500)
+                                      .style("opacity", 0);
+                              });
+
                             svg.append("g")
                                 .attr("class", "x axis")
                                 .attr("transform", "translate(0," + height + ")")
@@ -109,38 +146,6 @@ angular.module('domoApp')
                                   .attr("dy", ".71em")
                                   .style("text-anchor", "end")
                                   .text("tweets");
-
-                            // Define the div for the tooltip
-                           var hov = d3.select(element[0]).append("div")
-                               .attr("class", "tooltip")
-                               .style("opacity", 0);
-
-
-                            svg.selectAll("dot")
-                              .classed("svg-content", false)
-                              .data(data)
-                              .enter().append("circle")
-                              .attr("r", 20)
-                              .attr("opacity", ".9")
-                              .attr("cx", function(d) { return x(d.time); })
-                              .attr("cy", function(d) { return y(d.engagement); })
-                              .on("mouseover", function(d) {
-                                  hov.transition()
-                                      .duration(200)
-                                      .style("opacity", .9)
-                                      .style("background", "#f92")
-                                      .style("cursor", "pointer");
-                                  hov	.html(d.time + "<br/>"  + d.engagement)
-                                      .style("left", (d3.event.pageX) + "px")
-                                      .style("top", (d3.event.pageY - 28) + "px");
-                                  })
-                              .on("mouseout", function(d) {
-                                  hov.transition()
-                                      .duration(500)
-                                      .style("opacity", 0);
-                              });
-
-
 
 
                         }); //Service

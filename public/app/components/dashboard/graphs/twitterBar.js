@@ -1,7 +1,6 @@
 angular.module('domoApp')
     .directive('twitterBar', ['graphService', function(graphService) {
         return {
-
             restrict: "E",
             link: (scope, element) => {
 
