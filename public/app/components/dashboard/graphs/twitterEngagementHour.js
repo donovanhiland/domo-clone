@@ -119,7 +119,6 @@ angular.module('domoApp')
                                 return y(d.engagement);
                             })
                             .on("mouseover", function(d) {
-                                console.log(event.pageY);
                                 tooltip.transition()
                                     .duration(200)
                                     .style("opacity", 0.9);
