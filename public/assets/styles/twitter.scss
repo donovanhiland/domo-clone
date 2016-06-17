@@ -115,6 +115,9 @@ header {
                     font-weight: 300 !important;
                 }
             }
+            .day-hour-stats {
+
+            }
             h3 {
                 font-family: $domo-font;
                 font-size: 15px;
@@ -194,6 +197,7 @@ header {
                     display: flex;
                     justify-content: flex-start;
                     flex-direction: column;
+                    position: relative;
                     .engagement-data {
                         display: flex;
                         flex-direction: column;
@@ -311,14 +315,25 @@ header {
         }
     }
 }
-
-#top-hour {
+.vertical-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.engagement-section-container {
+  position: relative;
+}
+.day-hour-stats {
   border: none;
   display: flex;
   flex-direction: column;
+  self-align: space-around;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  // transform: translateY(-50%);
 
-  h4 {
-    width: 50vh;
+  h3 {
     font-size: 20px;
     color: #fff;
   }
@@ -333,35 +348,6 @@ header {
   }
 
   h6 {
-    font-size: 15px;
-    font-family: $domo-font;
-    font-weight: 600;
-    color: $domo-blue;
-  }
-}
-
-#top-day {
-  border: none;
-  display: flex;
-  flex-direction: column;
-
-  h1 {
-    margin-bottom: -10px;
-    width: 50vh;
-    font-size: 20px;
-    color: #fff;
-  }
-
-  h2 {
-    margin-bottom: -5px;
-    margin-top: 15px;
-    font-size: 40px;
-    font-family: $domo-font;
-    font-weight: 600;
-    color: $domo-blue;
-  }
-
-  h3 {
     font-size: 15px;
     font-family: $domo-font;
     font-weight: 600;
