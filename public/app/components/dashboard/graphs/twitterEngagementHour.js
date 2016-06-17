@@ -62,7 +62,7 @@ angular.module('domoApp')
                         .attr("transform", "translate(" + margin.left + "," + 40 + ")");
 
                     // Define the div for the tooltip
-                    var div = d3.select(element[0]).append("div")
+                    var tooltip = d3.select(element[0]).append("div")
                         .attr("class", "tooltip")
                         .style("opacity", 0);
 
@@ -71,8 +71,8 @@ angular.module('domoApp')
                         let oldData = response.engagementByHour;
                         let data = [];
                         class Data {
-                            constructor(date, engagement) {
-                                this.time = date;
+                            constructor(time, engagement) {
+                                this.time = time;
                                 this.engagement = engagement;
                             }
                         }
@@ -110,7 +110,7 @@ angular.module('domoApp')
                         svg.selectAll("dot")
                             .data(data)
                             .enter().append("circle")
-                            .attr("r", 20)
+                            .attr("r", 15)
                             .attr("opacity", "0")
                             .attr("cx", function(d) {
                                 return x(d.time);
@@ -119,15 +119,16 @@ angular.module('domoApp')
                                 return y(d.engagement);
                             })
                             .on("mouseover", function(d) {
-                                div.transition()
+                                console.log(event.pageY);
+                                tooltip.transition()
                                     .duration(200)
                                     .style("opacity", 0.9);
-                                div.html(d.time + "<br/>" + d.engagement)
+                                tooltip.html(d.time + "<br/>" + d.engagement)
                                     .style("left", (d3.event.pageX) + "px")
                                     .style("top", (d3.event.pageY - 28) + "px");
                             })
                             .on("mouseout", function(d) {
-                                div.transition()
+                                tooltip.transition()
                                     .duration(500)
                                     .style("opacity", 0);
                             });

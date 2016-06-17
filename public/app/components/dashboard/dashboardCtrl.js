@@ -10,6 +10,7 @@ angular.module("domoApp")
                 });
         })();
         $scope.user = user;
+        console.log($scope.user);
         $scope.card = {};
 
         $scope.setGraphType = (graphType) => {

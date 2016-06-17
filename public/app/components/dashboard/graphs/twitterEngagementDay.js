@@ -42,6 +42,10 @@ angular.module('domoApp')
                         .append("g")
                         .attr("transform", "translate(" + margin.left + "," + 60 + ")");
 
+                    // var tooltip = d3.select(element[0]).append("div")
+                    //     .attr("class", "tooltip")
+                    //     .style("opacity", 0);
+
                     //Data coming in
                     graphService.getTwitterLineData().then(function(response) {
                         let oldData = response.engagementByDay;
@@ -65,7 +69,7 @@ angular.module('domoApp')
 
                         svg.append("path")
                             .datum(data)
-                            .attr("class", "twitter-line-day")
+                            .attr("class", "twitter-line-translate")
                             .attr("d", area)
                             .attr("fill", "#9ce");
 
@@ -73,6 +77,34 @@ angular.module('domoApp')
                             .attr("class", "x axis")
                             .attr("transform", "translate(0," + height + ")")
                             .call(xAxis);
+
+                        // svg.selectAll("dot")
+                        //     .data(data)
+                        //     .enter().append("circle")
+                        //     .attr("r", 15)
+                        //     .attr("opacity", "1")
+                        //     .attr("cx", function(d) {
+                        //       console.log(d);
+                        //         return x(d.date);
+                        //     })
+                        //     .attr("cy", function(d) {
+                        //         return y(d.engagement);
+                        //     })
+                        //     .classed('twitter-line-translate', true)
+                        //     .on("mouseover", function(d) {
+                        //         console.log(event.pageY);
+                        //         tooltip.transition()
+                        //             .duration(200)
+                        //             .style("opacity", 0.9);
+                        //         tooltip.html(d.date + "<br/>" + d.engagement)
+                        //             .style("left", (d3.event.pageX) + "px")
+                        //             .style("top", (d3.event.pageY - 28) + "px");
+                        //     })
+                        //     .on("mouseout", function(d) {
+                        //         tooltip.transition()
+                        //             .duration(500)
+                        //             .style("opacity", 0);
+                        //     });
 
                         svg.append("g")
                             .attr("class", "y axis")
