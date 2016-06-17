@@ -51,7 +51,7 @@ angular.module('domoApp')
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + 20 + ")");
 
-                graphService.getTwitterLineData().then(function(response) {
+                graphService.getTwitterLineData(scope.user.screenName).then(function(response) {
                     let oldData = response.postsByHour;
 
                     let data = [];

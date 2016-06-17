@@ -39,7 +39,7 @@ angular.module('domoApp')
                         .append("g")
                         .attr("transform", "translate(" + margin.left + "," + 60 + ")");
 
-                    graphService.getTwitterBarData().then(function(response) {
+                    graphService.getTwitterBarData(scope.user.screenName).then(function(response) {
 
                         let dataNames = ["retweets", "favorites"];
 

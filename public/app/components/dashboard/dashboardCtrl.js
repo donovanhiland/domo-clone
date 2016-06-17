@@ -1,39 +1,38 @@
 angular.module("domoApp")
     .controller('dashboardCtrl', function($scope, $log, dashboardService, $state, user, $http) {
 
-        (function() {
-            dashboardService.getTwitterData({
-                    screenName: 'devmtn'
-                })
-                .then(function (response) {
-                    $scope.twitterAnalysis = response;
-                });
-        })();
         $scope.user = user;
-        console.log($scope.user);
+        (function(screenName) {
+          dashboardService.getTwitterData({
+            screenName: screenName
+          })
+          .then(function (response) {
+            $scope.twitterAnalysis = response;
+          });
+        })(user.screenName);
         $scope.card = {};
 
         $scope.setGraphType = (graphType) => {
             $scope.card.graphType = graphType;
             if (graphType === 'barChart') {
                 $scope.imageOpacity1 = {opacity: 1};
-                $scope.imageOpacity2 = {opacity: .1};
-                $scope.imageOpacity3 = {opacity: .1};
-                $scope.imageOpacity4 = {opacity: .1};
+                $scope.imageOpacity2 = {opacity: 0.1};
+                $scope.imageOpacity3 = {opacity: 0.1};
+                $scope.imageOpacity4 = {opacity: 0.1};
             } else if (graphType === 'scatterPlot') {
-                $scope.imageOpacity1 = {opacity: .1};
+                $scope.imageOpacity1 = {opacity: 0.1};
                 $scope.imageOpacity2 = {opacity: 1};
-                $scope.imageOpacity3 = {opacity: .1};
-                $scope.imageOpacity4 = {opacity: .1};
+                $scope.imageOpacity3 = {opacity: 0.1};
+                $scope.imageOpacity4 = {opacity: 0.1};
             } else if (graphType === 'pieChart') {
-                $scope.imageOpacity1 = {opacity: .1};
-                $scope.imageOpacity2 = {opacity: .1};
+                $scope.imageOpacity1 = {opacity: 0.1};
+                $scope.imageOpacity2 = {opacity: 0.1};
                 $scope.imageOpacity3 = {opacity: 1};
-                $scope.imageOpacity4 = {opacity: .1};
+                $scope.imageOpacity4 = {opacity: 0.1};
             } else if (graphType === 'lineGraph') {
-                $scope.imageOpacity1 = {opacity: .1};
-                $scope.imageOpacity2 = {opacity: .1};
-                $scope.imageOpacity3 = {opacity: .1};
+                $scope.imageOpacity1 = {opacity: 0.1};
+                $scope.imageOpacity2 = {opacity: 0.1};
+                $scope.imageOpacity3 = {opacity: 0.1};
                 $scope.imageOpacity4 = {opacity: 1};
             }
         };

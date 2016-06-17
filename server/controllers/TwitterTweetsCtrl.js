@@ -216,7 +216,7 @@ module.exports = {
                 retweetsPerTweet = (retweets / tweetCount);
                 favoritesPerTweet = (favorites / tweetCount);
                 twitter.get('/users/show', {
-                    screen_name: 'devmtn'
+                    screen_name: req.body.screenName
                 }, (error, user, response) => {
                     let followerCount = user.followers_count;
                     let analysisData = {
